@@ -13,13 +13,17 @@ public class DaoProveedor {
 	
 
 	@SuppressWarnings("unchecked")
-	public List<Proveedor> Listado(){
+	public List<Proveedor> Listado(String filtroNombre){
+		List<Proveedor> lista;
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
 		if (em==null)
 			return null;
 		else{
-			List<Proveedor> lista=em.createQuery("SELECT pr FROM Proveedor pr").getResultList();
+			if (filtroNombre=="")
+				lista=em.createQuery("SELECT pr FROM Proveedor pr").getResultList();
+			else
+				lista=em.createQuery("SELECT pr FROM Proveedor pr where pr.nombre LIKE :filtroNombre").setParameter("filtroNombre","%"+filtroNombre+"%").getResultList();
 			//ab.cerrarConexion();
 			ab.cerrarConexion();
 			return lista;

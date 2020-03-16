@@ -6,7 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+import controlador.ControladorListadoArticulos;
+import controlador.ControladorListadoProveedores;
 import controlador.ControladorPrincipal;
 import javax.swing.JDesktopPane;
 import java.awt.Color;
@@ -60,6 +61,8 @@ public class VentanaPrincipal extends JFrame {
 	}
 	public void listadoProveedores() {
 		ListadoProveedores lp=new ListadoProveedores(this);
+		ControladorListadoProveedores controla =new ControladorListadoProveedores(lp);
+		lp.establecerControlador(controla);
 		panelInterior.add(lp);
 		lp.setVisible(true);
 	}
@@ -70,15 +73,28 @@ public class VentanaPrincipal extends JFrame {
 		lc.setVisible(true);
 	}
 	
+	public void listadoArticulos() {
+		ListadoArticulos la=new ListadoArticulos(this);
+		ControladorListadoArticulos controlala=new ControladorListadoArticulos(la);
+		la.establecerControlador(controlala);
+		panelInterior.add(la);
+		la.setVisible(true);
+		
+	}
+	
 	public void establecerControlador(ControladorPrincipal controlador) {
 		listarProveedores.addActionListener(controlador);
 		listarClientes.addActionListener(controlador);
+		listarArticulos.addActionListener(controlador);
 	}
 	public JMenuItem getListarProveedores() {
 		return listarProveedores;
 	}
 	public JMenuItem getListarClientes() {
 		return listarClientes;
+	}
+	public JMenuItem getListarArticulos() {
+		return listarArticulos;
 	}
 	public JDesktopPane getPanelInterior() {
 		return panelInterior;

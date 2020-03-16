@@ -8,9 +8,10 @@ import modelo.persistencia.AbreCierra;
 import modelo.persistencia.DaoProveedor;
 
 public class GestorProveedor {
-	public List<Proveedor> listar(){
+	
+	public List<Proveedor> listar(String filtroNombre){
 		DaoProveedor dp=new DaoProveedor();
-		return dp.Listado();
+		return dp.Listado(filtroNombre);
 	}
 	public Proveedor existe(int num) {
 		DaoProveedor dp=new DaoProveedor();

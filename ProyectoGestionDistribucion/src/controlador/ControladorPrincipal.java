@@ -19,7 +19,8 @@ public class ControladorPrincipal implements ActionListener{
 			ventanaPrincipal.listadoProveedores();
 		if (e.getSource()==ventanaPrincipal.getListarClientes())
 			ventanaPrincipal.listadoClientes();
-
+		if (e.getSource()==ventanaPrincipal.getListarArticulos())
+			ventanaPrincipal.listadoArticulos();
 		
 	}
 

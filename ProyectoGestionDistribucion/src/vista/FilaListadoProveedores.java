@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 
 import controlador.ControlaFilaListadoProveedores;
 import java.awt.Color;
+
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -50,6 +53,7 @@ public class FilaListadoProveedores extends JPanel {
 		add(movil);
 		bEditar=new JButton();
 		bEditar.setBounds(1070, 0, 20, 20);
+		bEditar.setIcon(new ImageIcon("src/img/pen.png"));
 		add(bEditar);
 	}
 	

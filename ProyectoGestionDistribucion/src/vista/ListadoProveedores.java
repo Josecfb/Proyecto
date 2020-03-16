@@ -13,6 +13,9 @@ import javax.swing.JScrollPane;
 import controlador.ControlaFilaListadoProveedores;
 import controlador.ControladorListadoProveedores;
 import model.Proveedor;
+import javax.swing.border.BevelBorder;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 
 
 public class ListadoProveedores extends JInternalFrame {
@@ -22,6 +25,9 @@ public class ListadoProveedores extends JInternalFrame {
 	private JScrollPane scroll;
 	private FilaListadoProveedores fila;
 	private JLabel numero, nombre, direccion, codPost, poblacion, provincia, fijo, movil;
+	private JTextField TFiltroNombre;
+	private JButton bFiltrar;
+	private JPanel panel;
 
 
 	public ListadoProveedores(VentanaPrincipal v) {
@@ -30,10 +36,10 @@ public class ListadoProveedores extends JInternalFrame {
 		setClosable(true);
 		setMaximizable(true);
 		setIconifiable(true);
-		setTitle("Listadio de Proveedores");
+		setTitle("Listado de Proveedores");
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		setBounds(10, 10, 1120, 600);
-		setLayout(null);
+		getContentPane().setLayout(null);
 		inicializar();
 
 	}
@@ -41,21 +47,29 @@ public class ListadoProveedores extends JInternalFrame {
 	private void inicializar() {
 		Color fondo=new Color(100,100,100);
 		numero=new JLabel("Número");
+		numero.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		nombre=new JLabel("Nombre");
+		nombre.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		direccion=new JLabel("Dirección");
+		direccion.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		codPost=new JLabel("Cod. Pos.");
+		codPost.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		poblacion=new JLabel("Población");
+		poblacion.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		provincia=new JLabel("Provincia");
+		provincia.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		fijo=new JLabel("Fijo");
+		fijo.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		movil=new JLabel("Movil");
-		numero.setBounds(10, 11, 45, 20);
-		nombre.setBounds(65, 11, 200, 20);
-		direccion.setBounds(280, 11, 300, 20);
-		codPost.setBounds(590, 11, 60, 20);
-		poblacion.setBounds(660, 11, 120, 20);
-		provincia.setBounds(795, 11, 100, 20);
-		fijo.setBounds(910, 11, 70, 20);
-		movil.setBounds(990, 11, 70, 20);
+		movil.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		numero.setBounds(10, 37, 45, 20);
+		nombre.setBounds(65, 37, 200, 20);
+		direccion.setBounds(280, 37, 300, 20);
+		codPost.setBounds(590, 37, 60, 20);
+		poblacion.setBounds(660, 37, 120, 20);
+		provincia.setBounds(795, 37, 100, 20);
+		fijo.setBounds(910, 37, 70, 20);
+		movil.setBounds(990, 37, 70, 20);
 		numero.setOpaque(true);
 		nombre.setOpaque(true);
 		direccion.setOpaque(true);
@@ -72,7 +86,7 @@ public class ListadoProveedores extends JInternalFrame {
 		provincia.setBackground(fondo);
 		fijo.setBackground(fondo);
 		movil.setBackground(fondo);
-		add(numero);
+		getContentPane().add(numero);
 		numero.setForeground(Color.WHITE);
 		nombre.setForeground(Color.WHITE);
 		direccion.setForeground(Color.WHITE);
@@ -81,23 +95,33 @@ public class ListadoProveedores extends JInternalFrame {
 		provincia.setForeground(Color.WHITE);
 		fijo.setForeground(Color.WHITE);
 		movil.setForeground(Color.WHITE);
-		add(numero);
-		add(nombre);
-		add(direccion);
-		add(codPost);
-		add(poblacion);
-		add(provincia);
-		add(fijo);
-		add(movil);
+		getContentPane().add(numero);
+		getContentPane().add(nombre);
+		getContentPane().add(direccion);
+		getContentPane().add(codPost);
+		getContentPane().add(poblacion);
+		getContentPane().add(provincia);
+		getContentPane().add(fijo);
+		getContentPane().add(movil);
 		
 		scroll =new JScrollPane();
 		scroll.setBackground(fondo);
-		scroll.setBounds(10, 30, 1100, getHeight()-20);
+		scroll.setBounds(10, 61, 1100, 575);
 		scroll.setBorder(null);
-		add(scroll);
+		getContentPane().add(scroll);
+		
+		TFiltroNombre = new JTextField();
+		TFiltroNombre.setBounds(64, 11, 201, 20);
+		getContentPane().add(TFiltroNombre);
+		TFiltroNombre.setColumns(10);
+		
+		bFiltrar = new JButton("Filtrar");
+		bFiltrar.setBounds(280, 10, 89, 23);
+		getContentPane().add(bFiltrar);
 
 
 		ControladorListadoProveedores controladorListadoProveedores=new ControladorListadoProveedores(this);
+		controladorListadoProveedores.listar(this);
 
 		
 	}
@@ -105,7 +129,7 @@ public class ListadoProveedores extends JInternalFrame {
 	public void muestra(List<Proveedor> filas) {
 		
 		//FilaListadoProveedores fila;
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 
 
 		//panel.setBounds(0,0,727,600);
@@ -122,7 +146,7 @@ public class ListadoProveedores extends JInternalFrame {
 			fila=new FilaListadoProveedores(v);
 			ControlaFilaListadoProveedores controlaFila=new ControlaFilaListadoProveedores(fila);
 			fila.establecerControlador(controlaFila);
-			fila.setPreferredSize(new Dimension(1100,20));
+			fila.setPreferredSize(new Dimension(1100,40));
 			
 			if (i%2==0) fila.setBackground(Color.WHITE);
 			fila.getNumero().setText(String.valueOf(pro.getNumero()));
@@ -136,8 +160,26 @@ public class ListadoProveedores extends JInternalFrame {
 			panel.add(fila);
 		}
 	}
+	
+	public void establecerControlador(ControladorListadoProveedores controlador) {
+		bFiltrar.addActionListener(controlador);
+	}
 
+	public JTextField getTFiltroNombre() {
+		return TFiltroNombre;
+	}
 
+	public JButton getbFiltrar() {
+		return bFiltrar;
+	}
 
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public JScrollPane getScroll() {
+		return scroll;
+	}
+	
 	
 }

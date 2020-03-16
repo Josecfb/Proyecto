@@ -3,24 +3,24 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import model.Proveedor;
-import modelo.negocio.GestorProveedor;
-import vista.ListadoProveedores;
+import model.Articulo;
+import modelo.negocio.GestorArticulo;
+import vista.ListadoArticulos;
 import vista.VentanaPrincipal;
 
-public class ControladorListadoProveedores implements ActionListener{
-	private ListadoProveedores listado;
+public class ControladorListadoArticulos implements ActionListener{
+	private ListadoArticulos listado;
 
 	
-	public ControladorListadoProveedores(ListadoProveedores listado) {
+	public ControladorListadoArticulos(ListadoArticulos listado) {
 		listar(listado);		
 		
 	}
 
-	public void listar(ListadoProveedores listado) {
+	public void listar(ListadoArticulos listado) {
 		this.listado=listado;
-		List<Proveedor> filas;
-		GestorProveedor gp=new GestorProveedor();
+		List<Articulo> filas;
+		GestorArticulo gp=new GestorArticulo();
 		filas=gp.listar(listado.getTFiltroNombre().getText());
 		System.out.println(filas.size());
 		listado.muestra(filas);

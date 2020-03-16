@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="ProyectoGestionDistribucion" transaction-type="RESOURCE_LOCAL">
+		<class>model.AlbaranCliente</class>
+		<class>model.AlbaranesProveedor</class>
+		<class>model.Articulo</class>
+		<class>model.Cliente</class>
+		<class>model.Codigospostale</class>
+		<class>model.CodigospostalePK</class>
+		<class>model.FacturasCliente</class>
+		<class>model.FacturasProveedor</class>
+		<class>model.Familia</class>
+		<class>model.FilasAlbaranCliente</class>
+		<class>model.FilasAlbaranClientePK</class>
+		<class>model.FilasAlbaranProveedor</class>
+		<class>model.FilasAlbaranProveedorPK</class>
+		<class>model.FilasFacturasCliente</class>
+		<class>model.FilasFacturasClientePK</class>
+		<class>model.FilasFacturasProveedor</class>
+		<class>model.FilasFacturasProveedorPK</class>
+		<class>model.FilasPedidosCliente</class>
+		<class>model.FilasPedidosClientePK</class>
+		<class>model.FilasPedidosProveedor</class>
+		<class>model.FilasPedidosProveedorPK</class>
+		<class>model.Lote</class>
+		<class>model.PedidosCliente</class>
+		<class>model.PedidosProveedor</class>
+		<class>model.Poblacione</class>
+		<class>model.PreciosCliente</class>
+		<class>model.PreciosClientePK</class>
+		<class>model.Proveedor</class>
+		<class>model.Provincia</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/GestionDistribucion"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="$Mis2Perro"/>
+		</properties>
+	</persistence-unit>
+</persistence>

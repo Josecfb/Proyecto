@@ -6,7 +6,6 @@ import java.util.List;
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
 import vista.ListadoArticulos;
-import vista.VentanaPrincipal;
 
 public class ControladorListadoArticulos implements ActionListener{
 	private ListadoArticulos listado;
@@ -14,7 +13,6 @@ public class ControladorListadoArticulos implements ActionListener{
 	
 	public ControladorListadoArticulos(ListadoArticulos listado) {
 		listar(listado);		
-		
 	}
 
 	public void listar(ListadoArticulos listado) {
@@ -33,9 +31,5 @@ public class ControladorListadoArticulos implements ActionListener{
 			listar(listado);
 			System.out.println("Boton filtro");
 		}
-		
-		
 	}
-	
-
 }

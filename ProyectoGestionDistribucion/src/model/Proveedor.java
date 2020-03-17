@@ -60,6 +60,9 @@ public class Proveedor implements Serializable {
 	//bi-directional many-to-one association to PedidosProveedor
 	@OneToMany(mappedBy="proveedore")
 	private List<PedidosProveedor> pedidosProveedors;
+	
+	@OneToMany(mappedBy="proveedorBean")
+	private List<Articulo> articulosPro;
 
 	public Proveedor() {
 	}
@@ -222,10 +225,7 @@ public class Proveedor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Proveedor [numero=" + numero + ", codPost=" + codPost + ", direccion=" + direccion + ", email=" + email
-				+ ", nif=" + nif + ", nombre=" + nombre + ", numCuentaContable=" + numCuentaContable + ", telefonoFijo="
-				+ telefonoFijo + ", telefonoMovil=" + telefonoMovil + ", provincia=" + provincia + ", poblacion="
-				+ poblacion + "]";
+		return nombre;
 	}
 
 }

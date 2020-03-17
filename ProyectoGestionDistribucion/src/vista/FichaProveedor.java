@@ -1,23 +1,19 @@
 package vista;
 
-import javax.swing.JFrame;
+
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
-
 import controlador.ControladorFichaProveedor;
 import model.Proveedor;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.Color;
+import javax.swing.UIManager;
 
 public class FichaProveedor extends JInternalFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4232463625349427321L;
 	private JTextField tNumero;
 	private JTextField tDireccion;
@@ -31,9 +27,9 @@ public class FichaProveedor extends JInternalFrame {
 	private JTextField tSubcuenta;
 	private JTextField tNif;
 
-
-
 	public FichaProveedor(Proveedor pro) {
+		setAutoscrolls(true);
+		setBorder(UIManager.getBorder("InternalFrame.border"));
 		setBounds(100, 100, 997, 439);
 		getContentPane().setLayout(null);
 		setResizable(true);

@@ -6,15 +6,12 @@ import java.util.List;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
 import vista.ListadoProveedores;
-import vista.VentanaPrincipal;
 
 public class ControladorListadoProveedores implements ActionListener{
 	private ListadoProveedores listado;
-
 	
 	public ControladorListadoProveedores(ListadoProveedores listado) {
 		listar(listado);		
-		
 	}
 
 	public void listar(ListadoProveedores listado) {
@@ -33,9 +30,6 @@ public class ControladorListadoProveedores implements ActionListener{
 			listar(listado);
 			System.out.println("Boton filtro");
 		}
-		
-		
 	}
 	
-
 }

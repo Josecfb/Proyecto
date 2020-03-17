@@ -2,9 +2,6 @@ package modelo.persistencia;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 
 import model.Articulo;
 
@@ -29,34 +26,35 @@ public class DaoArticulo {
 			return lista;
 		}
 	}
-//	public Proveedor existe(int num) {
-//		Proveedor pro;
-//		AbreCierra ab=new AbreCierra();
-//		em=ab.abrirConexion();
-//		if (em==null)
-//			return null;
-//		else 
-//			pro=em.find(Proveedor.class, num);
-//		System.out.println("en existe"+pro.getNumero());
-//		return pro;
-//	}
-//	
-//	public int Modificar(Proveedor pro) {
-//		Proveedor antiguo=existe(pro.getNumero());
-//		em.getTransaction().begin();
-//		if (em==null) return -1;
-//		antiguo.setNumero(pro.getNumero());
-//		antiguo.setNombre(pro.getNombre());
-//		antiguo.setDireccion(pro.getDireccion());
-//		antiguo.setCodPost(pro.getCodPost());
-//		antiguo.setNif(pro.getNif());
-//		antiguo.setEmail(pro.getEmail());
-//		antiguo.setNumCuentaContable(pro.getNumCuentaContable());
-//		antiguo.setTelefonoFijo(pro.getTelefonoFijo());
-//		antiguo.setTelefonoMovil(pro.getTelefonoMovil());
-//		em.merge(antiguo);
-//		em.getTransaction().commit();
-//		em.close();
-//		return 0;
-//	}
+	public Articulo existe(int num) {
+		Articulo art;
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		if (em==null)
+			return null;
+		else 
+			art=em.find(Articulo.class, num);
+		System.out.println("en existe"+art.getCod());
+		return art;
+	}
+	
+	public int modificar(Articulo art) {
+		Articulo antiguo=existe(art.getCod());
+		em.getTransaction().begin();
+		if (em==null) return -1;
+		antiguo.setCod(art.getCod());
+		antiguo.setCodpro(art.getCodpro());
+		antiguo.setNombre(art.getNombre());
+		antiguo.setCoste(art.getCoste());
+		antiguo.setPrecioMayorista(art.getPrecioMayorista());
+		antiguo.setPrecioMinorista(art.getPrecioMinorista());
+		antiguo.setIva(art.getIva());
+		antiguo.setUnidadesCaja(art.getUnidadesCaja());
+		antiguo.setStock(art.getStock());
+		antiguo.setStockMinimo(art.getStockMinimo());
+		em.merge(antiguo);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
+	}
 }

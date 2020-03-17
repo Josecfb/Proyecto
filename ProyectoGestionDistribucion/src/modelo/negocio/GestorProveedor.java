@@ -1,10 +1,6 @@
 package modelo.negocio;
 import java.util.List;
-
-import javax.persistence.EntityTransaction;
-
 import model.Proveedor;
-import modelo.persistencia.AbreCierra;
 import modelo.persistencia.DaoProveedor;
 
 public class GestorProveedor {

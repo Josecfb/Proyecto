@@ -67,4 +67,9 @@ public class Familia implements Serializable {
 		return articulo;
 	}
 
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
 }

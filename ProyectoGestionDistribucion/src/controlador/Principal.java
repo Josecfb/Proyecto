@@ -8,7 +8,5 @@ public class Principal {
 		VentanaPrincipal ventanaPrincipal=new VentanaPrincipal();
 		ControladorPrincipal controladorPrincipal=new ControladorPrincipal(ventanaPrincipal);
 		ventanaPrincipal.establecerControlador(controladorPrincipal);
-		//FichaProveedor fp=new FichaProveedor(null);
 	}
-
 }

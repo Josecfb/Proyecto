@@ -15,6 +15,7 @@ import controlador.ControladorListadoProveedores;
 import model.Proveedor;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 
@@ -115,8 +116,9 @@ public class ListadoProveedores extends JInternalFrame {
 		getContentPane().add(TFiltroNombre);
 		TFiltroNombre.setColumns(10);
 		
-		bFiltrar = new JButton("Filtrar");
-		bFiltrar.setBounds(280, 10, 89, 23);
+		bFiltrar = new JButton();
+		bFiltrar.setBounds(280, 10, 20, 20);
+		bFiltrar.setIcon(new ImageIcon("src/img/filter.png"));
 		getContentPane().add(bFiltrar);
 
 
@@ -146,7 +148,7 @@ public class ListadoProveedores extends JInternalFrame {
 			fila=new FilaListadoProveedores(v);
 			ControlaFilaListadoProveedores controlaFila=new ControlaFilaListadoProveedores(fila);
 			fila.establecerControlador(controlaFila);
-			fila.setPreferredSize(new Dimension(1100,40));
+			fila.setPreferredSize(new Dimension(1100,20));
 			
 			if (i%2==0) fila.setBackground(Color.WHITE);
 			fila.getNumero().setText(String.valueOf(pro.getNumero()));

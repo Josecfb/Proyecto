@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import modelo.negocio.GestorProveedor;
 import vista.FichaProveedor;
 import vista.FilaListadoProveedores;
-import vista.VentanaPrincipal;
 
 public class ControlaFilaListadoProveedores implements ActionListener{
 	private FilaListadoProveedores filaListadoProveedores;

@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -24,19 +23,19 @@ public class Articulo implements Serializable {
 	private String codpro;
 
 	@Column(name="COSTE")
-	private BigDecimal coste;
+	private Double coste;
 
 	@Column(name="IVA")
-	private BigDecimal iva;
+	private Double iva;
 
 	@Column(name="NOMBRE")
 	private String nombre;
 
 	@Column(name="PRECIO_MAYORISTA")
-	private BigDecimal precioMayorista;
+	private Double precioMayorista;
 
 	@Column(name="PRECIO_MINORISTA")
-	private BigDecimal precioMinorista;
+	private Double precioMinorista;
 
 	@Column(name="STOCK")
 	private int stock;
@@ -51,6 +50,10 @@ public class Articulo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="FAMILIA")
 	private Familia familiaBean;
+	
+	@ManyToOne
+	@JoinColumn(name="PROVEEDOR")
+	private Proveedor proveedorBean;
 
 	//bi-directional many-to-one association to FilasAlbaranCliente
 	@OneToMany(mappedBy="articuloBean")
@@ -99,19 +102,19 @@ public class Articulo implements Serializable {
 		this.codpro = codpro;
 	}
 
-	public BigDecimal getCoste() {
+	public Double getCoste() {
 		return this.coste;
 	}
 
-	public void setCoste(BigDecimal coste) {
+	public void setCoste(Double coste) {
 		this.coste = coste;
 	}
 
-	public BigDecimal getIva() {
+	public Double getIva() {
 		return this.iva;
 	}
 
-	public void setIva(BigDecimal iva) {
+	public void setIva(Double iva) {
 		this.iva = iva;
 	}
 
@@ -123,19 +126,19 @@ public class Articulo implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public BigDecimal getPrecioMayorista() {
+	public Double getPrecioMayorista() {
 		return this.precioMayorista;
 	}
 
-	public void setPrecioMayorista(BigDecimal precioMayorista) {
+	public void setPrecioMayorista(Double precioMayorista) {
 		this.precioMayorista = precioMayorista;
 	}
 
-	public BigDecimal getPrecioMinorista() {
+	public Double getPrecioMinorista() {
 		return this.precioMinorista;
 	}
 
-	public void setPrecioMinorista(BigDecimal precioMinorista) {
+	public void setPrecioMinorista(Double precioMinorista) {
 		this.precioMinorista = precioMinorista;
 	}
 
@@ -169,6 +172,14 @@ public class Articulo implements Serializable {
 
 	public void setFamiliaBean(Familia familiaBean) {
 		this.familiaBean = familiaBean;
+	}
+
+	public Proveedor getProveedorBean() {
+		return proveedorBean;
+	}
+
+	public void setProveedorBean(Proveedor proveedorBean) {
+		this.proveedorBean = proveedorBean;
 	}
 
 	public List<FilasAlbaranCliente> getFilasAlbaranClientes() {

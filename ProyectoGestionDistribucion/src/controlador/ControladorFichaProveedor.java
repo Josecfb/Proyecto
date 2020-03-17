@@ -48,7 +48,6 @@ public class ControladorFichaProveedor implements InternalFrameListener{
 			fichaProveedor.dispose();
 		else {
 			System.out.println("error");
-
 			if (!ok[0])
 				JOptionPane.showMessageDialog(new JFrame(),"Nombre vacío","error",JOptionPane.ERROR_MESSAGE);
 			if (!ok[1])

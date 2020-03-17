@@ -6,7 +6,6 @@ import java.util.List;
 import model.Cliente;
 import modelo.negocio.GestorCliente;
 import vista.ListadoClientes;
-import vista.ListadoProveedores;
 
 public class ControladorListadoClientes implements ActionListener{
 	private ListadoClientes listado;
@@ -15,7 +14,7 @@ public class ControladorListadoClientes implements ActionListener{
 	public ControladorListadoClientes(ListadoClientes listado) {
 		this.listado=listado;
 		GestorCliente gc=new GestorCliente();
-		List<Cliente> filas=gc.listar();
+		List<Cliente> filas=gc.listar(listado.getTFiltroNombre().getText());
 		System.out.println(filas.size());
 		listado.muestra(filas);		
 	}

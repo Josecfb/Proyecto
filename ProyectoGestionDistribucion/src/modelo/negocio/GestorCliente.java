@@ -4,8 +4,8 @@ import model.Cliente;
 import modelo.persistencia.DaoCliente;
 
 public class GestorCliente {
-	public List<Cliente> listar(){
+	public List<Cliente> listar(String filtroNombre){
 		DaoCliente dp=new DaoCliente();
-		return dp.Listado();
+		return dp.Listado(filtroNombre);
 	}
 }

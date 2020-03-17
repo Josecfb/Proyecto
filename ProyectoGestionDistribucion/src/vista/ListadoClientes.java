@@ -1,19 +1,21 @@
 package vista;
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
 import controlador.ControlaFilaListadoClientes;
 import controlador.ControladorListadoClientes;
 import model.Cliente;
-
-
 
 public class ListadoClientes extends JInternalFrame {
 
@@ -21,6 +23,8 @@ public class ListadoClientes extends JInternalFrame {
 	private JScrollPane scroll;
 	private FilaListadoClientes fila;
 	private JLabel numero, nif, nombreComercial, nombreFiscal,codPost, poblacion, provincia, fijo, movil;
+	private JTextField TFiltroNombre;
+	private JButton bFiltrar;
 
 
 	public ListadoClientes() {
@@ -31,9 +35,8 @@ public class ListadoClientes extends JInternalFrame {
 		setTitle("Listadio de Clientes");
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		setBounds(10, 10, 1120, 600);
-		setLayout(null);
+		getContentPane().setLayout(null);
 		inicializar();
-
 	}
 	
 	private void inicializar() {
@@ -47,15 +50,15 @@ public class ListadoClientes extends JInternalFrame {
 		provincia=new JLabel("Provincia");
 		fijo=new JLabel("Fijo");
 		movil=new JLabel("Movil");
-		numero.setBounds(10, 11, 40, 20);
-		nif.setBounds(60, 11, 70, 20);
-		nombreComercial.setBounds(140, 11, 200, 20);
-		nombreFiscal.setBounds(350, 11, 200, 20);
-		codPost.setBounds(560, 11, 60, 20);
-		poblacion.setBounds(630, 11, 90, 20);
-		provincia.setBounds(740, 11, 90, 20);
-		fijo.setBounds(870, 11, 70, 20);
-		movil.setBounds(950, 11, 70, 20);
+		numero.setBounds(10, 42, 40, 20);
+		nif.setBounds(60, 42, 70, 20);
+		nombreComercial.setBounds(140, 42, 200, 20);
+		nombreFiscal.setBounds(350, 42, 200, 20);
+		codPost.setBounds(560, 42, 60, 20);
+		poblacion.setBounds(630, 42, 90, 20);
+		provincia.setBounds(740, 42, 90, 20);
+		fijo.setBounds(870, 42, 70, 20);
+		movil.setBounds(950, 42, 70, 20);
 		numero.setOpaque(true);
 		nif.setOpaque(true);
 		nombreComercial.setOpaque(true);
@@ -83,26 +86,31 @@ public class ListadoClientes extends JInternalFrame {
 		provincia.setForeground(Color.WHITE);
 		fijo.setForeground(Color.WHITE);
 		movil.setForeground(Color.WHITE);
-		add(numero);
-		add(nif);
-		add(nombreComercial);
-		add(nombreFiscal);
-		add(codPost);
-		add(poblacion);
-		add(provincia);
-		add(fijo);
-		add(movil);
+		getContentPane().add(numero);
+		getContentPane().add(nif);
+		getContentPane().add(nombreComercial);
+		getContentPane().add(nombreFiscal);
+		getContentPane().add(codPost);
+		getContentPane().add(poblacion);
+		getContentPane().add(provincia);
+		getContentPane().add(fijo);
+		getContentPane().add(movil);
 		
 		scroll =new JScrollPane();
 		scroll.setBackground(fondo);
-		scroll.setBounds(10, 30, 1100, getHeight()-20);
+		scroll.setBounds(10, 61, 1100, getHeight()-20);
 		scroll.setBorder(null);
-		add(scroll);
-
-
-		ControladorListadoClientes controladorListadoClientes=new ControladorListadoClientes(this);
-
+		getContentPane().add(scroll);
+		TFiltroNombre = new JTextField();
+		TFiltroNombre.setBounds(64, 11, 201, 20);
+		getContentPane().add(TFiltroNombre);
+		TFiltroNombre.setColumns(10);
 		
+		bFiltrar = new JButton();
+		bFiltrar.setBounds(280, 10, 20, 20);
+		bFiltrar.setIcon(new ImageIcon("src/img/filter.png"));
+		getContentPane().add(bFiltrar);
+		ControladorListadoClientes controladorListadoClientes=new ControladorListadoClientes(this);		
 	}
 	
 	public void muestra(List<Cliente> filas) {
@@ -115,7 +123,6 @@ public class ListadoClientes extends JInternalFrame {
 		scroll.setViewportView(panel);
 		for (Cliente cli:filas) {
 			i++;
-		
 			fila=new FilaListadoClientes();
 			ControlaFilaListadoClientes controlaFila=new ControlaFilaListadoClientes(fila);
 			fila.establecerControlador(controlaFila);
@@ -134,7 +141,14 @@ public class ListadoClientes extends JInternalFrame {
 		}
 	}
 
+	public JTextField getTFiltroNombre() {
+		return TFiltroNombre;
+	}
 
-
+	public JButton getbFiltrar() {
+		return bFiltrar;
+	}
 	
+	
+
 }

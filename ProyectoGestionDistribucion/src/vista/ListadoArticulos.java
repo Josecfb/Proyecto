@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -12,10 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
 import controlador.ControlaFilaListadoArticulos;
 import controlador.ControladorListadoArticulos;
-import controlador.ControladorListadoProveedores;
 import model.Articulo;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
@@ -126,8 +125,9 @@ public class ListadoArticulos extends JInternalFrame {
 		getContentPane().add(TFiltroNombre);
 		TFiltroNombre.setColumns(10);
 		
-		bFiltrar = new JButton("Filtrar");
-		bFiltrar.setBounds(280, 10, 89, 23);
+		bFiltrar = new JButton();
+		bFiltrar.setBounds(280, 10, 20, 20);
+		bFiltrar.setIcon(new ImageIcon("src/img/filter.png"));
 		getContentPane().add(bFiltrar);
 
 		//ControladorListadoProveedores controladorListadoProveedores=new ControladorListadoProveedores(this);
@@ -162,8 +162,7 @@ public class ListadoArticulos extends JInternalFrame {
 			fila.getCoste().setText(String.valueOf(arti.getCoste()));
 			fila.getPrecioMay().setText(String.valueOf(arti.getPrecioMayorista()));
 			fila.getPrecioMin().setText(String.valueOf(arti.getPrecioMinorista()));
-			fila.getStock().setText("2");
-			System.out.println(arti.getStock());
+			fila.getStock().setText(String.valueOf(arti.getStock()));
 			fila.getStockMin().setText(String.valueOf(arti.getStockMinimo()));
 			panel.add(fila);
 		}

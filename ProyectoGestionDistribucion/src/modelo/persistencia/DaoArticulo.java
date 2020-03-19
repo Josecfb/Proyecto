@@ -57,4 +57,15 @@ public class DaoArticulo {
 		em.close();
 		return 0;
 	}
+	
+	public int nuevo(Articulo art) {
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		em.getTransaction().begin();
+		if (em==null) return -1;
+		em.persist(art);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
+	}
 }

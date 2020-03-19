@@ -17,15 +17,17 @@ public class ControlaFilaListadoArticulos implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("hola");
-		if(e.getSource()==filaListadoArticulos.getbEditar()) {
-			System.out.println("hola"+filaListadoArticulos.getNombre().getText());
-			GestorArticulo ga=new GestorArticulo();
-			FichaArticulo fa=new FichaArticulo(ga.existe(Integer.valueOf(filaListadoArticulos.getCodigo().getText())));
-			ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
-			fa.EstablecerManejadorVentana(cfa);
-			filaListadoArticulos.getV().getPanelInterior().add(fa);
-			fa.setVisible(true);
-		}
+		FichaArticulo fa;
+		System.out.println("hola"+filaListadoArticulos.getNombre().getText());
+		GestorArticulo ga=new GestorArticulo();
+		if(e.getSource()==filaListadoArticulos.getbEditar())
+			fa=new FichaArticulo(ga.existe(Integer.valueOf(filaListadoArticulos.getCodigo().getText())));
+		else
+			fa=new FichaArticulo(null);
+		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
+		fa.EstablecerManejadorVentana(cfa);
+		filaListadoArticulos.getV().getPanelInterior().add(fa);
+		fa.setVisible(true);
 	}
 
 }

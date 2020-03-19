@@ -11,7 +11,13 @@ import controlador.ControladorListadoProveedores;
 import controlador.ControladorPrincipal;
 import javax.swing.JDesktopPane;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Rectangle;
+import javax.swing.JToolBar;
+import java.awt.BorderLayout;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class VentanaPrincipal extends JFrame {
 	private static final long serialVersionUID = -2711106703828276308L;
@@ -19,6 +25,10 @@ public class VentanaPrincipal extends JFrame {
 	private JMenu menuFichero, menuProveedores, menuClientes, menuArticulos;
 	private JMenuItem salir,listarProveedores,listarClientes,listarArticulos;
 	private JDesktopPane panelInterior;
+	private JToolBar toolBar;
+	private JButton bArticulos;
+	private JButton bClientes;
+	private JButton bProveedores;
 
 	
 	public VentanaPrincipal() {
@@ -36,6 +46,21 @@ public class VentanaPrincipal extends JFrame {
 		panelInterior.setBackground(Color.DARK_GRAY);
 		panelInterior.setBounds(new Rectangle(1, 1, 470, 239));
 		getContentPane().add(panelInterior);
+		
+		toolBar = new JToolBar();
+		getContentPane().add(toolBar, BorderLayout.NORTH);
+		
+		bArticulos = new JButton("");
+		toolBar.add(bArticulos);
+		bArticulos.setIcon(new ImageIcon(new ImageIcon("src/img/articulos.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		
+		bClientes = new JButton("");
+		toolBar.add(bClientes);
+		bClientes.setIcon(new ImageIcon(new ImageIcon("src/img/clientes.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		
+		bProveedores = new JButton("");
+		toolBar.add(bProveedores);
+		bProveedores.setIcon(new ImageIcon(new ImageIcon("src/img/proveedores.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		panelInterior.setVisible(true);
 	}
 	private void pintaMenu() {
@@ -86,6 +111,9 @@ public class VentanaPrincipal extends JFrame {
 		listarProveedores.addActionListener(controlador);
 		listarClientes.addActionListener(controlador);
 		listarArticulos.addActionListener(controlador);
+		bArticulos.addActionListener(controlador);
+		bClientes.addActionListener(controlador);
+		bProveedores.addActionListener(controlador);
 	}
 	public JMenuItem getListarProveedores() {
 		return listarProveedores;
@@ -98,6 +126,15 @@ public class VentanaPrincipal extends JFrame {
 	}
 	public JDesktopPane getPanelInterior() {
 		return panelInterior;
+	}
+	public JButton getbArticulos() {
+		return bArticulos;
+	}
+	public JButton getbClientes() {
+		return bClientes;
+	}
+	public JButton getbProveedores() {
+		return bProveedores;
 	}
 	
 	

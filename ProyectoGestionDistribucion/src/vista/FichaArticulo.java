@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.text.NumberFormat;
 import java.util.List;
-
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import controlador.ControladorFichaArticulo;
@@ -16,8 +15,6 @@ import model.Familia;
 import model.Proveedor;
 import modelo.negocio.GestorFamilia;
 import modelo.negocio.GestorProveedor;
-import modelo.persistencia.DaoProveedor;
-
 import javax.swing.JComboBox;
 
 public class FichaArticulo extends JInternalFrame {
@@ -35,11 +32,13 @@ public class FichaArticulo extends JInternalFrame {
 	private JTextField tStockMin;
 	private JComboBox<Familia> comboFamilia;
 	private JComboBox<Proveedor> comboProveedor;
-	
+	private NumberFormat formatoeuro, formatoPorcentaje;
+	private Articulo art;
 
 	public FichaArticulo(Articulo art) {
-		NumberFormat formatoeuro = NumberFormat.getCurrencyInstance();
-		NumberFormat formatoPorcentaje = NumberFormat.getPercentInstance();
+		this.art=art;
+		formatoeuro = NumberFormat.getCurrencyInstance();
+		formatoPorcentaje = NumberFormat.getPercentInstance();
 		setBounds(100, 100, 870, 476);
 		getContentPane().setLayout(null);
 		setTitle("Ficha de Artículos");
@@ -68,7 +67,6 @@ public class FichaArticulo extends JInternalFrame {
 		tCodigo.setColumns(10);
 		tCodigo.setBounds(96, 40, 86, 25);
 		tCodigo.setHorizontalAlignment(JTextField.RIGHT);
-		tCodigo.setText(String.valueOf(art.getCod()));
 		tCodigo.setFocusable(false);
 		panel.add(tCodigo);
 		
@@ -81,7 +79,6 @@ public class FichaArticulo extends JInternalFrame {
 		tNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tNombre.setColumns(10);
 		tNombre.setBounds(298, 40, 437, 25);
-		tNombre.setText(art.getNombre());
 		panel.add(tNombre);
 		
 		tCProv = new JTextField();
@@ -89,7 +86,6 @@ public class FichaArticulo extends JInternalFrame {
 		tCProv.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tCProv.setColumns(10);
 		tCProv.setBounds(96, 92, 86, 25);
-		tCProv.setText(String.valueOf(art.getCodpro()));
 		panel.add(tCProv);
 		
 		JLabel lCodPro = new JLabel("C. Prov.");
@@ -105,12 +101,12 @@ public class FichaArticulo extends JInternalFrame {
 		comboProveedor = new JComboBox<Proveedor>();
 		comboProveedor.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboProveedor.setBounds(298, 92, 437, 25);
+		comboProveedor.setEditable(true);
 		GestorProveedor gp=new GestorProveedor();
 		List<Proveedor> proveedores;
 		proveedores=gp.listar("");
 		for (Proveedor pro:proveedores)
 			comboProveedor.addItem(pro);
-		comboProveedor.setSelectedItem(art.getProveedorBean());
 		panel.add(comboProveedor);
 		
 		JLabel lCoste = new JLabel("Coste");
@@ -123,7 +119,6 @@ public class FichaArticulo extends JInternalFrame {
 		tCoste.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tCoste.setColumns(10);
 		tCoste.setBounds(96, 146, 134, 25);
-		tCoste.setText(formatoeuro.format(art.getCoste()));
 		panel.add(tCoste);
 		
 		tPrecioMay = new JTextField();
@@ -131,7 +126,6 @@ public class FichaArticulo extends JInternalFrame {
 		tPrecioMay.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tPrecioMay.setColumns(10);
 		tPrecioMay.setBounds(363, 146, 134, 25);
-		tPrecioMay.setText(formatoeuro.format(art.getPrecioMayorista()));
 		panel.add(tPrecioMay);
 		
 		JLabel lPrecioMay = new JLabel("Precio May.");
@@ -144,7 +138,6 @@ public class FichaArticulo extends JInternalFrame {
 		tPrecioMin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tPrecioMin.setColumns(10);
 		tPrecioMin.setBounds(601, 146, 134, 25);
-		tPrecioMin.setText(formatoeuro.format(art.getPrecioMinorista()));
 		panel.add(tPrecioMin);
 		
 		JLabel lPrecioMin = new JLabel("Precio Min.");
@@ -162,7 +155,6 @@ public class FichaArticulo extends JInternalFrame {
 		tIva.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tIva.setColumns(10);
 		tIva.setBounds(96, 197, 72, 25);
-		tIva.setText(formatoPorcentaje.format(art.getIva()));
 		panel.add(tIva);
 		
 		tUnidadesCaja = new JTextField();
@@ -170,7 +162,6 @@ public class FichaArticulo extends JInternalFrame {
 		tUnidadesCaja.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tUnidadesCaja.setColumns(10);
 		tUnidadesCaja.setBounds(304, 197, 72, 25);
-		tUnidadesCaja.setText(String.valueOf(art.getUnidadesCaja()));
 		panel.add(tUnidadesCaja);
 		
 		JLabel lUCaja = new JLabel("Unidades/Caja");
@@ -186,12 +177,12 @@ public class FichaArticulo extends JInternalFrame {
 		comboFamilia = new JComboBox<Familia>();
 		comboFamilia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboFamilia.setBounds(482, 197, 253, 25);
+		comboFamilia.setEditable(true);
 		GestorFamilia gf=new GestorFamilia();
 		List<Familia> familias;
 		familias=gf.listar("");
 		for (Familia fam:familias)
 			comboFamilia.addItem(fam);
-		comboFamilia.setSelectedItem(art.getFamiliaBean());
 		panel.add(comboFamilia);
 		
 		tStock = new JTextField();
@@ -199,7 +190,6 @@ public class FichaArticulo extends JInternalFrame {
 		tStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tStock.setColumns(10);
 		tStock.setBounds(96, 251, 72, 25);
-		tStock.setText(String.valueOf(art.getStock()));
 		panel.add(tStock);
 		
 		JLabel lStock = new JLabel("Stock");
@@ -212,7 +202,6 @@ public class FichaArticulo extends JInternalFrame {
 		tStockMin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tStockMin.setColumns(10);
 		tStockMin.setBounds(290, 251, 86, 25);
-		tStockMin.setText(String.valueOf(art.getStockMinimo()));
 		panel.add(tStockMin);
 		
 		JLabel lStockMin = new JLabel("Stock Min.");
@@ -222,10 +211,35 @@ public class FichaArticulo extends JInternalFrame {
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_1, null);
+		if (art!=null)
+			llenaFicha(art);
+	}
+	
+	private void llenaFicha(Articulo art) {
+		tCodigo.setText(String.valueOf(art.getCod()));
+		tNombre.setText(art.getNombre());
+		tCProv.setText(String.valueOf(art.getCodpro()));
+		comboProveedor.setSelectedItem(art.getProveedorBean());
+		tCoste.setText(formatoeuro.format(art.getCoste()));
+		tPrecioMay.setText(formatoeuro.format(art.getPrecioMayorista()));
+		tPrecioMin.setText(formatoeuro.format(art.getPrecioMinorista()));
+		tIva.setText(formatoPorcentaje.format(art.getIva()));
+		tUnidadesCaja.setText(String.valueOf(art.getUnidadesCaja()));
+		comboFamilia.setSelectedItem(art.getFamiliaBean());
+		tStock.setText(String.valueOf(art.getStock()));
+		tStockMin.setText(String.valueOf(art.getStockMinimo()));
 	}
 	
 	public void EstablecerManejadorVentana(ControladorFichaArticulo manejador) {
 		this.addInternalFrameListener(manejador);
+		tPrecioMay.addFocusListener(manejador);
+		tPrecioMin.addFocusListener(manejador);
+		tCoste.addFocusListener(manejador);
+		tIva.addFocusListener(manejador);
+	}
+
+	public Articulo getArt() {
+		return art;
 	}
 
 	public JTextField gettCodigo() {

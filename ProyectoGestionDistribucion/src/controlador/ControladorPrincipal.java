@@ -15,11 +15,11 @@ public class ControladorPrincipal implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==ventanaPrincipal.getListarProveedores()) 
+		if (e.getSource()==ventanaPrincipal.getListarProveedores() || e.getSource()==ventanaPrincipal.getbProveedores()) 
 			ventanaPrincipal.listadoProveedores();
-		if (e.getSource()==ventanaPrincipal.getListarClientes())
+		if (e.getSource()==ventanaPrincipal.getListarClientes() || e.getSource()==ventanaPrincipal.getbClientes())
 			ventanaPrincipal.listadoClientes();
-		if (e.getSource()==ventanaPrincipal.getListarArticulos())
+		if (e.getSource()==ventanaPrincipal.getListarArticulos() || e.getSource()==ventanaPrincipal.getbArticulos())
 			ventanaPrincipal.listadoArticulos();
 		
 	}

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
+import vista.FichaArticulo;
 import vista.ListadoArticulos;
 
 public class ControladorListadoArticulos implements ActionListener{
@@ -26,10 +27,42 @@ public class ControladorListadoArticulos implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if (e.getSource()==listado.getbFiltrar()) {
-			listado.getPanel().updateUI();
-			listar(listado);
-			System.out.println("Boton filtro");
+			filtrar();
 		}
+		if (e.getSource()==listado.getbFiltros()) {
+			muestraFiltros();
+		}
+		if (e.getSource()==listado.getbNuevo())
+			nuevoArticulo();
+		
+	}
+
+	private void muestraFiltros() {
+		if (listado.getbFiltrar().isVisible()) {
+			listado.getbFiltrar().setVisible(false);
+			listado.getTFiltroNombre().setVisible(false);
+		}
+		else {
+			listado.getbFiltrar().setVisible(true);
+			listado.getTFiltroNombre().setVisible(true);
+		}
+	}
+
+	private void filtrar() {
+		listado.getPanel().updateUI();
+		listar(listado);
+		System.out.println("Boton filtro");
+	}
+	
+	private void nuevoArticulo() {
+		GestorArticulo ga=new GestorArticulo();
+		FichaArticulo fa=new FichaArticulo(null);
+		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
+		fa.EstablecerManejadorVentana(cfa);
+		System.out.println("nuevo articulo");
+		listado.getV().getPanelInterior().add(fa);
+		fa.setVisible(true);
 	}
 }

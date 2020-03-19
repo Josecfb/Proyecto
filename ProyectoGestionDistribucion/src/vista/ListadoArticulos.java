@@ -4,7 +4,6 @@ package vista;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -18,6 +17,8 @@ import controlador.ControladorListadoArticulos;
 import model.Articulo;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
+import javax.swing.JToolBar;
+import javax.swing.JToggleButton;
 
 
 public class ListadoArticulos extends JInternalFrame {
@@ -28,8 +29,10 @@ public class ListadoArticulos extends JInternalFrame {
 	private FilaListadoArticulos fila;
 	private JLabel Lcod, LCProv, lNombre, Lcoste, LPrecioMay, LPrecioMin, lStock, lStockMin;
 	private JTextField TFiltroNombre;
-	private JButton bFiltrar;
+	private JButton bFiltrar,bNuevo;
 	private JPanel panel;
+	private JToggleButton bFiltros;
+	private JButton bActualizar;
 
 
 	public ListadoArticulos(VentanaPrincipal v) {
@@ -64,14 +67,14 @@ public class ListadoArticulos extends JInternalFrame {
 		lStock.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		lStockMin=new JLabel("Stock Min.");
 		lStockMin.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		Lcod.setBounds(10, 38, 45, 20);
-		LCProv.setBounds(65, 38, 70, 20);
-		lNombre.setBounds(145, 38, 267, 20);
-		Lcoste.setBounds(561, 38, 70, 20);
-		LPrecioMay.setBounds(641, 38, 88, 20);
-		LPrecioMin.setBounds(739, 38, 98, 20);
-		lStock.setBounds(847, 38, 80, 20);
-		lStockMin.setBounds(935, 38, 98, 20);
+		Lcod.setBounds(10, 74, 45, 20);
+		LCProv.setBounds(65, 74, 70, 20);
+		lNombre.setBounds(145, 74, 267, 20);
+		Lcoste.setBounds(561, 74, 70, 20);
+		LPrecioMay.setBounds(641, 74, 88, 20);
+		LPrecioMin.setBounds(739, 74, 98, 20);
+		lStock.setBounds(847, 74, 80, 20);
+		lStockMin.setBounds(935, 74, 98, 20);
 		Lcod.setOpaque(true);
 		LCProv.setOpaque(true);
 		lNombre.setOpaque(true);
@@ -108,7 +111,7 @@ public class ListadoArticulos extends JInternalFrame {
 		
 		scroll =new JScrollPane();
 		scroll.setBackground(fondo);
-		scroll.setBounds(10, 57, 1100, getHeight()-20);
+		scroll.setBounds(10, 99, 1100, getHeight()-20);
 		scroll.setBorder(null);
 		getContentPane().add(scroll);
 		
@@ -117,18 +120,35 @@ public class ListadoArticulos extends JInternalFrame {
 		LFam.setForeground(Color.WHITE);
 		LFam.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		LFam.setBackground(SystemColor.windowBorder);
-		LFam.setBounds(422, 38, 129, 20);
+		LFam.setBounds(422, 74, 129, 20);
 		getContentPane().add(LFam);
 
 		TFiltroNombre = new JTextField();
-		TFiltroNombre.setBounds(64, 11, 201, 20);
+		TFiltroNombre.setBounds(64, 47, 201, 20);
 		getContentPane().add(TFiltroNombre);
 		TFiltroNombre.setColumns(10);
 		
 		bFiltrar = new JButton();
-		bFiltrar.setBounds(280, 10, 20, 20);
+		bFiltrar.setBounds(280, 46, 20, 20);
 		bFiltrar.setIcon(new ImageIcon("src/img/filter.png"));
+		bFiltrar.setVisible(false);
 		getContentPane().add(bFiltrar);
+		
+		JToolBar toolBar = new JToolBar();
+		toolBar.setBounds(0, 0, 412, 45);
+		getContentPane().add(toolBar);
+		
+		bNuevo = new JButton();
+		toolBar.add(bNuevo);
+		bNuevo.setIcon(new ImageIcon("src/img/nuevo.png"));
+		
+		bFiltros = new JToggleButton("");
+		toolBar.add(bFiltros);
+		bFiltros.setIcon(new ImageIcon("src/img/filtro.png"));
+		
+		bActualizar = new JButton("");
+		toolBar.add(bActualizar);
+		bActualizar.setIcon(new ImageIcon("src/img/actualizar.png"));
 
 		//ControladorListadoProveedores controladorListadoProveedores=new ControladorListadoProveedores(this);
 
@@ -170,6 +190,8 @@ public class ListadoArticulos extends JInternalFrame {
 	
 	public void establecerControlador(ControladorListadoArticulos controlador) {
 		bFiltrar.addActionListener(controlador);
+		bNuevo.addActionListener(controlador);
+		bFiltros.addActionListener(controlador);
 	}
 
 	public JTextField getTFiltroNombre() {
@@ -183,6 +205,17 @@ public class ListadoArticulos extends JInternalFrame {
 	public JPanel getPanel() {
 		return panel;
 	}
-	
+
+	public JButton getbNuevo() {
+		return bNuevo;
+	}
+
+	public JToggleButton getbFiltros() {
+		return bFiltros;
+	}
+
+	public VentanaPrincipal getV() {
+		return v;
+	}
 	
 }

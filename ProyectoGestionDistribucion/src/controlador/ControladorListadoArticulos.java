@@ -58,7 +58,6 @@ public class ControladorListadoArticulos implements ActionListener{
 	private void filtrar() {
 		listado.getPanel().updateUI();
 		listar(listado);
-		System.out.println("Boton filtro");
 	}
 	
 	private void actualizar() {

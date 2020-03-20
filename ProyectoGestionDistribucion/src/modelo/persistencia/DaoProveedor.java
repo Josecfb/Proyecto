@@ -37,7 +37,7 @@ public class DaoProveedor {
 		return pro;
 	}
 	
-	public int Modificar(Proveedor pro) {
+	public int modificar(Proveedor pro) {
 		Proveedor antiguo=existe(pro.getNumero());
 		em.getTransaction().begin();
 		if (em==null) return -1;
@@ -51,6 +51,17 @@ public class DaoProveedor {
 		antiguo.setTelefonoFijo(pro.getTelefonoFijo());
 		antiguo.setTelefonoMovil(pro.getTelefonoMovil());
 		em.merge(antiguo);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
+	}
+	
+	public int nuevo(Proveedor pro) {
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		em.getTransaction().begin();
+		if (em==null) return -1;
+		em.persist(pro);
 		em.getTransaction().commit();
 		em.close();
 		return 0;

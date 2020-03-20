@@ -130,10 +130,12 @@ public class ListadoClientes extends JInternalFrame {
 		TFiltroNombre.setBounds(64, 67, 201, 20);
 		getContentPane().add(TFiltroNombre);
 		TFiltroNombre.setColumns(10);
+		TFiltroNombre.setVisible(false);
 		
 		bFiltrar = new JButton();
 		bFiltrar.setBounds(280, 66, 20, 20);
 		bFiltrar.setIcon(new ImageIcon("src/img/filter.png"));
+		bFiltrar.setVisible(false);
 		getContentPane().add(bFiltrar);
 		
 		toolBar = new JToolBar();
@@ -223,7 +225,7 @@ public class ListadoClientes extends JInternalFrame {
 		}
 	}
 	
-	public void establecerControlador(ControladorListadoArticulos controlador) {
+	public void establecerControlador(ControladorListadoClientes controlador) {
 		bFiltrar.addActionListener(controlador);
 		bNuevo.addActionListener(controlador);
 		bFiltros.addActionListener(controlador);

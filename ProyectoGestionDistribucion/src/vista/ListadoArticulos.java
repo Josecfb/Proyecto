@@ -40,7 +40,6 @@ public class ListadoArticulos extends JInternalFrame {
 		this.v=v;
 		setResizable(true);
 		setClosable(true);
-		setMaximizable(true);
 		setIconifiable(true);
 		setTitle("Listado de Art\u00EDculos");
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);

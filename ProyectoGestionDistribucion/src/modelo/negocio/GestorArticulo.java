@@ -25,7 +25,6 @@ public class GestorArticulo {
 		boolean[] ok = valida(art);
 		if (ok[0] && ok[1] && ok[2] && ok[3] && ok[4]) {
 			DaoArticulo da=new DaoArticulo();
-			System.out.println("en gestor "+art.getNombre());
 			int modificado=da.modificar(art);
 			ok[5]=modificado==0;
 		}
@@ -41,9 +40,8 @@ public class GestorArticulo {
 		boolean[] ok = valida(art);
 		if (ok[0] && ok[1] && ok[2] && ok[3] && ok[4]) {
 			DaoArticulo da=new DaoArticulo();
-			System.out.println("en gestor "+art.getNombre());
-			int modificado=da.nuevo(art);
-			ok[5]=modificado==0;
+			int creado=da.nuevo(art);
+			ok[5]=creado==0;
 		}
 		return ok;
 	}

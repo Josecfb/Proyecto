@@ -15,6 +15,7 @@ import javax.swing.UIManager;
 public class FichaProveedor extends JInternalFrame {
 
 	private static final long serialVersionUID = -4232463625349427321L;
+	private Proveedor pro;
 	private JTextField tNumero;
 	private JTextField tDireccion;
 	private JTextField tPoblacion;
@@ -28,6 +29,7 @@ public class FichaProveedor extends JInternalFrame {
 	private JTextField tNif;
 
 	public FichaProveedor(Proveedor pro) {
+		this.pro=pro;
 		setAutoscrolls(true);
 		setBorder(UIManager.getBorder("InternalFrame.border"));
 		setBounds(100, 100, 997, 439);
@@ -232,6 +234,10 @@ public class FichaProveedor extends JInternalFrame {
 	}
 	public JTextField gettNumero() {
 		return tNumero;
+	}
+
+	public Proveedor getPro() {
+		return pro;
 	}
 
 	

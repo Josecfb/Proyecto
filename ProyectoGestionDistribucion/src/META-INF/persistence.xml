@@ -30,6 +30,7 @@
 		<class>model.PreciosClientePK</class>
 		<class>model.Proveedor</class>
 		<class>model.Provincia</class>
+		<class>model.Datosempresa</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/GestionDistribucion"/>

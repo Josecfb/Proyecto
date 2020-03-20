@@ -11,6 +11,7 @@ import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 
 import controlador.ControlaFilaListadoProveedores;
+import controlador.ControladorListadoArticulos;
 import controlador.ControladorListadoProveedores;
 import model.Proveedor;
 import javax.swing.border.BevelBorder;
@@ -123,11 +124,13 @@ public class ListadoProveedores extends JInternalFrame {
 		TFiltroNombre = new JTextField();
 		TFiltroNombre.setBounds(54, 67, 201, 20);
 		getContentPane().add(TFiltroNombre);
+		TFiltroNombre.setVisible(false);
 		TFiltroNombre.setColumns(10);
 		
 		bFiltrar = new JButton();
 		bFiltrar.setBounds(270, 66, 20, 20);
 		bFiltrar.setIcon(new ImageIcon("src/img/filter.png"));
+		bFiltrar.setVisible(false);
 		getContentPane().add(bFiltrar);
 
 		JToolBar toolBar = new JToolBar();
@@ -230,7 +233,11 @@ public class ListadoProveedores extends JInternalFrame {
 	
 	public void establecerControlador(ControladorListadoProveedores controlador) {
 		bFiltrar.addActionListener(controlador);
+		bNuevo.addActionListener(controlador);
+		bFiltros.addActionListener(controlador);
+		bActualizar.addActionListener(controlador);
 	}
+	
 
 	public JTextField getTFiltroNombre() {
 		return TFiltroNombre;
@@ -246,6 +253,34 @@ public class ListadoProveedores extends JInternalFrame {
 
 	public JScrollPane getScroll() {
 		return scroll;
+	}
+
+	public JButton getbNuevo() {
+		return bNuevo;
+	}
+
+	public JToggleButton getbFiltros() {
+		return bFiltros;
+	}
+
+	public JButton getbActualizar() {
+		return bActualizar;
+	}
+
+	public JButton getbFacturas() {
+		return bFacturas;
+	}
+
+	public JButton getbPedidos() {
+		return bPedidos;
+	}
+
+	public JButton getbAlbaranes() {
+		return bAlbaranes;
+	}
+
+	public VentanaPrincipal getV() {
+		return v;
 	}
 	
 	

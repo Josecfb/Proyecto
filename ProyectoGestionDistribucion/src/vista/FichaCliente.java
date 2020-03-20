@@ -190,6 +190,7 @@ public class FichaCliente extends JInternalFrame {
 		comboTipo.addItem("Mayorista");
 		comboTipo.addItem("Minorista");
 		comboTipo.setEditable(true);
+		comboTipo.setSelectedItem(null);
 		panel.add(comboTipo);
 		
 		JLabel lTipo = new JLabel("Tipo");

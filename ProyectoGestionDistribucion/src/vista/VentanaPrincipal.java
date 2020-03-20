@@ -7,6 +7,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import controlador.ControladorListadoArticulos;
+import controlador.ControladorListadoClientes;
 import controlador.ControladorListadoProveedores;
 import controlador.ControladorPrincipal;
 import javax.swing.JDesktopPane;
@@ -112,6 +113,8 @@ public class VentanaPrincipal extends JFrame {
 	
 	public void listadoClientes() {
 		ListadoClientes lc=new ListadoClientes(this);
+		ControladorListadoClientes controlacli=new ControladorListadoClientes(lc);
+		lc.establecerControlador(controlacli);
 		panelInterior.add(lc);
 		lc.setVisible(true);
 	}

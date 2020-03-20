@@ -14,8 +14,29 @@ public class GestorProveedor {
 		return dp.existe(num);
 	}
 	
-	public boolean[] ModificarProveedor(Proveedor pro) {
-		
+	public boolean[] modificarProveedor(Proveedor pro) {
+		boolean[] ok = valida(pro);
+		if (ok[0] && ok[1] && ok[2]) {
+			DaoProveedor dp=new DaoProveedor();
+			System.out.println("en gestor "+pro.getNombre());
+			int modificado=dp.modificar(pro);
+			ok[3]=modificado==0;
+		}
+		return ok;
+	}
+	
+	public boolean[] nuevoProveedor(Proveedor pro) {
+		boolean[] ok = valida(pro);
+		if (ok[0] && ok[1] && ok[2]) {
+			DaoProveedor dp=new DaoProveedor();
+			System.out.println("en gestor "+pro.getNombre());
+			int creado=dp.nuevo(pro);
+			ok[3]=creado==0;
+		}
+		return ok;
+	}
+	
+	private boolean[] valida(Proveedor pro) {
 		boolean[] ok=new boolean[4];
 		for (int i=0;i<ok.length-1;i++)
 			ok[i]=true;
@@ -23,15 +44,6 @@ public class GestorProveedor {
 		ok[0]=pro.getNombre().length()>0;
 		ok[1]=pro.getNif().length()>0;
 		ok[2]=pro.getEmail().length()>0;
-		for (int i=0;i<3;i++)
-			if (ok[i])
-				System.out.println(i+" si");
-		if (ok[0] && ok[1] && ok[2]) {
-			DaoProveedor dp=new DaoProveedor();
-			System.out.println("en gestor "+pro.getNombre());
-			int modificado=dp.Modificar(pro);
-			ok[3]=modificado==0;
-		}
 		return ok;
 	}
 	

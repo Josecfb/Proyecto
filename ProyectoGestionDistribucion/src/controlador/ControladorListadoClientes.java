@@ -63,6 +63,7 @@ public class ControladorListadoClientes implements ActionListener{
 	}
 	
 	private void nuevoCliente() {
+		System.out.println("nuevo cliente");
 		GestorCliente gc=new GestorCliente();
 		FichaCliente fc=new FichaCliente(null);
 		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);

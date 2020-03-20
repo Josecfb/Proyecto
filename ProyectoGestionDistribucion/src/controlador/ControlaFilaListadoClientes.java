@@ -2,6 +2,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import modelo.negocio.GestorCliente;
+import vista.FichaCliente;
 import vista.FilaListadoClientes;
 
 public class ControlaFilaListadoClientes implements ActionListener{
@@ -13,10 +16,17 @@ public class ControlaFilaListadoClientes implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("hola");
+		System.out.println("editar cli");
+		FichaCliente fc;
+		GestorCliente gc=new GestorCliente();
 		if(e.getSource()==filaListadoClientes.getbEditar())
-			System.out.println("hola"+filaListadoClientes.getNombreComercial().getText());
-		
+			fc=new FichaCliente(gc.existe(Integer.valueOf(filaListadoClientes.getNumero().getText())));
+		else
+			fc=new FichaCliente(null);
+		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);
+		fc.establecerManejadorVentana(cfc);
+		filaListadoClientes.getV().getPanelInterior().add(fc);
+		fc.setVisible(true);
 	}
 
 }

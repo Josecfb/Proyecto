@@ -12,8 +12,10 @@ public class FilaListadoClientes extends JPanel {
 	private static final long serialVersionUID = 4813844448451936303L;
 	private JLabel numero, nif, nombreComercial, nombreFiscal,codPost, poblacion, provincia, fijo, movil;
 	private JButton bEditar;
+	private VentanaPrincipal v;
 
-	public FilaListadoClientes() {
+	public FilaListadoClientes(VentanaPrincipal v) {
+		this.v=v;
 		setLayout(null);
 		setSize(975, 20);
 		setBackground(new Color(240,240,240));
@@ -102,6 +104,10 @@ public class FilaListadoClientes extends JPanel {
 
 	public void setbEditar(JButton bEditar) {
 		this.bEditar = bEditar;
+	}
+
+	public VentanaPrincipal getV() {
+		return v;
 	}
 	
 	

@@ -3,6 +3,9 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
+import javax.swing.ImageIcon;
+
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
 import vista.FichaArticulo;
@@ -28,14 +31,14 @@ public class ControladorListadoArticulos implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource()==listado.getbFiltrar()) {
+		if (e.getSource()==listado.getbFiltrar()) 
 			filtrar();
-		}
-		if (e.getSource()==listado.getbFiltros()) {
+		if (e.getSource()==listado.getbFiltros()) 
 			muestraFiltros();
-		}
 		if (e.getSource()==listado.getbNuevo())
 			nuevoArticulo();
+		if (e.getSource()==listado.getbActualizar())
+			actualizar();
 		
 	}
 
@@ -43,10 +46,12 @@ public class ControladorListadoArticulos implements ActionListener{
 		if (listado.getbFiltrar().isVisible()) {
 			listado.getbFiltrar().setVisible(false);
 			listado.getTFiltroNombre().setVisible(false);
+			listado.getbFiltros().setIcon(new ImageIcon("src/img/filtro.png"));
 		}
 		else {
 			listado.getbFiltrar().setVisible(true);
 			listado.getTFiltroNombre().setVisible(true);
+			listado.getbFiltros().setIcon(new ImageIcon("src/img/nofiltro.png"));
 		}
 	}
 
@@ -54,6 +59,10 @@ public class ControladorListadoArticulos implements ActionListener{
 		listado.getPanel().updateUI();
 		listar(listado);
 		System.out.println("Boton filtro");
+	}
+	
+	private void actualizar() {
+		listado.getPanel().updateUI();
 	}
 	
 	private void nuevoArticulo() {

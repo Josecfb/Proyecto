@@ -21,10 +21,13 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
-		if (fichaArticulo.getArt()!=null)
-			modificaArticulo();
-		else
-			nuevoArticulo();
+		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
+		if (res==JOptionPane.YES_OPTION)
+			if (fichaArticulo.getArt()!=null)
+				modificaArticulo();
+			else
+				nuevoArticulo();
+		fichaArticulo.dispose();
 	}
 
 	@Override
@@ -60,9 +63,8 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 		ok=ga.modificarArticulo(artModif);
 		if (ok[5])
 			fichaArticulo.dispose();
-		else {
-			muestraErrores(ok);
-		}
+		else 
+			muestraErrores(ok);		
 	}
 	
 	private void nuevoArticulo() {
@@ -76,7 +78,6 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 		else {
 			muestraErrores(ok);
 		}
-		
 	}
 
 	private void asignaCampos(Articulo artModif) {
@@ -131,7 +132,6 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	@Override
 	public void internalFrameDeactivated(InternalFrameEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

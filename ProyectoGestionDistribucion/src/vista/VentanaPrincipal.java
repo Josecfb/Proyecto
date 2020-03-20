@@ -14,10 +14,13 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
+
 import java.awt.BorderLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Dimension;
 
 public class VentanaPrincipal extends JFrame {
 	private static final long serialVersionUID = -2711106703828276308L;
@@ -29,6 +32,8 @@ public class VentanaPrincipal extends JFrame {
 	private JButton bArticulos;
 	private JButton bClientes;
 	private JButton bProveedores;
+	private JButton bFacturas;
+	
 
 	
 	public VentanaPrincipal() {
@@ -48,19 +53,32 @@ public class VentanaPrincipal extends JFrame {
 		getContentPane().add(panelInterior);
 		
 		toolBar = new JToolBar();
+		toolBar.setPreferredSize(new Dimension(13, 90));
+		toolBar.setSize(new Dimension(0, 90));
 		getContentPane().add(toolBar, BorderLayout.NORTH);
 		
-		bArticulos = new JButton("");
+		bArticulos = new JButton("Articulos");
+		bArticulos.setMaximumSize(new Dimension(90, 90));
 		toolBar.add(bArticulos);
 		bArticulos.setIcon(new ImageIcon(new ImageIcon("src/img/articulos.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		bArticulos.setHorizontalTextPosition(SwingConstants.CENTER );
+		bArticulos.setVerticalTextPosition( SwingConstants.BOTTOM );
+
 		
-		bClientes = new JButton("");
+		bClientes = new JButton("Clientes");
+		bClientes.setMaximumSize(new Dimension(90, 90));
 		toolBar.add(bClientes);
 		bClientes.setIcon(new ImageIcon(new ImageIcon("src/img/clientes.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		bClientes.setHorizontalTextPosition(SwingConstants.CENTER );
+		bClientes.setVerticalTextPosition( SwingConstants.BOTTOM );
 		
-		bProveedores = new JButton("");
+		bProveedores = new JButton("Proveedores");
+		bProveedores.setMaximumSize(new Dimension(90, 90));
 		toolBar.add(bProveedores);
 		bProveedores.setIcon(new ImageIcon(new ImageIcon("src/img/proveedores.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		bProveedores.setHorizontalTextPosition(SwingConstants.CENTER );
+		bProveedores.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
 		panelInterior.setVisible(true);
 	}
 	private void pintaMenu() {
@@ -93,7 +111,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	public void listadoClientes() {
-		ListadoClientes lc=new ListadoClientes();
+		ListadoClientes lc=new ListadoClientes(this);
 		panelInterior.add(lc);
 		lc.setVisible(true);
 	}

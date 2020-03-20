@@ -107,6 +107,7 @@ public class FichaArticulo extends JInternalFrame {
 		proveedores=gp.listar("");
 		for (Proveedor pro:proveedores)
 			comboProveedor.addItem(pro);
+		comboProveedor.setSelectedItem(null);
 		panel.add(comboProveedor);
 		
 		JLabel lCoste = new JLabel("Coste");
@@ -183,6 +184,7 @@ public class FichaArticulo extends JInternalFrame {
 		familias=gf.listar("");
 		for (Familia fam:familias)
 			comboFamilia.addItem(fam);
+		comboFamilia.setSelectedItem(null);
 		panel.add(comboFamilia);
 		
 		tStock = new JTextField();

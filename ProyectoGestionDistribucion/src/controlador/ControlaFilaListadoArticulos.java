@@ -16,7 +16,6 @@ public class ControlaFilaListadoArticulos implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("hola");
 		FichaArticulo fa;
 		System.out.println("hola"+filaListadoArticulos.getNombre().getText());
 		GestorArticulo ga=new GestorArticulo();

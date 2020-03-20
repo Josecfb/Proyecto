@@ -12,10 +12,16 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
 
 import controlador.ControlaFilaListadoClientes;
+import controlador.ControladorListadoArticulos;
 import controlador.ControladorListadoClientes;
 import model.Cliente;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 
 public class ListadoClientes extends JInternalFrame {
 
@@ -24,10 +30,20 @@ public class ListadoClientes extends JInternalFrame {
 	private FilaListadoClientes fila;
 	private JLabel numero, nif, nombreComercial, nombreFiscal,codPost, poblacion, provincia, fijo, movil;
 	private JTextField TFiltroNombre;
+	private JPanel panel;
 	private JButton bFiltrar;
+	private JToolBar toolBar;
+	private JButton bNuevo;
+	private JToggleButton bFiltros;
+	private JButton bActualizar;
+	private JButton bPedidos;
+	private JButton bAlbaranes;
+	private JButton bFacturas;
+	private VentanaPrincipal v;
 
 
-	public ListadoClientes() {
+	public ListadoClientes(VentanaPrincipal v) {
+		this.v=v;
 		setResizable(true);
 		setClosable(true);
 		setMaximizable(true);
@@ -42,23 +58,32 @@ public class ListadoClientes extends JInternalFrame {
 	private void inicializar() {
 		Color fondo=new Color(100,100,100);
 		numero=new JLabel("Número");
+		numero.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		nif=new JLabel("Nif");
+		nif.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		nombreComercial=new JLabel("Nombre Comercial");
+		nombreComercial.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		nombreFiscal=new JLabel("Nombre Fiscal");
+		nombreFiscal.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		codPost=new JLabel("Cod. Pos.");
+		codPost.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		poblacion=new JLabel("Población");
+		poblacion.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		provincia=new JLabel("Provincia");
+		provincia.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		fijo=new JLabel("Fijo");
+		fijo.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		movil=new JLabel("Movil");
-		numero.setBounds(10, 42, 40, 20);
-		nif.setBounds(60, 42, 70, 20);
-		nombreComercial.setBounds(140, 42, 200, 20);
-		nombreFiscal.setBounds(350, 42, 200, 20);
-		codPost.setBounds(560, 42, 60, 20);
-		poblacion.setBounds(630, 42, 90, 20);
-		provincia.setBounds(740, 42, 90, 20);
-		fijo.setBounds(870, 42, 70, 20);
-		movil.setBounds(950, 42, 70, 20);
+		movil.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		numero.setBounds(10, 98, 40, 20);
+		nif.setBounds(60, 98, 70, 20);
+		nombreComercial.setBounds(140, 98, 200, 20);
+		nombreFiscal.setBounds(350, 98, 200, 20);
+		codPost.setBounds(560, 98, 60, 20);
+		poblacion.setBounds(630, 98, 90, 20);
+		provincia.setBounds(740, 98, 90, 20);
+		fijo.setBounds(870, 98, 70, 20);
+		movil.setBounds(950, 98, 70, 20);
 		numero.setOpaque(true);
 		nif.setOpaque(true);
 		nombreComercial.setOpaque(true);
@@ -68,15 +93,15 @@ public class ListadoClientes extends JInternalFrame {
 		provincia.setOpaque(true);
 		fijo.setOpaque(true);
 		movil.setOpaque(true);
-		numero.setBackground(fondo);
-		nif.setBackground(fondo);
-		nombreComercial.setBackground(fondo);
-		nombreFiscal.setBackground(fondo);
-		codPost.setBackground(fondo);
-		poblacion.setBackground(fondo);
-		provincia.setBackground(fondo);
-		fijo.setBackground(fondo);
-		movil.setBackground(fondo);
+		numero.setBackground(new Color(0, 0, 128));
+		nif.setBackground(new Color(0, 0, 128));
+		nombreComercial.setBackground(new Color(0, 0, 128));
+		nombreFiscal.setBackground(new Color(0, 0, 128));
+		codPost.setBackground(new Color(0, 0, 128));
+		poblacion.setBackground(new Color(0, 0, 128));
+		provincia.setBackground(new Color(0, 0, 128));
+		fijo.setBackground(new Color(0, 0, 128));
+		movil.setBackground(new Color(0, 0, 128));
 		numero.setForeground(Color.WHITE);
 		nif.setForeground(Color.WHITE);
 		nombreComercial.setForeground(Color.WHITE);
@@ -98,24 +123,81 @@ public class ListadoClientes extends JInternalFrame {
 		
 		scroll =new JScrollPane();
 		scroll.setBackground(fondo);
-		scroll.setBounds(10, 61, 1100, getHeight()-20);
+		scroll.setBounds(10, 117, 1100, 463);
 		scroll.setBorder(null);
 		getContentPane().add(scroll);
 		TFiltroNombre = new JTextField();
-		TFiltroNombre.setBounds(64, 11, 201, 20);
+		TFiltroNombre.setBounds(64, 67, 201, 20);
 		getContentPane().add(TFiltroNombre);
 		TFiltroNombre.setColumns(10);
 		
 		bFiltrar = new JButton();
-		bFiltrar.setBounds(280, 10, 20, 20);
+		bFiltrar.setBounds(280, 66, 20, 20);
 		bFiltrar.setIcon(new ImageIcon("src/img/filter.png"));
 		getContentPane().add(bFiltrar);
+		
+		toolBar = new JToolBar();
+		toolBar.setSize(new Dimension(0, 90));
+		toolBar.setPreferredSize(new Dimension(13, 90));
+		toolBar.setMaximumSize(new Dimension(13, 90));
+		toolBar.setBounds(0, 0, 385, 63);
+		getContentPane().add(toolBar);
+		
+		bNuevo = new JButton();
+		bNuevo.setText("Nuevo");
+		bNuevo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bNuevo);
+		bNuevo.setIcon(new ImageIcon("src/img/nuevo.png"));
+		bNuevo.setMaximumSize(new Dimension(60, 60));
+		bNuevo.setHorizontalTextPosition(SwingConstants.CENTER );
+		bNuevo.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
+		bFiltros = new JToggleButton("Filtro");
+		bFiltros.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bFiltros);
+		bFiltros.setIcon(new ImageIcon("src/img/filtro.png"));
+		bFiltros.setMaximumSize(new Dimension(60, 60));
+		bFiltros.setHorizontalTextPosition(SwingConstants.CENTER );
+		bFiltros.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
+		bActualizar = new JButton("Actualizar");
+		bActualizar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bActualizar);
+		bActualizar.setIcon(new ImageIcon("src/img/actualizar.png"));
+		bActualizar.setMaximumSize(new Dimension(60, 60));
+		bActualizar.setHorizontalTextPosition(SwingConstants.CENTER );
+		bActualizar.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
+		bPedidos = new JButton("Pedidos");
+		bPedidos.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bPedidos);
+		bPedidos.setIcon(new ImageIcon("src/img/pedidoproveedor.png"));
+		bPedidos.setMaximumSize(new Dimension(60, 60));
+		bPedidos.setHorizontalTextPosition(SwingConstants.CENTER );
+		bPedidos.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
+		bAlbaranes = new JButton("Albaranes");
+		bAlbaranes.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bAlbaranes);
+		bAlbaranes.setIcon(new ImageIcon("src/img/albaran.png"));
+		bAlbaranes.setMaximumSize(new Dimension(60, 60));
+		bAlbaranes.setHorizontalTextPosition(SwingConstants.CENTER );
+		bAlbaranes.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
+		bFacturas = new JButton("Facturas");
+		bFacturas.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bFacturas);
+		bFacturas.setIcon(new ImageIcon("src/img/facturas.png"));
+		bFacturas.setMaximumSize(new Dimension(60, 60));
+		bFacturas.setHorizontalTextPosition(SwingConstants.CENTER );
+		bFacturas.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
 		ControladorListadoClientes controladorListadoClientes=new ControladorListadoClientes(this);		
 	}
 	
 	public void muestra(List<Cliente> filas) {
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(800,600));
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(null);
@@ -123,7 +205,7 @@ public class ListadoClientes extends JInternalFrame {
 		scroll.setViewportView(panel);
 		for (Cliente cli:filas) {
 			i++;
-			fila=new FilaListadoClientes();
+			fila=new FilaListadoClientes(v);
 			ControlaFilaListadoClientes controlaFila=new ControlaFilaListadoClientes(fila);
 			fila.establecerControlador(controlaFila);
 			fila.setPreferredSize(new Dimension(1100,20));
@@ -140,6 +222,17 @@ public class ListadoClientes extends JInternalFrame {
 			panel.add(fila);
 		}
 	}
+	
+	public void establecerControlador(ControladorListadoArticulos controlador) {
+		bFiltrar.addActionListener(controlador);
+		bNuevo.addActionListener(controlador);
+		bFiltros.addActionListener(controlador);
+		bActualizar.addActionListener(controlador);
+	}
+
+	public VentanaPrincipal getV() {
+		return v;
+	}
 
 	public JTextField getTFiltroNombre() {
 		return TFiltroNombre;
@@ -147,6 +240,38 @@ public class ListadoClientes extends JInternalFrame {
 
 	public JButton getbFiltrar() {
 		return bFiltrar;
+	}
+
+	public JButton getbNuevo() {
+		return bNuevo;
+	}
+
+	public JToggleButton getbFiltros() {
+		return bFiltros;
+	}
+
+	public JButton getbActualizar() {
+		return bActualizar;
+	}
+
+	public JButton getbPedidos() {
+		return bPedidos;
+	}
+
+	public JButton getbAlbaranes() {
+		return bAlbaranes;
+	}
+
+	public JButton getbFacturas() {
+		return bFacturas;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public JLabel getNumero() {
+		return numero;
 	}
 	
 	

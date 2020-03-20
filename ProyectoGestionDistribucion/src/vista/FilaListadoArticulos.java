@@ -4,8 +4,6 @@ import javax.swing.JPanel;
 
 import controlador.ControlaFilaListadoArticulos;
 import java.awt.Color;
-import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;

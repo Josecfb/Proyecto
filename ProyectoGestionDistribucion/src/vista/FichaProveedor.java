@@ -58,7 +58,6 @@ public class FichaProveedor extends JInternalFrame {
 		tNumero.setColumns(10);
 		tNumero.setBounds(175, 47, 86, 25);
 		tNumero.setHorizontalAlignment(JTextField.RIGHT);
-		tNumero.setText(String.valueOf(pro.getNumero()));
 		tNumero.setFocusable(false);
 		panel.add(tNumero);
 		
@@ -71,7 +70,6 @@ public class FichaProveedor extends JInternalFrame {
 		tNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tNombre.setColumns(10);
 		tNombre.setBounds(347, 47, 395, 25);
-		tNombre.setText(pro.getNombre());
 		panel.add(tNombre);
 		
 		JLabel lDireccion = new JLabel("Direcci\u00F3n");
@@ -83,7 +81,6 @@ public class FichaProveedor extends JInternalFrame {
 		tDireccion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tDireccion.setColumns(10);
 		tDireccion.setBounds(175, 101, 567, 25);
-		tDireccion.setText(pro.getDireccion());
 		panel.add(tDireccion);
 		
 		JLabel lPoblación = new JLabel("Poblaci\u00F3n");
@@ -95,7 +92,6 @@ public class FichaProveedor extends JInternalFrame {
 		tPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tPoblacion.setColumns(10);
 		tPoblacion.setBounds(175, 156, 248, 25);
-		tPoblacion.setText(pro.getPoblacion());
 		panel.add(tPoblacion);
 		
 		JLabel lProvincia = new JLabel("Provincia");
@@ -107,7 +103,6 @@ public class FichaProveedor extends JInternalFrame {
 		tProvincia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tProvincia.setColumns(10);
 		tProvincia.setBounds(519, 156, 223, 25);
-		tProvincia.setText(pro.getProvincia());
 		panel.add(tProvincia);
 		
 		JLabel lCodPost = new JLabel("C\u00F3digo Postal");
@@ -119,7 +114,6 @@ public class FichaProveedor extends JInternalFrame {
 		tCodPos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tCodPos.setColumns(10);
 		tCodPos.setBounds(175, 211, 111, 25);
-		tCodPos.setText(pro.getCodPost());
 		panel.add(tCodPos);
 		
 		JLabel lFijo = new JLabel("T. Fijo");
@@ -131,7 +125,6 @@ public class FichaProveedor extends JInternalFrame {
 		tFijo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tFijo.setColumns(10);
 		tFijo.setBounds(375, 211, 134, 25);
-		tFijo.setText(pro.getTelefonoFijo());
 		panel.add(tFijo);
 		
 		JLabel lMovil = new JLabel("M\u00F3vil");
@@ -143,7 +136,6 @@ public class FichaProveedor extends JInternalFrame {
 		tMovil.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tMovil.setColumns(10);
 		tMovil.setBounds(583, 211, 159, 25);
-		tMovil.setText(pro.getTelefonoMovil());
 		panel.add(tMovil);
 		
 		tEMail = new JTextField();
@@ -151,7 +143,6 @@ public class FichaProveedor extends JInternalFrame {
 		tEMail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tEMail.setColumns(10);
 		tEMail.setBounds(175, 268, 200, 25);
-		tEMail.setText(pro.getEmail());
 		panel.add(tEMail);
 		
 		JLabel lEMail = new JLabel("Email");
@@ -165,7 +156,6 @@ public class FichaProveedor extends JInternalFrame {
 		tSubcuenta.setColumns(10);
 		tSubcuenta.setBounds(445, 268, 104, 25);
 		tSubcuenta.setHorizontalAlignment(JTextField.RIGHT);
-		tSubcuenta.setText(String.valueOf(pro.getNumCuentaContable()));
 		panel.add(tSubcuenta);
 		
 		JLabel lSubcuent = new JLabel("Sub cta.");
@@ -184,13 +174,29 @@ public class FichaProveedor extends JInternalFrame {
 		tNif.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tNif.setColumns(10);
 		tNif.setBounds(583, 268, 159, 25);
-		tNif.setText(pro.getNif());
 		panel.add(tNif);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Facturas", null, panel_1, null);
+		if (pro!=null)
+			llenaFicha(pro);
 		
 	}
+	
+	public void llenaFicha(Proveedor pro) {
+		tNumero.setText(String.valueOf(pro.getNumero()));
+		tNombre.setText(pro.getNombre());
+		tDireccion.setText(pro.getDireccion());
+		tPoblacion.setText(pro.getPoblacion());
+		tProvincia.setText(pro.getProvincia());
+		tCodPos.setText(pro.getCodPost());
+		tFijo.setText(pro.getTelefonoFijo());
+		tMovil.setText(pro.getTelefonoMovil());
+		tEMail.setText(pro.getEmail());
+		tSubcuenta.setText(String.valueOf(pro.getNumCuentaContable()));
+		tNif.setText(pro.getNif());
+	}
+	
 	public void EstablecerManejadorVentana(ControladorFichaProveedor manejador) {
 		this.addInternalFrameListener(manejador);
 	}

@@ -3,6 +3,7 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +17,8 @@ import controlador.ControlaFilaListadoArticulos;
 import controlador.ControladorListadoArticulos;
 import model.Articulo;
 import javax.swing.border.BevelBorder;
-import java.awt.SystemColor;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 import javax.swing.JToggleButton;
 
 
@@ -32,7 +33,7 @@ public class ListadoArticulos extends JInternalFrame {
 	private JButton bFiltrar,bNuevo;
 	private JPanel panel;
 	private JToggleButton bFiltros;
-	private JButton bActualizar;
+	private JButton bActualizar, bPedidos,bAlbaranes,bFacturas;
 
 
 	public ListadoArticulos(VentanaPrincipal v) {
@@ -67,14 +68,14 @@ public class ListadoArticulos extends JInternalFrame {
 		lStock.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		lStockMin=new JLabel("Stock Min.");
 		lStockMin.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		Lcod.setBounds(10, 74, 45, 20);
-		LCProv.setBounds(65, 74, 70, 20);
-		lNombre.setBounds(145, 74, 267, 20);
-		Lcoste.setBounds(561, 74, 70, 20);
-		LPrecioMay.setBounds(641, 74, 88, 20);
-		LPrecioMin.setBounds(739, 74, 98, 20);
-		lStock.setBounds(847, 74, 80, 20);
-		lStockMin.setBounds(935, 74, 98, 20);
+		Lcod.setBounds(10, 102, 45, 20);
+		LCProv.setBounds(65, 102, 70, 20);
+		lNombre.setBounds(145, 102, 267, 20);
+		Lcoste.setBounds(561, 102, 70, 20);
+		LPrecioMay.setBounds(641, 102, 88, 20);
+		LPrecioMin.setBounds(739, 102, 98, 20);
+		lStock.setBounds(847, 102, 80, 20);
+		lStockMin.setBounds(935, 102, 98, 20);
 		Lcod.setOpaque(true);
 		LCProv.setOpaque(true);
 		lNombre.setOpaque(true);
@@ -83,14 +84,14 @@ public class ListadoArticulos extends JInternalFrame {
 		LPrecioMin.setOpaque(true);
 		lStock.setOpaque(true);
 		lStockMin.setOpaque(true);
-		Lcod.setBackground(fondo);
-		LCProv.setBackground(fondo);
-		lNombre.setBackground(fondo);
-		Lcoste.setBackground(fondo);
-		LPrecioMay.setBackground(fondo);
-		LPrecioMin.setBackground(fondo);
-		lStock.setBackground(fondo);
-		lStockMin.setBackground(fondo);
+		Lcod.setBackground(new Color(0, 0, 128));
+		LCProv.setBackground(new Color(0, 0, 128));
+		lNombre.setBackground(new Color(0, 0, 128));
+		Lcoste.setBackground(new Color(0, 0, 128));
+		LPrecioMay.setBackground(new Color(0, 0, 128));
+		LPrecioMin.setBackground(new Color(0, 0, 128));
+		lStock.setBackground(new Color(0, 0, 128));
+		lStockMin.setBackground(new Color(0, 0, 128));
 		getContentPane().add(Lcod);
 		Lcod.setForeground(Color.WHITE);
 		LCProv.setForeground(Color.WHITE);
@@ -111,7 +112,7 @@ public class ListadoArticulos extends JInternalFrame {
 		
 		scroll =new JScrollPane();
 		scroll.setBackground(fondo);
-		scroll.setBounds(10, 99, 1100, getHeight()-20);
+		scroll.setBounds(10, 127, 1100, 470);
 		scroll.setBorder(null);
 		getContentPane().add(scroll);
 		
@@ -119,36 +120,77 @@ public class ListadoArticulos extends JInternalFrame {
 		LFam.setOpaque(true);
 		LFam.setForeground(Color.WHITE);
 		LFam.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		LFam.setBackground(SystemColor.windowBorder);
-		LFam.setBounds(422, 74, 129, 20);
+		LFam.setBackground(new Color(0, 0, 128));
+		LFam.setBounds(422, 102, 129, 20);
 		getContentPane().add(LFam);
 
 		TFiltroNombre = new JTextField();
-		TFiltroNombre.setBounds(64, 47, 201, 20);
+		TFiltroNombre.setBounds(64, 75, 201, 20);
 		getContentPane().add(TFiltroNombre);
+		TFiltroNombre.setVisible(false);
 		TFiltroNombre.setColumns(10);
 		
 		bFiltrar = new JButton();
-		bFiltrar.setBounds(280, 46, 20, 20);
+		bFiltrar.setBounds(280, 74, 20, 20);
 		bFiltrar.setIcon(new ImageIcon("src/img/filter.png"));
 		bFiltrar.setVisible(false);
 		getContentPane().add(bFiltrar);
 		
 		JToolBar toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 412, 45);
+		toolBar.setSize(new Dimension(0, 90));
+		toolBar.setMaximumSize(new Dimension(13, 90));
+		toolBar.setPreferredSize(new Dimension(13, 90));
+		toolBar.setBounds(0, 0, 385, 63);
 		getContentPane().add(toolBar);
 		
 		bNuevo = new JButton();
+		bNuevo.setText("Nuevo");
+		bNuevo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		toolBar.add(bNuevo);
 		bNuevo.setIcon(new ImageIcon("src/img/nuevo.png"));
+		bNuevo.setMaximumSize(new Dimension(60, 60));
+		bNuevo.setHorizontalTextPosition(SwingConstants.CENTER );
+		bNuevo.setVerticalTextPosition( SwingConstants.BOTTOM );
 		
-		bFiltros = new JToggleButton("");
+		bFiltros = new JToggleButton("Filtro");
+		bFiltros.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		toolBar.add(bFiltros);
 		bFiltros.setIcon(new ImageIcon("src/img/filtro.png"));
+		bFiltros.setMaximumSize(new Dimension(60, 60));
+		bFiltros.setHorizontalTextPosition(SwingConstants.CENTER );
+		bFiltros.setVerticalTextPosition( SwingConstants.BOTTOM );
 		
-		bActualizar = new JButton("");
+		bActualizar = new JButton("Actualizar");
+		bActualizar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		toolBar.add(bActualizar);
 		bActualizar.setIcon(new ImageIcon("src/img/actualizar.png"));
+		bActualizar.setMaximumSize(new Dimension(60, 60));
+		bActualizar.setHorizontalTextPosition(SwingConstants.CENTER );
+		bActualizar.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
+		bPedidos = new JButton("Pedidos");
+		bPedidos.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bPedidos);
+		bPedidos.setIcon(new ImageIcon("src/img/pedidoproveedor.png"));
+		bPedidos.setMaximumSize(new Dimension(60, 60));
+		bPedidos.setHorizontalTextPosition(SwingConstants.CENTER );
+		bPedidos.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
+		bAlbaranes = new JButton("Albaranes");
+		bAlbaranes.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bAlbaranes);
+		bAlbaranes.setIcon(new ImageIcon("src/img/albaran.png"));
+		bAlbaranes.setMaximumSize(new Dimension(60, 60));
+		bAlbaranes.setHorizontalTextPosition(SwingConstants.CENTER );
+		bAlbaranes.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
+		bFacturas = new JButton("Facturas");
+		bFacturas.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		toolBar.add(bFacturas);
+		bFacturas.setIcon(new ImageIcon("src/img/facturas.png"));
+		bFacturas.setMaximumSize(new Dimension(60, 60));
+		bFacturas.setHorizontalTextPosition(SwingConstants.CENTER );
+		bFacturas.setVerticalTextPosition( SwingConstants.BOTTOM );
 
 		//ControladorListadoProveedores controladorListadoProveedores=new ControladorListadoProveedores(this);
 
@@ -192,6 +234,7 @@ public class ListadoArticulos extends JInternalFrame {
 		bFiltrar.addActionListener(controlador);
 		bNuevo.addActionListener(controlador);
 		bFiltros.addActionListener(controlador);
+		bActualizar.addActionListener(controlador);
 	}
 
 	public JTextField getTFiltroNombre() {
@@ -212,6 +255,10 @@ public class ListadoArticulos extends JInternalFrame {
 
 	public JToggleButton getbFiltros() {
 		return bFiltros;
+	}
+
+	public JButton getbActualizar() {
+		return bActualizar;
 	}
 
 	public VentanaPrincipal getV() {

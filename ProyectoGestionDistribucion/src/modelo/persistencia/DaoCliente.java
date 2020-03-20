@@ -7,6 +7,18 @@ import model.Cliente;
 public class DaoCliente {
 	private EntityManager em;
 	
+	
+	public Cliente existe(int num) {
+		Cliente cli;
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		if (em==null)
+			return null;
+		else 
+			cli=em.find(Cliente.class, num);
+		return cli;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Cliente> Listado(String filtroNombre){
 		List<Cliente> lista;

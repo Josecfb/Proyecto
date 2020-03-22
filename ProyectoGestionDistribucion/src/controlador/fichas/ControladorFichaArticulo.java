@@ -1,4 +1,4 @@
-package controlador;
+package controlador.fichas;
 
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -10,7 +10,7 @@ import model.Articulo;
 import model.Familia;
 import model.Proveedor;
 import modelo.negocio.GestorArticulo;
-import vista.FichaArticulo;
+import vista.fichas.FichaArticulo;
 
 public class ControladorFichaArticulo implements InternalFrameListener, FocusListener {
 	private FichaArticulo fichaArticulo;
@@ -27,7 +27,8 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 				modificaArticulo();
 			else
 				nuevoArticulo();
-		fichaArticulo.dispose();
+		else
+			fichaArticulo.dispose();
 	}
 
 	@Override

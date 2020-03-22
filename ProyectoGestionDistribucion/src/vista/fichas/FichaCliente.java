@@ -1,4 +1,4 @@
-package vista;
+package vista.fichas;
 
 import java.awt.Font;
 import javax.swing.JInternalFrame;
@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import controlador.ControladorFichaCliente;
+import controlador.fichas.ControladorFichaCliente;
 import model.Cliente;
 import javax.swing.JComboBox;
 
@@ -18,6 +18,7 @@ public class FichaCliente extends JInternalFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 7007272565978130446L;
+	private Cliente cli;
 	private JTextField tNumero;
 	private JTextField tDireccion;
 	private JTextField tPoblacion;
@@ -36,6 +37,7 @@ public class FichaCliente extends JInternalFrame {
 
 
 	public FichaCliente(Cliente cli) {
+		this.cli=cli;
 		setAutoscrolls(true);
 		setBorder(UIManager.getBorder("InternalFrame.border"));
 		setBounds(100, 100, 997, 512);
@@ -164,6 +166,7 @@ public class FichaCliente extends JInternalFrame {
 		tSubcuenta.setColumns(10);
 		tSubcuenta.setBounds(591, 316, 159, 25);
 		tSubcuenta.setHorizontalAlignment(JTextField.RIGHT);
+		tSubcuenta.setText("0");
 		panel.add(tSubcuenta);
 		
 		JLabel lSubcuent = new JLabel("Sub cta.");
@@ -261,4 +264,74 @@ public class FichaCliente extends JInternalFrame {
 	public void establecerManejadorVentana(ControladorFichaCliente cfc) {
 		this.addInternalFrameListener(cfc);
 	}
+
+	public Cliente getCli() {
+		return cli;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public JTextField gettNumero() {
+		return tNumero;
+	}
+
+	public JTextField gettDireccion() {
+		return tDireccion;
+	}
+
+	public JTextField gettPoblacion() {
+		return tPoblacion;
+	}
+
+	public JTextField gettProvincia() {
+		return tProvincia;
+	}
+
+	public JTextField gettEmail() {
+		return tEmail;
+	}
+
+	public JTextField gettFijo() {
+		return tFijo;
+	}
+
+	public JTextField gettMovil() {
+		return tMovil;
+	}
+
+	public JTextField gettNombre() {
+		return tNombre;
+	}
+
+	public JTextField gettCodPos() {
+		return tCodPos;
+	}
+
+	public JTextField gettSubcuenta() {
+		return tSubcuenta;
+	}
+
+	public JTextField gettNif() {
+		return tNif;
+	}
+
+	public JTextField gettApellidos() {
+		return tApellidos;
+	}
+
+	public JTextField gettNomComercial() {
+		return tNomComercial;
+	}
+
+	public JTextField gettNomFiscal() {
+		return tNomFiscal;
+	}
+
+	public JComboBox<String> getComboTipo() {
+		return comboTipo;
+	}
+	
+	
 }

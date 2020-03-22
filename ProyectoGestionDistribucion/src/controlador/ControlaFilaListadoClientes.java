@@ -3,9 +3,10 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import controlador.fichas.ControladorFichaCliente;
 import modelo.negocio.GestorCliente;
-import vista.FichaCliente;
 import vista.FilaListadoClientes;
+import vista.fichas.FichaCliente;
 
 public class ControlaFilaListadoClientes implements ActionListener{
 	private FilaListadoClientes filaListadoClientes;

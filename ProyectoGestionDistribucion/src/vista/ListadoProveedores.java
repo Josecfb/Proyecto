@@ -236,6 +236,7 @@ public class ListadoProveedores extends JInternalFrame {
 		bNuevo.addActionListener(controlador);
 		bFiltros.addActionListener(controlador);
 		bActualizar.addActionListener(controlador);
+		bPedidos.addActionListener(controlador);
 	}
 	
 

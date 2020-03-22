@@ -1,4 +1,4 @@
-package vista;
+package vista.fichas;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -9,7 +9,8 @@ import java.text.NumberFormat;
 import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import controlador.ControladorFichaArticulo;
+
+import controlador.fichas.ControladorFichaArticulo;
 import model.Articulo;
 import model.Familia;
 import model.Proveedor;
@@ -120,6 +121,7 @@ public class FichaArticulo extends JInternalFrame {
 		tCoste.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tCoste.setColumns(10);
 		tCoste.setBounds(96, 146, 134, 25);
+		tCoste.setText("0,00 €");
 		panel.add(tCoste);
 		
 		tPrecioMay = new JTextField();
@@ -127,6 +129,7 @@ public class FichaArticulo extends JInternalFrame {
 		tPrecioMay.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tPrecioMay.setColumns(10);
 		tPrecioMay.setBounds(363, 146, 134, 25);
+		tPrecioMay.setText("0,00 €");
 		panel.add(tPrecioMay);
 		
 		JLabel lPrecioMay = new JLabel("Precio May.");
@@ -139,6 +142,7 @@ public class FichaArticulo extends JInternalFrame {
 		tPrecioMin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tPrecioMin.setColumns(10);
 		tPrecioMin.setBounds(601, 146, 134, 25);
+		tPrecioMin.setText("0,00 €");
 		panel.add(tPrecioMin);
 		
 		JLabel lPrecioMin = new JLabel("Precio Min.");
@@ -156,6 +160,7 @@ public class FichaArticulo extends JInternalFrame {
 		tIva.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tIva.setColumns(10);
 		tIva.setBounds(96, 197, 72, 25);
+		tIva.setText("0%");
 		panel.add(tIva);
 		
 		tUnidadesCaja = new JTextField();
@@ -163,6 +168,7 @@ public class FichaArticulo extends JInternalFrame {
 		tUnidadesCaja.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tUnidadesCaja.setColumns(10);
 		tUnidadesCaja.setBounds(304, 197, 72, 25);
+		tUnidadesCaja.setText("0");
 		panel.add(tUnidadesCaja);
 		
 		JLabel lUCaja = new JLabel("Unidades/Caja");
@@ -192,6 +198,7 @@ public class FichaArticulo extends JInternalFrame {
 		tStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tStock.setColumns(10);
 		tStock.setBounds(96, 251, 72, 25);
+		tStock.setText("0");
 		panel.add(tStock);
 		
 		JLabel lStock = new JLabel("Stock");
@@ -204,6 +211,7 @@ public class FichaArticulo extends JInternalFrame {
 		tStockMin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tStockMin.setColumns(10);
 		tStockMin.setBounds(290, 251, 86, 25);
+		tStockMin.setText("0");
 		panel.add(tStockMin);
 		
 		JLabel lStockMin = new JLabel("Stock Min.");

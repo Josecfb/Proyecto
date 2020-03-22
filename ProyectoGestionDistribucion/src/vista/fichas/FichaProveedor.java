@@ -1,9 +1,9 @@
-package vista;
+package vista.fichas;
 
 
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
-import controlador.ControladorFichaProveedor;
+
 import model.Proveedor;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -11,6 +11,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+
+import controlador.fichas.ControladorFichaProveedor;
 
 public class FichaProveedor extends JInternalFrame {
 
@@ -158,6 +160,7 @@ public class FichaProveedor extends JInternalFrame {
 		tSubcuenta.setColumns(10);
 		tSubcuenta.setBounds(445, 268, 104, 25);
 		tSubcuenta.setHorizontalAlignment(JTextField.RIGHT);
+		tSubcuenta.setText("0");
 		panel.add(tSubcuenta);
 		
 		JLabel lSubcuent = new JLabel("Sub cta.");

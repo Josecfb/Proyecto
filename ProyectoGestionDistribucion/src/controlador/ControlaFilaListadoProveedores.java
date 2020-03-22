@@ -3,9 +3,10 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import controlador.fichas.ControladorFichaProveedor;
 import modelo.negocio.GestorProveedor;
-import vista.FichaProveedor;
 import vista.FilaListadoProveedores;
+import vista.fichas.FichaProveedor;
 
 public class ControlaFilaListadoProveedores implements ActionListener{
 	private FilaListadoProveedores filaListadoProveedores;

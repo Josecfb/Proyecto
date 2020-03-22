@@ -33,7 +33,6 @@ public class DaoProveedor {
 			return null;
 		else 
 			pro=em.find(Proveedor.class, num);
-		System.out.println("en existe"+pro.getNumero());
 		return pro;
 	}
 	

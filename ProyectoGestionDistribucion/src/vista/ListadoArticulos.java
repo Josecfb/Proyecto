@@ -191,17 +191,13 @@ public class ListadoArticulos extends JInternalFrame {
 		bFacturas.setHorizontalTextPosition(SwingConstants.CENTER );
 		bFacturas.setVerticalTextPosition( SwingConstants.BOTTOM );
 
-		//ControladorListadoProveedores controladorListadoProveedores=new ControladorListadoProveedores(this);
 
 		
 	}
 	
 	public void muestra(List<Articulo> filas) {
-		
-		//FilaListadoProveedores fila;
+
 		panel = new JPanel();
-
-
 		panel.setBounds(0,0,727,1200);
 		panel.setPreferredSize(new Dimension(800,filas.size()*30));
 		panel.setBackground(Color.WHITE);

@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.ImageIcon;
 
+import controlador.fichas.ControladorFichaProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
-import vista.FichaProveedor;
 import vista.ListadoProveedores;
+import vista.PedidosProveedores;
+import vista.fichas.FichaProveedor;
 
 public class ControladorListadoProveedores implements ActionListener{
 	private ListadoProveedores listado;
@@ -36,6 +38,8 @@ public class ControladorListadoProveedores implements ActionListener{
 			nuevoProveedor();
 		if (e.getSource()==listado.getbActualizar())
 			actualizar();
+		if (e.getSource()==listado.getbPedidos())
+			abrePedidos();
 	}
 	
 	private void filtrar() {
@@ -67,5 +71,11 @@ public class ControladorListadoProveedores implements ActionListener{
 		fp.EstablecerManejadorVentana(cfp);
 		listado.getV().getPanelInterior().add(fp);
 		fp.setVisible(true);
+	}
+	
+	private void abrePedidos() {
+		PedidosProveedores pp=new PedidosProveedores(listado.getV());
+		listado.getV().getPanelInterior().add(pp);
+		pp.setVisible(true);
 	}
 }

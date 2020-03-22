@@ -45,6 +45,9 @@ public class Articulo implements Serializable {
 
 	@Column(name="UNIDADES_CAJA")
 	private int unidadesCaja;
+	
+	@Column(name="ENPEDIDO")
+	private boolean enPedido;
 
 	//bi-directional many-to-one association to Familia
 	@ManyToOne

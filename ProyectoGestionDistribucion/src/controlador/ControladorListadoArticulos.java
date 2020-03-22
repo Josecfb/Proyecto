@@ -6,10 +6,11 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import controlador.fichas.ControladorFichaArticulo;
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
-import vista.FichaArticulo;
 import vista.ListadoArticulos;
+import vista.fichas.FichaArticulo;
 
 public class ControladorListadoArticulos implements ActionListener{
 	private ListadoArticulos listado;
@@ -65,7 +66,7 @@ public class ControladorListadoArticulos implements ActionListener{
 	}
 	
 	private void nuevoArticulo() {
-		GestorArticulo ga=new GestorArticulo();
+		//GestorArticulo ga=new GestorArticulo();
 		FichaArticulo fa=new FichaArticulo(null);
 		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
 		fa.EstablecerManejadorVentana(cfa);

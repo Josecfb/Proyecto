@@ -6,10 +6,11 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import controlador.fichas.ControladorFichaCliente;
 import model.Cliente;
 import modelo.negocio.GestorCliente;
-import vista.FichaCliente;
 import vista.ListadoClientes;
+import vista.fichas.FichaCliente;
 
 public class ControladorListadoClientes implements ActionListener{
 	private ListadoClientes listado;
@@ -23,7 +24,6 @@ public class ControladorListadoClientes implements ActionListener{
 		this.listado=listado;
 		GestorCliente gc=new GestorCliente();
 		List<Cliente> filas=gc.listar(listado.getTFiltroNombre().getText());
-		System.out.println(filas.size());
 		listado.muestra(filas);
 	}
 	

@@ -2,9 +2,11 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import controlador.fichas.ControladorFichaArticulo;
 import modelo.negocio.GestorArticulo;
-import vista.FichaArticulo;
 import vista.FilaListadoArticulos;
+import vista.fichas.FichaArticulo;
 
 
 public class ControlaFilaListadoArticulos implements ActionListener{

@@ -1,4 +1,4 @@
-package controlador;
+package controlador.fichas;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -7,7 +7,7 @@ import javax.swing.event.InternalFrameListener;
 
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
-import vista.FichaProveedor;
+import vista.fichas.FichaProveedor;
 
 public class ControladorFichaProveedor implements InternalFrameListener{
 	private FichaProveedor fichaProveedor;
@@ -35,16 +35,17 @@ public class ControladorFichaProveedor implements InternalFrameListener{
 				modificaProveedor();
 			else
 				nuevoProvedor();
-		fichaProveedor.dispose();	
+		else
+			fichaProveedor.dispose();	
 	}
 	
 	private void nuevoProvedor() {
 		Proveedor proNuevo=new Proveedor();
 		asignaCampos(proNuevo);
 		GestorProveedor gp=new GestorProveedor();
-		boolean[] ok=new boolean[6];
+		boolean[] ok=new boolean[4];
 		ok=gp.nuevoProveedor(proNuevo);
-		if (ok[5])
+		if (ok[3])
 			fichaProveedor.dispose();
 		else {
 			muestraErrores(ok);
@@ -56,16 +57,15 @@ public class ControladorFichaProveedor implements InternalFrameListener{
 		proModif.setNumero(Integer.valueOf(fichaProveedor.gettNumero().getText()));
 		asignaCampos(proModif);
 		GestorProveedor gp=new GestorProveedor();
-		boolean[] ok=new boolean[6];
+		boolean[] ok=new boolean[4];
 		ok=gp.modificarProveedor(proModif);
-		if (ok[5])
+		if (ok[3])
 			fichaProveedor.dispose();
 		else 
 			muestraErrores(ok);	
 	}
 
 	private void asignaCampos(Proveedor proModif) {
-		proModif.setNumero(Integer.valueOf(fichaProveedor.gettNumero().getText()));
 		proModif.setNombre(fichaProveedor.gettNombre().getText());
 		proModif.setDireccion(fichaProveedor.gettDireccion().getText());
 		proModif.setCodPost(fichaProveedor.gettCodPos().getText());

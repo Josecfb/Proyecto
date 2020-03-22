@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import model.Cliente;
 
+
 public class DaoCliente {
 	private EntityManager em;
 	
@@ -34,5 +35,41 @@ public class DaoCliente {
 			ab.cerrarConexion();
 			return lista;
 		}
+	}
+	
+	public int modificar(Cliente cli) {
+		Cliente antiguo=existe(cli.getNumero());
+		em.getTransaction().begin();
+		if (em==null) return -1;
+		antiguo.setNumero(cli.getNumero());
+		antiguo.setTipo(cli.getTipo());
+		antiguo.setNifCif(cli.getNifCif());
+		antiguo.setNombre(cli.getNombre());
+		antiguo.setApellidos(cli.getApellidos());
+		antiguo.setEmail(cli.getEmail());
+		antiguo.setTelefonoFijo(cli.getTelefonoFijo());
+		antiguo.setTelefonoMovil(cli.getTelefonoMovil());
+		antiguo.setNombreComercial(cli.getNombreComercial());
+		antiguo.setNombreFiscal(cli.getNombreFiscal());
+		antiguo.setDireccion(cli.getDireccion());
+		antiguo.setCodPost(cli.getCodPost());
+		antiguo.setNumCuentaContable(cli.getNumCuentaContable());
+		antiguo.setProvincia(cli.getProvincia());
+		antiguo.setPoblacion(cli.getPoblacion());
+		em.merge(antiguo);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
+	}
+	
+	public int nuevo(Cliente cli) {
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		em.getTransaction().begin();
+		if (em==null) return -1;
+		em.persist(cli);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
 	}
 }

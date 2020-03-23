@@ -7,11 +7,11 @@ import java.util.List;
 
 
 /**
- * The persistent class for the LOTES database table.
+ * The persistent class for the lotes database table.
  * 
  */
 @Entity
-@Table(name="LOTES")
+@Table(name="lotes")
 @NamedQuery(name="Lote.findAll", query="SELECT l FROM Lote l")
 public class Lote implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,13 +20,18 @@ public class Lote implements Serializable {
 	@Column(name="NUM_LOTE")
 	private int numLote;
 
+	@ManyToOne
+	@JoinColumn(name="ARTICULO")
+	private Articulo articuloBean;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CADUCIDAD")
 	private Date fechaCaducidad;
 
-	@Column(name="LOTE")
 	private String lote;
 
+	private int stock;
+	
 	//bi-directional many-to-one association to FilasAlbaranCliente
 	@OneToMany(mappedBy="loteBean")
 	private List<FilasAlbaranCliente> filasAlbaranClientes;
@@ -54,6 +59,14 @@ public class Lote implements Serializable {
 		this.numLote = numLote;
 	}
 
+	public Articulo getArticuloBean() {
+		return this.articuloBean;
+	}
+
+	public void setArticuloBean(Articulo articuloBean) {
+		this.articuloBean = articuloBean;
+	}
+
 	public Date getFechaCaducidad() {
 		return this.fechaCaducidad;
 	}
@@ -70,92 +83,12 @@ public class Lote implements Serializable {
 		this.lote = lote;
 	}
 
-	public List<FilasAlbaranCliente> getFilasAlbaranClientes() {
-		return this.filasAlbaranClientes;
+	public int getStock() {
+		return this.stock;
 	}
 
-	public void setFilasAlbaranClientes(List<FilasAlbaranCliente> filasAlbaranClientes) {
-		this.filasAlbaranClientes = filasAlbaranClientes;
-	}
-
-	public FilasAlbaranCliente addFilasAlbaranCliente(FilasAlbaranCliente filasAlbaranCliente) {
-		getFilasAlbaranClientes().add(filasAlbaranCliente);
-		filasAlbaranCliente.setLoteBean(this);
-
-		return filasAlbaranCliente;
-	}
-
-	public FilasAlbaranCliente removeFilasAlbaranCliente(FilasAlbaranCliente filasAlbaranCliente) {
-		getFilasAlbaranClientes().remove(filasAlbaranCliente);
-		filasAlbaranCliente.setLoteBean(null);
-
-		return filasAlbaranCliente;
-	}
-
-	public List<FilasAlbaranProveedor> getFilasAlbaranProveedors() {
-		return this.filasAlbaranProveedors;
-	}
-
-	public void setFilasAlbaranProveedors(List<FilasAlbaranProveedor> filasAlbaranProveedors) {
-		this.filasAlbaranProveedors = filasAlbaranProveedors;
-	}
-
-	public FilasAlbaranProveedor addFilasAlbaranProveedor(FilasAlbaranProveedor filasAlbaranProveedor) {
-		getFilasAlbaranProveedors().add(filasAlbaranProveedor);
-		filasAlbaranProveedor.setLoteBean(this);
-
-		return filasAlbaranProveedor;
-	}
-
-	public FilasAlbaranProveedor removeFilasAlbaranProveedor(FilasAlbaranProveedor filasAlbaranProveedor) {
-		getFilasAlbaranProveedors().remove(filasAlbaranProveedor);
-		filasAlbaranProveedor.setLoteBean(null);
-
-		return filasAlbaranProveedor;
-	}
-
-	public List<FilasFacturasCliente> getFilasFacturasClientes() {
-		return this.filasFacturasClientes;
-	}
-
-	public void setFilasFacturasClientes(List<FilasFacturasCliente> filasFacturasClientes) {
-		this.filasFacturasClientes = filasFacturasClientes;
-	}
-
-	public FilasFacturasCliente addFilasFacturasCliente(FilasFacturasCliente filasFacturasCliente) {
-		getFilasFacturasClientes().add(filasFacturasCliente);
-		filasFacturasCliente.setLoteBean(this);
-
-		return filasFacturasCliente;
-	}
-
-	public FilasFacturasCliente removeFilasFacturasCliente(FilasFacturasCliente filasFacturasCliente) {
-		getFilasFacturasClientes().remove(filasFacturasCliente);
-		filasFacturasCliente.setLoteBean(null);
-
-		return filasFacturasCliente;
-	}
-
-	public List<FilasFacturasProveedor> getFilasFacturasProveedors() {
-		return this.filasFacturasProveedors;
-	}
-
-	public void setFilasFacturasProveedors(List<FilasFacturasProveedor> filasFacturasProveedors) {
-		this.filasFacturasProveedors = filasFacturasProveedors;
-	}
-
-	public FilasFacturasProveedor addFilasFacturasProveedor(FilasFacturasProveedor filasFacturasProveedor) {
-		getFilasFacturasProveedors().add(filasFacturasProveedor);
-		filasFacturasProveedor.setLoteBean(this);
-
-		return filasFacturasProveedor;
-	}
-
-	public FilasFacturasProveedor removeFilasFacturasProveedor(FilasFacturasProveedor filasFacturasProveedor) {
-		getFilasFacturasProveedors().remove(filasFacturasProveedor);
-		filasFacturasProveedor.setLoteBean(null);
-
-		return filasFacturasProveedor;
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 }

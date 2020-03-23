@@ -38,7 +38,7 @@ public class ListadoArticulos extends JInternalFrame {
 
 	public ListadoArticulos(VentanaPrincipal v) {
 		this.v=v;
-		setResizable(true);
+		setResizable(false);
 		setClosable(true);
 		setIconifiable(true);
 		setTitle("Listado de Art\u00EDculos");
@@ -111,7 +111,7 @@ public class ListadoArticulos extends JInternalFrame {
 		
 		scroll =new JScrollPane();
 		scroll.setBackground(fondo);
-		scroll.setBounds(10, 127, 1100, 470);
+		scroll.setBounds(10, 127, 1100, 432);
 		scroll.setBorder(null);
 		getContentPane().add(scroll);
 		
@@ -199,7 +199,7 @@ public class ListadoArticulos extends JInternalFrame {
 
 		panel = new JPanel();
 		panel.setBounds(0,0,727,1200);
-		panel.setPreferredSize(new Dimension(800,filas.size()*30));
+		panel.setPreferredSize(new Dimension(800,filas.size()*25));
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(null);
 

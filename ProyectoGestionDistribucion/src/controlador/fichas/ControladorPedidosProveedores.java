@@ -2,8 +2,7 @@ package controlador.fichas;
 
 import java.util.List;
 
-
-import model.Proveedor;
+import model.PedidosProveedor;
 import modelo.negocio.GestorPedidosProve;
 import vista.PedidosProveedores;
 
@@ -15,7 +14,7 @@ public class ControladorPedidosProveedores {
 	}
 	public void listar(PedidosProveedores pedidosProve) {
 		this.pedidosProve=pedidosProve;
-		List<Object[]> filas;
+		List<PedidosProveedor> filas;
 		GestorPedidosProve gpp=new GestorPedidosProve();
 		filas=gpp.listar();
 		System.out.println(filas.size());

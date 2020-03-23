@@ -16,15 +16,15 @@ import java.util.List;
 public class PedidosProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="NUM")
 	private int num;
 
 	@Column(name="CONFIRMADO")
-	private byte confirmado;
+	private boolean confirmado;
 
 	@Column(name="ENVIADO")
-	private byte enviado;
+	private boolean enviado;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA")
@@ -55,19 +55,19 @@ public class PedidosProveedor implements Serializable {
 		this.num = num;
 	}
 
-	public byte getConfirmado() {
+	public boolean getConfirmado() {
 		return this.confirmado;
 	}
 
-	public void setConfirmado(byte confirmado) {
+	public void setConfirmado(boolean confirmado) {
 		this.confirmado = confirmado;
 	}
 
-	public byte getEnviado() {
+	public boolean getEnviado() {
 		return this.enviado;
 	}
 
-	public void setEnviado(byte enviado) {
+	public void setEnviado(boolean enviado) {
 		this.enviado = enviado;
 	}
 

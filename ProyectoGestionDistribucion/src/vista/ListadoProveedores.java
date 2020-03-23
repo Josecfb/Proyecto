@@ -43,9 +43,9 @@ public class ListadoProveedores extends JInternalFrame {
 
 	public ListadoProveedores(VentanaPrincipal v) {
 		this.v=v;
-		setResizable(true);
+		setResizable(false);
 		setClosable(true);
-		setMaximizable(true);
+		setMaximizable(false);
 		setIconifiable(true);
 		setTitle("Listado de Proveedores");
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -117,7 +117,7 @@ public class ListadoProveedores extends JInternalFrame {
 		
 		scroll =new JScrollPane();
 		scroll.setBackground(fondo);
-		scroll.setBounds(10, 115, 1100, 470);
+		scroll.setBounds(10, 115, 1100, 444);
 		scroll.setBorder(null);
 		getContentPane().add(scroll);
 		
@@ -202,7 +202,7 @@ public class ListadoProveedores extends JInternalFrame {
 
 
 		//panel.setBounds(0,0,727,600);
-		panel.setPreferredSize(new Dimension(800,600));
+		panel.setPreferredSize(new Dimension(800,filas.size()*25));
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(null);
 

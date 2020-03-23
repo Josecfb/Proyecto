@@ -44,9 +44,9 @@ public class ListadoClientes extends JInternalFrame {
 
 	public ListadoClientes(VentanaPrincipal v) {
 		this.v=v;
-		setResizable(true);
+		setResizable(false);
 		setClosable(true);
-		setMaximizable(true);
+		setMaximizable(false);
 		setIconifiable(true);
 		setTitle("Listadio de Clientes");
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -123,7 +123,7 @@ public class ListadoClientes extends JInternalFrame {
 		
 		scroll =new JScrollPane();
 		scroll.setBackground(fondo);
-		scroll.setBounds(10, 117, 1100, 463);
+		scroll.setBounds(10, 117, 1100, 442);
 		scroll.setBorder(null);
 		getContentPane().add(scroll);
 		TFiltroNombre = new JTextField();
@@ -200,7 +200,7 @@ public class ListadoClientes extends JInternalFrame {
 	public void muestra(List<Cliente> filas) {
 		
 		panel = new JPanel();
-		panel.setPreferredSize(new Dimension(800,600));
+		panel.setPreferredSize(new Dimension(800,filas.size()*25));
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(null);
 		int i=0;

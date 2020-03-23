@@ -3,6 +3,7 @@ package vista;
 import javax.swing.JPanel;
 
 import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
+import model.PedidosProveedor;
 import model.Proveedor;
 
 import javax.swing.JLabel;
@@ -14,12 +15,12 @@ import javax.swing.JButton;
 public class FilaPedidoPendienteProveedor extends JPanel {
 	private JLabel lProveedor, lTotal;
 	private JButton bEditar;
-	private Proveedor pro;
+	private PedidosProveedor ped;
 	private VentanaPrincipal v;
 
-	public FilaPedidoPendienteProveedor(Proveedor pro,VentanaPrincipal v) {
+	public FilaPedidoPendienteProveedor(PedidosProveedor ped,VentanaPrincipal v) {
 		this.v=v;
-		this.pro=pro;
+		this.ped=ped;
 		setLayout(null);
 		
 		lProveedor = new JLabel("");
@@ -54,8 +55,8 @@ public class FilaPedidoPendienteProveedor extends JPanel {
 		return bEditar;
 	}
 
-	public Proveedor getPro() {
-		return pro;
+	public PedidosProveedor getPed() {
+		return ped;
 	}
 
 	public VentanaPrincipal getV() {

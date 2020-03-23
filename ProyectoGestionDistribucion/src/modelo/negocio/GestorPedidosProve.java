@@ -3,18 +3,20 @@ package modelo.negocio;
 import java.util.List;
 
 import model.Articulo;
+import model.FilasPedidosProveedor;
+import model.PedidosProveedor;
 import model.Proveedor;
 import modelo.persistencia.DaoPedidosProveedores;
 
 public class GestorPedidosProve {
-	public List<Object[]> listar(){
+	public List<PedidosProveedor> listar(){
 		DaoPedidosProveedores dpp=new DaoPedidosProveedores();
 		System.out.println(dpp.listadoPendientes().size());
 		return dpp.listadoPendientes();
 	}
 	
-	public List<Articulo> articulosPendientesPedido(Proveedor pro){
+	public List<FilasPedidosProveedor> articulosPendientesPedido(PedidosProveedor pedido){
 		DaoPedidosProveedores dpp=new DaoPedidosProveedores();
-		return dpp.articulosPendientesPedido(pro);
+		return dpp.articulosPendientesPedido(pedido);
 	}
 }

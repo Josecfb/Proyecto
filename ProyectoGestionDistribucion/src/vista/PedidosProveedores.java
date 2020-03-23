@@ -3,24 +3,25 @@ package vista;
 import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
-
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.NumberFormat;
 import java.util.List;
-
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-
 import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
 import controlador.fichas.ControladorPedidosProveedores;
+import model.PedidosProveedor;
 import model.Proveedor;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 
 public class PedidosProveedores extends JInternalFrame {
+
+	private static final long serialVersionUID = 8710778275789682602L;
 	private JPanel panel;
 	private JScrollPane scrollPendientes;
 	private FilaPedidoPendienteProveedor filaPed;
@@ -74,7 +75,7 @@ public class PedidosProveedores extends JInternalFrame {
 		ControladorPedidosProveedores cpp=new ControladorPedidosProveedores(this);
 	}
 	
-	public void muestraPendientes(List<Object[]> lista) {
+	public void muestraPendientes(List<PedidosProveedor> lista) {
 		System.out.println("pendientes="+lista.size());
 		panel = new JPanel();
 		//panel.setBounds(0,0,727,650);
@@ -84,17 +85,16 @@ public class PedidosProveedores extends JInternalFrame {
 
 		int i=0;
 		scrollPendientes.setViewportView(panel);
-		for (Object[] fila:lista) {
+		for (PedidosProveedor fila:lista) {
 			i++;
-			Proveedor pro=(Proveedor) fila[0];
-			filaPed=new FilaPedidoPendienteProveedor(pro,v);
+			Proveedor pro=fila.getProveedore();
+			filaPed=new FilaPedidoPendienteProveedor(fila,v);
 			ControladorFilaPedidoPendienteProveedor controla=new ControladorFilaPedidoPendienteProveedor(filaPed);
 			filaPed.establecerControlador(controla);
 			filaPed.setPreferredSize(new Dimension(650,30));
 			if (i%2==0) filaPed.setBackground(Color.WHITE);
 			
 			filaPed.getlProveedor().setText(String.valueOf(pro.getNombre()));
-			filaPed.getlTotal().setText(formatoeuro.format(fila[1]));
 			panel.add(filaPed);
 		}
 	}

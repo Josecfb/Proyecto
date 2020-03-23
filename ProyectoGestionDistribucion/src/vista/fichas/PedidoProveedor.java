@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
 import controlador.fichas.ControladorPedidoProveedor;
 import model.Articulo;
+import model.FilasPedidosProveedor;
+import model.PedidosProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
 
@@ -28,7 +30,7 @@ public class PedidoProveedor extends JInternalFrame {
 	private static final long serialVersionUID = 4339097703466328107L;
 	private JTextField tFecha;
 	private JComboBox<Proveedor> comboProveedor;
-	private Proveedor pro;
+	private PedidosProveedor ped;
 	private ControladorPedidoProveedor pendiente;
 	private JScrollPane scrollPendientes;
 	private FilaPedidoProveedor filaPed;
@@ -36,8 +38,9 @@ public class PedidoProveedor extends JInternalFrame {
 	private JLabel lTotal;
 
 
-	public PedidoProveedor(Proveedor pro) {
-		this.pro=pro;
+	public PedidoProveedor(PedidosProveedor ped) {
+		pendiente=new ControladorPedidoProveedor(this);
+		this.ped=ped;
 		setBounds(100, 100, 759, 465);
 		getContentPane().setLayout(null);
 		comboProveedor = new JComboBox<Proveedor>();
@@ -46,7 +49,7 @@ public class PedidoProveedor extends JInternalFrame {
 		comboProveedor.setEditable(true);
 		for (Proveedor pr:new GestorProveedor().listar("")) 
 			comboProveedor.addItem(pr);
-		comboProveedor.setSelectedItem(pro);
+		comboProveedor.setSelectedItem(ped.getProveedore());
 		getContentPane().add(comboProveedor);
 		
 		JLabel lblNewLabel = new JLabel("Proveedor");
@@ -73,12 +76,13 @@ public class PedidoProveedor extends JInternalFrame {
 		lTotal.setBounds(595, 394, 89, 25);
 		getContentPane().add(lTotal);
 		setTitle("Pedido Proveedor");
-		muestraFilasPendientes();
+		pendiente.articulosPendientesPedido(ped);
+		muestraFilasPendientes(ped);
 	}
 	
-	public void muestraFilasPendientes() {
-		ControladorPedidoProveedor pendiente=new ControladorPedidoProveedor(this);
-		List<Articulo> filas=pendiente.articulosPendientesPedido(this);
+	public void muestraFilasPendientes(PedidosProveedor pedido) {
+		
+		List<FilasPedidosProveedor> filas=pendiente.articulosPendientesPedido(pedido);
 		System.out.println("filas "+filas.size());
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(650,filas.size()*30));
@@ -88,20 +92,20 @@ public class PedidoProveedor extends JInternalFrame {
 		int i=0;
 		scrollPendientes.setViewportView(panel);
 		double total=0;
-		for (Articulo art:filas) {
+		for (FilasPedidosProveedor fil:filas) {
 			i++;
 			System.out.println(i);
 			filaPed=new FilaPedidoProveedor();
 			filaPed.setPreferredSize(new Dimension(650,30));
-			filaPed.gettCProv().setText(art.getCodpro());
-			filaPed.gettNomArt().setText(art.getNombre());
+			filaPed.gettCProv().setText(fil.getArticuloBean().getCodpro());
+			filaPed.gettNomArt().setText(fil.getArticuloBean().getNombre());
 			DecimalFormat df = new DecimalFormat("#");
-			filaPed.gettUnidades().setText(String.valueOf(df.format(Math.ceil((double)(art.getStockMinimo()-art.getStock())/art.getUnidadesCaja())*art.getUnidadesCaja())));
-			filaPed.gettCajas().setText(String.valueOf(df.format(Math.ceil((double)(art.getStockMinimo()-art.getStock())/art.getUnidadesCaja()))));
-			filaPed.gettCoste().setText(String.valueOf(art.getCoste()));
-			filaPed.gettTotal().setText(String.valueOf(art.getCoste()*Math.ceil((double)(art.getStockMinimo()-art.getStock())/art.getUnidadesCaja())*art.getUnidadesCaja()));
+			filaPed.gettUnidades().setText(String.valueOf(fil.getCantidad()));
+			//filaPed.gettCajas().setText(String.valueOf(df.format(Math.ceil((double)(art.getStockMinimo()-art.getStock())/art.getUnidadesCaja()))));
+			filaPed.gettCoste().setText(String.valueOf(fil.getArticuloBean().getCoste()));
+			//filaPed.gettTotal().setText(String.valueOf(art.getCoste()*Math.ceil((double)(art.getStockMinimo()-art.getStock())/art.getUnidadesCaja())*art.getUnidadesCaja()));
 			panel.add(filaPed);
-			total+=art.getCoste()*Math.ceil((double)(art.getStockMinimo()-art.getStock())/art.getUnidadesCaja())*art.getUnidadesCaja();
+			total+=fil.getArticuloBean().getCoste()*Math.ceil((double)(fil.getArticuloBean().getStockMinimo()-fil.getArticuloBean().getStock())/fil.getArticuloBean().getUnidadesCaja())*fil.getArticuloBean().getUnidadesCaja();
 		}
 		filaPed=new FilaPedidoProveedor();
 		filaPed.setPreferredSize(new Dimension(650,30));
@@ -120,7 +124,8 @@ public class PedidoProveedor extends JInternalFrame {
 	}
 
 
-	public Proveedor getPro() {
-		return pro;
+	public PedidosProveedor getPed() {
+		return ped;
 	}
+
 }

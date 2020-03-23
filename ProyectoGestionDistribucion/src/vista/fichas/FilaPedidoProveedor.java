@@ -3,9 +3,9 @@ package vista.fichas;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.Proveedor;
-
 public class FilaPedidoProveedor extends JPanel {
+
+	private static final long serialVersionUID = -3446443914975183188L;
 	private JTextField tCProv;
 	private JTextField tNomArt;
 	private JTextField tUnidades;

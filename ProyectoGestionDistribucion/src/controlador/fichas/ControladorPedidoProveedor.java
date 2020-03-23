@@ -2,7 +2,8 @@ package controlador.fichas;
 
 import java.util.List;
 
-import model.Articulo;
+import model.FilasPedidosProveedor;
+import model.PedidosProveedor;
 import modelo.negocio.GestorPedidosProve;
 import vista.fichas.PedidoProveedor;
 
@@ -13,8 +14,8 @@ public class ControladorPedidoProveedor {
 		
 	}
 	
-	public List<Articulo> articulosPendientesPedido(PedidoProveedor pedido){
+	public List<FilasPedidosProveedor> articulosPendientesPedido(PedidosProveedor pedido){
 		GestorPedidosProve gpp=new GestorPedidosProve();
-		return gpp.articulosPendientesPedido(pedido.getPro());
+		return gpp.articulosPendientesPedido(pedido);
 	}
 }

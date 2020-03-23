@@ -7,6 +7,7 @@
 		<class>model.Cliente</class>
 		<class>model.Codigospostale</class>
 		<class>model.CodigospostalePK</class>
+		<class>model.Datosempresa</class>
 		<class>model.FacturasCliente</class>
 		<class>model.FacturasProveedor</class>
 		<class>model.Familia</class>
@@ -30,7 +31,6 @@
 		<class>model.PreciosClientePK</class>
 		<class>model.Proveedor</class>
 		<class>model.Provincia</class>
-		<class>model.Datosempresa</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/GestionDistribucion"/>

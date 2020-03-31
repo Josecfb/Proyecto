@@ -104,15 +104,16 @@ public class VentanaPrincipal extends JFrame {
 		menuArticulos.add(listarArticulos);
 	}
 	public void listadoProveedores() {
-		ListadoProveedores lp=new ListadoProveedores(this);
+		VListadoProveedores lp=new VListadoProveedores(this);
 		ControladorListadoProveedores controla =new ControladorListadoProveedores(lp);
 		lp.establecerControlador(controla);
 		panelInterior.add(lp);
 		lp.setVisible(true);
+		System.out.println("hay "+panelInterior.getComponentCount());
 	}
 	
 	public void listadoClientes() {
-		ListadoClientes lc=new ListadoClientes(this);
+		VListadoClientes lc=new VListadoClientes(this);
 		ControladorListadoClientes controlacli=new ControladorListadoClientes(lc);
 		lc.establecerControlador(controlacli);
 		panelInterior.add(lc);
@@ -120,7 +121,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	public void listadoArticulos() {
-		ListadoArticulos la=new ListadoArticulos(this);
+		VListadoArticulos la=new VListadoArticulos(this);
 		ControladorListadoArticulos controlala=new ControladorListadoArticulos(la);
 		la.establecerControlador(controlala);
 		panelInterior.add(la);

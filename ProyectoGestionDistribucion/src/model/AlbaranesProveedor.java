@@ -43,7 +43,7 @@ public class AlbaranesProveedor implements Serializable {
 
 	//bi-directional many-to-one association to PedidosProveedor
 	@OneToMany(mappedBy="albaranesProveedor")
-	private List<PedidosProveedor> pedidosProveedors;
+	private List<PedidoProveedor> pedidosProveedors;
 
 	public AlbaranesProveedor() {
 	}
@@ -110,22 +110,22 @@ public class AlbaranesProveedor implements Serializable {
 		return filasAlbaranProveedor;
 	}
 
-	public List<PedidosProveedor> getPedidosProveedors() {
+	public List<PedidoProveedor> getPedidosProveedors() {
 		return this.pedidosProveedors;
 	}
 
-	public void setPedidosProveedors(List<PedidosProveedor> pedidosProveedors) {
+	public void setPedidosProveedors(List<PedidoProveedor> pedidosProveedors) {
 		this.pedidosProveedors = pedidosProveedors;
 	}
 
-	public PedidosProveedor addPedidosProveedor(PedidosProveedor pedidosProveedor) {
+	public PedidoProveedor addPedidosProveedor(PedidoProveedor pedidosProveedor) {
 		getPedidosProveedors().add(pedidosProveedor);
 		pedidosProveedor.setAlbaranesProveedor(this);
 
 		return pedidosProveedor;
 	}
 
-	public PedidosProveedor removePedidosProveedor(PedidosProveedor pedidosProveedor) {
+	public PedidoProveedor removePedidosProveedor(PedidoProveedor pedidosProveedor) {
 		getPedidosProveedors().remove(pedidosProveedor);
 		pedidosProveedor.setAlbaranesProveedor(null);
 

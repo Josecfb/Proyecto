@@ -1,22 +1,30 @@
 package controlador.fichas;
 
+import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+
+import javax.swing.ComboBoxEditor;
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import model.Articulo;
 import model.Familia;
 import model.Proveedor;
 import modelo.negocio.GestorArticulo;
-import vista.fichas.FichaArticulo;
+import vista.fichas.VFichaArticulo;
 
 public class ControladorFichaArticulo implements InternalFrameListener, FocusListener {
-	private FichaArticulo fichaArticulo;
+	private VFichaArticulo fichaArticulo;
+	private GestorArticulo ga;
 	
-	public ControladorFichaArticulo(FichaArticulo fichaArticulo) {
+	public ControladorFichaArticulo(VFichaArticulo fichaArticulo) {
 		this.fichaArticulo=fichaArticulo;
+		ga=new GestorArticulo();
 	}
 
 	@Override
@@ -41,6 +49,18 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 			fichaArticulo.gettCoste().setText(focoEuro(fichaArticulo.gettCoste().getText()));
 		if (e.getSource()==fichaArticulo.gettIva())
 			fichaArticulo.gettIva().setText(focoPorcentaje(fichaArticulo.gettIva().getText()));
+		if (e.getSource().getClass()==JTextField.class) {
+			JTextField campo=(JTextField) e.getSource();
+			campo.selectAll();
+			campo.setBackground(new Color(240,240,255));
+		}
+
+		if (e.getSource()==JComboBox.class) {
+			System.out.println("combo");
+			@SuppressWarnings("rawtypes")
+			JComboBox jComboBox = (JComboBox) e.getSource();
+			jComboBox.getEditor().getEditorComponent().setBackground(Color.BLUE);
+		}
 	}
 
 	@Override
@@ -53,13 +73,17 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 			fichaArticulo.gettCoste().setText(noFocoEuro(fichaArticulo.gettCoste().getText()));
 		if (e.getSource()==fichaArticulo.gettIva())
 			fichaArticulo.gettIva().setText(fichaArticulo.gettIva().getText()+"%");
+		if (e.getSource().getClass()==JTextField.class || e.getSource().getClass()==JComboBox.class) {
+			JTextField campo=(JTextField) e.getSource();
+			campo.setBackground(Color.WHITE);
+		}
 	}
 	
 	private void modificaArticulo() {
 		Articulo artModif=new Articulo();
 		artModif.setCod(Integer.valueOf(fichaArticulo.gettCodigo().getText()));
 		asignaCampos(artModif);
-		GestorArticulo ga=new GestorArticulo();
+		ga=new GestorArticulo();
 		boolean[] ok=new boolean[6];
 		ok=ga.modificarArticulo(artModif);
 		if (ok[5])
@@ -71,7 +95,6 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	private void nuevoArticulo() {
 		Articulo artNuevo=new Articulo();
 		asignaCampos(artNuevo);
-		GestorArticulo ga=new GestorArticulo();
 		boolean[] ok=new boolean[6];
 		ok=ga.nuevoArticulo(artNuevo);
 		if (ok[5])

@@ -5,26 +5,26 @@ import java.awt.event.ActionListener;
 
 import controlador.fichas.ControladorFichaArticulo;
 import modelo.negocio.GestorArticulo;
-import vista.FilaListadoArticulos;
-import vista.fichas.FichaArticulo;
+import vista.VFilaListadoArticulos;
+import vista.fichas.VFichaArticulo;
 
 
 public class ControlaFilaListadoArticulos implements ActionListener{
-	private FilaListadoArticulos filaListadoArticulos;
+	private VFilaListadoArticulos filaListadoArticulos;
 	
-	public ControlaFilaListadoArticulos(FilaListadoArticulos filaListadoArticulos) {
+	public ControlaFilaListadoArticulos(VFilaListadoArticulos filaListadoArticulos) {
 		this.filaListadoArticulos=filaListadoArticulos;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		FichaArticulo fa;
+		VFichaArticulo fa;
 		System.out.println("hola"+filaListadoArticulos.getNombre().getText());
 		GestorArticulo ga=new GestorArticulo();
 		if(e.getSource()==filaListadoArticulos.getbEditar())
-			fa=new FichaArticulo(ga.existe(Integer.valueOf(filaListadoArticulos.getCodigo().getText())));
+			fa=new VFichaArticulo(ga.existe(Integer.valueOf(filaListadoArticulos.getCodigo().getText())));
 		else
-			fa=new FichaArticulo(null);
+			fa=new VFichaArticulo(null);
 		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
 		fa.EstablecerManejadorVentana(cfa);
 		filaListadoArticulos.getV().getPanelInterior().add(fa);

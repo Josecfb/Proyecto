@@ -6,20 +6,22 @@ import modelo.persistencia.DaoCliente;
 
 
 public class GestorCliente {
+	private DaoCliente dc;
+	
+	public GestorCliente() {
+		dc=new DaoCliente();
+	}
 	public List<Cliente> listar(String filtroNombre){
-		DaoCliente dp=new DaoCliente();
-		return dp.Listado(filtroNombre);
+		return dc.Listado(filtroNombre);
 	}
 	
 	public Cliente existe(int num) {
-		DaoCliente da=new DaoCliente();
-		return da.existe(num);
+		return dc.existe(num);
 	}
 	
 	public boolean[] modificarProveedor(Cliente cli) {
 		boolean[] ok = valida(cli);
 		if (ok[0] && ok[1] && ok[2]) {
-			DaoCliente dc=new DaoCliente();
 			int modificado=dc.modificar(cli);
 			ok[3]=modificado==0;
 		}
@@ -29,7 +31,6 @@ public class GestorCliente {
 	public boolean[] nuevoCliente(Cliente cli) {
 		boolean[] ok = valida(cli);
 		if (ok[0] && ok[1] && ok[2]) {
-			DaoCliente dc=new DaoCliente();
 			int creado=dc.nuevo(cli);
 			ok[3]=creado==0;
 		}

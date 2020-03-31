@@ -6,20 +6,21 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import controlador.fichas.ControladorFichaProveedor;
+import controlador.fichas.ControladorPedidosProveedores;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
-import vista.ListadoProveedores;
-import vista.PedidosProveedores;
-import vista.fichas.FichaProveedor;
+import vista.VListadoProveedores;
+import vista.VPedidosProveedores;
+import vista.fichas.VFichaProveedor;
 
 public class ControladorListadoProveedores implements ActionListener{
-	private ListadoProveedores listado;
+	private VListadoProveedores listado;
 	
-	public ControladorListadoProveedores(ListadoProveedores listado) {
+	public ControladorListadoProveedores(VListadoProveedores listado) {
 		listar(listado);		
 	}
 
-	public void listar(ListadoProveedores listado) {
+	public void listar(VListadoProveedores listado) {
 		this.listado=listado;
 		List<Proveedor> filas;
 		GestorProveedor gp=new GestorProveedor();
@@ -65,8 +66,7 @@ public class ControladorListadoProveedores implements ActionListener{
 	}
 	
 	private void nuevoProveedor() {
-		GestorProveedor ga=new GestorProveedor();
-		FichaProveedor fp=new FichaProveedor(null);
+		VFichaProveedor fp=new VFichaProveedor(null);
 		ControladorFichaProveedor cfp=new ControladorFichaProveedor(fp);
 		fp.EstablecerManejadorVentana(cfp);
 		listado.getV().getPanelInterior().add(fp);
@@ -74,7 +74,9 @@ public class ControladorListadoProveedores implements ActionListener{
 	}
 	
 	private void abrePedidos() {
-		PedidosProveedores pp=new PedidosProveedores(listado.getV());
+		VPedidosProveedores pp=new VPedidosProveedores(listado.getV());
+		ControladorPedidosProveedores cpp=new ControladorPedidosProveedores(pp);
+		pp.establecerManejador(cpp);
 		listado.getV().getPanelInterior().add(pp);
 		pp.setVisible(true);
 	}

@@ -59,7 +59,7 @@ public class Proveedor implements Serializable {
 
 	//bi-directional many-to-one association to PedidosProveedor
 	@OneToMany(mappedBy="proveedore")
-	private List<PedidosProveedor> pedidosProveedors;
+	private List<PedidoProveedor> pedidosProveedors;
 	
 	@OneToMany(mappedBy="proveedorBean")
 	private List<Articulo> articulosPro;
@@ -201,22 +201,22 @@ public class Proveedor implements Serializable {
 		return facturasProveedor;
 	}
 
-	public List<PedidosProveedor> getPedidosProveedors() {
+	public List<PedidoProveedor> getPedidosProveedors() {
 		return this.pedidosProveedors;
 	}
 
-	public void setPedidosProveedors(List<PedidosProveedor> pedidosProveedors) {
+	public void setPedidosProveedors(List<PedidoProveedor> pedidosProveedors) {
 		this.pedidosProveedors = pedidosProveedors;
 	}
 
-	public PedidosProveedor addPedidosProveedor(PedidosProveedor pedidosProveedor) {
+	public PedidoProveedor addPedidosProveedor(PedidoProveedor pedidosProveedor) {
 		getPedidosProveedors().add(pedidosProveedor);
 		pedidosProveedor.setProveedore(this);
 
 		return pedidosProveedor;
 	}
 
-	public PedidosProveedor removePedidosProveedor(PedidosProveedor pedidosProveedor) {
+	public PedidoProveedor removePedidosProveedor(PedidoProveedor pedidosProveedor) {
 		getPedidosProveedors().remove(pedidosProveedor);
 		pedidosProveedor.setProveedore(null);
 

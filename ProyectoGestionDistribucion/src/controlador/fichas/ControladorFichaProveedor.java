@@ -7,12 +7,12 @@ import javax.swing.event.InternalFrameListener;
 
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
-import vista.fichas.FichaProveedor;
+import vista.fichas.VFichaProveedor;
 
 public class ControladorFichaProveedor implements InternalFrameListener{
-	private FichaProveedor fichaProveedor;
+	private VFichaProveedor fichaProveedor;
 	
-	public ControladorFichaProveedor(FichaProveedor fichaProveedor) {
+	public ControladorFichaProveedor(VFichaProveedor fichaProveedor) {
 		this.fichaProveedor=fichaProveedor;
 	}
 

@@ -3,14 +3,14 @@ package controlador.fichas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vista.FilaPedidoPendienteProveedor;
-import vista.fichas.PedidoProveedor;
+import vista.VFilaPedidoPendienteProveedor;
+import vista.fichas.VPedidoProveedor;
 
 public class ControladorFilaPedidoPendienteProveedor implements ActionListener{
-	private FilaPedidoPendienteProveedor fila;
-	private PedidoProveedor pp;
+	private VFilaPedidoPendienteProveedor fila;
+	private VPedidoProveedor pp;
 	
-	public ControladorFilaPedidoPendienteProveedor(FilaPedidoPendienteProveedor fila) {
+	public ControladorFilaPedidoPendienteProveedor(VFilaPedidoPendienteProveedor fila) {
 		this.fila=fila;
 	}
 
@@ -18,9 +18,11 @@ public class ControladorFilaPedidoPendienteProveedor implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fila.getbEditar()) {
 			System.out.println("editar pedido pendiente");
-			pp=new PedidoProveedor(fila.getPed());
-			if (fila.getV()==null) System.out.println("nulo");
-			fila.getV().getPanelInterior().add(pp);
+			pp=new VPedidoProveedor(fila.getPed(),fila.getVpedidos());
+			ControladorPedidoProveedor cpp=new ControladorPedidoProveedor(pp);
+			pp.establecerControlador(cpp);
+			if (fila.getVpedidos().getV()==null) System.out.println("nulo");
+			fila.getVpedidos().getV().getPanelInterior().add(pp);
 			pp.setVisible(true);
 		}
 	}

@@ -4,16 +4,25 @@ import java.util.List;
 
 
 import model.Articulo;
+import model.Proveedor;
 import modelo.persistencia.DaoArticulo;
 
 public class GestorArticulo {
+	private DaoArticulo da;
+	
+	public GestorArticulo() {
+		da=new DaoArticulo();
+	}
+	
+	
+	public List<Articulo> deUnProveedor(Proveedor pro){
+		return da.deUnProveedor(pro);
+	}
 	
 	public List<Articulo> listar(String filtroNombre){
-		DaoArticulo da=new DaoArticulo();
 		return da.Listado(filtroNombre);
 	}
 	public Articulo existe(int num) {
-		DaoArticulo da=new DaoArticulo();
 		return da.existe(num);
 	}
 	/**
@@ -24,7 +33,6 @@ public class GestorArticulo {
 	public boolean[] modificarArticulo(Articulo art) {
 		boolean[] ok = valida(art);
 		if (ok[0] && ok[1] && ok[2] && ok[3] && ok[4]) {
-			DaoArticulo da=new DaoArticulo();
 			int modificado=da.modificar(art);
 			ok[5]=modificado==0;
 		}
@@ -39,7 +47,6 @@ public class GestorArticulo {
 	public boolean[] nuevoArticulo(Articulo art) {
 		boolean[] ok = valida(art);
 		if (ok[0] && ok[1] && ok[2] && ok[3] && ok[4]) {
-			DaoArticulo da=new DaoArticulo();
 			int creado=da.nuevo(art);
 			ok[5]=creado==0;
 		}

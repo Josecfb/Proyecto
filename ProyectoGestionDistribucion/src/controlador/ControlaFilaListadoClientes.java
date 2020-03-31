@@ -5,25 +5,25 @@ import java.awt.event.ActionListener;
 
 import controlador.fichas.ControladorFichaCliente;
 import modelo.negocio.GestorCliente;
-import vista.FilaListadoClientes;
-import vista.fichas.FichaCliente;
+import vista.VFilaListadoClientes;
+import vista.fichas.VFichaCliente;
 
 public class ControlaFilaListadoClientes implements ActionListener{
-	private FilaListadoClientes filaListadoClientes;
+	private VFilaListadoClientes filaListadoClientes;
 	
-	public ControlaFilaListadoClientes(FilaListadoClientes filaListadoClientes) {
+	public ControlaFilaListadoClientes(VFilaListadoClientes filaListadoClientes) {
 		this.filaListadoClientes=filaListadoClientes;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("editar cli");
-		FichaCliente fc;
+		VFichaCliente fc;
 		GestorCliente gc=new GestorCliente();
 		if(e.getSource()==filaListadoClientes.getbEditar())
-			fc=new FichaCliente(gc.existe(Integer.valueOf(filaListadoClientes.getNumero().getText())));
+			fc=new VFichaCliente(gc.existe(Integer.valueOf(filaListadoClientes.getNumero().getText())));
 		else
-			fc=new FichaCliente(null);
+			fc=new VFichaCliente(null);
 		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);
 		fc.establecerManejadorVentana(cfc);
 		filaListadoClientes.getV().getPanelInterior().add(fc);

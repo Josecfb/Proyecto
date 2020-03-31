@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 
 import controlador.fichas.ControladorFichaProveedor;
 import modelo.negocio.GestorProveedor;
-import vista.FilaListadoProveedores;
-import vista.fichas.FichaProveedor;
+import vista.VFilaListadoProveedores;
+import vista.fichas.VFichaProveedor;
 
 public class ControlaFilaListadoProveedores implements ActionListener{
-	private FilaListadoProveedores filaListadoProveedores;
+	private VFilaListadoProveedores filaListadoProveedores;
 	
-	public ControlaFilaListadoProveedores(FilaListadoProveedores filaListadoProveedores) {
+	public ControlaFilaListadoProveedores(VFilaListadoProveedores filaListadoProveedores) {
 		this.filaListadoProveedores=filaListadoProveedores;
 	}
 
@@ -21,7 +21,7 @@ public class ControlaFilaListadoProveedores implements ActionListener{
 		if(e.getSource()==filaListadoProveedores.getbEditar()) {
 			System.out.println("hola"+filaListadoProveedores.getNombre().getText());
 			GestorProveedor gp=new GestorProveedor();
-			FichaProveedor fp=new FichaProveedor(gp.existe(Integer.valueOf(filaListadoProveedores.getNumero().getText())));
+			VFichaProveedor fp=new VFichaProveedor(gp.existe(Integer.valueOf(filaListadoProveedores.getNumero().getText())));
 			ControladorFichaProveedor cfp=new ControladorFichaProveedor(fp);
 			fp.EstablecerManejadorVentana(cfp);
 			filaListadoProveedores.getV().getPanelInterior().add(fp);

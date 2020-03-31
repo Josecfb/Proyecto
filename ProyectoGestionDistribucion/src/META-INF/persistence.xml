@@ -21,11 +21,11 @@
 		<class>model.FilasFacturasProveedorPK</class>
 		<class>model.FilasPedidosCliente</class>
 		<class>model.FilasPedidosClientePK</class>
-		<class>model.FilasPedidosProveedor</class>
+		<class>model.FilaPedidoProveedor</class>
 		<class>model.FilasPedidosProveedorPK</class>
 		<class>model.Lote</class>
 		<class>model.PedidosCliente</class>
-		<class>model.PedidosProveedor</class>
+		<class>model.PedidoProveedor</class>
 		<class>model.Poblacione</class>
 		<class>model.PreciosCliente</class>
 		<class>model.PreciosClientePK</class>

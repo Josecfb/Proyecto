@@ -3,20 +3,38 @@ package modelo.negocio;
 import java.util.List;
 
 import model.Articulo;
-import model.FilasPedidosProveedor;
-import model.PedidosProveedor;
-import model.Proveedor;
+import model.FilaPedidoProveedor;
+import model.PedidoProveedor;
 import modelo.persistencia.DaoPedidosProveedores;
 
 public class GestorPedidosProve {
-	public List<PedidosProveedor> listar(){
-		DaoPedidosProveedores dpp=new DaoPedidosProveedores();
+	private DaoPedidosProveedores dpp;
+	
+	public PedidoProveedor existe(int num) {
+		return dpp.existe(num);
+	}
+	
+	public GestorPedidosProve() {
+		dpp=new DaoPedidosProveedores();
+	}
+	public List<PedidoProveedor> listar(){
 		System.out.println(dpp.listadoPendientes().size());
 		return dpp.listadoPendientes();
 	}
 	
-	public List<FilasPedidosProveedor> articulosPendientesPedido(PedidosProveedor pedido){
-		DaoPedidosProveedores dpp=new DaoPedidosProveedores();
-		return dpp.articulosPendientesPedido(pedido);
+	public List<FilaPedidoProveedor> listaFilasPedido(PedidoProveedor pedido){
+		return dpp.listaFilasPedido(pedido);
+	}
+	
+	public FilaPedidoProveedor existeFila(PedidoProveedor ped, Articulo art) {
+		return dpp.existeFila(ped,art);
+	}
+	
+	public int modificarPedido(PedidoProveedor ped) {
+		return dpp.modificarPedido(ped);
+	}
+	
+	public int nuevoPedido(PedidoProveedor ped) {
+		return dpp.nuevoPedido(ped);
 	}
 }

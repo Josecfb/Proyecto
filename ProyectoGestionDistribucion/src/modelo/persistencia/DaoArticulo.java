@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import model.Articulo;
+import model.Proveedor;
 
 public class DaoArticulo {
 	private EntityManager em;
@@ -26,6 +27,20 @@ public class DaoArticulo {
 			return lista;
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Articulo> deUnProveedor(Proveedor pro){
+		List<Articulo> lista;
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		if (em==null)
+			return null;
+		else
+			lista=em.createQuery("SELECT ar FROM Articulo ar where ar.proveedorBean=:pro order by ar.nombre").setParameter("pro", pro).getResultList();
+		ab.cerrarConexion();
+		return lista;
+	}
+	
 	public Articulo existe(int num) {
 		Articulo art;
 		AbreCierra ab=new AbreCierra();

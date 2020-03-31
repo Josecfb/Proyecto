@@ -9,18 +9,18 @@ import javax.swing.ImageIcon;
 import controlador.fichas.ControladorFichaArticulo;
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
-import vista.ListadoArticulos;
-import vista.fichas.FichaArticulo;
+import vista.VListadoArticulos;
+import vista.fichas.VFichaArticulo;
 
 public class ControladorListadoArticulos implements ActionListener{
-	private ListadoArticulos listado;
+	private VListadoArticulos listado;
 
 	
-	public ControladorListadoArticulos(ListadoArticulos listado) {
+	public ControladorListadoArticulos(VListadoArticulos listado) {
 		listar(listado);		
 	}
 
-	public void listar(ListadoArticulos listado) {
+	public void listar(VListadoArticulos listado) {
 		this.listado=listado;
 		List<Articulo> filas;
 		GestorArticulo gp=new GestorArticulo();
@@ -62,12 +62,13 @@ public class ControladorListadoArticulos implements ActionListener{
 	}
 	
 	private void actualizar() {
-		listado.getPanel().updateUI();
+		
+		listar(listado);
 	}
 	
 	private void nuevoArticulo() {
 		//GestorArticulo ga=new GestorArticulo();
-		FichaArticulo fa=new FichaArticulo(null);
+		VFichaArticulo fa=new VFichaArticulo(null);
 		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
 		fa.EstablecerManejadorVentana(cfa);
 		System.out.println("nuevo articulo");

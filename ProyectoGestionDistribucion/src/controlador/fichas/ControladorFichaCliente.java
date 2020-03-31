@@ -7,13 +7,16 @@ import javax.swing.event.InternalFrameListener;
 
 import model.Cliente;
 import modelo.negocio.GestorCliente;
-import vista.fichas.FichaCliente;
+import vista.fichas.VFichaCliente;
 
 public class ControladorFichaCliente implements InternalFrameListener {
-	private FichaCliente fichaCliente;
+	private VFichaCliente fichaCliente;
+	private GestorCliente gc;
 
-	public ControladorFichaCliente(FichaCliente fichaCliente) {
+	public ControladorFichaCliente(VFichaCliente fichaCliente) {
 		this.fichaCliente=fichaCliente;
+		gc=new GestorCliente();
+		
 	}
 
 	@Override
@@ -31,7 +34,6 @@ public class ControladorFichaCliente implements InternalFrameListener {
 	private void nuevoCliente() {
 		Cliente cliNuevo=new Cliente();
 		asignaCampos(cliNuevo);
-		GestorCliente gc=new GestorCliente();
 		boolean[] ok=new boolean[4];
 		ok=gc.nuevoCliente(cliNuevo);
 		if (ok[3])
@@ -45,7 +47,6 @@ public class ControladorFichaCliente implements InternalFrameListener {
 		Cliente cliModif=new Cliente();
 		cliModif.setNumero(Integer.valueOf(fichaCliente.gettNumero().getText()));
 		asignaCampos(cliModif);
-		GestorCliente gc=new GestorCliente();
 		boolean[] ok=new boolean[4];
 		ok=gc.modificarProveedor(cliModif);
 		if (ok[3])

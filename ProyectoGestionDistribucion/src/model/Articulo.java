@@ -80,7 +80,7 @@ public class Articulo implements Serializable {
 
 	//bi-directional many-to-one association to FilasPedidosProveedor
 	@OneToMany(mappedBy="articuloBean")
-	private List<FilasPedidosProveedor> filasPedidosProveedors;
+	private List<FilaPedidoProveedor> filasPedidosProveedors;
 
 	//bi-directional many-to-one association to PreciosCliente
 	@OneToMany(mappedBy="articuloBean")
@@ -240,7 +240,6 @@ public class Articulo implements Serializable {
 	public FilasFacturasCliente addFilasFacturasCliente(FilasFacturasCliente filasFacturasCliente) {
 		getFilasFacturasClientes().add(filasFacturasCliente);
 		filasFacturasCliente.setArticuloBean(this);
-
 		return filasFacturasCliente;
 	}
 
@@ -295,22 +294,22 @@ public class Articulo implements Serializable {
 		return filasPedidosCliente;
 	}
 
-	public List<FilasPedidosProveedor> getFilasPedidosProveedors() {
+	public List<FilaPedidoProveedor> getFilasPedidosProveedors() {
 		return this.filasPedidosProveedors;
 	}
 
-	public void setFilasPedidosProveedors(List<FilasPedidosProveedor> filasPedidosProveedors) {
+	public void setFilasPedidosProveedors(List<FilaPedidoProveedor> filasPedidosProveedors) {
 		this.filasPedidosProveedors = filasPedidosProveedors;
 	}
 
-	public FilasPedidosProveedor addFilasPedidosProveedor(FilasPedidosProveedor filasPedidosProveedor) {
+	public FilaPedidoProveedor addFilasPedidosProveedor(FilaPedidoProveedor filasPedidosProveedor) {
 		getFilasPedidosProveedors().add(filasPedidosProveedor);
 		filasPedidosProveedor.setArticuloBean(this);
 
 		return filasPedidosProveedor;
 	}
 
-	public FilasPedidosProveedor removeFilasPedidosProveedor(FilasPedidosProveedor filasPedidosProveedor) {
+	public FilaPedidoProveedor removeFilasPedidosProveedor(FilaPedidoProveedor filasPedidosProveedor) {
 		getFilasPedidosProveedors().remove(filasPedidosProveedor);
 		filasPedidosProveedor.setArticuloBean(null);
 
@@ -339,4 +338,10 @@ public class Articulo implements Serializable {
 		return preciosCliente;
 	}
 
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
+	
 }

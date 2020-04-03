@@ -29,7 +29,7 @@ public class FacturasProveedor implements Serializable {
 
 	//bi-directional many-to-one association to AlbaranesProveedor
 	@OneToMany(mappedBy="facturasProveedor")
-	private List<AlbaranesProveedor> albaranesProveedors;
+	private List<AlbaranProveedor> albaranesProveedors;
 
 	//bi-directional many-to-one association to Proveedore
 	@ManyToOne
@@ -67,22 +67,22 @@ public class FacturasProveedor implements Serializable {
 		this.pagada = pagada;
 	}
 
-	public List<AlbaranesProveedor> getAlbaranesProveedors() {
+	public List<AlbaranProveedor> getAlbaranesProveedors() {
 		return this.albaranesProveedors;
 	}
 
-	public void setAlbaranesProveedors(List<AlbaranesProveedor> albaranesProveedors) {
+	public void setAlbaranesProveedors(List<AlbaranProveedor> albaranesProveedors) {
 		this.albaranesProveedors = albaranesProveedors;
 	}
 
-	public AlbaranesProveedor addAlbaranesProveedor(AlbaranesProveedor albaranesProveedor) {
+	public AlbaranProveedor addAlbaranesProveedor(AlbaranProveedor albaranesProveedor) {
 		getAlbaranesProveedors().add(albaranesProveedor);
 		albaranesProveedor.setFacturasProveedor(this);
 
 		return albaranesProveedor;
 	}
 
-	public AlbaranesProveedor removeAlbaranesProveedor(AlbaranesProveedor albaranesProveedor) {
+	public AlbaranProveedor removeAlbaranesProveedor(AlbaranProveedor albaranesProveedor) {
 		getAlbaranesProveedors().remove(albaranesProveedor);
 		albaranesProveedor.setFacturasProveedor(null);
 

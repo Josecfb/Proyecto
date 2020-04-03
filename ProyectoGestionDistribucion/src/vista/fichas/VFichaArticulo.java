@@ -45,6 +45,7 @@ public class VFichaArticulo extends JInternalFrame {
 
 	public VFichaArticulo(Articulo art) {
 		this.art=art;
+		
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		setBounds(100, 100, 870, 476);
@@ -318,4 +319,5 @@ public class VFichaArticulo extends JInternalFrame {
 	public JComboBox<Proveedor> getComboProveedor() {
 		return comboProveedor;
 	}
+	
 }

@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 
 import model.Articulo;
 import model.PedidoProveedor;
+import model.Proveedor;
 import model.FilaPedidoProveedor;
 import model.FilasPedidosProveedorPK;
 
@@ -12,16 +13,32 @@ public class DaoPedidosProveedores {
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	public List<PedidoProveedor> listadoPendientes(){
+	public List<PedidoProveedor> listadoPendientes(Proveedor pro){
 		List<PedidoProveedor> listaPedidos;
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
 		if (em==null)
 			return null;
 		else
-			listaPedidos=em.createQuery("select ped from PedidoProveedor ped").getResultList();
+			if (pro==null)
+				listaPedidos=em.createQuery("select ped from PedidoProveedor ped").getResultList();
+			else
+				listaPedidos=em.createQuery("select ped from PedidoProveedor ped where ped.proveedore=:pro").setParameter("pro", pro).getResultList();
 		ab.cerrarConexion();
 		return listaPedidos;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PedidoProveedor> listaEnviados(Proveedor pro){
+		List<PedidoProveedor> lista;
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		if (em==null)
+			return null;
+		else
+			lista=em.createQuery("select ped from PedidoProveedor ped where ped.proveedore=:pro and ped.enviado=TRUE").setParameter("pro", pro).getResultList();
+		ab.cerrarConexion();
+		return lista;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -70,8 +87,7 @@ public class DaoPedidosProveedores {
 		antiguo.setFecha(ped.getFecha());
 		antiguo.setConfirmado(ped.getConfirmado());
 		antiguo.setEnviado(ped.getEnviado());
-		antiguo.setProveedore(ped.getProveedore());
-		System.out.println("ahí van");
+		antiguo.setAlbaranesProveedor(ped.getAlbaranesProveedor());
 		for (FilaPedidoProveedor fil:antiguo.getFilaPedidoProveedor()) {
 			em.find(FilaPedidoProveedor.class, fil.getId());
 			em.remove(fil);
@@ -81,8 +97,7 @@ public class DaoPedidosProveedores {
 		for (FilaPedidoProveedor fil:ped.getFilaPedidoProveedor())
 			em.persist(fil);
 		System.out.println(antiguo.getFilaPedidoProveedor().size()+"filas");
-		for (FilaPedidoProveedor fil:antiguo.getFilaPedidoProveedor())
-			System.out.println("antiguoooo"+fil.getCantidad());
+		
 		antiguo.setFilaPedidoProveedor(ped.getFilaPedidoProveedor());
 		em.merge(antiguo);
 		em.getTransaction().commit();
@@ -97,6 +112,7 @@ public class DaoPedidosProveedores {
 		em.getTransaction().begin();
 		if (em==null) return -1;
 		em.persist(ped);
+		System.out.println("Pedido con numero "+ped.getNum());
 		em.getTransaction().commit();
 		em.close();
 		return 0;

@@ -35,7 +35,6 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 	
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
-		if(vpedidoProveedor.getHash()!=vpedidoProveedor.getPed().hashCode()) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION)
 				if (!vpedidoProveedor.gettNumpedido().getText().equals(""))
@@ -44,9 +43,6 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 					nuevoPedido();
 			else
 				vpedidoProveedor.dispose();
-		}else
-			vpedidoProveedor.dispose();
-		
 	}
 	
 	private void modificaPedido() {

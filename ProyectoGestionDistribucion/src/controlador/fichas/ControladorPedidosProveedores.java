@@ -19,7 +19,7 @@ public class ControladorPedidosProveedores implements ActionListener{
 		this.vPedidosProve=pedidosProve;
 		List<PedidoProveedor> filas;
 		GestorPedidosProve gpp=new GestorPedidosProve();
-		filas=gpp.listar();
+		filas=gpp.listar(null);
 		System.out.println(filas.size());
 		pedidosProve.muestraPendientes(filas);
 	}

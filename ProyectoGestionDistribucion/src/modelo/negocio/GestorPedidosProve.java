@@ -5,6 +5,7 @@ import java.util.List;
 import model.Articulo;
 import model.FilaPedidoProveedor;
 import model.PedidoProveedor;
+import model.Proveedor;
 import modelo.persistencia.DaoPedidosProveedores;
 
 public class GestorPedidosProve {
@@ -17,10 +18,7 @@ public class GestorPedidosProve {
 	public GestorPedidosProve() {
 		dpp=new DaoPedidosProveedores();
 	}
-	public List<PedidoProveedor> listar(){
-		System.out.println(dpp.listadoPendientes().size());
-		return dpp.listadoPendientes();
-	}
+
 	
 	public List<FilaPedidoProveedor> listaFilasPedido(PedidoProveedor pedido){
 		return dpp.listaFilasPedido(pedido);
@@ -36,5 +34,13 @@ public class GestorPedidosProve {
 	
 	public int nuevoPedido(PedidoProveedor ped) {
 		return dpp.nuevoPedido(ped);
+	}
+	
+	public List<PedidoProveedor> listar(Proveedor pro){
+		return dpp.listadoPendientes(pro);
+	}
+	
+	public List<PedidoProveedor> listaEnviados(Proveedor pro){
+		return dpp.listaEnviados(pro);
 	}
 }

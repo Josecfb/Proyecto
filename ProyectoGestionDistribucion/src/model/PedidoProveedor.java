@@ -42,7 +42,7 @@ public class PedidoProveedor implements Serializable {
 	//bi-directional many-to-one association to AlbaranesProveedor
 	@ManyToOne
 	@JoinColumn(name="NUM_ALBARAN")
-	private AlbaranesProveedor albaranesProveedor;
+	private AlbaranProveedor albaranesProveedor;
 
 	public PedidoProveedor() {
 	}
@@ -109,11 +109,11 @@ public class PedidoProveedor implements Serializable {
 		this.proveedore = proveedore;
 	}
 
-	public AlbaranesProveedor getAlbaranesProveedor() {
+	public AlbaranProveedor getAlbaranesProveedor() {
 		return this.albaranesProveedor;
 	}
 
-	public void setAlbaranesProveedor(AlbaranesProveedor albaranesProveedor) {
+	public void setAlbaranesProveedor(AlbaranProveedor albaranesProveedor) {
 		this.albaranesProveedor = albaranesProveedor;
 	}
 

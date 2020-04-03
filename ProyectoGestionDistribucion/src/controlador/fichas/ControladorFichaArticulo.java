@@ -22,6 +22,7 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	private VFichaArticulo fichaArticulo;
 	private GestorArticulo ga;
 	
+	
 	public ControladorFichaArticulo(VFichaArticulo fichaArticulo) {
 		this.fichaArticulo=fichaArticulo;
 		ga=new GestorArticulo();
@@ -29,14 +30,15 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
-		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
-		if (res==JOptionPane.YES_OPTION)
-			if (fichaArticulo.getArt()!=null)
-				modificaArticulo();
+
+			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
+			if (res==JOptionPane.YES_OPTION)
+				if (fichaArticulo.getArt()!=null)
+					modificaArticulo();
+				else
+					nuevoArticulo();
 			else
-				nuevoArticulo();
-		else
-			fichaArticulo.dispose();
+				fichaArticulo.dispose();
 	}
 
 	@Override

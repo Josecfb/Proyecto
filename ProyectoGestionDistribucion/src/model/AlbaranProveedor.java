@@ -12,16 +12,17 @@ import java.util.List;
  */
 @Entity
 @Table(name="ALBARANES_PROVEEDOR")
-@NamedQuery(name="AlbaranesProveedor.findAll", query="SELECT a FROM AlbaranesProveedor a")
-public class AlbaranesProveedor implements Serializable {
+@NamedQuery(name="AlbaranProveedor.findAll", query="SELECT a FROM AlbaranProveedor a")
+public class AlbaranProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="NUM")
 	private int num;
 
 	@Column(name="ACTUALIZADO_ALMACEN")
-	private byte actualizadoAlmacen;
+	private boolean actualizadoAlmacen;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA")
@@ -45,7 +46,7 @@ public class AlbaranesProveedor implements Serializable {
 	@OneToMany(mappedBy="albaranesProveedor")
 	private List<PedidoProveedor> pedidosProveedors;
 
-	public AlbaranesProveedor() {
+	public AlbaranProveedor() {
 	}
 
 	public int getNum() {
@@ -56,11 +57,11 @@ public class AlbaranesProveedor implements Serializable {
 		this.num = num;
 	}
 
-	public byte getActualizadoAlmacen() {
+	public boolean getActualizadoAlmacen() {
 		return this.actualizadoAlmacen;
 	}
 
-	public void setActualizadoAlmacen(byte actualizadoAlmacen) {
+	public void setActualizadoAlmacen(boolean actualizadoAlmacen) {
 		this.actualizadoAlmacen = actualizadoAlmacen;
 	}
 

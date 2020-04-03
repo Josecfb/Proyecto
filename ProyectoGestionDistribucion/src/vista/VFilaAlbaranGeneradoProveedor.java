@@ -3,7 +3,8 @@ package vista;
 import javax.swing.JPanel;
 
 import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
-import model.PedidoProveedor;
+import controlador.fichas.CtrlFilaAlbaranesGenProveedor;
+import model.AlbaranProveedor;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -11,18 +12,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class VFilaPedidoPendienteProveedor extends JPanel {
+public class VFilaAlbaranGeneradoProveedor extends JPanel {
 
 	private static final long serialVersionUID = 4665261804339480581L;
 	private JLabel lProveedor, lFecha;
 	private JButton bEditar;
-	private PedidoProveedor ped;
-	private VPedidosProveedores vpedidos;
+	private AlbaranProveedor alb;
+	private VAlbaranesProveedores vAlbaranes;
 
-	public VFilaPedidoPendienteProveedor(PedidoProveedor ped,VPedidosProveedores vpedidos) {
+	public VFilaAlbaranGeneradoProveedor(AlbaranProveedor alb,VAlbaranesProveedores vAlbaranes) {
 		setBackground(Color.WHITE);
-		this.vpedidos=vpedidos;
-		this.ped=ped;
+		this.vAlbaranes=vAlbaranes;
+		this.alb=alb;
 		setLayout(null);
 		
 		lProveedor = new JLabel("");
@@ -41,7 +42,7 @@ public class VFilaPedidoPendienteProveedor extends JPanel {
 		add(lFecha);
 	}
 	
-	public void establecerControlador(ControladorFilaPedidoPendienteProveedor controlador) {
+	public void establecerControlador(CtrlFilaAlbaranesGenProveedor controlador) {
 		bEditar.addActionListener(controlador);
 	}
 
@@ -57,12 +58,12 @@ public class VFilaPedidoPendienteProveedor extends JPanel {
 		return bEditar;
 	}
 
-	public PedidoProveedor getPed() {
-		return ped;
+	public AlbaranProveedor getAlb() {
+		return alb;
 	}
 
-	public VPedidosProveedores getVpedidos() {
-		return vpedidos;
+	public VAlbaranesProveedores getVAlbaranes() {
+		return vAlbaranes;
 	}
 
 	

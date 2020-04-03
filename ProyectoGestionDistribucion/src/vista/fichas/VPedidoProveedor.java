@@ -43,13 +43,9 @@ public class VPedidoProveedor extends JInternalFrame {
 	private JTextField tNumpedido;
 	private JCheckBox checConfirmado, checEnviado;
 	private JButton bNuevaFila;
-	private int hash;
-
-	
 
 
 	public VPedidoProveedor(PedidoProveedor ped,VPedidosProveedores vpedidos) {
-		hash=ped.hashCode();
 		this.vpedidos=vpedidos;
 		this.ped=ped;
 		formatoeuro = NumberFormat.getCurrencyInstance();
@@ -292,9 +288,4 @@ public class VPedidoProveedor extends JInternalFrame {
 	public JButton getbNuevaFila() {
 		return bNuevaFila;
 	}
-
-	public int getHash() {
-		return hash;
-	}
-	
 }

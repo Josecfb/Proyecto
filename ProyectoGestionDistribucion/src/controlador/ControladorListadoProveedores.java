@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.ImageIcon;
 
+import controlador.fichas.ControladorAlbaranesProveedores;
 import controlador.fichas.ControladorFichaProveedor;
 import controlador.fichas.ControladorPedidosProveedores;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
+import vista.VAlbaranesProveedores;
 import vista.VListadoProveedores;
 import vista.VPedidosProveedores;
 import vista.fichas.VFichaProveedor;
@@ -41,6 +43,8 @@ public class ControladorListadoProveedores implements ActionListener{
 			actualizar();
 		if (e.getSource()==listado.getbPedidos())
 			abrePedidos();
+		if (e.getSource()==listado.getbAlbaranes())
+			abreAlbaranes();
 	}
 	
 	private void filtrar() {
@@ -79,5 +83,14 @@ public class ControladorListadoProveedores implements ActionListener{
 		pp.establecerManejador(cpp);
 		listado.getV().getPanelInterior().add(pp);
 		pp.setVisible(true);
+	}
+	
+	private void abreAlbaranes() {
+		System.out.println("albaranes");
+		VAlbaranesProveedores vap=new VAlbaranesProveedores(listado.getV());
+		ControladorAlbaranesProveedores cap=new ControladorAlbaranesProveedores(vap);
+		vap.establecerManejador(cap);
+		listado.getV().getPanelInterior().add(vap);
+		vap.setVisible(true);
 	}
 }

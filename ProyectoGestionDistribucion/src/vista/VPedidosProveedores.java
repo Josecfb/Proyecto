@@ -68,7 +68,7 @@ public class VPedidosProveedores extends JInternalFrame {
 		pEnviados.setLayout(null);
 		
 		scrollEnviados = new JScrollPane();
-		scrollEnviados.setBounds(10, 11, 783, 277);
+		scrollEnviados.setBounds(10, 11, 783, 439);
 		pEnviados.add(scrollEnviados);
 		
 		JPanel pRecibidos = new JPanel();
@@ -76,7 +76,7 @@ public class VPedidosProveedores extends JInternalFrame {
 		pRecibidos.setLayout(null);
 		
 		JScrollPane scrollRecibidos = new JScrollPane();
-		scrollRecibidos.setBounds(10, 51, 783, 237);
+		scrollRecibidos.setBounds(10, 11, 783, 439);
 		pRecibidos.add(scrollRecibidos);
 		ControladorPedidosProveedores cpp=new ControladorPedidosProveedores(this);
 	}
@@ -92,17 +92,14 @@ public class VPedidosProveedores extends JInternalFrame {
 		panelEnviados.setBackground(Color.WHITE);
 		panelEnviados.setBorder(null);
 
-		int i=0;
 		scrollPendientes.setViewportView(panelPendientes);
 		scrollEnviados.setViewportView(panelEnviados);
 		for (PedidoProveedor fila:lista) {
-			i++;
 			Proveedor pro=fila.getProveedore();
 			filaPed=new VFilaPedidoPendienteProveedor(fila,this);
 			ControladorFilaPedidoPendienteProveedor controla=new ControladorFilaPedidoPendienteProveedor(filaPed);
 			filaPed.establecerControlador(controla);
 			filaPed.setPreferredSize(new Dimension(650,30));
-			if (i%2==0) filaPed.setBackground(Color.WHITE);
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			filaPed.getlProveedor().setText(String.valueOf(pro.getNombre()));
 			if (fila.getFecha()!=null) filaPed.getlFecha().setText(formatter.format(fila.getFecha()));

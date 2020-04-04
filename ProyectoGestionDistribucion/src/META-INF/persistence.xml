@@ -23,7 +23,6 @@
 		<class>model.FilasPedidosClientePK</class>
 		<class>model.FilaPedidoProveedor</class>
 		<class>model.FilasPedidosProveedorPK</class>
-		<class>model.Lote</class>
 		<class>model.PedidosCliente</class>
 		<class>model.PedidoProveedor</class>
 		<class>model.Poblacione</class>

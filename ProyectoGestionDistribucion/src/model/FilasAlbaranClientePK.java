@@ -18,9 +18,6 @@ public class FilasAlbaranClientePK implements Serializable {
 	@Column(name="ARTICULO", insertable=false, updatable=false)
 	private int articulo;
 
-	@Column(name="LOTE", insertable=false, updatable=false)
-	private int lote;
-
 	public FilasAlbaranClientePK() {
 	}
 	public int getAlbaran() {
@@ -35,12 +32,6 @@ public class FilasAlbaranClientePK implements Serializable {
 	public void setArticulo(int articulo) {
 		this.articulo = articulo;
 	}
-	public int getLote() {
-		return this.lote;
-	}
-	public void setLote(int lote) {
-		this.lote = lote;
-	}
 
 	public boolean equals(Object other) {
 		if (this == other) {
@@ -52,8 +43,7 @@ public class FilasAlbaranClientePK implements Serializable {
 		FilasAlbaranClientePK castOther = (FilasAlbaranClientePK)other;
 		return 
 			(this.albaran == castOther.albaran)
-			&& (this.articulo == castOther.articulo)
-			&& (this.lote == castOther.lote);
+			&& (this.articulo == castOther.articulo);
 	}
 
 	public int hashCode() {
@@ -61,7 +51,7 @@ public class FilasAlbaranClientePK implements Serializable {
 		int hash = 17;
 		hash = hash * prime + this.albaran;
 		hash = hash * prime + this.articulo;
-		hash = hash * prime + this.lote;
+
 		
 		return hash;
 	}

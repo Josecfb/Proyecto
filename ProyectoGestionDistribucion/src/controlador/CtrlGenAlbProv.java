@@ -75,7 +75,7 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 				ped.setConfirmado(true);
 				gpp.modificarPedido(ped);
 			}
-			
+			gap.generaFilas(alb);
 		}
 		
 	}

@@ -34,11 +34,6 @@ public class FilasFacturasProveedor implements Serializable {
 	@JoinColumn(name="ARTICULO")
 	private Articulo articuloBean;
 
-	//bi-directional many-to-one association to Lote
-	@ManyToOne
-	@JoinColumn(name="LOTE")
-	private Lote loteBean;
-
 	public FilasFacturasProveedor() {
 	}
 
@@ -80,14 +75,6 @@ public class FilasFacturasProveedor implements Serializable {
 
 	public void setArticuloBean(Articulo articuloBean) {
 		this.articuloBean = articuloBean;
-	}
-
-	public Lote getLoteBean() {
-		return this.loteBean;
-	}
-
-	public void setLoteBean(Lote loteBean) {
-		this.loteBean = loteBean;
 	}
 
 }

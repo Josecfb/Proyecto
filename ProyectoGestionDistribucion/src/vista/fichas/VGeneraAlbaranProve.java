@@ -16,19 +16,22 @@ import controlador.CtrlGenAlbProv;
 import model.PedidoProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
+import vista.VentanaPrincipal;
 
 import javax.swing.JButton;
 
 public class VGeneraAlbaranProve extends JInternalFrame {
 
 	private static final long serialVersionUID = -8073649338631908268L;
+	private VentanaPrincipal v;
 	private JComboBox<Proveedor> comboProve;
 	private JButton bAceptar, bCancelar;
 	private JPanel panelFila;
 	private JScrollPane scrollPane;
 	private VFilaPedGeneraAlbProve vfila;
 
-	public VGeneraAlbaranProve() {
+	public VGeneraAlbaranProve(VentanaPrincipal v) {
+		this.v=v;
 		setBounds(100, 100, 746, 382);
 		getContentPane().setLayout(null);
 		
@@ -103,4 +106,9 @@ public class VGeneraAlbaranProve extends JInternalFrame {
 		return panelFila;
 	}
 
+	public VentanaPrincipal getV() {
+		return v;
+	}
+
+	
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import controlador.CtrlGenAlbProv;
 import model.AlbaranProveedor;
 import model.PedidoProveedor;
+import modelo.negocio.GestorAlbaranProve;
 import modelo.negocio.GestorPedidosProve;
 import vista.VAlbaranesProveedores;
 import vista.VPedidosProveedores;
@@ -22,17 +23,17 @@ public class ControladorAlbaranesProveedores implements ActionListener{
 	public void listar(VAlbaranesProveedores vAlbaranes) {
 		this.vAlbaranes=vAlbaranes;
 		List<AlbaranProveedor> filas;
-		GestorPedidosProve gpp=new GestorPedidosProve();
-//		filas=gpp.listar();
+		GestorAlbaranProve gap=new GestorAlbaranProve();
+		filas=gap.listarAlbaranes();
 //		System.out.println(filas.size());
-//		vAlbaranes.muestraPendientes(filas);
+		vAlbaranes.muestraPendientes(filas);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource()==vAlbaranes.getbNuevoGenerado()) {
-			VGeneraAlbaranProve vGenAlb=new VGeneraAlbaranProve();
+			VGeneraAlbaranProve vGenAlb=new VGeneraAlbaranProve(vAlbaranes.getV());
 			CtrlGenAlbProv cpp=new CtrlGenAlbProv(vGenAlb);
 			vGenAlb.establecerControlador(cpp);
 			vAlbaranes.getV().getPanelInterior().add(vGenAlb);

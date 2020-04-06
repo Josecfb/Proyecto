@@ -22,7 +22,7 @@ public class FilaPedidoProveedor implements Serializable {
 
 	//bi-directional many-to-one association to PedidosProveedor
 	@ManyToOne
-	@JoinColumn(name="PEDIDO")
+	@JoinColumn(name=("PEDIDO"))
 	private PedidoProveedor pedidosProveedor;
 
 	//bi-directional many-to-one association to Articulo

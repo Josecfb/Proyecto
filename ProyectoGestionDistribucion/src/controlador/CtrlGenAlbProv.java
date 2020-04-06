@@ -1,7 +1,6 @@
 package controlador;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -10,22 +9,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import org.eclipse.persistence.jpa.jpql.parser.SizeExpression;
-
 import model.AlbaranProveedor;
 import model.PedidoProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorAlbaranProve;
 import modelo.negocio.GestorPedidosProve;
+import vista.fichas.VAlbaranProveedor;
 import vista.fichas.VFilaPedGeneraAlbProve;
 import vista.fichas.VGeneraAlbaranProve;
 
 public class CtrlGenAlbProv implements ActionListener, FocusListener{
 	private VGeneraAlbaranProve vGenAlvPro; 
-	private JPanel panelFila;
+
 	
 	public CtrlGenAlbProv(VGeneraAlbaranProve vGenAlvPro) {
 		this.vGenAlvPro=vGenAlvPro;
@@ -46,7 +41,6 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 			System.out.println("Numero de pedidos sin recibir="+listaPed.size());
 			vGenAlvPro.muestraPedidos(listaPed);
 		}
-		
 	}
 
 	@Override
@@ -65,17 +59,25 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 			for (Component compo:compnentes) {
 				VFilaPedGeneraAlbProve vfila;
 				vfila=(VFilaPedGeneraAlbProve) compo;
-				PedidoProveedor ped=gpp.existe(Integer.parseInt(vfila.getlNum().getText()));
-				pedidos.add(ped);
+				if (vfila.getChecMarca().isSelected()) {	
+					PedidoProveedor ped=gpp.existe(Integer.parseInt(vfila.getlNum().getText()));
+					if (!ped.getConfirmado())
+						pedidos.add(ped);
+				}
 			}
 			alb.setPedidosProveedors(pedidos);
+			
 			gap.nuevoAlbaran(alb);
 			for (PedidoProveedor ped:alb.getPedidosProveedors()) {
 				ped.setAlbaranesProveedor(alb);
 				ped.setConfirmado(true);
 				gpp.modificarPedido(ped);
 			}
-			gap.generaFilas(alb);
+			alb.setFilasAlbaranProveedors(gap.generaFilas(alb));
+			gap.modificaAlbaranGenerado(alb);
+			VAlbaranProveedor vAlb=new VAlbaranProveedor(alb);
+			vGenAlvPro.getV().getPanelInterior().add(vAlb);
+			vAlb.setVisible(true);
 		}
 		
 	}

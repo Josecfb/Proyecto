@@ -3,7 +3,7 @@ package modelo.negocio;
 import java.util.List;
 
 import model.AlbaranProveedor;
-import model.FilasAlbaranProveedor;
+import model.FilaAlbaranProveedor;
 import modelo.persistencia.DaoAlbaranProve;
 
 public class GestorAlbaranProve {
@@ -14,11 +14,18 @@ public class GestorAlbaranProve {
 	}
 	
 	public int nuevoAlbaran(AlbaranProveedor alb) {
-		
 		return dap.nuevoAlbaran(alb);
 	}
 	
-	public List<FilasAlbaranProveedor> generaFilas(AlbaranProveedor alb){
+	public int modificaAlbaranGenerado(AlbaranProveedor alb) {
+		return dap.modificaAlbaranGenerado(alb);
+	}
+	
+	public List<FilaAlbaranProveedor> generaFilas(AlbaranProveedor alb){
 		return dap.generaFilas(alb);
+	}
+	
+	public List<AlbaranProveedor> listarAlbaranes(){
+		return dap.listarAlbaranes();
 	}
 }

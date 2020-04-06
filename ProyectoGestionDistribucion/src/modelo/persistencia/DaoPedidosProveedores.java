@@ -36,7 +36,7 @@ public class DaoPedidosProveedores {
 		if (em==null)
 			return null;
 		else
-			lista=em.createQuery("select ped from PedidoProveedor ped where ped.proveedore=:pro and ped.enviado=TRUE").setParameter("pro", pro).getResultList();
+			lista=em.createQuery("select ped from PedidoProveedor ped where ped.proveedore=:pro and ped.enviado=TRUE and ped.confirmado=FALSE").setParameter("pro", pro).getResultList();
 		ab.cerrarConexion();
 		return lista;
 	}
@@ -76,11 +76,15 @@ public class DaoPedidosProveedores {
 			return null;
 		else 
 			ped=em.find(PedidoProveedor.class, num);
+		ab.cerrarConexion();
 		return ped;
 	}
 	
 	public int modificarPedido(PedidoProveedor ped) {
+		AbreCierra ab=new AbreCierra();
+		
 		PedidoProveedor antiguo=existe(ped.getNum());
+		em=ab.abrirConexion();
 		em.getTransaction().begin();
 		if (em==null) return -1;
 		antiguo.setNum(ped.getNum());
@@ -88,8 +92,8 @@ public class DaoPedidosProveedores {
 		antiguo.setConfirmado(ped.getConfirmado());
 		antiguo.setEnviado(ped.getEnviado());
 		antiguo.setAlbaranesProveedor(ped.getAlbaranesProveedor());
-		for (FilaPedidoProveedor fil:antiguo.getFilaPedidoProveedor()) {
-			em.find(FilaPedidoProveedor.class, fil.getId());
+		for (FilaPedidoProveedor fi:antiguo.getFilaPedidoProveedor()) {
+			FilaPedidoProveedor fil=em.find(FilaPedidoProveedor.class, fi.getId());
 			em.remove(fil);
 		}
 		em.getTransaction().commit();

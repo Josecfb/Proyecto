@@ -13,7 +13,7 @@
 		<class>model.Familia</class>
 		<class>model.FilasAlbaranCliente</class>
 		<class>model.FilasAlbaranClientePK</class>
-		<class>model.FilasAlbaranProveedor</class>
+		<class>model.FilaAlbaranProveedor</class>
 		<class>model.FilasAlbaranProveedorPK</class>
 		<class>model.FilasFacturasCliente</class>
 		<class>model.FilasFacturasClientePK</class>

@@ -1,24 +1,22 @@
 package modelo.persistencia;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
 import model.AlbaranProveedor;
 import model.Articulo;
-import model.FilaPedidoProveedor;
-import model.FilasAlbaranProveedor;
-import model.PedidoProveedor;
+import model.FilaAlbaranProveedor;
+
 
 public class DaoAlbaranProve {
 	private EntityManager em;
 
 	public int nuevoAlbaran(AlbaranProveedor alb) {
-		AbreCierra ab=new AbreCierra();
-		em=ab.abrirConexion();
-		em.getTransaction().begin();
+		abrir();
 		if (em==null) return -1;
-		
+		em.getTransaction().begin();
 		em.persist(alb);
 		
 		em.getTransaction().commit();
@@ -27,20 +25,53 @@ public class DaoAlbaranProve {
 		return 0;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<FilasAlbaranProveedor> generaFilas(AlbaranProveedor alb){
+	public int modificaAlbaranGenerado(AlbaranProveedor alb) {
+		abrir();
+		if (em==null) return -1;
+		AlbaranProveedor antiguo=em.find(AlbaranProveedor.class, alb.getNum());
+		System.out.println(antiguo.getFilasAlbaranProveedors().size()+" filas");
+		for (FilaAlbaranProveedor fila:alb.getFilasAlbaranProveedors())
+			antiguo.getFilasAlbaranProveedors().add(fila);
+		System.out.println(antiguo.getFilasAlbaranProveedors().size()+" filas");
+		em.getTransaction().begin();
+		em.merge(antiguo);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
+	}
+	
+	public List<AlbaranProveedor> listarAlbaranes(){
+		abrir();
+		if (em==null) return null;
+		List<AlbaranProveedor> lista=em.createQuery("select alb from AlbaranProveedor alb").getResultList();
+		em.close();
+		return lista;
+	}
+
+	private void abrir() {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
-		em.getTransaction().begin();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<FilaAlbaranProveedor> generaFilas(AlbaranProveedor alb){
+		List<FilaAlbaranProveedor> filasAlb=new ArrayList<FilaAlbaranProveedor>();
+		abrir();
 		if (em==null) return null;
 		List<Object[]> filas;
-		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad) from FilaPedidoProveedor fil where fil.pedidosProveedor.albaranesProveedor=:alb group by fil.articuloBean").setParameter("alb", alb).getResultList();
+		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad),fil.articuloBean.coste from FilaPedidoProveedor fil where fil.pedidosProveedor.albaranesProveedor=:alb group by fil.articuloBean").setParameter("alb", alb).getResultList();
 		for (Object[] fila:filas) {
 			Articulo art=(Articulo) fila[0];
-			
 			System.out.println(art.getNombre()+"\t"+fila[1]+"\t"+fila[2]);
+			FilaAlbaranProveedor filaAlb=new FilaAlbaranProveedor();
+			filaAlb.setAlbaranesProveedor(alb);
+			filaAlb.setArticuloBean(art);
+			int cantidad=Integer.valueOf(((Long) fila[1]).intValue());
+			filaAlb.setCantidad(cantidad);
+			filaAlb.setPrecio((Double) fila[2]);
+			filasAlb.add(filaAlb);
 		}
-		return null;
+		return filasAlb;
 	}
 	
 }

@@ -9,14 +9,19 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+
+import controlador.fichas.ControladorAlbaranProveedor;
 import controlador.fichas.ControladorFilaPedidoProveedor;
 import controlador.fichas.ControladorPedidoProveedor;
+import model.AlbaranProveedor;
 import model.FilaPedidoProveedor;
+import model.FilaAlbaranProveedor;
 import model.PedidoProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
@@ -26,31 +31,30 @@ import java.awt.SystemColor;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 
-public class VPedidoProveedor extends JInternalFrame {
+public class VAlbaranProveedor extends JInternalFrame {
 
 	private static final long serialVersionUID = 4339097703466328107L;
-	private VPedidosProveedores vpedidos;
+	//private VPedidosProveedores vpedidos;
 	private JDateChooser cFecha;
 	private JComboBox<Proveedor> comboProveedor;
-	private PedidoProveedor ped;
-	private ControladorPedidoProveedor contrPedPro;
+	private AlbaranProveedor alb;
+	private ControladorAlbaranProveedor contrAlbPro;
 	private JScrollPane scrollPendientes;
-	private VFilaPedidoProveedor filaPed;
+	private VFilaAlbaranProveedor vFilaAlb;
 	private JPanel panel;
 	private JLabel lTotal;
 	private NumberFormat formatoeuro, formatoentero;
-	private JTextField tNumpedido;
-	private JCheckBox checConfirmado, checEnviado;
+	private JTextField tNumAlb;
+	private JCheckBox checAlmacen;
 	private JButton bNuevaFila;
 
 
-	public VPedidoProveedor(PedidoProveedor ped,VPedidosProveedores vpedidos) {
-		this.vpedidos=vpedidos;
-		this.ped=ped;
+	public VAlbaranProveedor(AlbaranProveedor alb) {
+		//this.vpedidos=vpedidos;
+		this.alb=alb;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoentero=NumberFormat.getIntegerInstance();
-		contrPedPro=new ControladorPedidoProveedor(this);
-		this.ped=ped;
+		contrAlbPro=new ControladorAlbaranProveedor(this);
 		setBounds(100, 100, 759, 465);
 		getContentPane().setLayout(null);
 		setResizable(false);
@@ -99,7 +103,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		lblNewLabel_1.setOpaque(true);
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBackground(new Color(0, 0, 128));
-		lblNewLabel_1.setBounds(24, 96, 45, 18);
+		lblNewLabel_1.setBounds(39, 102, 45, 18);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Nombre");
@@ -107,7 +111,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		lblNewLabel_2.setOpaque(true);
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setBackground(new Color(0, 0, 128));
-		lblNewLabel_2.setBounds(79, 96, 358, 18);
+		lblNewLabel_2.setBounds(94, 102, 358, 18);
 		getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Cajas");
@@ -115,7 +119,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		lblNewLabel_3.setForeground(Color.WHITE);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_3.setBackground(new Color(0, 0, 128));
-		lblNewLabel_3.setBounds(447, 96, 38, 18);
+		lblNewLabel_3.setBounds(462, 102, 38, 18);
 		getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Unidades");
@@ -123,7 +127,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_4.setBackground(new Color(0, 0, 128));
-		lblNewLabel_4.setBounds(495, 96, 29, 18);
+		lblNewLabel_4.setBounds(510, 102, 29, 18);
 		getContentPane().add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Coste");
@@ -131,7 +135,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_5.setBackground(new Color(0, 0, 128));
-		lblNewLabel_5.setBounds(534, 96, 64, 18);
+		lblNewLabel_5.setBounds(549, 102, 64, 18);
 		getContentPane().add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Total");
@@ -139,7 +143,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		lblNewLabel_6.setForeground(Color.WHITE);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_6.setBackground(new Color(0, 0, 128));
-		lblNewLabel_6.setBounds(608, 96, 76, 18);
+		lblNewLabel_6.setBounds(623, 102, 76, 18);
 		getContentPane().add(lblNewLabel_6);
 		
 		JLabel lNum = new JLabel("Numero");
@@ -147,56 +151,51 @@ public class VPedidoProveedor extends JInternalFrame {
 		lNum.setBounds(35, 24, 49, 25);
 		getContentPane().add(lNum);
 		
-		tNumpedido = new JTextField();
-		tNumpedido.setColumns(10);
-		tNumpedido.setBounds(94, 24, 64, 25);
-		tNumpedido.setFocusable(false);
-		getContentPane().add(tNumpedido);
+		tNumAlb = new JTextField();
+		tNumAlb.setColumns(10);
+		tNumAlb.setBounds(94, 24, 64, 25);
+		tNumAlb.setFocusable(false);
+		getContentPane().add(tNumAlb);
 		
-		checConfirmado = new JCheckBox("Confirmado");
-		checConfirmado.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		checConfirmado.setBounds(311, 61, 97, 23);
-		getContentPane().add(checConfirmado);
-		
-		checEnviado = new JCheckBox("Enviado");
-		checEnviado.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		checEnviado.setBounds(442, 61, 97, 23);
-		getContentPane().add(checEnviado);
-		
+		checAlmacen = new JCheckBox("Confirmado");
+		checAlmacen.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		checAlmacen.setBounds(311, 61, 97, 23);
+		getContentPane().add(checAlmacen);
+
 		bNuevaFila = new JButton("");
 		bNuevaFila.setBounds(578, 60, 35, 35);
 		getContentPane().add(bNuevaFila);
 		
-		setTitle("Pedido Proveedor");
-		contrPedPro.articulosPendientesPedido(ped);
-		muestraFilas(ped);
-		if (ped!=null)
+		setTitle("Albaran Proveedor");
+		//contrAlbPro.articulosPendientesPedido(alb);
+		muestraFilas(alb);
+		if (alb!=null)
 			llenaFicha();
 		
 	}
 
 	public void nuevaFila() {
-		FilaPedidoProveedor fil = new FilaPedidoProveedor();
-		fil.setPedidosProveedor(ped);
-		filaPed=new VFilaPedidoProveedor(this,fil);
-		ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(filaPed);
-		filaPed.establecerControlador(controla);
-		filaPed.setPreferredSize(new Dimension(710,30));
-		panel.add(filaPed);
+		FilaAlbaranProveedor fil = new FilaAlbaranProveedor();
+		fil.setAlbaranesProveedor(alb);
+		vFilaAlb=new VFilaAlbaranProveedor(this,fil);
+		//ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(vFilaAlb);
+		//vFilaAlb.establecerControlador(controla);
+		vFilaAlb.setPreferredSize(new Dimension(710,30));
+		panel.add(vFilaAlb);
 		panel.updateUI();
 	}
 	
 	public void llenaFicha() {
-		tNumpedido.setText(String.valueOf(ped.getNum()));
-		comboProveedor.setSelectedItem(ped.getProveedore());
-		cFecha.setDate(ped.getFecha());
-		checConfirmado.setSelected(ped.getConfirmado());
-		checEnviado.setSelected(ped.getEnviado());
+		tNumAlb.setText(String.valueOf(alb.getNum()));
+		comboProveedor.setSelectedItem(alb.getProveedore());
+		cFecha.setDate(alb.getFecha());
+		checAlmacen.setSelected(alb.getActualizadoAlmacen());
+
 	}
 	
-	public void muestraFilas(PedidoProveedor pedido) {
+	public void muestraFilas(AlbaranProveedor albaran) {
 		
-		List<FilaPedidoProveedor> filas=contrPedPro.articulosPendientesPedido(pedido);
+		List<FilaAlbaranProveedor> filas=alb.getFilasAlbaranProveedors();
 		System.out.println("filas "+filas.size());
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(710,filas.size()*30));
@@ -206,23 +205,23 @@ public class VPedidoProveedor extends JInternalFrame {
 		int i=0;
 		scrollPendientes.setViewportView(panel);
 		double total=0;
-		ControladorFilaPedidoProveedor cfpp =new ControladorFilaPedidoProveedor(filaPed);
-		for (FilaPedidoProveedor fil:filas) {
+		//ControladorFilaPedidoProveedor cfpp =new ControladorFilaPedidoProveedor(vFilaAlb);
+		for (FilaAlbaranProveedor fil:filas) {
 			i++;
 			System.out.println("fila num: "+i);
-			filaPed=new VFilaPedidoProveedor(this,fil);
-			ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(filaPed);
-			filaPed.establecerControlador(controla);
-			filaPed.setPreferredSize(new Dimension(710,23));
-			filaPed.gettCod().setText(String.valueOf(fil.getArticuloBean().getCod()));
-			filaPed.getArticulo().setSelectedItem(fil.getArticuloBean());
-			filaPed.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
-			filaPed.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
-			filaPed.gettCoste().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
-			filaPed.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
-			panel.add(filaPed);
-			total+=cfpp.euroADoble(filaPed.gettCoste().getText())*Integer.parseInt(filaPed.gettUnidades().getText());
-			filaPed.updateUI();
+			vFilaAlb=new VFilaAlbaranProveedor(this,fil);
+			//ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(vFilaAlb);
+			//vFilaAlb.establecerControlador(controla);
+			vFilaAlb.setPreferredSize(new Dimension(710,23));
+			vFilaAlb.gettCod().setText(String.valueOf(fil.getArticuloBean().getCod()));
+			vFilaAlb.getArticulo().setSelectedItem(fil.getArticuloBean());
+			vFilaAlb.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
+			vFilaAlb.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
+			vFilaAlb.gettCoste().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
+			vFilaAlb.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
+			panel.add(vFilaAlb);
+			//total+=cfpp.euroADoble(vFilaAlb.gettCoste().getText())*Integer.parseInt(vFilaAlb.gettUnidades().getText());
+			vFilaAlb.updateUI();
 		}
 		
 		lTotal.setText(formatoeuro.format(total));
@@ -239,7 +238,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		lTotal.setText(formatoeuro.format(total));
 	}
 	
-	public void establecerControlador(ControladorPedidoProveedor controlador) {
+	public void establecerControlador(ControladorAlbaranProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);
 		bNuevaFila.addActionListener(controlador);
@@ -252,36 +251,24 @@ public class VPedidoProveedor extends JInternalFrame {
 	}
 
 
-	public PedidoProveedor getPed() {
-		return ped;
+	public AlbaranProveedor getAlb() {
+		return alb;
 	}
 
 	public JTextField gettNumpedido() {
-		return tNumpedido;
+		return tNumAlb;
 	}
 
 	public JDateChooser getcFecha() {
 		return cFecha;
 	}
 
-	public JCheckBox getChecConfirmado() {
-		return checConfirmado;
-	}
-
-	public JCheckBox getChecEnviado() {
-		return checEnviado;
+	public JCheckBox getChecAlmacen() {
+		return checAlmacen;
 	}
 
 	public JPanel getPanel() {
 		return panel;
-	}
-
-	public VPedidosProveedores getVpedidos() {
-		return vpedidos;
-	}
-
-	public void setPed(PedidoProveedor ped) {
-		this.ped = ped;
 	}
 
 	public JButton getbNuevaFila() {

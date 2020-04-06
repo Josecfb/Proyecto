@@ -28,7 +28,7 @@ public class VFilaAlbaranGeneradoProveedor extends JPanel {
 		
 		lProveedor = new JLabel("");
 		lProveedor.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lProveedor.setBounds(24, 5, 400, 20);
+		lProveedor.setBounds(24, 5, 406, 20);
 		add(lProveedor);
 		
 		bEditar = new JButton("");

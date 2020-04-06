@@ -11,8 +11,8 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="FILAS_ALBARAN_PROVEEDOR")
-@NamedQuery(name="FilasAlbaranProveedor.findAll", query="SELECT f FROM FilasAlbaranProveedor f")
-public class FilasAlbaranProveedor implements Serializable {
+@NamedQuery(name="FilaAlbaranProveedor.findAll", query="SELECT f FROM FilaAlbaranProveedor f")
+public class FilaAlbaranProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -22,7 +22,7 @@ public class FilasAlbaranProveedor implements Serializable {
 	private int cantidad;
 
 	@Column(name="PRECIO")
-	private BigDecimal precio;
+	private Double precio;
 
 	//bi-directional many-to-one association to AlbaranesProveedor
 	@ManyToOne
@@ -34,7 +34,7 @@ public class FilasAlbaranProveedor implements Serializable {
 	@JoinColumn(name="ARTICULO")
 	private Articulo articuloBean;
 
-	public FilasAlbaranProveedor() {
+	public FilaAlbaranProveedor() {
 	}
 
 	public FilasAlbaranProveedorPK getId() {
@@ -53,11 +53,11 @@ public class FilasAlbaranProveedor implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public BigDecimal getPrecio() {
+	public Double getPrecio() {
 		return this.precio;
 	}
 
-	public void setPrecio(BigDecimal precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 

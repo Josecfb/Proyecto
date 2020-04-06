@@ -39,8 +39,8 @@ public class AlbaranProveedor implements Serializable {
 	private FacturasProveedor facturasProveedor;
 
 	//bi-directional many-to-one association to FilasAlbaranProveedor
-	@OneToMany(mappedBy="albaranesProveedor")
-	private List<FilasAlbaranProveedor> filasAlbaranProveedors;
+	@OneToMany(mappedBy="albaranesProveedor",cascade = CascadeType.ALL)
+	private List<FilaAlbaranProveedor> filasAlbaranProveedors;
 
 	//bi-directional many-to-one association to PedidosProveedor
 	@OneToMany(mappedBy="albaranesProveedor")
@@ -89,22 +89,22 @@ public class AlbaranProveedor implements Serializable {
 		this.facturasProveedor = facturasProveedor;
 	}
 
-	public List<FilasAlbaranProveedor> getFilasAlbaranProveedors() {
+	public List<FilaAlbaranProveedor> getFilasAlbaranProveedors() {
 		return this.filasAlbaranProveedors;
 	}
 
-	public void setFilasAlbaranProveedors(List<FilasAlbaranProveedor> filasAlbaranProveedors) {
+	public void setFilasAlbaranProveedors(List<FilaAlbaranProveedor> filasAlbaranProveedors) {
 		this.filasAlbaranProveedors = filasAlbaranProveedors;
 	}
 
-	public FilasAlbaranProveedor addFilasAlbaranProveedor(FilasAlbaranProveedor filasAlbaranProveedor) {
+	public FilaAlbaranProveedor addFilasAlbaranProveedor(FilaAlbaranProveedor filasAlbaranProveedor) {
 		getFilasAlbaranProveedors().add(filasAlbaranProveedor);
 		filasAlbaranProveedor.setAlbaranesProveedor(this);
 
 		return filasAlbaranProveedor;
 	}
 
-	public FilasAlbaranProveedor removeFilasAlbaranProveedor(FilasAlbaranProveedor filasAlbaranProveedor) {
+	public FilaAlbaranProveedor removeFilasAlbaranProveedor(FilaAlbaranProveedor filasAlbaranProveedor) {
 		getFilasAlbaranProveedors().remove(filasAlbaranProveedor);
 		filasAlbaranProveedor.setAlbaranesProveedor(null);
 

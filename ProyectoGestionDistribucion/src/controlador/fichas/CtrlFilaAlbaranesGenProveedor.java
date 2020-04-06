@@ -5,11 +5,12 @@ import java.awt.event.ActionListener;
 
 import vista.VAlbaranesProveedores;
 import vista.VFilaAlbaranGeneradoProveedor;
+import vista.fichas.VAlbaranProveedor;
 
 
 public class CtrlFilaAlbaranesGenProveedor implements ActionListener{
 	private VFilaAlbaranGeneradoProveedor fila;
-//	private VAlbaranesProveedores vAlba;
+	private VAlbaranProveedor vAlba;
 	
 	public CtrlFilaAlbaranesGenProveedor(VFilaAlbaranGeneradoProveedor fila) {
 		this.fila=fila;
@@ -18,13 +19,13 @@ public class CtrlFilaAlbaranesGenProveedor implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fila.getbEditar()) {
-			System.out.println("editar pedido pendiente");
-			// ficha albaran generado vAlba=new VAlbaranesProveedores(fila.getA(),fila.getVpedidos());
-//			ControladorPedidoProveedor cpp=new ControladorPedidoProveedor(vAlba);
-//			vAlba.establecerControlador(cpp);
+			System.out.println("editar albaran");
+			vAlba=new VAlbaranProveedor(fila.getAlb());
+			ControladorAlbaranProveedor cap=new ControladorAlbaranProveedor(vAlba);
+			vAlba.establecerControlador(cap);
 //			if (fila.getVpedidos().getV()==null) System.out.println("nulo");
-//			fila.getVpedidos().getV().getPanelInterior().add(vAlba);
-//			vAlba.setVisible(true);
+			fila.getVAlbaranes().getV().getPanelInterior().add(vAlba);
+			vAlba.setVisible(true);
 		}
 	}
 }

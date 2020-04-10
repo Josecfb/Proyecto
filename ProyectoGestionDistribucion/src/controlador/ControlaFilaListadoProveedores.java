@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import controlador.fichas.ControladorFichaProveedor;
 import modelo.negocio.GestorProveedor;
-import vista.VFilaListadoProveedores;
-import vista.fichas.VFichaProveedor;
+import vista.proveedores.VFichaProveedor;
+import vista.proveedores.VFilaListadoProveedores;
 
 public class ControlaFilaListadoProveedores implements ActionListener{
 	private VFilaListadoProveedores filaListadoProveedores;

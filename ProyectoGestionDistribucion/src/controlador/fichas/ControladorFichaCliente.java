@@ -7,7 +7,7 @@ import javax.swing.event.InternalFrameListener;
 
 import model.Cliente;
 import modelo.negocio.GestorCliente;
-import vista.fichas.VFichaCliente;
+import vista.clientes.VFichaCliente;
 
 public class ControladorFichaCliente implements InternalFrameListener {
 	private VFichaCliente fichaCliente;

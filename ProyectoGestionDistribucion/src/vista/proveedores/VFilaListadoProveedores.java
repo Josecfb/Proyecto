@@ -1,8 +1,10 @@
-package vista;
+package vista.proveedores;
 
 import javax.swing.JPanel;
 
 import controlador.ControlaFilaListadoProveedores;
+import vista.VentanaPrincipal;
+
 import java.awt.Color;
 
 

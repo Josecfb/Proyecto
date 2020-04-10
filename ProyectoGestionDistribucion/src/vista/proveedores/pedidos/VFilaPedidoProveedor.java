@@ -1,4 +1,4 @@
-package vista.fichas;
+package vista.proveedores.pedidos;
 
 import java.util.List;
 
@@ -10,10 +10,8 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import controlador.fichas.ControladorFilaPedidoProveedor;
 import model.Articulo;
-import model.FilaAlbaranProveedor;
 import model.FilaPedidoProveedor;
 import model.PedidoProveedor;
-import model.Proveedor;
 import modelo.negocio.GestorArticulo;
 import java.awt.Font;
 import java.awt.Component;
@@ -22,7 +20,7 @@ import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class VFilaAlbaranProveedor extends JPanel {
+public class VFilaPedidoProveedor extends JPanel {
 
 	private static final long serialVersionUID = -3446443914975183188L;
 	private JTextField tCod;
@@ -33,12 +31,12 @@ public class VFilaAlbaranProveedor extends JPanel {
 	private JTextField tTotal;
 	private JButton bBorrar;
 	private PedidoProveedor ped;
-	private VAlbaranProveedor vAlbaran;
-	private FilaAlbaranProveedor fila;
+	private VPedidoProveedor vPedido;
+	private FilaPedidoProveedor fila;
 
-	public VFilaAlbaranProveedor(VAlbaranProveedor vAlbaran,FilaAlbaranProveedor fila) {
+	public VFilaPedidoProveedor(VPedidoProveedor vPedido,FilaPedidoProveedor fila) {
 		this.fila=fila;
-		this.vAlbaran=vAlbaran;
+		this.vPedido=vPedido;
 		setBackground(SystemColor.control);
 		setLayout(null);
 		
@@ -97,7 +95,7 @@ public class VFilaAlbaranProveedor extends JPanel {
 
 	private void asignaArticulosCombo() {
 		
-		List<Articulo> articulos=new GestorArticulo().deUnProveedor(vAlbaran.getAlb().getProveedore());
+		List<Articulo> articulos=new GestorArticulo().deUnProveedor(vPedido.getPed().getProveedore());
 			for (Articulo art:articulos)
 				articulo.addItem(art);
 	}
@@ -148,11 +146,11 @@ public class VFilaAlbaranProveedor extends JPanel {
 		return bBorrar;
 	}
 
-	public VAlbaranProveedor getvAlbaran() {
-		return vAlbaran;
+	public VPedidoProveedor getvPedido() {
+		return vPedido;
 	}
 
-	public FilaAlbaranProveedor getFila() {
+	public FilaPedidoProveedor getFila() {
 		return fila;
 	}
 	

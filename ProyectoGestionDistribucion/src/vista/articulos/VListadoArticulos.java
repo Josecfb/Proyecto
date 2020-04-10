@@ -1,4 +1,4 @@
-package vista;
+package vista.articulos;
 
 
 import java.awt.Color;
@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import controlador.ControlaFilaListadoArticulos;
 import controlador.ControladorListadoArticulos;
 import model.Articulo;
+import vista.VentanaPrincipal;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -202,12 +204,14 @@ public class VListadoArticulos extends JInternalFrame {
 		panel.setPreferredSize(new Dimension(800,filas.size()*25));
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(null);
+		
 
 		int i=0;
 		scroll.setViewportView(panel);
 		for (Articulo arti:filas) {
 			i++;
 			fila=new VFilaListadoArticulos(v);
+			
 			ControlaFilaListadoArticulos controlaFila=new ControlaFilaListadoArticulos(fila);
 			fila.establecerControlador(controlaFila);
 			fila.setPreferredSize(new Dimension(1100,20));

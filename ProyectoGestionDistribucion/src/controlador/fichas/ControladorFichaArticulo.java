@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.ComboBoxEditor;
-import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,7 +14,7 @@ import model.Articulo;
 import model.Familia;
 import model.Proveedor;
 import modelo.negocio.GestorArticulo;
-import vista.fichas.VFichaArticulo;
+import vista.articulos.VFichaArticulo;
 
 public class ControladorFichaArticulo implements InternalFrameListener, FocusListener {
 	private VFichaArticulo fichaArticulo;

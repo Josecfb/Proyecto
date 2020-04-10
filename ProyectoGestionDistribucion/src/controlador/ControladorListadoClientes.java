@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import controlador.fichas.ControladorFichaCliente;
 import model.Cliente;
 import modelo.negocio.GestorCliente;
-import vista.VListadoClientes;
-import vista.fichas.VFichaCliente;
+import vista.clientes.VFichaCliente;
+import vista.clientes.VListadoClientes;
 
 public class ControladorListadoClientes implements ActionListener{
 	private VListadoClientes listado;
@@ -64,7 +64,6 @@ public class ControladorListadoClientes implements ActionListener{
 	
 	private void nuevoCliente() {
 		System.out.println("nuevo cliente");
-		GestorCliente gc=new GestorCliente();
 		VFichaCliente fc=new VFichaCliente(null);
 		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);
 		fc.establecerManejadorVentana(cfc);

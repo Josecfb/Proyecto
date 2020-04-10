@@ -1,4 +1,4 @@
-package vista;
+package vista.proveedores.pedidos;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
@@ -10,21 +10,19 @@ import javax.swing.JToolBar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
 import controlador.fichas.ControladorPedidosProveedores;
 import model.PedidoProveedor;
 import model.Proveedor;
-
-
+import vista.VentanaPrincipal;
 
 public class VPedidosProveedores extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
-	private JPanel panelPendientes, panelEnviados;
-	private JScrollPane scrollPendientes, scrollEnviados;
+	private JPanel panelPendientes, panelEnviados, panelRecibidos;
+	private JScrollPane scrollPendientes, scrollEnviados, scrollRecibidos;
 	private VFilaPedidoPendienteProveedor filaPed;
 	//private NumberFormat formatoeuro;
 	private VentanaPrincipal v;
@@ -75,7 +73,7 @@ public class VPedidosProveedores extends JInternalFrame {
 		tabbedPane.addTab("Recibidos", null, pRecibidos, null);
 		pRecibidos.setLayout(null);
 		
-		JScrollPane scrollRecibidos = new JScrollPane();
+		scrollRecibidos = new JScrollPane();
 		scrollRecibidos.setBounds(10, 11, 783, 439);
 		pRecibidos.add(scrollRecibidos);
 		ControladorPedidosProveedores cpp=new ControladorPedidosProveedores(this);
@@ -87,13 +85,20 @@ public class VPedidosProveedores extends JInternalFrame {
 		panelPendientes.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelPendientes.setBackground(Color.WHITE);
 		panelPendientes.setBorder(null);
+		
 		panelEnviados = new JPanel();
 		panelEnviados.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelEnviados.setBackground(Color.WHITE);
 		panelEnviados.setBorder(null);
+		
+		panelRecibidos = new JPanel();
+		panelRecibidos.setPreferredSize(new Dimension(650,lista.size()*30));
+		panelRecibidos.setBackground(Color.WHITE);
+		panelRecibidos.setBorder(null);
 
 		scrollPendientes.setViewportView(panelPendientes);
 		scrollEnviados.setViewportView(panelEnviados);
+		scrollRecibidos.setViewportView(panelRecibidos);
 		for (PedidoProveedor fila:lista) {
 			Proveedor pro=fila.getProveedore();
 			filaPed=new VFilaPedidoPendienteProveedor(fila,this);
@@ -103,10 +108,14 @@ public class VPedidosProveedores extends JInternalFrame {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			filaPed.getlProveedor().setText(String.valueOf(pro.getNombre()));
 			if (fila.getFecha()!=null) filaPed.getlFecha().setText(formatter.format(fila.getFecha()));
-			if (fila.getEnviado())
-				panelEnviados.add(filaPed);
+			filaPed.getlNum().setText(String.valueOf(fila.getNum()));
+			if (fila.getEnviado() && fila.getConfirmado())
+				panelRecibidos.add(filaPed);
 			else
-				panelPendientes.add(filaPed);
+				if (fila.getEnviado())
+					panelEnviados.add(filaPed);
+				else
+					panelPendientes.add(filaPed);
 		}
 	}
 	

@@ -6,8 +6,8 @@ import java.util.List;
 
 import model.PedidoProveedor;
 import modelo.negocio.GestorPedidosProve;
-import vista.VPedidosProveedores;
-import vista.fichas.VPedidoProveedor;
+import vista.proveedores.pedidos.VPedidoProveedor;
+import vista.proveedores.pedidos.VPedidosProveedores;
 
 public class ControladorPedidosProveedores implements ActionListener{
 	private VPedidosProveedores vPedidosProve;

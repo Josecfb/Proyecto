@@ -10,10 +10,10 @@ import controlador.fichas.ControladorFichaProveedor;
 import controlador.fichas.ControladorPedidosProveedores;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
-import vista.VAlbaranesProveedores;
-import vista.VListadoProveedores;
-import vista.VPedidosProveedores;
-import vista.fichas.VFichaProveedor;
+import vista.proveedores.VFichaProveedor;
+import vista.proveedores.VListadoProveedores;
+import vista.proveedores.albaranes.VAlbaranesProveedores;
+import vista.proveedores.pedidos.VPedidosProveedores;
 
 public class ControladorListadoProveedores implements ActionListener{
 	private VListadoProveedores listado;

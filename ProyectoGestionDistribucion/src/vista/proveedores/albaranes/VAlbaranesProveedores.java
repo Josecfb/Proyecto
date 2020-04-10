@@ -1,4 +1,4 @@
-package vista;
+package vista.proveedores.albaranes;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
@@ -10,17 +10,14 @@ import javax.swing.JToolBar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import controlador.fichas.ControladorAlbaranesProveedores;
-import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
-import controlador.fichas.ControladorPedidosProveedores;
 import controlador.fichas.CtrlFilaAlbaranesGenProveedor;
 import model.AlbaranProveedor;
-import model.PedidoProveedor;
 import model.Proveedor;
+import vista.VentanaPrincipal;
 
 
 
@@ -36,7 +33,7 @@ public class VAlbaranesProveedores extends JInternalFrame {
 	public VAlbaranesProveedores(VentanaPrincipal v) {
 		this.v=v;
 		//formatoeuro = NumberFormat.getCurrencyInstance();
-		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 16));
+		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
 		setBounds(100, 100, 844, 547);
 		getContentPane().setLayout(null);
 		setResizable(false);
@@ -46,7 +43,7 @@ public class VAlbaranesProveedores extends JInternalFrame {
 		setTitle("Albaranes Proveedores");
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tabbedPane.setBounds(10, 11, 808, 495);
 		getContentPane().add(tabbedPane);
 		
@@ -71,8 +68,19 @@ public class VAlbaranesProveedores extends JInternalFrame {
 		pEnAlmacen.setLayout(null);
 		
 		scrollEnAlmacen = new JScrollPane();
-		scrollEnAlmacen.setBounds(10, 51, 783, 237);
+		scrollEnAlmacen.setBounds(10, 51, 783, 397);
 		pEnAlmacen.add(scrollEnAlmacen);
+		
+		JPanel pFacturados = new JPanel();
+		tabbedPane.addTab("Facturados", null, pFacturados, null);
+		pFacturados.setLayout(null);
+		
+		JScrollPane scrollFacturados = new JScrollPane();
+		scrollFacturados.setBounds(10, 62, 783, 386);
+		pFacturados.add(scrollFacturados);
+		
+		
+		
 		ControladorAlbaranesProveedores cap=new ControladorAlbaranesProveedores(this);
 	}
 	
@@ -120,6 +128,4 @@ public class VAlbaranesProveedores extends JInternalFrame {
 	public JPanel getPanel() {
 		return panelGenerados;
 	}
-	
-	
 }

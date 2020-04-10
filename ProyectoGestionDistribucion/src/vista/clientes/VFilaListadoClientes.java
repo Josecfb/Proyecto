@@ -1,8 +1,10 @@
-package vista;
+package vista.clientes;
 
 import javax.swing.JPanel;
 
 import controlador.ControlaFilaListadoClientes;
+import vista.VentanaPrincipal;
+
 import java.awt.Color;
 
 import javax.swing.ImageIcon;

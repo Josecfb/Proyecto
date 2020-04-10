@@ -1,9 +1,9 @@
 package modelo.negocio;
 import java.util.List;
 
-
-
+import model.AlbaranProveedor;
 import model.Articulo;
+import model.FilaAlbaranProveedor;
 import model.Proveedor;
 import modelo.persistencia.DaoArticulo;
 
@@ -64,6 +64,10 @@ public class GestorArticulo {
 		ok[3]=art.getPrecioMinorista()>0;
 		ok[4]=art.getProveedorBean()!=null;
 		return ok;
+	}
+	
+	public void actualizaArticulosAlbaranProve(AlbaranProveedor albModif,int masmenos) {
+		da.actualizaArticulosAlbaranProve(albModif,masmenos);
 	}
 	
 }

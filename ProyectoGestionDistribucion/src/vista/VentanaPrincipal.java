@@ -10,6 +10,10 @@ import controlador.ControladorListadoArticulos;
 import controlador.ControladorListadoClientes;
 import controlador.ControladorListadoProveedores;
 import controlador.ControladorPrincipal;
+import vista.articulos.VListadoArticulos;
+import vista.clientes.VListadoClientes;
+import vista.proveedores.VListadoProveedores;
+
 import javax.swing.JDesktopPane;
 import java.awt.Color;
 import java.awt.Image;
@@ -33,7 +37,7 @@ public class VentanaPrincipal extends JFrame {
 	private JButton bArticulos;
 	private JButton bClientes;
 	private JButton bProveedores;
-	private JButton bFacturas;
+	//private JButton bFacturas;
 	
 
 	

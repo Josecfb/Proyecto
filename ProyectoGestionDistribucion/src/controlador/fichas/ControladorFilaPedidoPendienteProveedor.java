@@ -3,8 +3,8 @@ package controlador.fichas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vista.VFilaPedidoPendienteProveedor;
-import vista.fichas.VPedidoProveedor;
+import vista.proveedores.pedidos.VFilaPedidoPendienteProveedor;
+import vista.proveedores.pedidos.VPedidoProveedor;
 
 public class ControladorFilaPedidoPendienteProveedor implements ActionListener{
 	private VFilaPedidoPendienteProveedor fila;

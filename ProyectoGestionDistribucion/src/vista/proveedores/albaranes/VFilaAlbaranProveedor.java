@@ -1,4 +1,4 @@
-package vista.fichas;
+package vista.proveedores.albaranes;
 
 import java.util.List;
 
@@ -8,11 +8,10 @@ import javax.swing.JTextField;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-import controlador.fichas.ControladorFilaPedidoProveedor;
+import controlador.fichas.CtrlFilaAlbProve;
 import model.Articulo;
-import model.FilaPedidoProveedor;
+import model.FilaAlbaranProveedor;
 import model.PedidoProveedor;
-import model.Proveedor;
 import modelo.negocio.GestorArticulo;
 import java.awt.Font;
 import java.awt.Component;
@@ -21,7 +20,7 @@ import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class VFilaPedidoProveedor extends JPanel {
+public class VFilaAlbaranProveedor extends JPanel {
 
 	private static final long serialVersionUID = -3446443914975183188L;
 	private JTextField tCod;
@@ -32,12 +31,12 @@ public class VFilaPedidoProveedor extends JPanel {
 	private JTextField tTotal;
 	private JButton bBorrar;
 	private PedidoProveedor ped;
-	private VPedidoProveedor vPedido;
-	private FilaPedidoProveedor fila;
+	private VAlbaranProveedor vAlbaran;
+	private FilaAlbaranProveedor fila;
 
-	public VFilaPedidoProveedor(VPedidoProveedor vPedido,FilaPedidoProveedor fila) {
+	public VFilaAlbaranProveedor(VAlbaranProveedor vAlbaran,FilaAlbaranProveedor fila) {
 		this.fila=fila;
-		this.vPedido=vPedido;
+		this.vAlbaran=vAlbaran;
 		setBackground(SystemColor.control);
 		setLayout(null);
 		
@@ -96,12 +95,12 @@ public class VFilaPedidoProveedor extends JPanel {
 
 	private void asignaArticulosCombo() {
 		
-		List<Articulo> articulos=new GestorArticulo().deUnProveedor(vPedido.getPed().getProveedore());
+		List<Articulo> articulos=new GestorArticulo().deUnProveedor(vAlbaran.getAlb().getProveedore());
 			for (Articulo art:articulos)
 				articulo.addItem(art);
 	}
 	
-	public void establecerControlador(ControladorFilaPedidoProveedor controla) {
+	public void establecerControlador(CtrlFilaAlbProve controla) {
 		Component[] componentes=getComponents();
 		JTextField jt=null;
 		for (Component componente:componentes) 
@@ -147,11 +146,11 @@ public class VFilaPedidoProveedor extends JPanel {
 		return bBorrar;
 	}
 
-	public VPedidoProveedor getvPedido() {
-		return vPedido;
+	public VAlbaranProveedor getvAlbaran() {
+		return vAlbaran;
 	}
 
-	public FilaPedidoProveedor getFila() {
+	public FilaAlbaranProveedor getFila() {
 		return fila;
 	}
 	

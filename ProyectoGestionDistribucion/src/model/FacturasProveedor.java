@@ -17,6 +17,7 @@ public class FacturasProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="NUM")
 	private int num;
 
@@ -37,7 +38,7 @@ public class FacturasProveedor implements Serializable {
 	private Proveedor proveedore;
 
 	//bi-directional many-to-one association to FilasFacturasProveedor
-	@OneToMany(mappedBy="facturasProveedor")
+	@OneToMany(mappedBy="facturasProveedor",cascade = CascadeType.ALL)
 	private List<FilasFacturasProveedor> filasFacturasProveedors;
 
 	public FacturasProveedor() {

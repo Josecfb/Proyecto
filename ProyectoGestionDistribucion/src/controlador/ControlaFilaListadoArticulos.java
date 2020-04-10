@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import controlador.fichas.ControladorFichaArticulo;
 import modelo.negocio.GestorArticulo;
-import vista.VFilaListadoArticulos;
-import vista.fichas.VFichaArticulo;
+import vista.articulos.VFichaArticulo;
+import vista.articulos.VFilaListadoArticulos;
 
 
 public class ControlaFilaListadoArticulos implements ActionListener{

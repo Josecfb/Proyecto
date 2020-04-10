@@ -21,11 +21,19 @@ public class GestorAlbaranProve {
 		return dap.modificaAlbaranGenerado(alb);
 	}
 	
+	public int modificaAlbaran(AlbaranProveedor alb) {
+		return dap.modificaAlbaran(alb);
+	}
+	
 	public List<FilaAlbaranProveedor> generaFilas(AlbaranProveedor alb){
 		return dap.generaFilas(alb);
 	}
 	
 	public List<AlbaranProveedor> listarAlbaranes(){
 		return dap.listarAlbaranes();
+	}
+	public void actualizaAlmacen(AlbaranProveedor albModif,int masmenos) {
+		GestorArticulo ga=new GestorArticulo();
+		ga.actualizaArticulosAlbaranProve(albModif,masmenos);
 	}
 }

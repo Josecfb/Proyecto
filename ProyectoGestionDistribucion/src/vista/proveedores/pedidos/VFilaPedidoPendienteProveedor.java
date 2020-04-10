@@ -1,4 +1,4 @@
-package vista;
+package vista.proveedores.pedidos;
 
 import javax.swing.JPanel;
 
@@ -14,7 +14,7 @@ import java.awt.Color;
 public class VFilaPedidoPendienteProveedor extends JPanel {
 
 	private static final long serialVersionUID = 4665261804339480581L;
-	private JLabel lProveedor, lFecha;
+	private JLabel lProveedor, lFecha, lNum;
 	private JButton bEditar;
 	private PedidoProveedor ped;
 	private VPedidosProveedores vpedidos;
@@ -27,7 +27,7 @@ public class VFilaPedidoPendienteProveedor extends JPanel {
 		
 		lProveedor = new JLabel("");
 		lProveedor.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lProveedor.setBounds(24, 5, 400, 20);
+		lProveedor.setBounds(74, 5, 400, 20);
 		add(lProveedor);
 		
 		bEditar = new JButton("");
@@ -39,6 +39,11 @@ public class VFilaPedidoPendienteProveedor extends JPanel {
 		lFecha.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lFecha.setBounds(484, 5, 101, 20);
 		add(lFecha);
+		
+		lNum = new JLabel("");
+		lNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lNum.setBounds(10, 5, 54, 20);
+		add(lNum);
 	}
 	
 	public void establecerControlador(ControladorFilaPedidoPendienteProveedor controlador) {
@@ -52,6 +57,10 @@ public class VFilaPedidoPendienteProveedor extends JPanel {
 	public JLabel getlFecha() {
 		return lFecha;
 	}
+	
+	public JLabel getlNum() {
+		return lNum;
+	}
 
 	public JButton getbEditar() {
 		return bEditar;
@@ -64,7 +73,4 @@ public class VFilaPedidoPendienteProveedor extends JPanel {
 	public VPedidosProveedores getVpedidos() {
 		return vpedidos;
 	}
-
-	
-	
 }

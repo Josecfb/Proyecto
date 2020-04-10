@@ -1,4 +1,4 @@
-package vista.fichas;
+package vista.clientes;
 
 import java.awt.Font;
 import javax.swing.JInternalFrame;

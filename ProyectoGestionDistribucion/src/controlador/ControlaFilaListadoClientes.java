@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import controlador.fichas.ControladorFichaCliente;
 import modelo.negocio.GestorCliente;
-import vista.VFilaListadoClientes;
-import vista.fichas.VFichaCliente;
+import vista.clientes.VFichaCliente;
+import vista.clientes.VFilaListadoClientes;
 
 public class ControlaFilaListadoClientes implements ActionListener{
 	private VFilaListadoClientes filaListadoClientes;

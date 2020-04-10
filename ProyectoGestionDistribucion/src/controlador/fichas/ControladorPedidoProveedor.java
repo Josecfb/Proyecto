@@ -1,7 +1,6 @@
 package controlador.fichas;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import model.Articulo;
@@ -19,9 +17,9 @@ import model.FilasPedidosProveedorPK;
 import model.PedidoProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorPedidosProve;
-import vista.fichas.VFilaPedidoProveedor;
-import vista.fichas.VPedidoProveedor;
 import vista.pdf.PdfPedidoProveedor;
+import vista.proveedores.pedidos.VFilaPedidoProveedor;
+import vista.proveedores.pedidos.VPedidoProveedor;
 
 public class ControladorPedidoProveedor implements InternalFrameListener, FocusListener,ActionListener{
 	private GestorPedidosProve gpp;
@@ -53,9 +51,6 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		ponFilas(pedModif);
 		int ok=gpp.modificarPedido(pedModif);
 		if (ok==0) {
-//			Component[] componentes =vpedidoProveedor.getV().getPanelInterior().getComponents();
-//			for(Component componente:componentes)
-//				(JInternalFrame) componente.up
 			ControladorPedidosProveedores cpp = new ControladorPedidosProveedores(vpedidoProveedor.getVpedidos());
 			cpp.listar(vpedidoProveedor.getVpedidos());
 			vpedidoProveedor.dispose();
@@ -79,13 +74,12 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 	
 
 	private void asignaCampos(PedidoProveedor pedModif) {
-		FilaPedidoProveedor filaModif;
 		pedModif.setFecha(vpedidoProveedor.getcFecha().getDate());
 		System.out.println("fecha "+vpedidoProveedor.getcFecha().getDate());
 		pedModif.setProveedore((Proveedor) vpedidoProveedor.getComboProveedor().getSelectedItem());
 		pedModif.setConfirmado(vpedidoProveedor.getChecConfirmado().isSelected());
 		pedModif.setEnviado(vpedidoProveedor.getChecEnviado().isSelected());	
-		if (pedModif.getEnviado())
+		if (pedModif.getEnviado() && !pedModif.getConfirmado())
 			new PdfPedidoProveedor(pedModif);
 		vpedidoProveedor.getPanel().updateUI();
 		

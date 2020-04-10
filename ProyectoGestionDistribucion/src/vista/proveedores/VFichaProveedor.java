@@ -1,4 +1,4 @@
-package vista.fichas;
+package vista.proveedores;
 
 
 import javax.swing.JInternalFrame;

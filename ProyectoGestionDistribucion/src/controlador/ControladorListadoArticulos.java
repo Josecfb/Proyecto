@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import controlador.fichas.ControladorFichaArticulo;
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
-import vista.VListadoArticulos;
-import vista.fichas.VFichaArticulo;
+import vista.articulos.VFichaArticulo;
+import vista.articulos.VListadoArticulos;
 
 public class ControladorListadoArticulos implements ActionListener{
 	private VListadoArticulos listado;

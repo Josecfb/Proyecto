@@ -3,7 +3,9 @@ package modelo.persistencia;
 import java.util.List;
 import javax.persistence.EntityManager;
 
+import model.AlbaranProveedor;
 import model.Articulo;
+import model.FilaAlbaranProveedor;
 import model.Proveedor;
 
 public class DaoArticulo {
@@ -82,5 +84,21 @@ public class DaoArticulo {
 		em.getTransaction().commit();
 		em.close();
 		return 0;
+	}
+	
+	public void actualizaArticulosAlbaranProve(AlbaranProveedor albModif,int masmenos) {
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		em.getTransaction().begin();
+		Articulo artAlb;
+		int cantidad;
+		for (FilaAlbaranProveedor fila:albModif.getFilasAlbaranProveedors()) {
+			artAlb=fila.getArticuloBean();
+			cantidad=fila.getCantidad();
+			em.createQuery("Update Articulo art set art.stock = art.stock+ :cantidad*:masmenos where art=:artAlb").setParameter("cantidad", cantidad).setParameter("masmenos", masmenos).setParameter("artAlb", artAlb).executeUpdate();
+		}
+		em.getTransaction().commit();
+		em.close();
+		
 	}
 }

@@ -1,4 +1,4 @@
-package vista.fichas;
+package vista.proveedores.albaranes;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;

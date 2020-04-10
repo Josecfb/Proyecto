@@ -94,7 +94,7 @@ public class PdfPedidoProveedor {
 			for (FilaPedidoProveedor fila:filas) {
 				celda[0].setPhrase(new Phrase(String.valueOf(fila.getArticuloBean().getCodpro())));
 				celda[1].setPhrase(new Phrase(fila.getArticuloBean().getNombre().toLowerCase()));
-				celda[2].setPhrase(new Phrase(String.valueOf(fila.getCantidad())));
+				celda[2].setPhrase(new Phrase(String.valueOf(fila.getCantidad()/fila.getArticuloBean().getUnidadesCaja())));
 				for (int i=0;i<celda.length;i++)
 					tabla.addCell(celda[i]);
 			}

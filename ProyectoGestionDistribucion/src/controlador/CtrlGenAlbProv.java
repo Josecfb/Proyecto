@@ -9,21 +9,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import controlador.fichas.ControladorAlbaranProveedor;
 import model.AlbaranProveedor;
 import model.PedidoProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorAlbaranProve;
 import modelo.negocio.GestorPedidosProve;
-import vista.fichas.VAlbaranProveedor;
-import vista.fichas.VFilaPedGeneraAlbProve;
-import vista.fichas.VGeneraAlbaranProve;
+import vista.proveedores.albaranes.VAlbaranProveedor;
+import vista.proveedores.albaranes.VAlbaranesProveedores;
+import vista.proveedores.albaranes.VFilaPedGeneraAlbProve;
+import vista.proveedores.albaranes.VGeneraAlbaranProve;
 
 public class CtrlGenAlbProv implements ActionListener, FocusListener{
 	private VGeneraAlbaranProve vGenAlvPro; 
+	private VAlbaranesProveedores vAlbsPro;
 
 	
-	public CtrlGenAlbProv(VGeneraAlbaranProve vGenAlvPro) {
+	public CtrlGenAlbProv(VGeneraAlbaranProve vGenAlvPro,VAlbaranesProveedores vAlbsPro) {
 		this.vGenAlvPro=vGenAlvPro;
+		this.vAlbsPro=vAlbsPro;
 	}
 
 	@Override
@@ -45,6 +49,20 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource()==vGenAlvPro.getbSiguiente()) {
+			vGenAlvPro.getComboProve().setVisible(false);
+			vGenAlvPro.getScrollPane().setVisible(true);
+			vGenAlvPro.getlProve().setVisible(false);
+			vGenAlvPro.getbSiguiente().setVisible(false);
+			vGenAlvPro.getLinea1().setText("Selecione los pedidos de los cuales procede el albarán");
+			vGenAlvPro.getLinea2().setText("y pulse el botón Aceptar. su Albarán quedará generado");
+			vGenAlvPro.getbAceptar().setVisible(true);
+		}
+		
+		if (e.getSource()==vGenAlvPro.getbCancelar()) {
+			vGenAlvPro.dispose();
+		}
 		
 		if (e.getSource()==vGenAlvPro.getbAceptar()) {
 			GestorPedidosProve gpp=new GestorPedidosProve();
@@ -75,12 +93,20 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 			}
 			alb.setFilasAlbaranProveedors(gap.generaFilas(alb));
 			gap.modificaAlbaranGenerado(alb);
-			VAlbaranProveedor vAlb=new VAlbaranProveedor(alb);
+			VAlbaranProveedor vAlb=new VAlbaranProveedor(alb,vAlbsPro);
+			ControladorAlbaranProveedor cap=new ControladorAlbaranProveedor(vAlb);
+			vAlb.establecerControlador(cap);
 			vGenAlvPro.getV().getPanelInterior().add(vAlb);
 			vAlb.setVisible(true);
+			vGenAlvPro.dispose();
 		}
 		
 	}
+
+	public VAlbaranesProveedores getvAlbsPro() {
+		return vAlbsPro;
+	}
+	
 	
 	
 

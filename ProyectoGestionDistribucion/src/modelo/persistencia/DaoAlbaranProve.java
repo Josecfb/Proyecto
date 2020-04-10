@@ -1,6 +1,5 @@
 package modelo.persistencia;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import javax.persistence.EntityManager;
 import model.AlbaranProveedor;
 import model.Articulo;
 import model.FilaAlbaranProveedor;
+
 
 
 public class DaoAlbaranProve {
@@ -30,6 +30,7 @@ public class DaoAlbaranProve {
 		if (em==null) return -1;
 		AlbaranProveedor antiguo=em.find(AlbaranProveedor.class, alb.getNum());
 		System.out.println(antiguo.getFilasAlbaranProveedors().size()+" filas");
+		antiguo.getFilasAlbaranProveedors().clear();
 		for (FilaAlbaranProveedor fila:alb.getFilasAlbaranProveedors())
 			antiguo.getFilasAlbaranProveedors().add(fila);
 		System.out.println(antiguo.getFilasAlbaranProveedors().size()+" filas");
@@ -40,6 +41,24 @@ public class DaoAlbaranProve {
 		return 0;
 	}
 	
+	public int modificaAlbaran(AlbaranProveedor alb) {
+		abrir();
+		if (em==null) return -1;
+		AlbaranProveedor antiguo=em.find(AlbaranProveedor.class, alb.getNum());
+		em.getTransaction().begin();
+		for (FilaAlbaranProveedor fi:antiguo.getFilasAlbaranProveedors()) 
+			em.remove(fi);
+		em.getTransaction().commit();
+		em.getTransaction().begin();
+		antiguo=alb;
+		em.merge(antiguo);
+		em.getTransaction().commit();
+		em.close();
+		System.gc();
+		return 0;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<AlbaranProveedor> listarAlbaranes(){
 		abrir();
 		if (em==null) return null;

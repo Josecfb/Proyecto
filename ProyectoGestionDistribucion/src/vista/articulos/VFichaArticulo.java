@@ -1,4 +1,4 @@
-package vista.fichas;
+package vista.articulos;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;

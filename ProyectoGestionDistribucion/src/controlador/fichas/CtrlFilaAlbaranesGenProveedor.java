@@ -3,9 +3,8 @@ package controlador.fichas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vista.VAlbaranesProveedores;
-import vista.VFilaAlbaranGeneradoProveedor;
-import vista.fichas.VAlbaranProveedor;
+import vista.proveedores.albaranes.VAlbaranProveedor;
+import vista.proveedores.albaranes.VFilaAlbaranGeneradoProveedor;
 
 
 public class CtrlFilaAlbaranesGenProveedor implements ActionListener{
@@ -19,11 +18,9 @@ public class CtrlFilaAlbaranesGenProveedor implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fila.getbEditar()) {
-			System.out.println("editar albaran");
-			vAlba=new VAlbaranProveedor(fila.getAlb());
+			vAlba=new VAlbaranProveedor(fila.getAlb(),fila.getVAlbaranes());
 			ControladorAlbaranProveedor cap=new ControladorAlbaranProveedor(vAlba);
 			vAlba.establecerControlador(cap);
-//			if (fila.getVpedidos().getV()==null) System.out.println("nulo");
 			fila.getVAlbaranes().getV().getPanelInterior().add(vAlba);
 			vAlba.setVisible(true);
 		}

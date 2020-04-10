@@ -1,4 +1,4 @@
-package vista.fichas;
+package vista.proveedores.pedidos;
 
 
 import javax.swing.JInternalFrame;
@@ -20,10 +20,11 @@ import model.FilaPedidoProveedor;
 import model.PedidoProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
-import vista.VPedidosProveedores;
+
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class VPedidoProveedor extends JInternalFrame {
@@ -165,6 +166,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		
 		bNuevaFila = new JButton("");
 		bNuevaFila.setBounds(578, 60, 35, 35);
+		bNuevaFila.setIcon(new ImageIcon("src/img/nuevafila.png"));
 		getContentPane().add(bNuevaFila);
 		
 		setTitle("Pedido Proveedor");
@@ -181,7 +183,8 @@ public class VPedidoProveedor extends JInternalFrame {
 		filaPed=new VFilaPedidoProveedor(this,fil);
 		ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(filaPed);
 		filaPed.establecerControlador(controla);
-		filaPed.setPreferredSize(new Dimension(710,30));
+		filaPed.setPreferredSize(new Dimension(710,23));
+		panel.setPreferredSize(new Dimension(710,panel.getHeight()+23));
 		panel.add(filaPed);
 		panel.updateUI();
 	}
@@ -199,7 +202,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		List<FilaPedidoProveedor> filas=contrPedPro.articulosPendientesPedido(pedido);
 		System.out.println("filas "+filas.size());
 		panel = new JPanel();
-		panel.setPreferredSize(new Dimension(710,filas.size()*30));
+		panel.setPreferredSize(new Dimension(710,filas.size()*23));
 		panel.setBackground(SystemColor.control);
 		panel.setBorder(null);
 		

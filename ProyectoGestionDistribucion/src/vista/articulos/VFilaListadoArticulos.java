@@ -1,8 +1,10 @@
-package vista;
+package vista.articulos;
 
 import javax.swing.JPanel;
 
 import controlador.ControlaFilaListadoArticulos;
+import vista.VentanaPrincipal;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

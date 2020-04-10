@@ -23,6 +23,9 @@ public class AlbaranProveedor implements Serializable {
 
 	@Column(name="ACTUALIZADO_ALMACEN")
 	private boolean actualizadoAlmacen;
+	
+	@Column(name="FACTURADO")
+	private boolean facturado;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA")

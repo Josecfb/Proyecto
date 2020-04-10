@@ -21,9 +21,9 @@ public class DaoPedidosProveedores {
 			return null;
 		else
 			if (pro==null)
-				listaPedidos=em.createQuery("select ped from PedidoProveedor ped").getResultList();
+				listaPedidos=em.createQuery("select ped from PedidoProveedor ped order by ped.fecha desc").getResultList();
 			else
-				listaPedidos=em.createQuery("select ped from PedidoProveedor ped where ped.proveedore=:pro").setParameter("pro", pro).getResultList();
+				listaPedidos=em.createQuery("select ped from PedidoProveedor ped where ped.proveedore=:pro order by ped.fecha desc").setParameter("pro", pro).getResultList();
 		ab.cerrarConexion();
 		return listaPedidos;
 	}
@@ -36,7 +36,7 @@ public class DaoPedidosProveedores {
 		if (em==null)
 			return null;
 		else
-			lista=em.createQuery("select ped from PedidoProveedor ped where ped.proveedore=:pro and ped.enviado=TRUE and ped.confirmado=FALSE").setParameter("pro", pro).getResultList();
+			lista=em.createQuery("select ped from PedidoProveedor ped where ped.proveedore=:pro and ped.enviado=TRUE and ped.confirmado=FALSE order by ped.fecha desc").setParameter("pro", pro).getResultList();
 		ab.cerrarConexion();
 		return lista;
 	}

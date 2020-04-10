@@ -1,8 +1,7 @@
-package vista;
+package vista.proveedores.albaranes;
 
 import javax.swing.JPanel;
 
-import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
 import controlador.fichas.CtrlFilaAlbaranesGenProveedor;
 import model.AlbaranProveedor;
 

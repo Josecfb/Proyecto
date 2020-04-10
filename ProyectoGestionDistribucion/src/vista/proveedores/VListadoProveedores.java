@@ -240,6 +240,7 @@ public class VListadoProveedores extends JInternalFrame {
 		bActualizar.addActionListener(controlador);
 		bPedidos.addActionListener(controlador);
 		bAlbaranes.addActionListener(controlador);
+		bFacturas.addActionListener(controlador);
 	}
 	
 

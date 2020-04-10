@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.AlbaranProveedor;
 import model.FilaAlbaranProveedor;
+import model.Proveedor;
 import modelo.persistencia.DaoAlbaranProve;
 
 public class GestorAlbaranProve {
@@ -35,5 +36,12 @@ public class GestorAlbaranProve {
 	public void actualizaAlmacen(AlbaranProveedor albModif,int masmenos) {
 		GestorArticulo ga=new GestorArticulo();
 		ga.actualizaArticulosAlbaranProve(albModif,masmenos);
+	}
+	public List<AlbaranProveedor> listaAlbaranesAlmacen(Proveedor pro){
+		return dap.listaAlbaranesAlmacen(pro);
+	}
+	
+	public AlbaranProveedor existe(int num) {
+		return dap.existe(num);
 	}
 }

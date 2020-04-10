@@ -106,6 +106,7 @@ public class VAlbaranesProveedores extends JInternalFrame {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			filaAlb.getlProveedor().setText(String.valueOf(pro.getNombre()));
 			if (fila.getFecha()!=null) filaAlb.getlFecha().setText(formatter.format(fila.getFecha()));
+			filaAlb.getlNum().setText(String.valueOf(fila.getNum()));
 			if (fila.getActualizadoAlmacen())
 				panelEnAlmacen.add(filaAlb);
 			else

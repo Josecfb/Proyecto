@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import controlador.fichas.ControladorAlbaranesProveedores;
+import controlador.fichas.ControladorFacturasProveedores;
 import controlador.fichas.ControladorFichaProveedor;
 import controlador.fichas.ControladorPedidosProveedores;
 import model.Proveedor;
@@ -13,6 +14,7 @@ import modelo.negocio.GestorProveedor;
 import vista.proveedores.VFichaProveedor;
 import vista.proveedores.VListadoProveedores;
 import vista.proveedores.albaranes.VAlbaranesProveedores;
+import vista.proveedores.facturas.VFacturasProveedores;
 import vista.proveedores.pedidos.VPedidosProveedores;
 
 public class ControladorListadoProveedores implements ActionListener{
@@ -45,6 +47,8 @@ public class ControladorListadoProveedores implements ActionListener{
 			abrePedidos();
 		if (e.getSource()==listado.getbAlbaranes())
 			abreAlbaranes();
+		if (e.getSource()==listado.getbFacturas())
+			abreFacturas();
 	}
 	
 	private void filtrar() {
@@ -86,11 +90,18 @@ public class ControladorListadoProveedores implements ActionListener{
 	}
 	
 	private void abreAlbaranes() {
-		System.out.println("albaranes");
 		VAlbaranesProveedores vap=new VAlbaranesProveedores(listado.getV());
 		ControladorAlbaranesProveedores cap=new ControladorAlbaranesProveedores(vap);
 		vap.establecerManejador(cap);
 		listado.getV().getPanelInterior().add(vap);
 		vap.setVisible(true);
+	}
+	
+	private void abreFacturas() {
+		VFacturasProveedores vfp=new VFacturasProveedores(listado.getV());
+		ControladorFacturasProveedores cfp=new ControladorFacturasProveedores(vfp);
+		vfp.establecerManejador(cfp);
+		listado.getV().getPanelInterior().add(vfp);
+		vfp.setVisible(true);
 	}
 }

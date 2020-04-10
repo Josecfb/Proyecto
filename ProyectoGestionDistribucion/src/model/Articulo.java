@@ -72,7 +72,7 @@ public class Articulo implements Serializable {
 
 	//bi-directional many-to-one association to FilasFacturasProveedor
 	@OneToMany(mappedBy="articuloBean")
-	private List<FilasFacturasProveedor> filasFacturasProveedors;
+	private List<FilaFacturaProveedor> filasFacturasProveedors;
 
 	//bi-directional many-to-one association to FilasPedidosCliente
 	@OneToMany(mappedBy="articuloBean")
@@ -250,22 +250,22 @@ public class Articulo implements Serializable {
 		return filasFacturasCliente;
 	}
 
-	public List<FilasFacturasProveedor> getFilasFacturasProveedors() {
+	public List<FilaFacturaProveedor> getFilasFacturasProveedors() {
 		return this.filasFacturasProveedors;
 	}
 
-	public void setFilasFacturasProveedors(List<FilasFacturasProveedor> filasFacturasProveedors) {
+	public void setFilasFacturasProveedors(List<FilaFacturaProveedor> filasFacturasProveedors) {
 		this.filasFacturasProveedors = filasFacturasProveedors;
 	}
 
-	public FilasFacturasProveedor addFilasFacturasProveedor(FilasFacturasProveedor filasFacturasProveedor) {
+	public FilaFacturaProveedor addFilasFacturasProveedor(FilaFacturaProveedor filasFacturasProveedor) {
 		getFilasFacturasProveedors().add(filasFacturasProveedor);
 		filasFacturasProveedor.setArticuloBean(this);
 
 		return filasFacturasProveedor;
 	}
 
-	public FilasFacturasProveedor removeFilasFacturasProveedor(FilasFacturasProveedor filasFacturasProveedor) {
+	public FilaFacturaProveedor removeFilasFacturasProveedor(FilaFacturaProveedor filasFacturasProveedor) {
 		getFilasFacturasProveedors().remove(filasFacturasProveedor);
 		filasFacturasProveedor.setArticuloBean(null);
 

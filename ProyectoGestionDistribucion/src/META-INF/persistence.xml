@@ -9,7 +9,7 @@
 		<class>model.CodigospostalePK</class>
 		<class>model.Datosempresa</class>
 		<class>model.FacturasCliente</class>
-		<class>model.FacturasProveedor</class>
+		<class>model.FacturaProveedor</class>
 		<class>model.Familia</class>
 		<class>model.FilasAlbaranCliente</class>
 		<class>model.FilasAlbaranClientePK</class>
@@ -17,7 +17,7 @@
 		<class>model.FilasAlbaranProveedorPK</class>
 		<class>model.FilasFacturasCliente</class>
 		<class>model.FilasFacturasClientePK</class>
-		<class>model.FilasFacturasProveedor</class>
+		<class>model.FilaFacturaProveedor</class>
 		<class>model.FilasFacturasProveedorPK</class>
 		<class>model.FilasPedidosCliente</class>
 		<class>model.FilasPedidosClientePK</class>

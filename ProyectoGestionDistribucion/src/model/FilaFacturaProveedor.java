@@ -11,8 +11,8 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="FILAS_FACTURAS_PROVEEDOR")
-@NamedQuery(name="FilasFacturasProveedor.findAll", query="SELECT f FROM FilasFacturasProveedor f")
-public class FilasFacturasProveedor implements Serializable {
+@NamedQuery(name="FilaFacturasroveedor.findAll", query="SELECT f FROM FilaFacturaProveedor f")
+public class FilaFacturaProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -27,14 +27,14 @@ public class FilasFacturasProveedor implements Serializable {
 	//bi-directional many-to-one association to FacturasProveedor
 	@ManyToOne
 	@JoinColumn(name="FACTURA")
-	private FacturasProveedor facturasProveedor;
+	private FacturaProveedor facturasProveedor;
 
 	//bi-directional many-to-one association to Articulo
 	@ManyToOne
 	@JoinColumn(name="ARTICULO")
 	private Articulo articuloBean;
 
-	public FilasFacturasProveedor() {
+	public FilaFacturaProveedor() {
 	}
 
 	public FilasFacturasProveedorPK getId() {
@@ -61,11 +61,11 @@ public class FilasFacturasProveedor implements Serializable {
 		this.precio = precio;
 	}
 
-	public FacturasProveedor getFacturasProveedor() {
+	public FacturaProveedor getFacturasProveedor() {
 		return this.facturasProveedor;
 	}
 
-	public void setFacturasProveedor(FacturasProveedor facturasProveedor) {
+	public void setFacturasProveedor(FacturaProveedor facturasProveedor) {
 		this.facturasProveedor = facturasProveedor;
 	}
 

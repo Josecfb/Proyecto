@@ -39,7 +39,7 @@ public class AlbaranProveedor implements Serializable {
 	//bi-directional many-to-one association to FacturasProveedor
 	@ManyToOne
 	@JoinColumn(name="NUM_FACTURA")
-	private FacturasProveedor facturasProveedor;
+	private FacturaProveedor facturasProveedor;
 
 	//bi-directional many-to-one association to FilasAlbaranProveedor
 	@OneToMany(mappedBy="albaranesProveedor",cascade = CascadeType.ALL)
@@ -84,11 +84,19 @@ public class AlbaranProveedor implements Serializable {
 		this.proveedore = proveedore;
 	}
 
-	public FacturasProveedor getFacturasProveedor() {
+	public FacturaProveedor getFacturasProveedor() {
 		return this.facturasProveedor;
 	}
+	
+	public boolean isFacturado() {
+		return facturado;
+	}
 
-	public void setFacturasProveedor(FacturasProveedor facturasProveedor) {
+	public void setFacturado(boolean facturado) {
+		this.facturado = facturado;
+	}
+
+	public void setFacturasProveedor(FacturaProveedor facturasProveedor) {
 		this.facturasProveedor = facturasProveedor;
 	}
 

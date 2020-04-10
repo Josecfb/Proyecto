@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import model.AlbaranProveedor;
 import model.Articulo;
 import model.FilaAlbaranProveedor;
+import model.Proveedor;
 
 
 
@@ -91,6 +92,23 @@ public class DaoAlbaranProve {
 			filasAlb.add(filaAlb);
 		}
 		return filasAlb;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<AlbaranProveedor> listaAlbaranesAlmacen(Proveedor pro){
+		abrir();
+		if (em==null) return null;
+		List<AlbaranProveedor> lista=em.createQuery("select alb from AlbaranProveedor alb where alb.proveedore=:pro and alb.facturado=FALSE").setParameter("pro", pro).getResultList();
+		em.close();
+		return lista;
+	}
+	
+	public AlbaranProveedor existe(int num) {
+		abrir();
+		if (em==null) return null;
+		AlbaranProveedor alb=em.find(AlbaranProveedor.class, num);
+		em.close();
+		return alb;
 	}
 	
 }

@@ -12,8 +12,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="FACTURAS_PROVEEDOR")
-@NamedQuery(name="FacturasProveedor.findAll", query="SELECT f FROM FacturasProveedor f")
-public class FacturasProveedor implements Serializable {
+@NamedQuery(name="FacturaProveedor.findAll", query="SELECT f FROM FacturaProveedor f")
+public class FacturaProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,7 +26,7 @@ public class FacturasProveedor implements Serializable {
 	private Date fecha;
 
 	@Column(name="PAGADA")
-	private byte pagada;
+	private boolean pagada;
 
 	//bi-directional many-to-one association to AlbaranesProveedor
 	@OneToMany(mappedBy="facturasProveedor")
@@ -39,9 +39,9 @@ public class FacturasProveedor implements Serializable {
 
 	//bi-directional many-to-one association to FilasFacturasProveedor
 	@OneToMany(mappedBy="facturasProveedor",cascade = CascadeType.ALL)
-	private List<FilasFacturasProveedor> filasFacturasProveedors;
+	private List<FilaFacturaProveedor> filasFacturasProveedors;
 
-	public FacturasProveedor() {
+	public FacturaProveedor() {
 	}
 
 	public int getNum() {
@@ -60,11 +60,11 @@ public class FacturasProveedor implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public byte getPagada() {
+	public boolean getPagada() {
 		return this.pagada;
 	}
 
-	public void setPagada(byte pagada) {
+	public void setPagada(boolean pagada) {
 		this.pagada = pagada;
 	}
 
@@ -98,22 +98,22 @@ public class FacturasProveedor implements Serializable {
 		this.proveedore = proveedore;
 	}
 
-	public List<FilasFacturasProveedor> getFilasFacturasProveedors() {
+	public List<FilaFacturaProveedor> getFilasFacturasProveedors() {
 		return this.filasFacturasProveedors;
 	}
 
-	public void setFilasFacturasProveedors(List<FilasFacturasProveedor> filasFacturasProveedors) {
+	public void setFilasFacturasProveedors(List<FilaFacturaProveedor> filasFacturasProveedors) {
 		this.filasFacturasProveedors = filasFacturasProveedors;
 	}
 
-	public FilasFacturasProveedor addFilasFacturasProveedor(FilasFacturasProveedor filasFacturasProveedor) {
+	public FilaFacturaProveedor addFilasFacturasProveedor(FilaFacturaProveedor filasFacturasProveedor) {
 		getFilasFacturasProveedors().add(filasFacturasProveedor);
 		filasFacturasProveedor.setFacturasProveedor(this);
 
 		return filasFacturasProveedor;
 	}
 
-	public FilasFacturasProveedor removeFilasFacturasProveedor(FilasFacturasProveedor filasFacturasProveedor) {
+	public FilaFacturaProveedor removeFilasFacturasProveedor(FilaFacturaProveedor filasFacturasProveedor) {
 		getFilasFacturasProveedors().remove(filasFacturasProveedor);
 		filasFacturasProveedor.setFacturasProveedor(null);
 

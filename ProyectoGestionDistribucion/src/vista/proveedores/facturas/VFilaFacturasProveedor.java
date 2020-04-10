@@ -1,9 +1,10 @@
-package vista.proveedores.albaranes;
+package vista.proveedores.facturas;
 
 import javax.swing.JPanel;
 
 import controlador.fichas.CtrlFilaAlbaranesGenProveedor;
 import model.AlbaranProveedor;
+import vista.proveedores.albaranes.VAlbaranesProveedores;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -11,19 +12,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class VFilaAlbaranGeneradoProveedor extends JPanel {
+public class VFilaFacturasProveedor extends JPanel {
 
 	private static final long serialVersionUID = 4665261804339480581L;
 	private JLabel lProveedor, lFecha,lNum;
 	private JButton bEditar;
-	private AlbaranProveedor alb;
-	private VAlbaranesProveedores vAlbaranes;
 
 
-	public VFilaAlbaranGeneradoProveedor(AlbaranProveedor alb,VAlbaranesProveedores vAlbaranes) {
+
+	public VFilaFacturasProveedor(AlbaranProveedor alb,VAlbaranesProveedores vAlbaranes) {
 		setBackground(Color.WHITE);
-		this.vAlbaranes=vAlbaranes;
-		this.alb=alb;
+//		this.vAlbaranes=vAlbaranes;
+//		this.alb=alb;
 		setLayout(null);
 		
 		lProveedor = new JLabel("");
@@ -67,13 +67,13 @@ public class VFilaAlbaranGeneradoProveedor extends JPanel {
 		return bEditar;
 	}
 
-	public AlbaranProveedor getAlb() {
-		return alb;
-	}
-
-	public VAlbaranesProveedores getVAlbaranes() {
-		return vAlbaranes;
-	}
+//	public AlbaranProveedor getAlb() {
+//		return alb;
+//	}
+//
+//	public VAlbaranesProveedores getVAlbaranes() {
+//		return vAlbaranes;
+//	}
 
 	
 	

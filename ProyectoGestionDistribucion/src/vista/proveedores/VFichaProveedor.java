@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import controlador.fichas.ControladorFichaProveedor;
+import controlador.proveedores.ControladorFichaProveedor;
 
 public class VFichaProveedor extends JInternalFrame {
 

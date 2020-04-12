@@ -1,4 +1,4 @@
-package controlador;
+package controlador.proveedores.albaranes;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import controlador.fichas.ControladorAlbaranProveedor;
 import model.AlbaranProveedor;
 import model.PedidoProveedor;
 import model.Proveedor;

@@ -13,7 +13,7 @@ import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import controlador.fichas.ControladorFichaArticulo;
+import controlador.articulos.ControladorFichaArticulo;
 import model.Articulo;
 import model.Familia;
 import model.Proveedor;

@@ -10,9 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 
-import controlador.ControlaFilaListadoProveedores;
-//import controlador.ControladorListadoArticulos;
-import controlador.ControladorListadoProveedores;
+import controlador.proveedores.ControlaFilaListadoProveedores;
+import controlador.proveedores.ControladorListadoProveedores;
 import model.Proveedor;
 import vista.VentanaPrincipal;
 

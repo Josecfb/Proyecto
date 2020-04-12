@@ -1,9 +1,8 @@
-package controlador;
+package controlador.clientes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controlador.fichas.ControladorFichaCliente;
 import modelo.negocio.GestorCliente;
 import vista.clientes.VFichaCliente;
 import vista.clientes.VFilaListadoClientes;

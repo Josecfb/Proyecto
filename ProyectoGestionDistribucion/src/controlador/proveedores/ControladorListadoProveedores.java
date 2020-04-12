@@ -1,14 +1,13 @@
-package controlador;
+package controlador.proveedores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.ImageIcon;
 
-import controlador.fichas.ControladorAlbaranesProveedores;
-import controlador.fichas.ControladorFacturasProveedores;
-import controlador.fichas.ControladorFichaProveedor;
-import controlador.fichas.ControladorPedidosProveedores;
+import controlador.proveedores.albaranes.ControladorAlbaranesProveedores;
+import controlador.proveedores.facturas.ControladorFacturasProveedores;
+import controlador.proveedores.pedidos.ControladorPedidosProveedores;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
 import vista.proveedores.VFichaProveedor;

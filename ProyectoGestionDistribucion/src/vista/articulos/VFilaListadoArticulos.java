@@ -2,7 +2,7 @@ package vista.articulos;
 
 import javax.swing.JPanel;
 
-import controlador.ControlaFilaListadoArticulos;
+import controlador.articulos.ControlaFilaListadoArticulos;
 import vista.VentanaPrincipal;
 
 import java.awt.Color;

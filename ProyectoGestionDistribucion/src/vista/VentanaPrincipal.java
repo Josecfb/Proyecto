@@ -6,10 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import controlador.ControladorListadoArticulos;
-import controlador.ControladorListadoClientes;
-import controlador.ControladorListadoProveedores;
+
 import controlador.ControladorPrincipal;
+import controlador.articulos.ControladorListadoArticulos;
+import controlador.clientes.ControladorListadoClientes;
+import controlador.proveedores.ControladorListadoProveedores;
 import vista.articulos.VListadoArticulos;
 import vista.clientes.VListadoClientes;
 import vista.proveedores.VListadoProveedores;

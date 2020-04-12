@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import controlador.CtrlGenAlbProv;
+import controlador.proveedores.albaranes.CtrlGenAlbProv;
 import model.PedidoProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;

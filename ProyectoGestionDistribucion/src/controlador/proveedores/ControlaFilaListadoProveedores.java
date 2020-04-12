@@ -1,9 +1,8 @@
-package controlador;
+package controlador.proveedores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controlador.fichas.ControladorFichaProveedor;
 import modelo.negocio.GestorProveedor;
 import vista.proveedores.VFichaProveedor;
 import vista.proveedores.VFilaListadoProveedores;

@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-import controlador.fichas.CtrlFilaAlbProve;
+import controlador.proveedores.albaranes.CtrlFilaAlbProve;
 import model.Articulo;
 import model.FilaAlbaranProveedor;
 import model.PedidoProveedor;

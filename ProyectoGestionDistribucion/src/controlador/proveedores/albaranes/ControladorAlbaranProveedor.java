@@ -1,4 +1,4 @@
-package controlador.fichas;
+package controlador.proveedores.albaranes;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;

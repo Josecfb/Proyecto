@@ -2,7 +2,7 @@ package vista.proveedores;
 
 import javax.swing.JPanel;
 
-import controlador.ControlaFilaListadoProveedores;
+import controlador.proveedores.ControlaFilaListadoProveedores;
 import vista.VentanaPrincipal;
 
 import java.awt.Color;

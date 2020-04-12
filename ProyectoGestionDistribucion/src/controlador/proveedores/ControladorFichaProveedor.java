@@ -1,4 +1,4 @@
-package controlador.fichas;
+package controlador.proveedores;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;

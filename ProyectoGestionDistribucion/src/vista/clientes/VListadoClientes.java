@@ -15,9 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 
-import controlador.ControlaFilaListadoClientes;
-
-import controlador.ControladorListadoClientes;
+import controlador.clientes.ControlaFilaListadoClientes;
+import controlador.clientes.ControladorListadoClientes;
 import model.Cliente;
 import vista.VentanaPrincipal;
 

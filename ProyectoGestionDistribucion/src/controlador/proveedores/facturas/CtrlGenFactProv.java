@@ -1,4 +1,4 @@
-package controlador;
+package controlador.proveedores.facturas;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -9,18 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import controlador.fichas.ControladorAlbaranProveedor;
 import model.AlbaranProveedor;
 import model.FacturaProveedor;
-import model.PedidoProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorAlbaranProve;
 import modelo.negocio.GestorFacturaProve;
-import modelo.negocio.GestorPedidosProve;
-import vista.proveedores.albaranes.VAlbaranProveedor;
-import vista.proveedores.albaranes.VAlbaranesProveedores;
-import vista.proveedores.albaranes.VFilaPedGeneraAlbProve;
-import vista.proveedores.albaranes.VGeneraAlbaranProve;
 import vista.proveedores.facturas.VFacturaProveedor;
 import vista.proveedores.facturas.VFacturasProveedores;
 import vista.proveedores.facturas.VFilaAlbGeneraFactProve;
@@ -76,10 +69,10 @@ public class CtrlGenFactProv implements ActionListener, FocusListener{
 			fac.setProveedore((Proveedor) vGenFactPro.getComboProve().getSelectedItem());
 			fac.setFecha(new Date());
 	
-			Component[] compnentes;
-			compnentes = vGenFactPro.getPanelFila().getComponents();
+			Component[] componentes;
+			componentes = vGenFactPro.getPanelFila().getComponents();
 			List<AlbaranProveedor> albaranes=new ArrayList<AlbaranProveedor>();
-			for (Component compo:compnentes) {
+			for (Component compo:componentes) {
 				VFilaAlbGeneraFactProve vfila;
 				vfila=(VFilaAlbGeneraFactProve) compo;
 				if (vfila.getChecMarca().isSelected()) {	
@@ -94,15 +87,17 @@ public class CtrlGenFactProv implements ActionListener, FocusListener{
 			for (AlbaranProveedor alb:fac.getAlbaranesProveedors()) {
 				alb.setFacturasProveedor(fac);
 				alb.setFacturado(true);
-				gap.modificaAlbaran(alb);
+				System.out.println("el albaran tiene filas= "+alb.getFilasAlbaranProveedors().size());
+				gap.facturaAlbaran(alb); 
+				
 			}
-			fac.setFilasAlbaranProveedors(gfp.generaFilas(fac));
-			gfp.modificaAlbaranGenerado(fac);
-			VFacturaProveedor vAlb=new VFacturaProveedor(fac,vFactsPro);
-			ControladorAlbaranProveedor cap=new ControladorAlbaranProveedor(vAlb);
-			vAlb.establecerControlador(cap);
-			vGenFactPro.getV().getPanelInterior().add(vAlb);
-			vAlb.setVisible(true);
+			fac.setFilasFacturasProveedors(gfp.generaFilas(fac));
+			gfp.modificaFacturaGenerada(fac);
+			VFacturaProveedor vFact=new VFacturaProveedor(fac,vFactsPro);
+			ControladorFacturaProveedor cfp=new ControladorFacturaProveedor(vFact);
+			vFact.establecerControlador(cfp);
+			vGenFactPro.getV().getPanelInterior().add(vFact);
+			vFact.setVisible(true);
 			vGenFactPro.dispose();
 		}
 		

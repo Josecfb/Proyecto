@@ -3,7 +3,6 @@ import java.util.List;
 
 import model.AlbaranProveedor;
 import model.Articulo;
-import model.FilaAlbaranProveedor;
 import model.Proveedor;
 import modelo.persistencia.DaoArticulo;
 

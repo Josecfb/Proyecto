@@ -1,10 +1,9 @@
-package controlador.fichas;
+package controlador.proveedores.albaranes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import controlador.CtrlGenAlbProv;
 import model.AlbaranProveedor;
 import modelo.negocio.GestorAlbaranProve;
 import vista.proveedores.albaranes.VAlbaranesProveedores;

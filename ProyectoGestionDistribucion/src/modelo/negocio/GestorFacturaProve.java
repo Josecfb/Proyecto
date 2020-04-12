@@ -2,9 +2,8 @@ package modelo.negocio;
 
 import java.util.List;
 
-import model.AlbaranProveedor;
 import model.FacturaProveedor;
-import model.FilaAlbaranProveedor;
+import model.FilaFacturaProveedor;
 import modelo.persistencia.DaoFacturaProve;
 
 public class GestorFacturaProve {
@@ -18,10 +17,20 @@ public class GestorFacturaProve {
 		return dfp.nuevaFactura(fact);
 	}
 
-	public List<FilaAlbaranProveedor> generaFilas(FacturaProveedor fac){
+	public List<FilaFacturaProveedor> generaFilas(FacturaProveedor fac){
 		return dfp.generaFilas(fac);
 	}
 	
+	public int modificaFacturaGenerada(FacturaProveedor fact) {
+		return dfp.modificaFacturaGenerada(fact);
+	}
+	
+	public int modificaFactura(FacturaProveedor fact) {
+		return dfp.modificaFactura(fact);
+	}
+	public List<FacturaProveedor> listarFacturas(){
+		return dfp.listarFacturas();
+	}
 	
 
 }

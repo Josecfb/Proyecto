@@ -1,4 +1,4 @@
-package controlador.fichas;
+package controlador.articulos;
 
 import java.awt.Color;
 import java.awt.event.FocusEvent;

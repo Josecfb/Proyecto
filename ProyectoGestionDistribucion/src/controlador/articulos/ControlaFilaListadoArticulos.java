@@ -1,9 +1,8 @@
-package controlador;
+package controlador.articulos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controlador.fichas.ControladorFichaArticulo;
 import modelo.negocio.GestorArticulo;
 import vista.articulos.VFichaArticulo;
 import vista.articulos.VFilaListadoArticulos;

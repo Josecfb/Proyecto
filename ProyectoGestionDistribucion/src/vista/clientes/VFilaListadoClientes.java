@@ -2,7 +2,7 @@ package vista.clientes;
 
 import javax.swing.JPanel;
 
-import controlador.ControlaFilaListadoClientes;
+import controlador.clientes.ControlaFilaListadoClientes;
 import vista.VentanaPrincipal;
 
 import java.awt.Color;

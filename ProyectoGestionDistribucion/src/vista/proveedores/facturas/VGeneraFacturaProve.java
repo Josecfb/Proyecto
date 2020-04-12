@@ -13,10 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import controlador.CtrlGenAlbProv;
-import controlador.CtrlGenFactProv;
+import controlador.proveedores.facturas.CtrlGenFactProv;
 import model.AlbaranProveedor;
-import model.FacturaProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
 import vista.VentanaPrincipal;

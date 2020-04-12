@@ -22,6 +22,10 @@ public class GestorAlbaranProve {
 		return dap.modificaAlbaranGenerado(alb);
 	}
 	
+	public int facturaAlbaran(AlbaranProveedor alb) {
+		return dap.facturaAlbaran(alb);
+	}
+	
 	public int modificaAlbaran(AlbaranProveedor alb) {
 		return dap.modificaAlbaran(alb);
 	}

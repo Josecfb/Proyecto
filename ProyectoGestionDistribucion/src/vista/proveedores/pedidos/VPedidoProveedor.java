@@ -14,8 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
-import controlador.fichas.ControladorFilaPedidoProveedor;
-import controlador.fichas.ControladorPedidoProveedor;
+
+import controlador.proveedores.pedidos.ControladorFilaPedidoProveedor;
+import controlador.proveedores.pedidos.ControladorPedidoProveedor;
 import model.FilaPedidoProveedor;
 import model.PedidoProveedor;
 import model.Proveedor;

@@ -1,4 +1,4 @@
-package controlador.fichas;
+package controlador.proveedores.facturas;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -9,7 +9,6 @@ import java.text.NumberFormat;
 import javax.swing.JTextField;
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
-import vista.proveedores.albaranes.VFilaAlbaranProveedor;
 import vista.proveedores.facturas.VFilaFacturaProveedor;
 
 public class CtrlFilaFactProve implements FocusListener, ActionListener{
@@ -68,7 +67,7 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 			vFilaFact.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaFact.gettCajas().getText())*art.getUnidadesCaja()));
 			vFilaFact.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaFact.gettUnidades().getText())*euroADoble(vFilaFact.gettCoste().getText())));
 			vFilaFact.gettCajas().setBackground(Color.WHITE);
-			vFilaFact.getvAlbaran().actualizaTotal();
+			vFilaFact.getvFactura().actualizaTotal();
 			return;
 		}
 		if (e.getSource().getClass()==JTextField.class) {
@@ -95,10 +94,10 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vFilaFact.getbBorrar()) {
-			vFilaFact.getvAlbaran().getcFecha().requestFocus();
-			vFilaFact.getvAlbaran().getPanel().remove(vFilaFact);
-			vFilaFact.getvAlbaran().actualizaTotal();
-			vFilaFact.getvAlbaran().updateUI();
+			vFilaFact.getvFactura().getcFecha().requestFocus();
+			vFilaFact.getvFactura().getPanel().remove(vFilaFact);
+			vFilaFact.getvFactura().actualizaTotal();
+			vFilaFact.getvFactura().updateUI();
 		}
 		
 	}

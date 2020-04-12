@@ -1,4 +1,4 @@
-package controlador;
+package controlador.clientes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,43 +6,38 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import controlador.fichas.ControladorFichaArticulo;
-import model.Articulo;
-import modelo.negocio.GestorArticulo;
-import vista.articulos.VFichaArticulo;
-import vista.articulos.VListadoArticulos;
+import model.Cliente;
+import modelo.negocio.GestorCliente;
+import vista.clientes.VFichaCliente;
+import vista.clientes.VListadoClientes;
 
-public class ControladorListadoArticulos implements ActionListener{
-	private VListadoArticulos listado;
+public class ControladorListadoClientes implements ActionListener{
+	private VListadoClientes listado;
 
 	
-	public ControladorListadoArticulos(VListadoArticulos listado) {
+	public ControladorListadoClientes(VListadoClientes listado) {
 		listar(listado);		
 	}
 
-	public void listar(VListadoArticulos listado) {
+	private void listar(VListadoClientes listado) {
 		this.listado=listado;
-		List<Articulo> filas;
-		GestorArticulo gp=new GestorArticulo();
-		filas=gp.listar(listado.getTFiltroNombre().getText());
-		System.out.println(filas.size());
+		GestorCliente gc=new GestorCliente();
+		List<Cliente> filas=gc.listar(listado.getTFiltroNombre().getText());
 		listado.muestra(filas);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		if (e.getSource()==listado.getbFiltrar()) 
 			filtrar();
 		if (e.getSource()==listado.getbFiltros()) 
 			muestraFiltros();
 		if (e.getSource()==listado.getbNuevo())
-			nuevoArticulo();
+			nuevoCliente();
 		if (e.getSource()==listado.getbActualizar())
 			actualizar();
-		
 	}
-
+	
 	private void muestraFiltros() {
 		if (listado.getbFiltrar().isVisible()) {
 			listado.getbFiltrar().setVisible(false);
@@ -59,20 +54,22 @@ public class ControladorListadoArticulos implements ActionListener{
 	private void filtrar() {
 		listado.getPanel().updateUI();
 		listar(listado);
+		System.out.println("Boton filtro");
 	}
 	
 	private void actualizar() {
-		
-		listar(listado);
+		listado.getPanel().updateUI();
 	}
 	
-	private void nuevoArticulo() {
-		//GestorArticulo ga=new GestorArticulo();
-		VFichaArticulo fa=new VFichaArticulo(null);
-		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
-		fa.EstablecerManejadorVentana(cfa);
+	private void nuevoCliente() {
+		System.out.println("nuevo cliente");
+		VFichaCliente fc=new VFichaCliente(null);
+		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);
+		fc.establecerManejadorVentana(cfc);
 		System.out.println("nuevo articulo");
-		listado.getV().getPanelInterior().add(fa);
-		fa.setVisible(true);
+		listado.getV().getPanelInterior().add(fc);
+		fc.setVisible(true);
 	}
+	
+
 }

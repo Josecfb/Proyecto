@@ -15,10 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
-import controlador.fichas.ControladorAlbaranProveedor;
-
-
-import controlador.fichas.CtrlFilaAlbProve;
+import controlador.proveedores.albaranes.ControladorAlbaranProveedor;
+import controlador.proveedores.albaranes.CtrlFilaAlbProve;
 import model.AlbaranProveedor;
 
 import model.FilaAlbaranProveedor;

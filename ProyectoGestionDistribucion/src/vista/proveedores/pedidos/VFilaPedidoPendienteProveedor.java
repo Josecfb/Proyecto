@@ -2,7 +2,7 @@ package vista.proveedores.pedidos;
 
 import javax.swing.JPanel;
 
-import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
+import controlador.proveedores.pedidos.ControladorFilaPedidoPendienteProveedor;
 import model.PedidoProveedor;
 
 import javax.swing.JLabel;

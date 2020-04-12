@@ -13,8 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import controlador.ControlaFilaListadoArticulos;
-import controlador.ControladorListadoArticulos;
+
+import controlador.articulos.ControlaFilaListadoArticulos;
+import controlador.articulos.ControladorListadoArticulos;
 import model.Articulo;
 import vista.VentanaPrincipal;
 

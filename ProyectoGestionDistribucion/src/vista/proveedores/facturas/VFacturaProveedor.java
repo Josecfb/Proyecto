@@ -15,14 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
-import controlador.fichas.ControladorAlbaranProveedor;
-
-
-import controlador.fichas.CtrlFilaAlbProve;
-import controlador.fichas.CtrlFilaFactProve;
-import model.AlbaranProveedor;
+import controlador.proveedores.facturas.ControladorFacturaProveedor;
+import controlador.proveedores.facturas.CtrlFilaFactProve;
 import model.FacturaProveedor;
-import model.FilaAlbaranProveedor;
 import model.FilaFacturaProveedor;
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
@@ -282,7 +277,7 @@ public class VFacturaProveedor extends JInternalFrame {
 		lTotal.setText(formatoeuro.format(total*1.1));
 	}
 	
-	public void establecerControlador(ControladorAlbaranProveedor controlador) {
+	public void establecerControlador(ControladorFacturaProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);
 		bNuevaFila.addActionListener(controlador);
@@ -306,7 +301,7 @@ public class VFacturaProveedor extends JInternalFrame {
 		return cFecha;
 	}
 
-	public JCheckBox getChecAlmacen() {
+	public JCheckBox getChecPagada() {
 		return checPagada;
 	}
 

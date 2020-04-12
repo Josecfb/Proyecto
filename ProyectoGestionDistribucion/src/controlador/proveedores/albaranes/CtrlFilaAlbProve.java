@@ -1,4 +1,4 @@
-package controlador.fichas;
+package controlador.proveedores.albaranes;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

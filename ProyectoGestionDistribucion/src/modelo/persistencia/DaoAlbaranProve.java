@@ -30,11 +30,9 @@ public class DaoAlbaranProve {
 		abrir();
 		if (em==null) return -1;
 		AlbaranProveedor antiguo=em.find(AlbaranProveedor.class, alb.getNum());
-		System.out.println(antiguo.getFilasAlbaranProveedors().size()+" filas");
 		antiguo.getFilasAlbaranProveedors().clear();
 		for (FilaAlbaranProveedor fila:alb.getFilasAlbaranProveedors())
 			antiguo.getFilasAlbaranProveedors().add(fila);
-		System.out.println(antiguo.getFilasAlbaranProveedors().size()+" filas");
 		em.getTransaction().begin();
 		em.merge(antiguo);
 		em.getTransaction().commit();
@@ -50,6 +48,19 @@ public class DaoAlbaranProve {
 		for (FilaAlbaranProveedor fi:antiguo.getFilasAlbaranProveedors()) 
 			em.remove(fi);
 		em.getTransaction().commit();
+		em.getTransaction().begin();
+		antiguo=alb;
+		em.merge(antiguo);
+		em.getTransaction().commit();
+		em.close();
+		System.gc();
+		return 0;
+	}
+	
+	public int facturaAlbaran(AlbaranProveedor alb) {
+		abrir();
+		if (em==null) return -1;
+		AlbaranProveedor antiguo=em.find(AlbaranProveedor.class, alb.getNum());
 		em.getTransaction().begin();
 		antiguo=alb;
 		em.merge(antiguo);
@@ -86,7 +97,7 @@ public class DaoAlbaranProve {
 			FilaAlbaranProveedor filaAlb=new FilaAlbaranProveedor();
 			filaAlb.setAlbaranesProveedor(alb);
 			filaAlb.setArticuloBean(art);
-			int cantidad=Integer.valueOf(((Long) fila[1]).intValue());
+			int cantidad=((Long) fila[1]).intValue();
 			filaAlb.setCantidad(cantidad);
 			filaAlb.setPrecio((Double) fila[2]);
 			filasAlb.add(filaAlb);
@@ -98,7 +109,7 @@ public class DaoAlbaranProve {
 	public List<AlbaranProveedor> listaAlbaranesAlmacen(Proveedor pro){
 		abrir();
 		if (em==null) return null;
-		List<AlbaranProveedor> lista=em.createQuery("select alb from AlbaranProveedor alb where alb.proveedore=:pro and alb.facturado=FALSE").setParameter("pro", pro).getResultList();
+		List<AlbaranProveedor> lista=em.createQuery("select alb from AlbaranProveedor alb where alb.proveedore=:pro and alb.actualizadoAlmacen=true").setParameter("pro", pro).getResultList();
 		em.close();
 		return lista;
 	}

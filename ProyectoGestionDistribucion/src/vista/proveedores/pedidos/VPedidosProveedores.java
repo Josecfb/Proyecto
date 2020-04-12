@@ -7,13 +7,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+
+import controlador.proveedores.pedidos.ControladorFilaPedidoPendienteProveedor;
+import controlador.proveedores.pedidos.ControladorPedidosProveedores;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import controlador.fichas.ControladorFilaPedidoPendienteProveedor;
-import controlador.fichas.ControladorPedidosProveedores;
+
 import model.PedidoProveedor;
 import model.Proveedor;
 import vista.VentanaPrincipal;

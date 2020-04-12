@@ -5,22 +5,19 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-import controlador.fichas.CtrlFilaAlbProve;
-import controlador.fichas.CtrlFilaFactProve;
+import controlador.proveedores.facturas.CtrlFilaFactProve;
 import model.Articulo;
-import model.FilaAlbaranProveedor;
 import model.FilaFacturaProveedor;
 import model.PedidoProveedor;
 import modelo.negocio.GestorArticulo;
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.SystemColor;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 public class VFilaFacturaProveedor extends JPanel {
 
@@ -148,7 +145,7 @@ public class VFilaFacturaProveedor extends JPanel {
 		return bBorrar;
 	}
 
-	public VFacturaProveedor getvAlbaran() {
+	public VFacturaProveedor getvFactura() {
 		return vFactura;
 	}
 

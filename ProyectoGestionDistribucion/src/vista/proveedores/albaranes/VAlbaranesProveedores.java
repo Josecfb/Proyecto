@@ -13,8 +13,8 @@ import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import controlador.fichas.ControladorAlbaranesProveedores;
-import controlador.fichas.CtrlFilaAlbaranesGenProveedor;
+import controlador.proveedores.albaranes.ControladorAlbaranesProveedores;
+import controlador.proveedores.albaranes.CtrlFilaAlbaranesGenProveedor;
 import model.AlbaranProveedor;
 import model.Proveedor;
 import vista.VentanaPrincipal;
@@ -24,8 +24,8 @@ import vista.VentanaPrincipal;
 public class VAlbaranesProveedores extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
-	private JPanel panelGenerados, panelEnAlmacen;
-	private JScrollPane scrollGenerados, scrollEnAlmacen;
+	private JPanel panelGenerados, panelEnAlmacen, panelFacturados;
+	private JScrollPane scrollGenerados, scrollEnAlmacen, scrollFacturados;
 	private VFilaAlbaranGeneradoProveedor filaAlb;
 	private VentanaPrincipal v;
 	private JButton bNuevoGenerado;
@@ -75,7 +75,7 @@ public class VAlbaranesProveedores extends JInternalFrame {
 		tabbedPane.addTab("Facturados", null, pFacturados, null);
 		pFacturados.setLayout(null);
 		
-		JScrollPane scrollFacturados = new JScrollPane();
+		scrollFacturados = new JScrollPane();
 		scrollFacturados.setBounds(10, 62, 783, 386);
 		pFacturados.add(scrollFacturados);
 		
@@ -94,9 +94,15 @@ public class VAlbaranesProveedores extends JInternalFrame {
 		panelEnAlmacen.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelEnAlmacen.setBackground(Color.WHITE);
 		panelEnAlmacen.setBorder(null);
+		panelFacturados = new JPanel();
+		panelFacturados.setPreferredSize(new Dimension(650,lista.size()*30));
+		panelFacturados.setBackground(Color.WHITE);
+		panelFacturados.setBorder(null);
 
 		scrollGenerados.setViewportView(panelGenerados);
 		scrollEnAlmacen.setViewportView(panelEnAlmacen);
+		scrollFacturados.setViewportView(panelFacturados);
+		
 		for (AlbaranProveedor fila:lista) {
 			Proveedor pro=fila.getProveedore();
 			filaAlb=new VFilaAlbaranGeneradoProveedor(fila,this);
@@ -107,10 +113,13 @@ public class VAlbaranesProveedores extends JInternalFrame {
 			filaAlb.getlProveedor().setText(String.valueOf(pro.getNombre()));
 			if (fila.getFecha()!=null) filaAlb.getlFecha().setText(formatter.format(fila.getFecha()));
 			filaAlb.getlNum().setText(String.valueOf(fila.getNum()));
-			if (fila.getActualizadoAlmacen())
-				panelEnAlmacen.add(filaAlb);
+			if (fila.getActualizadoAlmacen() && fila.isFacturado())
+				panelFacturados.add(filaAlb);
 			else
-				panelGenerados.add(filaAlb);
+				if (fila.getActualizadoAlmacen())
+					panelEnAlmacen.add(filaAlb);
+				else
+					panelGenerados.add(filaAlb);
 		}
 	}
 	

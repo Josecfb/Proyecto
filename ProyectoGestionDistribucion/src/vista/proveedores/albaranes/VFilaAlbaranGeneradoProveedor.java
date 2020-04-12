@@ -2,7 +2,7 @@ package vista.proveedores.albaranes;
 
 import javax.swing.JPanel;
 
-import controlador.fichas.CtrlFilaAlbaranesGenProveedor;
+import controlador.proveedores.albaranes.CtrlFilaAlbaranesGenProveedor;
 import model.AlbaranProveedor;
 
 import javax.swing.JLabel;

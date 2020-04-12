@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import controlador.fichas.ControladorFichaCliente;
+import controlador.clientes.ControladorFichaCliente;
 import model.Cliente;
 import javax.swing.JComboBox;
 

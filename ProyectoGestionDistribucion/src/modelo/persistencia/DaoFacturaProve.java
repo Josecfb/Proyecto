@@ -34,10 +34,8 @@ public class DaoFacturaProve {
 		if (em==null) return null;
 		List<Object[]> filas;
 		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad),fil.precio from FilaAlbaranProveedor fil where fil.albaranesProveedor.facturasProveedor=:fact group by fil.articuloBean").setParameter("fact", fact).getResultList();
-		System.out.println("numero de filas en factura "+filas.size());
 		for (Object[] fila:filas) {
 			Articulo art=(Articulo) fila[0];
-			System.out.println(art.getNombre()+"\t"+fila[1]+"\t"+fila[2]);
 			FilaFacturaProveedor filaFact=new FilaFacturaProveedor();
 			filaFact.setFacturasProveedor(fact);
 			filaFact.setArticuloBean(art);

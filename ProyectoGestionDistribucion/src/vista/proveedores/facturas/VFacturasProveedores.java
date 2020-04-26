@@ -51,7 +51,6 @@ public class VFacturasProveedores extends JInternalFrame {
 	}
 	
 	public void muestraPendientes(List<FacturaProveedor> lista) {
-		System.out.println("pendientes="+lista.size());
 		panelGeneradas = new JPanel();
 		panelGeneradas.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelGeneradas.setBackground(Color.WHITE);

@@ -17,11 +17,9 @@ public class ControladorFilaPedidoPendienteProveedor implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fila.getbEditar()) {
-			System.out.println("editar pedido pendiente");
 			pp=new VPedidoProveedor(fila.getPed(),fila.getVpedidos());
 			ControladorPedidoProveedor cpp=new ControladorPedidoProveedor(pp);
 			pp.establecerControlador(cpp);
-			if (fila.getVpedidos().getV()==null) System.out.println("nulo");
 			fila.getVpedidos().getV().getPanelInterior().add(pp);
 			pp.setVisible(true);
 		}

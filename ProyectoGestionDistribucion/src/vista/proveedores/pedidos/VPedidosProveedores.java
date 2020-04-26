@@ -33,7 +33,6 @@ public class VPedidosProveedores extends JInternalFrame {
 
 	public VPedidosProveedores(VentanaPrincipal v) {
 		this.v=v;
-		//formatoeuro = NumberFormat.getCurrencyInstance();
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 16));
 		setBounds(100, 100, 844, 547);
 		getContentPane().setLayout(null);
@@ -83,7 +82,6 @@ public class VPedidosProveedores extends JInternalFrame {
 	}
 	
 	public void muestraPendientes(List<PedidoProveedor> lista) {
-		System.out.println("pendientes="+lista.size());
 		panelPendientes = new JPanel();
 		panelPendientes.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelPendientes.setBackground(Color.WHITE);

@@ -231,7 +231,6 @@ public class VAlbaranProveedor extends JInternalFrame {
 	public void muestraFilas(AlbaranProveedor albaran) {
 		
 		List<FilaAlbaranProveedor> filas=alb.getFilasAlbaranProveedors();
-		System.out.println("filas "+filas.size());
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(710,filas.size()*30));
 		panel.setBackground(SystemColor.control);
@@ -241,7 +240,6 @@ public class VAlbaranProveedor extends JInternalFrame {
 		scrollPendientes.setViewportView(panel);
 		for (FilaAlbaranProveedor fil:filas) {
 			i++;
-			System.out.println("fila num: "+i);
 			vFilaAlb=new VFilaAlbaranProveedor(this,fil);
 			CtrlFilaAlbProve controla=new CtrlFilaAlbProve(vFilaAlb);
 			vFilaAlb.establecerControlador(controla);

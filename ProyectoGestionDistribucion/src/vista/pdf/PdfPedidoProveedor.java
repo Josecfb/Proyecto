@@ -78,16 +78,11 @@ public class PdfPedidoProveedor {
 				celda[i].setVerticalAlignment(PdfPCell.ALIGN_CENTER);
 				tabla.addCell(celda[i]);
 			}
-			System.out.println(ped.getProveedore().getNombre());
 			
 			List<FilaPedidoProveedor> filas=new ArrayList<FilaPedidoProveedor>();
-			if (ped.getFilaPedidoProveedor() == null) System.out.println("nulas");
 			filas=ped.getFilaPedidoProveedor();
-			System.out.println(filas.size()+".......");
-			for (int i=0;i<celda.length;i++) {
+			for (int i=0;i<celda.length;i++) 
 				celda[i].setBackgroundColor(BaseColor.WHITE);
-
-			}
 			celda[0].setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 			celda[1].setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
 			celda[2].setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
@@ -98,8 +93,6 @@ public class PdfPedidoProveedor {
 				for (int i=0;i<celda.length;i++)
 					tabla.addCell(celda[i]);
 			}
-				
-
 			pedido.add(tabla);
 			pedido.close();
 		} catch (FileNotFoundException | DocumentException e) {

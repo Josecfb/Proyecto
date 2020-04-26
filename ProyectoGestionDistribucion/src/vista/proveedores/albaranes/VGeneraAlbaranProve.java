@@ -43,7 +43,6 @@ public class VGeneraAlbaranProve extends JInternalFrame {
 		comboProve.setBounds(149, 145, 473, 25);
 		GestorProveedor gp=new GestorProveedor();
 		List<Proveedor> proves = gp.listar("");
-		System.out.println("proveedores obtenidos="+proves.size());
 		for (Proveedor pro:proves)
 			comboProve.addItem(pro);
 		comboProve.setSelectedItem(null);
@@ -99,7 +98,6 @@ public class VGeneraAlbaranProve extends JInternalFrame {
 			vfila.getlNum().setText(String.valueOf(ped.getNum()));
 			SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 			vfila.getlFecha().setText(formatoFecha.format(ped.getFecha()));
-			System.out.println(vfila.getlNum().getText());
 			panelFila.add(vfila);
 		}
 	}

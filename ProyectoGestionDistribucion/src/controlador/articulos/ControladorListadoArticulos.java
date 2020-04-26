@@ -24,7 +24,6 @@ public class ControladorListadoArticulos implements ActionListener{
 		List<Articulo> filas;
 		GestorArticulo gp=new GestorArticulo();
 		filas=gp.listar(listado.getTFiltroNombre().getText());
-		System.out.println(filas.size());
 		listado.muestra(filas);
 	}
 	
@@ -67,10 +66,9 @@ public class ControladorListadoArticulos implements ActionListener{
 	
 	private void nuevoArticulo() {
 		//GestorArticulo ga=new GestorArticulo();
-		VFichaArticulo fa=new VFichaArticulo(null);
+		VFichaArticulo fa=new VFichaArticulo(null,listado.getV());
 		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
 		fa.EstablecerManejadorVentana(cfa);
-		System.out.println("nuevo articulo");
 		listado.getV().getPanelInterior().add(fa);
 		fa.setVisible(true);
 	}

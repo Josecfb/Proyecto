@@ -29,11 +29,24 @@ public class GestorPedidosProve {
 	}
 	
 	public int modificarPedido(PedidoProveedor ped) {
+		
 		return dpp.modificarPedido(ped);
 	}
 	
-	public int nuevoPedido(PedidoProveedor ped) {
-		return dpp.nuevoPedido(ped);
+	public boolean[] nuevoPedido(PedidoProveedor ped) {
+		boolean[] ok=new boolean[4];
+		for (int i=0;i<ok.length;i++)
+			ok[i]=true;
+		ok[3]=false;
+		ok[0]=ped.getProveedore()!=null;
+		ok[1]=ped.getFecha()!=null;
+		int res=0;
+		if (ok[0] && ok[1]) {
+			res=dpp.nuevoPedido(ped);
+			ok[2]=res==-1;
+			ok[3]=res==0;
+		}
+		return ok;
 	}
 	
 	public List<PedidoProveedor> listar(Proveedor pro){

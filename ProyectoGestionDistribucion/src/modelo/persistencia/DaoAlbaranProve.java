@@ -19,9 +19,7 @@ public class DaoAlbaranProve {
 		if (em==null) return -1;
 		em.getTransaction().begin();
 		em.persist(alb);
-		
 		em.getTransaction().commit();
-		System.out.println("fecha albaran "+alb.getFecha()+"y numero "+alb.getNum());
 		em.close();
 		return 0;
 	}
@@ -93,7 +91,6 @@ public class DaoAlbaranProve {
 		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad),fil.articuloBean.coste from FilaPedidoProveedor fil where fil.pedidosProveedor.albaranesProveedor=:alb group by fil.articuloBean").setParameter("alb", alb).getResultList();
 		for (Object[] fila:filas) {
 			Articulo art=(Articulo) fila[0];
-			System.out.println(art.getNombre()+"\t"+fila[1]+"\t"+fila[2]);
 			FilaAlbaranProveedor filaAlb=new FilaAlbaranProveedor();
 			filaAlb.setAlbaranesProveedor(alb);
 			filaAlb.setArticuloBean(art);
@@ -109,7 +106,7 @@ public class DaoAlbaranProve {
 	public List<AlbaranProveedor> listaAlbaranesAlmacen(Proveedor pro){
 		abrir();
 		if (em==null) return null;
-		List<AlbaranProveedor> lista=em.createQuery("select alb from AlbaranProveedor alb where alb.proveedore=:pro and alb.actualizadoAlmacen=true").setParameter("pro", pro).getResultList();
+		List<AlbaranProveedor> lista=em.createQuery("select alb from AlbaranProveedor alb where alb.proveedore=:pro and alb.actualizadoAlmacen=true and alb.facturado=false").setParameter("pro", pro).getResultList();
 		em.close();
 		return lista;
 	}

@@ -1,5 +1,8 @@
 package modelo.persistencia;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,7 +16,11 @@ public class AbreCierra {
 	 */
 	public EntityManager abrirConexion() {
 		try {
-			EntityManagerFactory factoria=Persistence.createEntityManagerFactory("ProyectoGestionDistribucion");
+			Map<String, String> properties = new HashMap<String, String>();
+			properties.put ("javax.persistence.jdbc.url", "jdbc:mysql://127.0.0.1:3306/GestionDistribucion");
+			properties.put ("javax.persistence.jdbc.user", "root");
+			properties.put ("javax.persistence.jdbc.password", "$Mis2Perro");
+			EntityManagerFactory factoria=Persistence.createEntityManagerFactory("ProyectoGestionDistribucion",properties);
 			em=factoria.createEntityManager();
 			return em;
 		}catch(Exception e) {

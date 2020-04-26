@@ -238,7 +238,6 @@ public class VFacturaProveedor extends JInternalFrame {
 		scrollPendientes.setViewportView(panel);
 		for (FilaFacturaProveedor fil:filas) {
 			i++;
-			System.out.println("fila num: "+i);
 			vFilaFact=new VFilaFacturaProveedor(this,fil);
 			CtrlFilaFactProve controla=new CtrlFilaFactProve(vFilaFact);
 			vFilaFact.establecerControlador(controla);

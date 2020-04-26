@@ -54,7 +54,6 @@ public class ControladorListadoClientes implements ActionListener{
 	private void filtrar() {
 		listado.getPanel().updateUI();
 		listar(listado);
-		System.out.println("Boton filtro");
 	}
 	
 	private void actualizar() {
@@ -62,11 +61,9 @@ public class ControladorListadoClientes implements ActionListener{
 	}
 	
 	private void nuevoCliente() {
-		System.out.println("nuevo cliente");
 		VFichaCliente fc=new VFichaCliente(null);
 		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);
 		fc.establecerManejadorVentana(cfc);
-		System.out.println("nuevo articulo");
 		listado.getV().getPanelInterior().add(fc);
 		fc.setVisible(true);
 	}

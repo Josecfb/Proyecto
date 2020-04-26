@@ -19,6 +19,7 @@ import model.Familia;
 import model.Proveedor;
 import modelo.negocio.GestorFamilia;
 import modelo.negocio.GestorProveedor;
+import vista.VentanaPrincipal;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -26,6 +27,7 @@ import javax.swing.JComboBox;
 public class VFichaArticulo extends JInternalFrame {
 
 	private static final long serialVersionUID = 3871990475316407616L;
+	private VentanaPrincipal v;
 	private JTextField tCodigo;
 	private JTextField tNombre;
 	private JTextField tCProv;
@@ -43,9 +45,9 @@ public class VFichaArticulo extends JInternalFrame {
 	private JLabel lFoto;
 	private JPanel panel;
 
-	public VFichaArticulo(Articulo art) {
+	public VFichaArticulo(Articulo art,VentanaPrincipal v) {
 		this.art=art;
-		
+		this.v=v;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		setBounds(100, 100, 870, 476);
@@ -257,7 +259,6 @@ public class VFichaArticulo extends JInternalFrame {
 	public void EstablecerManejadorVentana(ControladorFichaArticulo manejador) {
 		this.addInternalFrameListener(manejador);
 		Component[] componentes=panel.getComponents();
-		System.out.println("componentes"+componentes.length);
 		comboFamilia.addFocusListener(manejador);
 		for (Component componente:componentes) {
 			if (componente.getClass()==JTextField.class)
@@ -318,6 +319,10 @@ public class VFichaArticulo extends JInternalFrame {
 
 	public JComboBox<Proveedor> getComboProveedor() {
 		return comboProveedor;
+	}
+
+	public VentanaPrincipal getV() {
+		return v;
 	}
 	
 }

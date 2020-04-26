@@ -51,7 +51,6 @@ public class DaoArticulo {
 			return null;
 		else 
 			art=em.find(Articulo.class, num);
-		System.out.println("en existe"+art.getCod());
 		return art;
 	}
 	

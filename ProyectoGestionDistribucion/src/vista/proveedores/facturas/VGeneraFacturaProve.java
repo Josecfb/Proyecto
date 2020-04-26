@@ -98,7 +98,6 @@ public class VGeneraFacturaProve extends JInternalFrame {
 			vfila.getlNum().setText(String.valueOf(alb.getNum()));
 			SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 			vfila.getlFecha().setText(formatoFecha.format(alb.getFecha()));
-			System.out.println(vfila.getlNum().getText());
 			panelFila.add(vfila);
 		}
 	}

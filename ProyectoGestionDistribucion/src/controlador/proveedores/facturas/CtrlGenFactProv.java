@@ -38,7 +38,6 @@ public class CtrlGenFactProv implements ActionListener, FocusListener{
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenFactPro.getComboProve().getEditor().getEditorComponent()) {
-			System.out.println("Muestra los pedidos de "+((Proveedor) vGenFactPro.getComboProve().getSelectedItem()).getNombre());
 			GestorAlbaranProve gap=new GestorAlbaranProve();
 			List<AlbaranProveedor> listaAlb =gap.listaAlbaranesAlmacen(((Proveedor) vGenFactPro.getComboProve().getSelectedItem()));
 			vGenFactPro.muestraAlbaranes(listaAlb);
@@ -87,7 +86,6 @@ public class CtrlGenFactProv implements ActionListener, FocusListener{
 			for (AlbaranProveedor alb:fac.getAlbaranesProveedors()) {
 				alb.setFacturasProveedor(fac);
 				alb.setFacturado(true);
-				System.out.println("el albaran tiene filas= "+alb.getFilasAlbaranProveedors().size());
 				gap.facturaAlbaran(alb); 
 				
 			}

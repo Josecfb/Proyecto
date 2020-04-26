@@ -49,6 +49,8 @@ public class DaoProveedor {
 		antiguo.setNumCuentaContable(pro.getNumCuentaContable());
 		antiguo.setTelefonoFijo(pro.getTelefonoFijo());
 		antiguo.setTelefonoMovil(pro.getTelefonoMovil());
+		antiguo.setPoblacion(pro.getPoblacion());
+		antiguo.setProvincia(pro.getProvincia());
 		em.merge(antiguo);
 		em.getTransaction().commit();
 		em.close();

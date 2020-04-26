@@ -18,7 +18,6 @@ public class GestorProveedor {
 		boolean[] ok = valida(pro);
 		if (ok[0] && ok[1] && ok[2]) {
 			DaoProveedor dp=new DaoProveedor();
-			System.out.println("en gestor "+pro.getNombre());
 			int modificado=dp.modificar(pro);
 			ok[3]=modificado==0;
 		}
@@ -29,7 +28,6 @@ public class GestorProveedor {
 		boolean[] ok = valida(pro);
 		if (ok[0] && ok[1] && ok[2]) {
 			DaoProveedor dp=new DaoProveedor();
-			System.out.println("en gestor "+pro.getNombre());
 			int creado=dp.nuevo(pro);
 			ok[3]=creado==0;
 		}

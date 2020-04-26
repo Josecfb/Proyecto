@@ -18,9 +18,8 @@ public class ControlaFilaListadoProveedores implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("hola");
 		if(e.getSource()==filaListadoProveedores.getbEditar()) {
-			System.out.println("hola"+filaListadoProveedores.getNombre().getText());
 			GestorProveedor gp=new GestorProveedor();
-			VFichaProveedor fp=new VFichaProveedor(gp.existe(Integer.valueOf(filaListadoProveedores.getNumero().getText())));
+			VFichaProveedor fp=new VFichaProveedor(gp.existe(Integer.valueOf(filaListadoProveedores.getNumero().getText())),filaListadoProveedores.getV());
 			ControladorFichaProveedor cfp=new ControladorFichaProveedor(fp);
 			fp.EstablecerManejadorVentana(cfp);
 			filaListadoProveedores.getV().getPanelInterior().add(fp);

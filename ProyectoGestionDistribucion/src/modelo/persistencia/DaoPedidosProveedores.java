@@ -100,8 +100,6 @@ public class DaoPedidosProveedores {
 		em.getTransaction().begin();
 		for (FilaPedidoProveedor fil:ped.getFilaPedidoProveedor())
 			em.persist(fil);
-		System.out.println(antiguo.getFilaPedidoProveedor().size()+"filas");
-		
 		antiguo.setFilaPedidoProveedor(ped.getFilaPedidoProveedor());
 		em.merge(antiguo);
 		em.getTransaction().commit();
@@ -109,14 +107,17 @@ public class DaoPedidosProveedores {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * 
+	 * @param ped
+	 * @return -1 error conexion 0 ok
+	 */
 	public int nuevoPedido(PedidoProveedor ped) {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
 		em.getTransaction().begin();
 		if (em==null) return -1;
 		em.persist(ped);
-		System.out.println("Pedido con numero "+ped.getNum());
 		em.getTransaction().commit();
 		em.close();
 		return 0;

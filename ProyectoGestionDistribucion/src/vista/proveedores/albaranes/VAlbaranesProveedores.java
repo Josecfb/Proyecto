@@ -85,7 +85,6 @@ public class VAlbaranesProveedores extends JInternalFrame {
 	}
 	
 	public void muestraPendientes(List<AlbaranProveedor> lista) {
-		System.out.println("pendientes="+lista.size());
 		panelGenerados = new JPanel();
 		panelGenerados.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelGenerados.setBackground(Color.WHITE);

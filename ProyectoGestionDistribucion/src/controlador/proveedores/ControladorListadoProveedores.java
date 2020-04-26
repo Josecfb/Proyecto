@@ -28,7 +28,6 @@ public class ControladorListadoProveedores implements ActionListener{
 		List<Proveedor> filas;
 		GestorProveedor gp=new GestorProveedor();
 		filas=gp.listar(listado.getTFiltroNombre().getText());
-		System.out.println(filas.size());
 		listado.muestra(filas);
 	}
 	
@@ -56,10 +55,11 @@ public class ControladorListadoProveedores implements ActionListener{
 	}
 	
 	private void muestraFiltros() {
-		System.out.println("filtros pro");
 		if (listado.getbFiltrar().isVisible()) {
 			listado.getbFiltrar().setVisible(false);
 			listado.getTFiltroNombre().setVisible(false);
+			listado.getTFiltroNombre().setText("");
+			listar(listado);
 			listado.getbFiltros().setIcon(new ImageIcon("src/img/filtro.png"));
 		}
 		else {
@@ -69,11 +69,11 @@ public class ControladorListadoProveedores implements ActionListener{
 		}
 	}
 	private void actualizar() {
-		listado.getPanel().updateUI();
+		listar(listado);
 	}
 	
 	private void nuevoProveedor() {
-		VFichaProveedor fp=new VFichaProveedor(null);
+		VFichaProveedor fp=new VFichaProveedor(null,listado.getV());
 		ControladorFichaProveedor cfp=new ControladorFichaProveedor(fp);
 		fp.EstablecerManejadorVentana(cfp);
 		listado.getV().getPanelInterior().add(fp);

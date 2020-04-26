@@ -1,6 +1,7 @@
 package controlador.articulos;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -15,6 +16,7 @@ import model.Familia;
 import model.Proveedor;
 import modelo.negocio.GestorArticulo;
 import vista.articulos.VFichaArticulo;
+import vista.articulos.VListadoArticulos;
 
 public class ControladorFichaArticulo implements InternalFrameListener, FocusListener {
 	private VFichaArticulo fichaArticulo;
@@ -30,13 +32,20 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	public void internalFrameClosing(InternalFrameEvent e) {
 
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
-			if (res==JOptionPane.YES_OPTION)
+			if (res==JOptionPane.YES_OPTION) {
 				if (fichaArticulo.getArt()!=null)
 					modificaArticulo();
 				else
 					nuevoArticulo();
-			else
-				fichaArticulo.dispose();
+				Component[] componentes=fichaArticulo.getV().getPanelInterior().getComponents();
+				for (Component componente:componentes)
+					if (componente.getClass()==VListadoArticulos.class) {
+						VListadoArticulos vlistado=(VListadoArticulos) componente;
+						vlistado.getbActualizar().doClick();
+					}
+			}
+			else 
+				fichaArticulo.dispose();							
 	}
 
 	@Override
@@ -56,7 +65,6 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 		}
 
 		if (e.getSource()==JComboBox.class) {
-			System.out.println("combo");
 			@SuppressWarnings("rawtypes")
 			JComboBox jComboBox = (JComboBox) e.getSource();
 			jComboBox.getEditor().getEditorComponent().setBackground(Color.BLUE);

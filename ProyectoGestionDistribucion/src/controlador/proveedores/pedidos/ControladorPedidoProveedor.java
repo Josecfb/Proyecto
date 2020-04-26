@@ -46,36 +46,50 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 	private void modificaPedido() {
 		PedidoProveedor pedModif=new PedidoProveedor();
 		pedModif.setNum(Integer.valueOf(vpedidoProveedor.gettNumpedido().getText()));
-		System.out.println("numero de pedido para modificar "+pedModif.getNum());
 		asignaCampos(pedModif);
 		ponFilas(pedModif);
 		int ok=gpp.modificarPedido(pedModif);
 		if (ok==0) {
-			ControladorPedidosProveedores cpp = new ControladorPedidosProveedores(vpedidoProveedor.getVpedidos());
-			cpp.listar(vpedidoProveedor.getVpedidos());
+			actualizarListaPedidos();
 			vpedidoProveedor.dispose();
 			
 		}
 		//else 
 			//muestraErrores(ok);		
 	}
+
+	private void actualizarListaPedidos() {
+		ControladorPedidosProveedores cpp = new ControladorPedidosProveedores(vpedidoProveedor.getVpedidos());
+		cpp.listar(vpedidoProveedor.getVpedidos());
+	}
 	
 	private void nuevoPedido() {
 		PedidoProveedor pedidoNuevo=new PedidoProveedor();
 		asignaCampos(pedidoNuevo);
-		int ok=gpp.nuevoPedido(pedidoNuevo);
+		boolean[] ok=new boolean[4];
+		ok=gpp.nuevoPedido(pedidoNuevo);
 		ponFilas(pedidoNuevo);
-		gpp.modificarPedido(pedidoNuevo);
-		if (ok==0)
+		if (ok[3]) gpp.modificarPedido(pedidoNuevo);
+		if (ok[3]) {
+			actualizarListaPedidos();
 			vpedidoProveedor.dispose();
+		}
+		else
+			muestraErrores(ok);
 		
 	}
 	
+	private void muestraErrores(boolean[] ok) {
+		if (!ok[0])
+			JOptionPane.showMessageDialog(new JFrame(),"Proveedor vacío","error",JOptionPane.ERROR_MESSAGE);
+		if (!ok[1])
+			JOptionPane.showMessageDialog(new JFrame(),"Fecha vacía","error",JOptionPane.ERROR_MESSAGE);
+		
+	}
 	
 
 	private void asignaCampos(PedidoProveedor pedModif) {
 		pedModif.setFecha(vpedidoProveedor.getcFecha().getDate());
-		System.out.println("fecha "+vpedidoProveedor.getcFecha().getDate());
 		pedModif.setProveedore((Proveedor) vpedidoProveedor.getComboProveedor().getSelectedItem());
 		pedModif.setConfirmado(vpedidoProveedor.getChecConfirmado().isSelected());
 		pedModif.setEnviado(vpedidoProveedor.getChecEnviado().isSelected());	
@@ -88,7 +102,6 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 	private void ponFilas(PedidoProveedor pedModif) {
 		FilaPedidoProveedor filaModif;
 		Component[] componentes=vpedidoProveedor.getPanel().getComponents();
-		System.out.println("pasa");	
 		filasmodificadas=new ArrayList<FilaPedidoProveedor>();
 		for (Component fila:componentes) {
 			filaModif=new FilaPedidoProveedor();
@@ -99,8 +112,6 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 			filasmodificadas.add(filaModif);
 		}
 		pedModif.setFilaPedidoProveedor(filasmodificadas);
-		for (FilaPedidoProveedor fila:pedModif.getFilaPedidoProveedor())
-			System.out.println("nueva cantidad "+fila.getCantidad());
 	}
 	
 	private void asignaCamposFila(VFilaPedidoProveedor fila,FilaPedidoProveedor filaModif,PedidoProveedor pedModif) {
@@ -113,7 +124,6 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		filaModif.setId(clave);
 		filaModif.setPedidosProveedor(pedModif);
 		filaModif.setArticuloBean(arti);
-		System.out.println("cantidad nueva "+fila.gettUnidades().getText()+" cantidad antigua "+filaModif.getCantidad());
 		filaModif.setCantidad(Integer.parseInt(fila.gettUnidades().getText()));
 	}
 	

@@ -201,7 +201,6 @@ public class VPedidoProveedor extends JInternalFrame {
 	public void muestraFilas(PedidoProveedor pedido) {
 		
 		List<FilaPedidoProveedor> filas=contrPedPro.articulosPendientesPedido(pedido);
-		System.out.println("filas "+filas.size());
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(710,filas.size()*23));
 		panel.setBackground(SystemColor.control);
@@ -213,7 +212,6 @@ public class VPedidoProveedor extends JInternalFrame {
 		ControladorFilaPedidoProveedor cfpp =new ControladorFilaPedidoProveedor(filaPed);
 		for (FilaPedidoProveedor fil:filas) {
 			i++;
-			System.out.println("fila num: "+i);
 			filaPed=new VFilaPedidoProveedor(this,fil);
 			ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(filaPed);
 			filaPed.establecerControlador(controla);

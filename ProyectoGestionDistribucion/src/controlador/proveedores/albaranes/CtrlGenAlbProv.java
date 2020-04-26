@@ -38,10 +38,8 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenAlvPro.getComboProve().getEditor().getEditorComponent()) {
-			System.out.println("Muestra los pedidos de "+((Proveedor) vGenAlvPro.getComboProve().getSelectedItem()).getNombre());
 			GestorPedidosProve gpp=new GestorPedidosProve();
 			List<PedidoProveedor> listaPed =gpp.listaEnviados(((Proveedor) vGenAlvPro.getComboProve().getSelectedItem()));
-			System.out.println("Numero de pedidos sin recibir="+listaPed.size());
 			vGenAlvPro.muestraPedidos(listaPed);
 		}
 	}

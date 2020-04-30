@@ -16,6 +16,7 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="NUMERO")
 	private int numero;
 
@@ -40,12 +41,6 @@ public class Cliente implements Serializable {
 	@Column(name="NOMBRE")
 	private String nombre;
 
-	@Column(name="NOMBRE_COMERCIAL")
-	private String nombreComercial;
-
-	@Column(name="NOMBRE_FISCAL")
-	private String nombreFiscal;
-
 	@Column(name="NUM_CUENTA_CONTABLE")
 	private int numCuentaContable;
 	
@@ -63,6 +58,9 @@ public class Cliente implements Serializable {
 
 	@Column(name="TIPO")
 	private int tipo;
+	
+	@Column(name="CONFIRMADO")
+	private boolean confirmado;
 
 	//bi-directional many-to-one association to AlbaranCliente
 	@OneToMany(mappedBy="clienteBean")
@@ -143,22 +141,6 @@ public class Cliente implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getNombreComercial() {
-		return this.nombreComercial;
-	}
-
-	public void setNombreComercial(String nombreComercial) {
-		this.nombreComercial = nombreComercial;
-	}
-
-	public String getNombreFiscal() {
-		return this.nombreFiscal;
-	}
-
-	public void setNombreFiscal(String nombreFiscal) {
-		this.nombreFiscal = nombreFiscal;
-	}
-
 	public int getNumCuentaContable() {
 		return this.numCuentaContable;
 	}
@@ -205,6 +187,16 @@ public class Cliente implements Serializable {
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+	
+	
+
+	public boolean isConfirmado() {
+		return confirmado;
+	}
+
+	public void setConfirmado(boolean confirmado) {
+		this.confirmado = confirmado;
 	}
 
 	public List<AlbaranCliente> getAlbaranClientes() {

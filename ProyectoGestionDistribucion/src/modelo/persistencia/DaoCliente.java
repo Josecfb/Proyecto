@@ -31,7 +31,7 @@ public class DaoCliente {
 			if (filtroNombre=="")
 				lista=em.createQuery("SELECT cli FROM Cliente cli").getResultList();
 			else
-				lista=em.createQuery("SELECT cli FROM Cliente cli where cli.nombreComercial LIKE :filtroNombre").setParameter("filtroNombre","%"+filtroNombre+"%").getResultList();
+				lista=em.createQuery("SELECT cli FROM Cliente cli where cli.nombre LIKE :filtroNombre").setParameter("filtroNombre","%"+filtroNombre+"%").getResultList();
 			ab.cerrarConexion();
 			return lista;
 		}
@@ -49,8 +49,6 @@ public class DaoCliente {
 		antiguo.setEmail(cli.getEmail());
 		antiguo.setTelefonoFijo(cli.getTelefonoFijo());
 		antiguo.setTelefonoMovil(cli.getTelefonoMovil());
-		antiguo.setNombreComercial(cli.getNombreComercial());
-		antiguo.setNombreFiscal(cli.getNombreFiscal());
 		antiguo.setDireccion(cli.getDireccion());
 		antiguo.setCodPost(cli.getCodPost());
 		antiguo.setNumCuentaContable(cli.getNumCuentaContable());

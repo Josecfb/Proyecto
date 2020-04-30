@@ -214,8 +214,8 @@ public class VListadoClientes extends JInternalFrame {
 			fila.setPreferredSize(new Dimension(1100,20));
 			if (i%2==0) fila.setBackground(Color.WHITE);
 			fila.getNumero().setText(String.valueOf(cli.getNumero()));
-			fila.getNombreComercial().setText(cli.getTipo()==1?cli.getNombreComercial():cli.getNombre());
-			fila.getNombreFiscal().setText(cli.getTipo()==1?cli.getNombreFiscal():cli.getApellidos());
+			fila.getNombreComercial().setText(cli.getNombre());
+			fila.getNombreFiscal().setText(cli.getApellidos());
 			fila.getNif().setText(cli.getNifCif());
 			fila.getCodPost().setText(cli.getCodPost());
 			fila.getProvincia().setText(cli.getProvincia());

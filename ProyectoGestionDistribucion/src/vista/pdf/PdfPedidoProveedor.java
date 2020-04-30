@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -25,14 +24,9 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-//import controlador.fichas.ControladorPedidosProveedores;
-
 public class PdfPedidoProveedor {
-	private PedidoProveedor ped;
 
-	
 	public PdfPedidoProveedor(PedidoProveedor ped) {
-		this.ped=ped;
 		GestorPedidosProve gpp=new GestorPedidosProve();
 		ped=gpp.existe(ped.getNum());
 		Document pedido=new Document();
@@ -44,8 +38,6 @@ public class PdfPedidoProveedor {
 			FileOutputStream ficheroPdf = new FileOutputStream(archivo);
 			PdfWriter.getInstance(pedido,ficheroPdf).setInitialLeading(20);
 			pedido.open();
-			//Font fuente = new Font(FontFamily.valueOf("arial"), 14);
-
 			pedido.add(new Paragraph("NIF: "+empresa.getNif(), FontFactory.getFont("arial",12)));
 			pedido.add(new Paragraph("Empresa: "+empresa.getNombre(), FontFactory.getFont("arial",12)));
 			pedido.add(new Paragraph("Teléfono: "+empresa.getFijo(), FontFactory.getFont("arial",12)));
@@ -54,31 +46,21 @@ public class PdfPedidoProveedor {
 			pedido.add(new Paragraph(" ",FontFactory.getFont("arial",12)));
 			pedido.add(new Paragraph("Pedido",FontFactory.getFont("arial",32)));
 			pedido.add(new Paragraph(" ",FontFactory.getFont("arial",10)));
-			
-			
-		           
-            
 			PdfPTable tabla = new PdfPTable(3);
-			
 			float[] anchoCols = new float[]{20f, 130f, 20f};
 			tabla.setWidths(anchoCols);
-
 			PdfPCell[] celda=new PdfPCell[3];
 			for (int i=0;i<celda.length;i++)
 				celda[i]=new PdfPCell();
 			celda[0].setPhrase(new Phrase("Código"));
-
 			celda[1].setPhrase(new Phrase("Nombre del Artículo"));
-			
 			celda[2].setPhrase(new Phrase("Cajas"));
-			
 			for (int i=0;i<celda.length;i++) {
 				celda[i].setBackgroundColor(BaseColor.LIGHT_GRAY);
 				celda[i].setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 				celda[i].setVerticalAlignment(PdfPCell.ALIGN_CENTER);
 				tabla.addCell(celda[i]);
 			}
-			
 			List<FilaPedidoProveedor> filas=new ArrayList<FilaPedidoProveedor>();
 			filas=ped.getFilaPedidoProveedor();
 			for (int i=0;i<celda.length;i++) 
@@ -99,6 +81,5 @@ public class PdfPedidoProveedor {
 			e.printStackTrace();
 		}
 		new EnviarCorreo(ped.getProveedore().getEmail(), archivo);
-		
 	}
 }

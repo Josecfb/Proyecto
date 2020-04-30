@@ -87,8 +87,6 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		cliModif.setEmail(fichaCliente.gettEmail().getText());
 		cliModif.setTelefonoFijo(fichaCliente.gettFijo().getText());
 		cliModif.setTelefonoMovil(fichaCliente.gettMovil().getText());
-		cliModif.setNombreComercial(fichaCliente.gettNomComercial().getText());
-		cliModif.setNombreFiscal(fichaCliente.gettNomFiscal().getText());
 		cliModif.setDireccion(fichaCliente.gettDireccion().getText());
 		cliModif.setCodPost(fichaCliente.gettCodPos().getText());
 		if (fichaCliente.gettSubcuenta().getText()==null) fichaCliente.gettSubcuenta().setText("0");
@@ -155,12 +153,6 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 				e.consume();
 		if (e.getSource()==fichaCliente.gettApellidos())
 			if(fichaCliente.gettApellidos().getText().length()==20)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettNomComercial())
-			if(fichaCliente.gettNomComercial().getText().length()==20)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettNomFiscal())
-			if(fichaCliente.gettNomFiscal().getText().length()==20)
 				e.consume();
 		if (e.getSource()==fichaCliente.gettDireccion())
 			if(fichaCliente.gettDireccion().getText().length()==40)

@@ -42,7 +42,7 @@ public class GestorCliente {
 		for (int i=0;i<ok.length-1;i++)
 			ok[i]=true;
 		ok[3]=false;
-		ok[0]=cli.getNombre().length()>0 || cli.getNombreComercial().length()>0;
+		ok[0]=cli.getNombre().length()>0;
 		ok[1]=cli.getNifCif().length()>0;
 		ok[2]=cli.getEmail().length()>0;
 		return ok;

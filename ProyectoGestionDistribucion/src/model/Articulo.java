@@ -16,6 +16,7 @@ public class Articulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="COD")
 	private int cod;
 
@@ -48,6 +49,9 @@ public class Articulo implements Serializable {
 	
 	@Column(name="ENPEDIDO")
 	private boolean enPedido;
+	
+	@Column(name="RESERVADOS")
+	private int reservados;
 
 	//bi-directional many-to-one association to Familia
 	@ManyToOne
@@ -175,6 +179,14 @@ public class Articulo implements Serializable {
 
 	public void setFamiliaBean(Familia familiaBean) {
 		this.familiaBean = familiaBean;
+	}
+
+	public int getReservados() {
+		return reservados;
+	}
+
+	public void setReservados(int reservados) {
+		this.reservados = reservados;
 	}
 
 	public Proveedor getProveedorBean() {

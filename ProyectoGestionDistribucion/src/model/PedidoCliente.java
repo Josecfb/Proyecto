@@ -12,8 +12,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="PEDIDOS_CLIENTE")
-@NamedQuery(name="PedidosCliente.findAll", query="SELECT p FROM PedidosCliente p")
-public class PedidosCliente implements Serializable {
+@NamedQuery(name="PedidoCliente.findAll", query="SELECT p FROM PedidoCliente p")
+public class PedidoCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,7 +21,10 @@ public class PedidosCliente implements Serializable {
 	private int num;
 
 	@Column(name="CONFIRMADO")
-	private byte confirmado;
+	private boolean confirmado;
+	
+	@Column(name="ENVIADO")
+	private boolean enviado;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA")
@@ -41,7 +44,7 @@ public class PedidosCliente implements Serializable {
 	@JoinColumn(name="NUM_ALBARAN")
 	private AlbaranCliente albaranCliente;
 
-	public PedidosCliente() {
+	public PedidoCliente() {
 	}
 
 	public int getNum() {
@@ -52,11 +55,11 @@ public class PedidosCliente implements Serializable {
 		this.num = num;
 	}
 
-	public byte getConfirmado() {
+	public boolean getConfirmado() {
 		return this.confirmado;
 	}
 
-	public void setConfirmado(byte confirmado) {
+	public void setConfirmado(boolean confirmado) {
 		this.confirmado = confirmado;
 	}
 
@@ -105,5 +108,14 @@ public class PedidosCliente implements Serializable {
 	public void setAlbaranCliente(AlbaranCliente albaranCliente) {
 		this.albaranCliente = albaranCliente;
 	}
+
+	public boolean getEnviado() {
+		return enviado;
+	}
+
+	public void setEnviado(boolean enviado) {
+		this.enviado = enviado;
+	}
+	
 
 }

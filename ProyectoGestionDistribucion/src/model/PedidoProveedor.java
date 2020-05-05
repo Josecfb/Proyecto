@@ -31,7 +31,7 @@ public class PedidoProveedor implements Serializable {
 	private Date fecha;
 
 	//bi-directional many-to-one association to FilasPedidosProveedor
-	@OneToMany(mappedBy="pedidosProveedor")
+	@OneToMany(mappedBy="pedidosProveedor",cascade = CascadeType.ALL)
 	private List<FilaPedidoProveedor> filaPedidoProveedors;
 
 	//bi-directional many-to-one association to Proveedore

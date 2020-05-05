@@ -231,6 +231,7 @@ public class VListadoClientes extends JInternalFrame {
 		bNuevo.addActionListener(controlador);
 		bFiltros.addActionListener(controlador);
 		bActualizar.addActionListener(controlador);
+		bPedidos.addActionListener(controlador);
 	}
 
 	public VentanaPrincipal getV() {

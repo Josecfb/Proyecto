@@ -27,7 +27,7 @@ public class FilasPedidosCliente implements Serializable {
 	//bi-directional many-to-one association to PedidosCliente
 	@ManyToOne
 	@JoinColumn(name="PEDIDO")
-	private PedidosCliente pedidosCliente;
+	private PedidoCliente pedidosCliente;
 
 	//bi-directional many-to-one association to Articulo
 	@ManyToOne
@@ -61,11 +61,11 @@ public class FilasPedidosCliente implements Serializable {
 		this.precio = precio;
 	}
 
-	public PedidosCliente getPedidosCliente() {
+	public PedidoCliente getPedidosCliente() {
 		return this.pedidosCliente;
 	}
 
-	public void setPedidosCliente(PedidosCliente pedidosCliente) {
+	public void setPedidosCliente(PedidoCliente pedidosCliente) {
 		this.pedidosCliente = pedidosCliente;
 	}
 

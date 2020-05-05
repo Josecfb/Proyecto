@@ -6,10 +6,14 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import controlador.clientes.pedidos.ControladorPedidosClientes;
+import controlador.proveedores.pedidos.ControladorPedidosProveedores;
 import model.Cliente;
 import modelo.negocio.GestorCliente;
 import vista.clientes.VFichaCliente;
 import vista.clientes.VListadoClientes;
+import vista.clientes.pedidos.VPedidosClientes;
+import vista.proveedores.pedidos.VPedidosProveedores;
 
 public class ControladorListadoClientes implements ActionListener{
 	private VListadoClientes listado;
@@ -36,6 +40,16 @@ public class ControladorListadoClientes implements ActionListener{
 			nuevoCliente();
 		if (e.getSource()==listado.getbActualizar())
 			actualizar();
+		if (e.getSource()==listado.getbPedidos())
+			abrePedidos();
+	}
+	
+	private void abrePedidos() {
+		VPedidosClientes pp=new VPedidosClientes(listado.getV());
+		ControladorPedidosClientes cpp=new ControladorPedidosClientes(pp);
+		pp.establecerManejador(cpp);
+		listado.getV().getPanelInterior().add(pp);
+		pp.setVisible(true);
 	}
 	
 	private void muestraFiltros() {

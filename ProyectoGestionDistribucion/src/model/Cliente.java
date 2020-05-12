@@ -71,8 +71,8 @@ public class Cliente implements Serializable {
 	private List<PedidoCliente> pedidosClientes;
 
 	//bi-directional many-to-one association to PreciosCliente
-	@OneToMany(mappedBy="clienteBean")
-	private List<PreciosCliente> preciosClientes;
+	@OneToMany(mappedBy="clienteBean",cascade = CascadeType.ALL)
+	private List<PrecioCliente> preciosClientes;
 
 	public Cliente() {
 	}
@@ -243,26 +243,32 @@ public class Cliente implements Serializable {
 		return pedidosCliente;
 	}
 
-	public List<PreciosCliente> getPreciosClientes() {
+	public List<PrecioCliente> getPreciosClientes() {
 		return this.preciosClientes;
 	}
 
-	public void setPreciosClientes(List<PreciosCliente> preciosClientes) {
+	public void setPreciosClientes(List<PrecioCliente> preciosClientes) {
 		this.preciosClientes = preciosClientes;
 	}
 
-	public PreciosCliente addPreciosCliente(PreciosCliente preciosCliente) {
+	public PrecioCliente addPreciosCliente(PrecioCliente preciosCliente) {
 		getPreciosClientes().add(preciosCliente);
 		preciosCliente.setClienteBean(this);
 
 		return preciosCliente;
 	}
 
-	public PreciosCliente removePreciosCliente(PreciosCliente preciosCliente) {
+	public PrecioCliente removePreciosCliente(PrecioCliente preciosCliente) {
 		getPreciosClientes().remove(preciosCliente);
 		preciosCliente.setClienteBean(null);
 
 		return preciosCliente;
 	}
+
+	@Override
+	public String toString() {
+		return nombre+" "+apellidos;
+	}
+	
 
 }

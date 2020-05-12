@@ -1,10 +1,14 @@
 package controlador.clientes;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -13,14 +17,21 @@ import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
+import model.Articulo;
 import model.Cliente;
+import model.FacturaProveedor;
+import model.FilaFacturaProveedor;
+import model.PrecioCliente;
 import modelo.negocio.GestorCliente;
 import modelo.persistencia.DaoProvincia;
 import vista.clientes.VFichaCliente;
+import vista.clientes.VFilaPrecioCliente;
+import vista.proveedores.facturas.VFilaFacturaProveedor;
 
-public class ControladorFichaCliente implements InternalFrameListener, KeyListener, FocusListener {
+public class ControladorFichaCliente implements InternalFrameListener, KeyListener, FocusListener, ActionListener {
 	private VFichaCliente fichaCliente;
 	private GestorCliente gc;
+	private List<PrecioCliente> filasPrecio;
 
 	public ControladorFichaCliente(VFichaCliente fichaCliente) {
 		this.fichaCliente=fichaCliente;
@@ -44,6 +55,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		Cliente cliNuevo=new Cliente();
 		asignaCampos(cliNuevo);
 		boolean[] ok=new boolean[4];
+		ponFilasPrecios(cliNuevo);
 		ok=gc.nuevoCliente(cliNuevo);
 		if (ok[3])
 			fichaCliente.dispose();
@@ -56,8 +68,9 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		Cliente cliModif=new Cliente();
 		cliModif.setNumero(Integer.valueOf(fichaCliente.gettNumero().getText()));
 		asignaCampos(cliModif);
+		ponFilasPrecios(cliModif);
 		boolean[] ok=new boolean[4];
-		ok=gc.modificarProveedor(cliModif);
+		ok=gc.modificarCliente(cliModif);
 		if (ok[3])
 			fichaCliente.dispose();
 		else 
@@ -94,54 +107,36 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		cliModif.setPoblacion((String) fichaCliente.gettPoblacion().getSelectedItem());
 		cliModif.setProvincia(fichaCliente.gettProvincia().getText());
 	}
-
-	@Override
-	public void internalFrameDeactivated(InternalFrameEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void internalFrameDeiconified(InternalFrameEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void internalFrameIconified(InternalFrameEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void internalFrameOpened(InternalFrameEvent e) {
-		// TODO Auto-generated method stub
-		
+	
+	private void ponFilasPrecios(Cliente cliModif) {
+		PrecioCliente filaModif;
+		Component[] componentes=fichaCliente.getPanel().getComponents();
+		filasPrecio=new ArrayList<PrecioCliente>();
+		for (Component fila:componentes) {
+			filaModif=new PrecioCliente();
+			VFilaPrecioCliente fil=(VFilaPrecioCliente) fila;
+			fil.updateUI();
+			asignaCamposFila(fil,filaModif,cliModif);
+			filasPrecio.add(filaModif);
+		}
+		cliModif.setPreciosClientes(filasPrecio);
+		for(PrecioCliente fila:cliModif.getPreciosClientes())
+			System.out.println(fila.getArticuloBean()+" "+fila.getPrecio());
 	}
 	
-	@Override
-	public void internalFrameActivated(InternalFrameEvent e) {
-		// TODO Auto-generated method stub
-		
+	private void asignaCamposFila(VFilaPrecioCliente fila,PrecioCliente filaModif,Cliente cliModif) {
+		fila.updateUI();
+		fila.getComboArt().requestFocus();
+		Articulo arti=(Articulo) fila.getComboArt().getSelectedItem();
+		filaModif.setClienteBean(cliModif);
+		filaModif.setArticuloBean(arti);
+		filaModif.setPrecio(euroADoble(fila.gettPrecio().getText()));
+	}
+	
+	public Double euroADoble(String cad) {
+		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
 	}
 
-	@Override
-	public void internalFrameClosed(InternalFrameEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -205,4 +200,60 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			}
 		}
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==fichaCliente.getbNuevaFila()) {
+			fichaCliente.nuevaFilaPrecio();
+		}
+		
+	}
+	@Override
+	public void internalFrameDeactivated(InternalFrameEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void internalFrameDeiconified(InternalFrameEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void internalFrameIconified(InternalFrameEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void internalFrameOpened(InternalFrameEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void internalFrameActivated(InternalFrameEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void internalFrameClosed(InternalFrameEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

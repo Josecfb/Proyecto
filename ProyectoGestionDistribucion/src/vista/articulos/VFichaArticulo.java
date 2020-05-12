@@ -229,7 +229,7 @@ public class VFichaArticulo extends JInternalFrame {
 		panel.add(lStockMin);
 		
 		JPanel pFoto = new JPanel();
-		tabbedPane.addTab("New tab", null, pFoto, null);
+		tabbedPane.addTab("Imagen", null, pFoto, null);
 		pFoto.setLayout(null);
 		
 		lFoto = new JLabel("");

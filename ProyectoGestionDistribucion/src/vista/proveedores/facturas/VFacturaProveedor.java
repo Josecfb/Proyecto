@@ -139,7 +139,7 @@ public class VFacturaProveedor extends JInternalFrame {
 		lblNewLabel_4.setBounds(510, 102, 29, 18);
 		getContentPane().add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Coste");
+		JLabel lblNewLabel_5 = new JLabel("Precio");
 		lblNewLabel_5.setOpaque(true);
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -234,10 +234,8 @@ public class VFacturaProveedor extends JInternalFrame {
 		panel.setBackground(SystemColor.control);
 		panel.setBorder(null);
 		
-		int i=0;
 		scrollPendientes.setViewportView(panel);
 		for (FilaFacturaProveedor fil:filas) {
-			i++;
 			vFilaFact=new VFilaFacturaProveedor(this,fil);
 			CtrlFilaFactProve controla=new CtrlFilaFactProve(vFilaFact);
 			vFilaFact.establecerControlador(controla);

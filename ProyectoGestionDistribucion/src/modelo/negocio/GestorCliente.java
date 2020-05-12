@@ -19,7 +19,7 @@ public class GestorCliente {
 		return dc.existe(num);
 	}
 	
-	public boolean[] modificarProveedor(Cliente cli) {
+	public boolean[] modificarCliente(Cliente cli) {
 		boolean[] ok = valida(cli);
 		if (ok[0] && ok[1] && ok[2]) {
 			int modificado=dc.modificar(cli);

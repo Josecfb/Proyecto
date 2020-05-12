@@ -88,7 +88,7 @@ public class Articulo implements Serializable {
 
 	//bi-directional many-to-one association to PreciosCliente
 	@OneToMany(mappedBy="articuloBean")
-	private List<PreciosCliente> preciosClientes;
+	private List<PrecioCliente> preciosClientes;
 
 	public Articulo() {
 	}
@@ -328,22 +328,22 @@ public class Articulo implements Serializable {
 		return filasPedidosProveedor;
 	}
 
-	public List<PreciosCliente> getPreciosClientes() {
+	public List<PrecioCliente> getPreciosClientes() {
 		return this.preciosClientes;
 	}
 
-	public void setPreciosClientes(List<PreciosCliente> preciosClientes) {
+	public void setPreciosClientes(List<PrecioCliente> preciosClientes) {
 		this.preciosClientes = preciosClientes;
 	}
 
-	public PreciosCliente addPreciosCliente(PreciosCliente preciosCliente) {
+	public PrecioCliente addPreciosCliente(PrecioCliente preciosCliente) {
 		getPreciosClientes().add(preciosCliente);
 		preciosCliente.setArticuloBean(this);
 
 		return preciosCliente;
 	}
 
-	public PreciosCliente removePreciosCliente(PreciosCliente preciosCliente) {
+	public PrecioCliente removePreciosCliente(PrecioCliente preciosCliente) {
 		getPreciosClientes().remove(preciosCliente);
 		preciosCliente.setArticuloBean(null);
 

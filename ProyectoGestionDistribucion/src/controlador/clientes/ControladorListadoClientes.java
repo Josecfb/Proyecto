@@ -46,8 +46,6 @@ public class ControladorListadoClientes implements ActionListener{
 	
 	private void abrePedidos() {
 		VPedidosClientes pp=new VPedidosClientes(listado.getV());
-		ControladorPedidosClientes cpp=new ControladorPedidosClientes(pp);
-		pp.establecerManejador(cpp);
 		listado.getV().getPanelInterior().add(pp);
 		pp.setVisible(true);
 	}

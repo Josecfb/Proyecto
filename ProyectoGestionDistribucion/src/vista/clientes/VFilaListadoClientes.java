@@ -21,7 +21,7 @@ public class VFilaListadoClientes extends JPanel {
 	public VFilaListadoClientes(VentanaPrincipal v) {
 		this.v=v;
 		setLayout(null);
-		setSize(975, 20);
+		setSize(1074, 25);
 		setBackground(new Color(240,240,240));
 		inicializar();
 		setVisible(true);
@@ -37,15 +37,15 @@ public class VFilaListadoClientes extends JPanel {
 		provincia=new JLabel("Provincia");
 		fijo=new JLabel("Fijo");
 		movil=new JLabel("Movil");
-		numero.setBounds(10, 5, 40, 10);
-		nif.setBounds(60, 5, 70, 10);
-		nombreComercial.setBounds(140, 5, 200, 10);
-		nombreFiscal.setBounds(350, 5, 200, 10);
-		codPost.setBounds(560, 5, 60, 10);
-		poblacion.setBounds(630, 5, 90, 10);
-		provincia.setBounds(740, 5, 90, 10);
-		fijo.setBounds(870, 5, 70, 10);
-		movil.setBounds(950, 5, 70, 10);
+		numero.setBounds(10, 5, 40, 15);
+		nif.setBounds(60, 5, 70, 15);
+		nombreComercial.setBounds(140, 5, 200, 15);
+		nombreFiscal.setBounds(350, 5, 200, 15);
+		codPost.setBounds(560, 5, 60, 15);
+		poblacion.setBounds(630, 5, 90, 15);
+		provincia.setBounds(740, 5, 90, 15);
+		fijo.setBounds(870, 5, 70, 15);
+		movil.setBounds(950, 5, 70, 15);
 		add(numero);
 		add(nif);
 		add(nombreComercial);
@@ -56,7 +56,7 @@ public class VFilaListadoClientes extends JPanel {
 		add(fijo);
 		add(movil);
 		bEditar=new JButton();
-		bEditar.setBounds(1070, 0, 20, 20);
+		bEditar.setBounds(1070, 2, 20, 20);
 		bEditar.setIcon(new ImageIcon("src/img/pen.png"));
 		add(bEditar);
 	}

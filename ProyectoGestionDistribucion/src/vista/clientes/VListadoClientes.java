@@ -211,7 +211,7 @@ public class VListadoClientes extends JInternalFrame {
 			fila=new VFilaListadoClientes(v);
 			ControlaFilaListadoClientes controlaFila=new ControlaFilaListadoClientes(fila);
 			fila.establecerControlador(controlaFila);
-			fila.setPreferredSize(new Dimension(1100,20));
+			fila.setPreferredSize(new Dimension(1100,25));
 			if (i%2==0) fila.setBackground(Color.WHITE);
 			fila.getNumero().setText(String.valueOf(cli.getNumero()));
 			fila.getNombreComercial().setText(cli.getNombre());

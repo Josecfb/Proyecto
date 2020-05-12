@@ -71,7 +71,7 @@ public class VentanaPrincipal extends JFrame {
 		bArticulos.setVerticalTextPosition( SwingConstants.BOTTOM );
 
 		
-		bClientes = new JButton("Client May");
+		bClientes = new JButton("Clientes");
 		bClientes.setMaximumSize(new Dimension(90, 90));
 		toolBar.add(bClientes);
 		bClientes.setIcon(new ImageIcon(new ImageIcon("src/img/clientes.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));

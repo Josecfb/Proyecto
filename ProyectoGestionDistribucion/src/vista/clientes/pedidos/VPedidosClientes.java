@@ -27,10 +27,9 @@ public class VPedidosClientes extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
 	private JPanel panelPendientes, panelEnviados, panelRecibidos;
-	private JScrollPane scrollPendientes, scrollEnviados, scrollRecibidos;
+	private JScrollPane scrollPendientes, scrollEnviados;
 	private VFilaPedidoPendienteCliente filaPed;
 	private VentanaPrincipal v;
-	private JButton bNuevoPendiente;
 
 	public VPedidosClientes(VentanaPrincipal v) {
 		this.v=v;
@@ -56,14 +55,6 @@ public class VPedidosClientes extends JInternalFrame {
 		scrollPendientes.setBounds(10, 67, 783, 383);
 		pPendientes.add(scrollPendientes);
 		
-		JToolBar toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 87, 60);
-		pPendientes.add(toolBar);
-		
-		bNuevoPendiente = new JButton();
-		bNuevoPendiente.setIcon(new ImageIcon("src/img/nuevo.png"));
-		toolBar.add(bNuevoPendiente);
-		
 		JPanel pEnviados = new JPanel();
 		tabbedPane.addTab("Enviados", null, pEnviados, null);
 		pEnviados.setLayout(null);
@@ -71,20 +62,12 @@ public class VPedidosClientes extends JInternalFrame {
 		scrollEnviados = new JScrollPane();
 		scrollEnviados.setBounds(10, 11, 783, 439);
 		pEnviados.add(scrollEnviados);
-		
-		JPanel pRecibidos = new JPanel();
-		tabbedPane.addTab("Recibidos", null, pRecibidos, null);
-		pRecibidos.setLayout(null);
-		
-		scrollRecibidos = new JScrollPane();
-		scrollRecibidos.setBounds(10, 11, 783, 439);
-		pRecibidos.add(scrollRecibidos);
 		ControladorPedidosClientes cpp=new ControladorPedidosClientes(this);
 	}
 	
 	public void muestraPendientes(List<PedidoCliente> lista) {
 		panelPendientes = new JPanel();
-		panelPendientes.setPreferredSize(new Dimension(650,lista.size()*30));
+		panelPendientes.setPreferredSize(new Dimension(650,lista.size()*35));
 		panelPendientes.setBackground(Color.WHITE);
 		panelPendientes.setBorder(null);
 		
@@ -100,7 +83,6 @@ public class VPedidosClientes extends JInternalFrame {
 
 		scrollPendientes.setViewportView(panelPendientes);
 		scrollEnviados.setViewportView(panelEnviados);
-		scrollRecibidos.setViewportView(panelRecibidos);
 		for (PedidoCliente fila:lista) {
 			Cliente cli=fila.getClienteBean();
 			filaPed=new VFilaPedidoPendienteCliente(fila,this);
@@ -121,16 +103,9 @@ public class VPedidosClientes extends JInternalFrame {
 		}
 	}
 	
-	public void establecerManejador(ControladorPedidosClientes controlador) {
-		bNuevoPendiente.addActionListener(controlador);
-	}
 
 	public VentanaPrincipal getV() {
 		return v;
-	}
-
-	public JButton getbNuevoPendiente() {
-		return bNuevoPendiente;
 	}
 
 	public JPanel getPanel() {

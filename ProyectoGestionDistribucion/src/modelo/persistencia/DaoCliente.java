@@ -29,9 +29,9 @@ public class DaoCliente {
 			return null;
 		else{
 			if (filtroNombre=="")
-				lista=em.createQuery("SELECT cli FROM Cliente cli").getResultList();
+				lista=em.createQuery("SELECT cli FROM Cliente cli where cli.confirmado=true").getResultList();
 			else
-				lista=em.createQuery("SELECT cli FROM Cliente cli where cli.nombre LIKE :filtroNombre").setParameter("filtroNombre","%"+filtroNombre+"%").getResultList();
+				lista=em.createQuery("SELECT cli FROM Cliente cli where cli.confirmado=true and cli.nombre LIKE :filtroNombre").setParameter("filtroNombre","%"+filtroNombre+"%").getResultList();
 			ab.cerrarConexion();
 			return lista;
 		}
@@ -54,6 +54,7 @@ public class DaoCliente {
 		antiguo.setNumCuentaContable(cli.getNumCuentaContable());
 		antiguo.setProvincia(cli.getProvincia());
 		antiguo.setPoblacion(cli.getPoblacion());
+		antiguo.setPreciosClientes(cli.getPreciosClientes());
 		em.merge(antiguo);
 		em.getTransaction().commit();
 		em.close();

@@ -26,13 +26,6 @@ public class ControladorPedidosClientes implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource()==vPedidosCliente.getbNuevoPendiente()) {
-			VPedidoCliente vPedidoCli;
-			vPedidoCli=new VPedidoCliente(null, vPedidosCliente);
-			ControladorPedidoCliente cpp=new ControladorPedidoCliente(vPedidoCli);
-			vPedidoCli.establecerControlador(cpp);
-			vPedidosCliente.getV().getPanelInterior().add(vPedidoCli);
-			vPedidoCli.setVisible(true);
-		}
+
 	}
 }

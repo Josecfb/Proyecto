@@ -2,24 +2,19 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 
-/**
- * The persistent class for the PRECIOS_CLIENTE database table.
- * 
- */
 @Entity
 @Table(name="PRECIOS_CLIENTE")
-@NamedQuery(name="PreciosCliente.findAll", query="SELECT p FROM PreciosCliente p")
-public class PreciosCliente implements Serializable {
+@NamedQuery(name="PrecioCliente.findAll", query="SELECT p FROM PrecioCliente p")
+public class PrecioCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private PreciosClientePK id;
 
 	@Column(name="PRECIO")
-	private BigDecimal precio;
+	private double precio;
 
 	//bi-directional many-to-one association to Cliente
 	@ManyToOne
@@ -31,7 +26,7 @@ public class PreciosCliente implements Serializable {
 	@JoinColumn(name="ARTICULO")
 	private Articulo articuloBean;
 
-	public PreciosCliente() {
+	public PrecioCliente() {
 	}
 
 	public PreciosClientePK getId() {
@@ -42,11 +37,11 @@ public class PreciosCliente implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getPrecio() {
+	public double getPrecio() {
 		return this.precio;
 	}
 
-	public void setPrecio(BigDecimal precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 

@@ -23,11 +23,8 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource()==vFilaFact.getArticulo().getEditor().getEditorComponent()) {
-			if (vFilaFact.getArticulo().getSelectedItem()==null) {
-
-			}
-			
+		if (e.getSource()==vFilaFact.gettCoste()) {
+			vFilaFact.gettCoste().setText(focoEuro(vFilaFact.gettCoste().getText()));
 		}
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
@@ -69,6 +66,9 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 			vFilaFact.gettCajas().setBackground(Color.WHITE);
 			vFilaFact.getvFactura().actualizaTotal();
 			return;
+		}
+		if (e.getSource()==vFilaFact.gettCoste()) {
+			vFilaFact.gettCoste().setText(noFocoEuro(vFilaFact.gettCoste().getText()));
 		}
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();

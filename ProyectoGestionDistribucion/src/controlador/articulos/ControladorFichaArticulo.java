@@ -124,6 +124,7 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 		artModif.setFamiliaBean((Familia) fichaArticulo.getComboFamilia().getSelectedItem());
 		artModif.setStock(Integer.valueOf(fichaArticulo.gettStock().getText()));
 		artModif.setStockMinimo(Integer.valueOf(fichaArticulo.gettStockMin().getText()));
+		artModif.setReservados(Integer.valueOf(fichaArticulo.gettReservados().getText()));
 	}
 
 	private void muestraErrores(boolean[] ok) {

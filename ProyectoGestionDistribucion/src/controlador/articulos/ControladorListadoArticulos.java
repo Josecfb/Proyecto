@@ -45,6 +45,8 @@ public class ControladorListadoArticulos implements ActionListener{
 		if (listado.getbFiltrar().isVisible()) {
 			listado.getbFiltrar().setVisible(false);
 			listado.getTFiltroNombre().setVisible(false);
+			listado.getTFiltroNombre().setText("");
+			listar(listado);
 			listado.getbFiltros().setIcon(new ImageIcon("src/img/filtro.png"));
 		}
 		else {

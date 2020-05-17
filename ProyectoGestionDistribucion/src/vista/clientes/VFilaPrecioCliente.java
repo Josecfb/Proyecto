@@ -3,6 +3,8 @@ package vista.clientes;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 import controlador.clientes.ControlaFilaPrecioCli;
 import model.Articulo;
 import model.Cliente;
@@ -60,6 +62,7 @@ public class VFilaPrecioCliente extends JPanel {
 		for (Articulo art:artis)
 			comboArt.addItem(art);
 		comboArt.setSelectedItem(null);
+		AutoCompleteDecorator.decorate(comboArt);
 		add(comboArt);
 		
 		

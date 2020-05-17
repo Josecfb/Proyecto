@@ -36,7 +36,7 @@ public class VListadoArticulos extends JInternalFrame {
 	private JButton bFiltrar,bNuevo;
 	private JPanel panel;
 	private JToggleButton bFiltros;
-	private JButton bActualizar, bPedidos,bAlbaranes,bFacturas;
+	private JButton bActualizar;
 
 
 	public VListadoArticulos(VentanaPrincipal v) {
@@ -142,7 +142,7 @@ public class VListadoArticulos extends JInternalFrame {
 		toolBar.setSize(new Dimension(0, 90));
 		toolBar.setMaximumSize(new Dimension(13, 90));
 		toolBar.setPreferredSize(new Dimension(13, 90));
-		toolBar.setBounds(0, 0, 385, 63);
+		toolBar.setBounds(0, 0, 201, 63);
 		getContentPane().add(toolBar);
 		
 		bNuevo = new JButton();
@@ -169,30 +169,6 @@ public class VListadoArticulos extends JInternalFrame {
 		bActualizar.setMaximumSize(new Dimension(60, 60));
 		bActualizar.setHorizontalTextPosition(SwingConstants.CENTER );
 		bActualizar.setVerticalTextPosition( SwingConstants.BOTTOM );
-		
-		bPedidos = new JButton("Pedidos");
-		bPedidos.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		toolBar.add(bPedidos);
-		bPedidos.setIcon(new ImageIcon("src/img/pedidoproveedor.png"));
-		bPedidos.setMaximumSize(new Dimension(60, 60));
-		bPedidos.setHorizontalTextPosition(SwingConstants.CENTER );
-		bPedidos.setVerticalTextPosition( SwingConstants.BOTTOM );
-		
-		bAlbaranes = new JButton("Albaranes");
-		bAlbaranes.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		toolBar.add(bAlbaranes);
-		bAlbaranes.setIcon(new ImageIcon("src/img/albaran.png"));
-		bAlbaranes.setMaximumSize(new Dimension(60, 60));
-		bAlbaranes.setHorizontalTextPosition(SwingConstants.CENTER );
-		bAlbaranes.setVerticalTextPosition( SwingConstants.BOTTOM );
-		
-		bFacturas = new JButton("Facturas");
-		bFacturas.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		toolBar.add(bFacturas);
-		bFacturas.setIcon(new ImageIcon("src/img/facturas.png"));
-		bFacturas.setMaximumSize(new Dimension(60, 60));
-		bFacturas.setHorizontalTextPosition(SwingConstants.CENTER );
-		bFacturas.setVerticalTextPosition( SwingConstants.BOTTOM );
 
 
 		

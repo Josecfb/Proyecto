@@ -22,7 +22,7 @@ public class FilasPedidosCliente implements Serializable {
 	private int cantidad;
 
 	@Column(name="PRECIO")
-	private BigDecimal precio;
+	private double precio;
 
 	//bi-directional many-to-one association to PedidosCliente
 	@ManyToOne
@@ -53,11 +53,11 @@ public class FilasPedidosCliente implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public BigDecimal getPrecio() {
+	public double getPrecio() {
 		return this.precio;
 	}
 
-	public void setPrecio(BigDecimal precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 

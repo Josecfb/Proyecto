@@ -285,7 +285,7 @@ public class VFichaCliente extends JInternalFrame {
 			comboTipo.setSelectedItem("Mayorista");
 			
 		else {
-			comboTipo.setSelectedItem("Mayorista");
+			comboTipo.setSelectedItem("Minorista");
 			pMay.setVisible(false);
 			pMin.setVisible(true);
 		}

@@ -93,7 +93,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			if (fichaCliente.getComboTipo().getSelectedItem().equals("Mayorista"))
 				cliModif.setTipo(1);
 			else
-				cliModif.setTipo(2);
+				cliModif.setTipo(0);
 		cliModif.setNifCif(fichaCliente.gettNif().getText());
 		cliModif.setNombre(fichaCliente.gettNombre().getText());
 		cliModif.setApellidos(fichaCliente.gettApellidos().getText());

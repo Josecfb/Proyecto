@@ -27,6 +27,7 @@ import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class VentanaPrincipal extends JFrame {
 	private static final long serialVersionUID = -2711106703828276308L;
@@ -43,6 +44,8 @@ public class VentanaPrincipal extends JFrame {
 
 	
 	public VentanaPrincipal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaPrincipal.class.getResource("/img/icono.png")));
+		setTitle("Destión Distribución");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(1, 1, 487, 300);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);

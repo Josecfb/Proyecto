@@ -9,10 +9,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.NumberFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 import com.toedter.calendar.JDateChooser;
 
 import controlador.proveedores.pedidos.ControladorFilaPedidoProveedor;
@@ -53,7 +57,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		formatoentero=NumberFormat.getIntegerInstance();
 		contrPedPro=new ControladorPedidoProveedor(this);
 		this.ped=ped;
-		setBounds(100, 100, 759, 465);
+		setBounds(100, 100, 775, 465);
 		getContentPane().setLayout(null);
 		setResizable(false);
 		setClosable(true);
@@ -64,6 +68,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		comboProveedor.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboProveedor.setBounds(293, 24, 427, 25);
 		comboProveedor.setEditable(true);
+		AutoCompleteDecorator.decorate(comboProveedor);
 		for (Proveedor pr:new GestorProveedor().listar("")) 
 			comboProveedor.addItem(pr);
 		comboProveedor.setSelectedItem(null);
@@ -80,6 +85,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		getContentPane().add(lblFecha);
 		
 		cFecha = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
+		cFecha.setDate(new Date());
 		cFecha.setBounds(94, 60, 186, 25);
 		cFecha.getJCalendar().setTodayButtonVisible(true);
 		cFecha.getJCalendar().setTodayButtonText("Hoy");
@@ -88,7 +94,7 @@ public class VPedidoProveedor extends JInternalFrame {
 
 		
 		scrollPendientes = new JScrollPane();
-		scrollPendientes.setBounds(10, 124, 715, 259);
+		scrollPendientes.setBounds(10, 124, 739, 259);
 		getContentPane().add(scrollPendientes);
 		
 		lTotal = new JLabel("");
@@ -185,7 +191,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(filaPed);
 		filaPed.establecerControlador(controla);
 		filaPed.setPreferredSize(new Dimension(710,23));
-		panel.setPreferredSize(new Dimension(710,panel.getHeight()+23));
+		panel.setPreferredSize(new Dimension(710,panel.getHeight()+28));
 		panel.add(filaPed);
 		panel.updateUI();
 	}

@@ -44,6 +44,7 @@ public class VFichaArticulo extends JInternalFrame {
 	private Articulo art;
 	private JLabel lFoto;
 	private JPanel panel;
+	private JTextField tReservados;
 
 	public VFichaArticulo(Articulo art,VentanaPrincipal v) {
 		this.art=art;
@@ -187,12 +188,12 @@ public class VFichaArticulo extends JInternalFrame {
 		
 		JLabel lFamilia = new JLabel("Familia");
 		lFamilia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lFamilia.setBounds(400, 197, 72, 25);
+		lFamilia.setBounds(437, 197, 49, 25);
 		panel.add(lFamilia);
 		
 		comboFamilia = new JComboBox<Familia>();
 		comboFamilia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboFamilia.setBounds(482, 197, 253, 25);
+		comboFamilia.setBounds(505, 197, 230, 25);
 		comboFamilia.setEditable(true);
 		GestorFamilia gf=new GestorFamilia();
 		List<Familia> familias;
@@ -228,6 +229,19 @@ public class VFichaArticulo extends JInternalFrame {
 		lStockMin.setBounds(201, 251, 70, 25);
 		panel.add(lStockMin);
 		
+		JLabel lblReservados = new JLabel("Reservados");
+		lblReservados.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblReservados.setBounds(408, 251, 78, 25);
+		panel.add(lblReservados);
+		
+		tReservados = new JTextField();
+		tReservados.setText("0");
+		tReservados.setHorizontalAlignment(SwingConstants.RIGHT);
+		tReservados.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tReservados.setColumns(10);
+		tReservados.setBounds(505, 251, 86, 25);
+		panel.add(tReservados);
+		
 		JPanel pFoto = new JPanel();
 		tabbedPane.addTab("Imagen", null, pFoto, null);
 		pFoto.setLayout(null);
@@ -252,6 +266,7 @@ public class VFichaArticulo extends JInternalFrame {
 		comboFamilia.setSelectedItem(art.getFamiliaBean());
 		tStock.setText(String.valueOf(art.getStock()));
 		tStockMin.setText(String.valueOf(art.getStockMinimo()));
+		tReservados.setText(String.valueOf(art.getReservados()));
 		lFoto.setIcon(new ImageIcon(new ImageIcon("src/fotos/"+String.valueOf(art.getCod())+".jpg").getImage().getScaledInstance(603, 274, Image.SCALE_DEFAULT)));
 	}
 	
@@ -313,6 +328,10 @@ public class VFichaArticulo extends JInternalFrame {
 		return tUnidadesCaja;
 	}
 
+	public JTextField gettReservados() {
+		return tReservados;
+	}
+
 	public JComboBox<Familia> getComboFamilia() {
 		return comboFamilia;
 	}
@@ -324,5 +343,4 @@ public class VFichaArticulo extends JInternalFrame {
 	public VentanaPrincipal getV() {
 		return v;
 	}
-	
 }

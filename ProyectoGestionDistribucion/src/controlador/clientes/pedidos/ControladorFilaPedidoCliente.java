@@ -44,7 +44,6 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
 			vFilaPedido.getFila().setArticuloBean(art);
 			vFilaPedido.updateUI();
-			vFilaPedido.gettCoste().setText(formatoeuro.format(art.getCoste())); 
 			vFilaPedido.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaPedido.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
 			return;
@@ -61,7 +60,7 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.updateUI();
 			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
 			vFilaPedido.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaPedido.gettCajas().getText())*art.getUnidadesCaja()));
-			vFilaPedido.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaPedido.gettUnidades().getText())*euroADoble(vFilaPedido.gettCoste().getText())));
+			vFilaPedido.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaPedido.gettUnidades().getText())*euroADoble(vFilaPedido.gettPrecio().getText())));
 			vFilaPedido.gettCajas().setBackground(Color.WHITE);
 			vFilaPedido.getvPedido().actualizaTotal();
 			return;

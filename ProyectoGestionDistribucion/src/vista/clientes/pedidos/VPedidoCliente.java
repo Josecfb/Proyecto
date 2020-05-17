@@ -221,10 +221,10 @@ public class VPedidoCliente extends JInternalFrame {
 			filaPed.getArticulo().setSelectedItem(fil.getArticuloBean());
 			filaPed.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
 			filaPed.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
-			filaPed.gettCoste().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
-			filaPed.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
+			filaPed.gettPrecio().setText(formatoeuro.format(fil.getPrecio()));
+			filaPed.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getPrecio()));
 			panel.add(filaPed);
-			total+=cfpc.euroADoble(filaPed.gettCoste().getText())*Integer.parseInt(filaPed.gettUnidades().getText());
+			total+=cfpc.euroADoble(filaPed.gettPrecio().getText())*Integer.parseInt(filaPed.gettUnidades().getText());
 			filaPed.updateUI();
 		}
 		
@@ -237,7 +237,7 @@ public class VPedidoCliente extends JInternalFrame {
 		double total=0;
 		for (Component fila:filas) {
 			VFilaPedidoCliente fil=(VFilaPedidoCliente) fila;
-			total+=(new ControladorFilaPedidoCliente(fil).euroADoble(fil.gettCoste().getText()))*Integer.parseInt(fil.gettUnidades().getText());
+			total+=(new ControladorFilaPedidoCliente(fil).euroADoble(fil.gettPrecio().getText()))*Integer.parseInt(fil.gettUnidades().getText());
 		}
 		lTotal.setText(formatoeuro.format(total));
 	}

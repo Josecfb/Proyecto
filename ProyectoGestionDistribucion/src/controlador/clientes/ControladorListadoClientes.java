@@ -22,7 +22,10 @@ public class ControladorListadoClientes implements ActionListener{
 	public ControladorListadoClientes(VListadoClientes listado) {
 		listar(listado);		
 	}
-
+	/**
+	 * Obtiene la lista con todos los clientes y llama al método muestra(filas de la ventana listado de clientes
+	 * @param listado Ventana listado de clientes
+	 */
 	private void listar(VListadoClientes listado) {
 		this.listado=listado;
 		GestorCliente gc=new GestorCliente();

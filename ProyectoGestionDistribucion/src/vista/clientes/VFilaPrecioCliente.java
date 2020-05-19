@@ -2,34 +2,32 @@ package vista.clientes;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
 import controlador.clientes.ControlaFilaPrecioCli;
 import model.Articulo;
 import model.Cliente;
-import model.PrecioCliente;
 import modelo.negocio.GestorArticulo;
-
 import java.awt.Component;
 import java.awt.Font;
 import java.util.List;
-
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class VFilaPrecioCliente extends JPanel {
 	private static final long serialVersionUID = 1396732755308443918L;
 	private Cliente cli;
+	private VFichaCliente vFicha;
 	private JTextField tCodArt;
 	private JTextField tPorcent;
 	private JTextField tPrecio;
 	private JLabel lPrecioReal;
 	private JComboBox<Articulo> comboArt;
-	private JButton bNuevo;
+	private JButton bBorrar;
 
-	public VFilaPrecioCliente(Cliente cli) {
+	public VFilaPrecioCliente(VFichaCliente vFicha,Cliente cli) {
+		this.vFicha=vFicha;
 		this.cli=cli;
 		setLayout(null);
 		
@@ -66,9 +64,10 @@ public class VFilaPrecioCliente extends JPanel {
 		add(comboArt);
 		
 		
-		bNuevo = new JButton("");
-		bNuevo.setBounds(679, 5, 20, 20);
-		add(bNuevo);
+		bBorrar = new JButton("");
+		bBorrar.setBounds(679, 5, 20, 20);
+		bBorrar.setIcon(new ImageIcon("src/img/borrarfila.png"));
+		add(bBorrar);
 		
 		lPrecioReal = new JLabel("");
 		lPrecioReal.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -78,7 +77,7 @@ public class VFilaPrecioCliente extends JPanel {
 	}
 	
 	public void establecerControlador(ControlaFilaPrecioCli controlador) {
-		bNuevo.addActionListener(controlador);
+		bBorrar.addActionListener(controlador);
 		Component[] componentes=getComponents();
 		JTextField jt=null;
 		for (Component componente:componentes) 
@@ -105,8 +104,8 @@ public class VFilaPrecioCliente extends JPanel {
 		return comboArt;
 	}
 
-	public JButton getbNuevo() {
-		return bNuevo;
+	public JButton getbBorrar() {
+		return bBorrar;
 	}
 
 	public JLabel getlPrecioReal() {
@@ -115,6 +114,10 @@ public class VFilaPrecioCliente extends JPanel {
 
 	public Cliente getCli() {
 		return cli;
+	}
+
+	public VFichaCliente getvFicha() {
+		return vFicha;
 	}
 	
 	

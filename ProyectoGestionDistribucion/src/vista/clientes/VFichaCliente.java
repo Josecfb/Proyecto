@@ -3,6 +3,7 @@ package vista.clientes;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.SystemColor;
 import java.text.NumberFormat;
 import java.util.List;
@@ -47,7 +48,7 @@ public class VFichaCliente extends JInternalFrame {
 	private JTextField tApellidos;
 	private JCheckBox chkConfirmado;
 	private JScrollPane scrollPrecios;
-	private JButton bNuevaFila;
+	private JButton bNuevaFila, bBorrar;
 	private JPanel panel;
 	private  NumberFormat formatoeuro,formatoPorcentaje;
 
@@ -58,18 +59,24 @@ public class VFichaCliente extends JInternalFrame {
 		formatoPorcentaje.setMinimumFractionDigits(2);
 		setAutoscrolls(true);
 		setBorder(UIManager.getBorder("InternalFrame.border"));
-		setBounds(100, 100, 997, 512);
+		setBounds(100, 100, 997, 541);
+		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/clientes.png"));
+		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
+		setFrameIcon(icones);
 		getContentPane().setLayout(null);
 		setResizable(false);
 		setClosable(true);
 		setMaximizable(false);
 		setIconifiable(true);
 		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-		setTitle("Ficha Cliente");
+		if (cli!=null)
+			setTitle("Ficha de "+cli.getNombre()+" "+cli.getApellidos());
+		else
+			setTitle("Nuevo Cliente");
 		
 		JTabbedPane pestanas = new JTabbedPane(JTabbedPane.TOP);
 		pestanas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pestanas.setBounds(25, 11, 800, 428);
+		pestanas.setBounds(93, 31, 800, 428);
 		getContentPane().add(pestanas);
 		
 		pestPrincipal = new JPanel();
@@ -273,6 +280,11 @@ public class VFichaCliente extends JInternalFrame {
 		bNuevaFila = new JButton("");
 		bNuevaFila.setIcon(new ImageIcon("src/img/nuevafila.png"));
 		toolBar.add(bNuevaFila);
+		
+		bBorrar = new JButton("");
+		bBorrar.setBounds(924, 445, 49, 51);
+		getContentPane().add(bBorrar);
+		bBorrar.setIcon(new ImageIcon(new ImageIcon("src/img/eliminar.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		if (cli!=null) {
 			llenaFicha(cli);
 			muestraFilasPrecios();
@@ -315,7 +327,7 @@ public class VFichaCliente extends JInternalFrame {
 		scrollPrecios.setViewportView(panel);
 		for (PrecioCliente filaPre:lPrecios) {
 			System.out.println(lPrecios.size());
-			VFilaPrecioCliente vFila=new VFilaPrecioCliente(cli);
+			VFilaPrecioCliente vFila=new VFilaPrecioCliente(this,cli);
 			ControlaFilaPrecioCli cfpc=new ControlaFilaPrecioCli(vFila);
 			vFila.establecerControlador(cfpc);
 			vFila.setPreferredSize(new Dimension(775,30));
@@ -343,13 +355,14 @@ public class VFichaCliente extends JInternalFrame {
 				((JComboBox) componente).getEditor().getEditorComponent().addFocusListener(cfc);
 		}
 		bNuevaFila.addActionListener(cfc);
+		bBorrar.addActionListener(cfc);
 		comboTipo.getEditor().getEditorComponent().addFocusListener(cfc);
 	}
 	
 	public void nuevaFilaPrecio() {
 		PrecioCliente fil = new PrecioCliente();
 		fil.setClienteBean(cli);
-		VFilaPrecioCliente vFilaPrecio=new VFilaPrecioCliente(cli);
+		VFilaPrecioCliente vFilaPrecio=new VFilaPrecioCliente(this,cli);
 		ControlaFilaPrecioCli controla=new ControlaFilaPrecioCli(vFilaPrecio);
 		vFilaPrecio.establecerControlador(controla);
 		panel.setPreferredSize(new Dimension(710,panel.getHeight()+23));
@@ -437,4 +450,9 @@ public class VFichaCliente extends JInternalFrame {
 	public JPanel getPanel() {
 		return panel;
 	}
+
+	public JButton getbBorrar() {
+		return bBorrar;
+	}
+	
 }

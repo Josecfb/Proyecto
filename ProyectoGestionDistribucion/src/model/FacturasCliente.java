@@ -20,8 +20,9 @@ public class FacturasCliente implements Serializable {
 	@Column(name="NUM")
 	private int num;
 
-	@Column(name="CLIENTE")
-	private int cliente;
+	@ManyToOne
+	@JoinColumn(name="CLIENTE")
+	private Cliente cliente;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA")
@@ -49,11 +50,11 @@ public class FacturasCliente implements Serializable {
 		this.num = num;
 	}
 
-	public int getCliente() {
+	public Cliente getCliente() {
 		return this.cliente;
 	}
 
-	public void setCliente(int cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 

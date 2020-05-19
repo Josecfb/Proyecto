@@ -24,8 +24,12 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==vFilaPre.getbBorrar()) {
+			
+			vFilaPre.getvFicha().getPanel().remove(vFilaPre);
+			vFilaPre.getvFicha().updateUI();
+		}
 		
 	}
 

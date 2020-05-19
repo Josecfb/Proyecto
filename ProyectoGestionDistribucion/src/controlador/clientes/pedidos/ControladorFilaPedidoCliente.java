@@ -56,15 +56,6 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.gettCod().setBackground(Color.WHITE);
 			return;
 		}
-		if (e.getSource()==vFilaPedido.gettCajas()) {
-			vFilaPedido.updateUI();
-			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
-			vFilaPedido.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaPedido.gettCajas().getText())*art.getUnidadesCaja()));
-			vFilaPedido.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaPedido.gettUnidades().getText())*euroADoble(vFilaPedido.gettPrecio().getText())));
-			vFilaPedido.gettCajas().setBackground(Color.WHITE);
-			vFilaPedido.getvPedido().actualizaTotal();
-			return;
-		}
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
 			campo.setBackground(Color.WHITE);

@@ -1,6 +1,7 @@
 package modelo.negocio;
 import java.util.List;
 
+import model.AlbaranCliente;
 import model.AlbaranProveedor;
 import model.Articulo;
 import model.Proveedor;
@@ -23,6 +24,10 @@ public class GestorArticulo {
 	}
 	public Articulo existe(int num) {
 		return da.existe(num);
+	}
+	
+	public Articulo existe(int num,Proveedor pro) {
+		return da.existe(num,pro);
 	}
 	/**
 	 * 
@@ -69,4 +74,7 @@ public class GestorArticulo {
 		da.actualizaArticulosAlbaranProve(albModif,masmenos);
 	}
 	
+	public void actualizaArticulosAlbaranCliente(AlbaranCliente albModif,int masmenos) {
+		da.actualizaArticulosAlbaranCliente(albModif,masmenos);
+	}
 }

@@ -1,6 +1,5 @@
 package vista.clientes.pedidos;
 
-
 import javax.swing.JInternalFrame;
 import javax.swing.JComboBox;
 
@@ -18,13 +17,13 @@ import com.toedter.calendar.JDateChooser;
 import controlador.clientes.pedidos.ControladorFilaPedidoCliente;
 import controlador.clientes.pedidos.ControladorPedidoCliente;
 import model.Cliente;
-import model.FilaPedidoProveedor;
 import model.FilasPedidosCliente;
 import model.PedidoCliente;
 import modelo.negocio.GestorCliente;
 
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
+
 import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -50,11 +49,14 @@ public class VPedidoCliente extends JInternalFrame {
 	public VPedidoCliente(PedidoCliente ped,VPedidosClientes vpedidos) {
 		this.vpedidos=vpedidos;
 		this.ped=ped;
+		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/pedidoproveedor.png"));
+		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
+		setFrameIcon(icones);
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoentero=NumberFormat.getIntegerInstance();
 		contrPedCli=new ControladorPedidoCliente(this);
 		this.ped=ped;
-		setBounds(100, 100, 759, 465);
+		setBounds(100, 100, 759, 525);
 		getContentPane().setLayout(null);
 		setResizable(false);
 		setClosable(true);
@@ -102,7 +104,7 @@ public class VPedidoCliente extends JInternalFrame {
 		lblNewLabel_1.setOpaque(true);
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBackground(new Color(0, 0, 128));
-		lblNewLabel_1.setBounds(24, 96, 45, 18);
+		lblNewLabel_1.setBounds(24, 105, 45, 18);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Nombre");
@@ -110,31 +112,23 @@ public class VPedidoCliente extends JInternalFrame {
 		lblNewLabel_2.setOpaque(true);
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setBackground(new Color(0, 0, 128));
-		lblNewLabel_2.setBounds(79, 96, 358, 18);
+		lblNewLabel_2.setBounds(79, 105, 358, 18);
 		getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Cajas");
-		lblNewLabel_3.setOpaque(true);
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3.setBackground(new Color(0, 0, 128));
-		lblNewLabel_3.setBounds(447, 96, 38, 18);
-		getContentPane().add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Unidades");
+		JLabel lblNewLabel_4 = new JLabel("Unid.");
 		lblNewLabel_4.setOpaque(true);
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_4.setBackground(new Color(0, 0, 128));
-		lblNewLabel_4.setBounds(495, 96, 29, 18);
+		lblNewLabel_4.setBounds(444, 104, 48, 18);
 		getContentPane().add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Coste");
+		JLabel lblNewLabel_5 = new JLabel("Precio");
 		lblNewLabel_5.setOpaque(true);
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_5.setBackground(new Color(0, 0, 128));
-		lblNewLabel_5.setBounds(534, 96, 64, 18);
+		lblNewLabel_5.setBounds(496, 104, 66, 18);
 		getContentPane().add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Total");
@@ -142,7 +136,7 @@ public class VPedidoCliente extends JInternalFrame {
 		lblNewLabel_6.setForeground(Color.WHITE);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_6.setBackground(new Color(0, 0, 128));
-		lblNewLabel_6.setBounds(608, 96, 76, 18);
+		lblNewLabel_6.setBounds(572, 104, 76, 18);
 		getContentPane().add(lblNewLabel_6);
 		
 		JLabel lNum = new JLabel("Numero");
@@ -206,13 +200,11 @@ public class VPedidoCliente extends JInternalFrame {
 		panel.setPreferredSize(new Dimension(710,filas.size()*23));
 		panel.setBackground(SystemColor.control);
 		panel.setBorder(null);
-		
-		int i=0;
+
 		scrollPendientes.setViewportView(panel);
 		double total=0;
 		ControladorFilaPedidoCliente cfpc =new ControladorFilaPedidoCliente(filaPed);
 		for (FilasPedidosCliente fil:filas) {
-			i++;
 			filaPed=new VFilaPedidoCliente(this,fil);
 			ControladorFilaPedidoCliente controla=new ControladorFilaPedidoCliente(filaPed);
 			filaPed.establecerControlador(controla);
@@ -220,8 +212,8 @@ public class VPedidoCliente extends JInternalFrame {
 			filaPed.gettCod().setText(String.valueOf(fil.getArticuloBean().getCod()));
 			filaPed.getArticulo().setSelectedItem(fil.getArticuloBean());
 			filaPed.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
-			filaPed.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
 			filaPed.gettPrecio().setText(formatoeuro.format(fil.getPrecio()));
+			System.out.println(fil.getPrecio());
 			filaPed.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getPrecio()));
 			panel.add(filaPed);
 			total+=cfpc.euroADoble(filaPed.gettPrecio().getText())*Integer.parseInt(filaPed.gettUnidades().getText());

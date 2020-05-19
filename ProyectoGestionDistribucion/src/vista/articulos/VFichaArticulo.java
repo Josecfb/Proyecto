@@ -52,8 +52,14 @@ public class VFichaArticulo extends JInternalFrame {
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		setBounds(100, 100, 870, 476);
+		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/articulos.png"));
+		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
+		setFrameIcon(icones);
 		getContentPane().setLayout(null);
-		setTitle("Ficha de Artículos");
+		if (art!=null)
+			setTitle("Ficha de "+art.getNombre());
+		else
+			setTitle("Nuevo Artículo");
 		setResizable(false);
 		setClosable(true);
 		setMaximizable(false);

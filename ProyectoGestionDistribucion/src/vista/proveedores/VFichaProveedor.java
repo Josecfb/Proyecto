@@ -1,6 +1,8 @@
 package vista.proveedores;
 
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
@@ -13,6 +15,8 @@ import javax.swing.JLabel;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -37,20 +41,27 @@ public class VFichaProveedor extends JInternalFrame {
 	private JTextField tSubcuenta;
 	private JTextField tNif;
 	private JPanel panel;
+	private JButton bBorrar;
 
 	public VFichaProveedor(Proveedor pro,VentanaPrincipal v) {
 		this.pro=pro;
 		this.v=v;
 		setAutoscrolls(true);
 		setBorder(UIManager.getBorder("InternalFrame.border"));
-		setBounds(100, 100, 997, 439);
+		setBounds(100, 100, 997, 481);
+		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/proveedores.png"));
+		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
+		setFrameIcon(icones);
 		getContentPane().setLayout(null);
 		setResizable(false);
 		setClosable(true);
 		setMaximizable(false);
 		setIconifiable(true);
 		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-		setTitle("Ficha Proveedor");
+		if (pro!=null)
+			setTitle("Ficha de "+pro.getNombre());
+		else
+			setTitle("Nuevo Proveedor");
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -192,6 +203,10 @@ public class VFichaProveedor extends JInternalFrame {
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Facturas", null, panel_1, null);
+		bBorrar = new JButton("");
+		bBorrar.setBounds(924, 385, 49, 51);
+		getContentPane().add(bBorrar);
+		bBorrar.setIcon(new ImageIcon(new ImageIcon("src/img/eliminar.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		if (pro!=null)
 			llenaFicha(pro);
 		
@@ -224,6 +239,7 @@ public class VFichaProveedor extends JInternalFrame {
 				componente.addFocusListener(manejador);
 				componente.addKeyListener(manejador);
 			}
+		bBorrar.addActionListener(manejador);
 	}
 	public JTextField gettDireccion() {
 		return tDireccion;
@@ -265,6 +281,10 @@ public class VFichaProveedor extends JInternalFrame {
 
 	public VentanaPrincipal getV() {
 		return v;
+	}
+
+	public JButton getbBorrar() {
+		return bBorrar;
 	}
 
 	

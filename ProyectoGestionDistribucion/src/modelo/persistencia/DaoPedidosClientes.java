@@ -92,14 +92,9 @@ public class DaoPedidosClientes {
 		antiguo.setConfirmado(ped.getConfirmado());
 		antiguo.setEnviado(ped.getEnviado());
 		antiguo.setAlbaranCliente(ped.getAlbaranCliente());
-		for (FilasPedidosCliente fi:antiguo.getFilasPedidosClientes()) {
-			FilasPedidosCliente fil=em.find(FilasPedidosCliente.class, fi.getId());
-			em.remove(fil);
-		}
+		antiguo.getFilasPedidosClientes().clear();
 		em.getTransaction().commit();
 		em.getTransaction().begin();
-		for (FilasPedidosCliente fil:ped.getFilasPedidosClientes())
-			em.persist(fil);
 		antiguo.setFilasPedidosClientes(ped.getFilasPedidosClientes());
 		em.merge(antiguo);
 		em.getTransaction().commit();

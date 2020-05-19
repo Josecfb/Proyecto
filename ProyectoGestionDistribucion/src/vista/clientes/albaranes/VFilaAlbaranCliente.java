@@ -1,29 +1,24 @@
-package vista.proveedores.pedidos;
+package vista.clientes.albaranes;
 
 import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
-import controlador.proveedores.pedidos.ControladorFilaPedidoProveedor;
+import controlador.clientes.albaranes.CtrlFilaAlbCliente;
 import model.Articulo;
-import model.FilaPedidoProveedor;
+import model.FilasAlbaranCliente;
 import model.PedidoProveedor;
 import modelo.negocio.GestorArticulo;
-import vista.VentanaPrincipal;
-
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.SystemColor;
-import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class VFilaPedidoProveedor extends JPanel {
+public class VFilaAlbaranCliente extends JPanel {
 
 	private static final long serialVersionUID = -3446443914975183188L;
 	private JTextField tCod;
@@ -34,12 +29,12 @@ public class VFilaPedidoProveedor extends JPanel {
 	private JTextField tTotal;
 	private JButton bBorrar;
 	private PedidoProveedor ped;
-	private VPedidoProveedor vPedido;
-	private FilaPedidoProveedor fila;
+	private VAlbaranCliente vAlbaran;
+	private FilasAlbaranCliente fila;
 
-	public VFilaPedidoProveedor(VPedidoProveedor vPedido,FilaPedidoProveedor fila) {
+	public VFilaAlbaranCliente(VAlbaranCliente vAlbaran,FilasAlbaranCliente fila) {
 		this.fila=fila;
-		this.vPedido=vPedido;
+		this.vAlbaran=vAlbaran;
 		setBackground(SystemColor.control);
 		setLayout(null);
 		
@@ -52,7 +47,7 @@ public class VFilaPedidoProveedor extends JPanel {
 		articulo = new JComboBox<Articulo>();
 		articulo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		asignaArticulosCombo();
-		//articulo.setEditable(true);
+		articulo.setEditable(true);
 		articulo.setSelectedItem(null);
 		articulo.setBounds(67, 1, 363, 20);
 		articulo.setAutoscrolls(true);
@@ -98,12 +93,12 @@ public class VFilaPedidoProveedor extends JPanel {
 
 	private void asignaArticulosCombo() {
 		
-		List<Articulo> articulos=new GestorArticulo().deUnProveedor(vPedido.getPed().getProveedore());
+		List<Articulo> articulos=new GestorArticulo().listar("");
 			for (Articulo art:articulos)
 				articulo.addItem(art);
 	}
 	
-	public void establecerControlador(ControladorFilaPedidoProveedor controla) {
+	public void establecerControlador(CtrlFilaAlbCliente controla) {
 		Component[] componentes=getComponents();
 		JTextField jt=null;
 		for (Component componente:componentes) 
@@ -149,11 +144,11 @@ public class VFilaPedidoProveedor extends JPanel {
 		return bBorrar;
 	}
 
-	public VPedidoProveedor getvPedido() {
-		return vPedido;
+	public VAlbaranCliente getvAlbaran() {
+		return vAlbaran;
 	}
 
-	public FilaPedidoProveedor getFila() {
+	public FilasAlbaranCliente getFila() {
 		return fila;
 	}
 	

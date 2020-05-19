@@ -3,9 +3,11 @@ package modelo.persistencia;
 import java.util.List;
 import javax.persistence.EntityManager;
 
+import model.AlbaranCliente;
 import model.AlbaranProveedor;
 import model.Articulo;
 import model.FilaAlbaranProveedor;
+import model.FilasAlbaranCliente;
 import model.Proveedor;
 
 public class DaoArticulo {
@@ -54,6 +56,18 @@ public class DaoArticulo {
 		return art;
 	}
 	
+	public Articulo existe(int num,Proveedor pro) {
+		Articulo art;
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		if (em==null)
+			return null;
+		else {
+			art=em.createQuery("Select art from Articulo art where art.proveedorBean=:pro and art.cod=:num",Articulo.class).setParameter("num", num).setParameter("pro", pro).getSingleResult();
+		}
+		return art;
+	}
+	
 	public int modificar(Articulo art) {
 		Articulo antiguo=existe(art.getCod());
 		em.getTransaction().begin();
@@ -99,5 +113,20 @@ public class DaoArticulo {
 		em.getTransaction().commit();
 		em.close();
 		
+	}
+	
+	public void actualizaArticulosAlbaranCliente(AlbaranCliente albModif,int masmenos) {
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		em.getTransaction().begin();
+		Articulo artAlb;
+		int cantidad;
+		for (FilasAlbaranCliente fila:albModif.getFilasAlbaranClientes()) {
+			artAlb=fila.getArticuloBean();
+			cantidad=fila.getCantidad();
+			em.createQuery("Update Articulo art set art.stock = art.stock+ :cantidad*:masmenos where art=:artAlb").setParameter("cantidad", cantidad).setParameter("masmenos", masmenos).setParameter("artAlb", artAlb).executeUpdate();
+		}
+		em.getTransaction().commit();
+		em.close();
 	}
 }

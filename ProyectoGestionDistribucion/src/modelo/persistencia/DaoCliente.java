@@ -71,4 +71,14 @@ public class DaoCliente {
 		em.close();
 		return 0;
 	}
+	
+	public void borrarCliente(Cliente cli) {
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		Cliente borrar=em.find(Cliente.class, cli.getNumero());
+		em.getTransaction().begin();
+		em.remove(borrar);
+		em.getTransaction().commit();
+		em.close();
+	}
 }

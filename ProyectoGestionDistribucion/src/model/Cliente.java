@@ -73,6 +73,10 @@ public class Cliente implements Serializable {
 	//bi-directional many-to-one association to PreciosCliente
 	@OneToMany(mappedBy="clienteBean",cascade = CascadeType.ALL)
 	private List<PrecioCliente> preciosClientes;
+	
+	//bi-directional many-to-one association to FacturasProveedor
+		@OneToMany(mappedBy="cliente")
+		private List<FacturasCliente> facturasCliente;
 
 	public Cliente() {
 	}
@@ -263,6 +267,16 @@ public class Cliente implements Serializable {
 		preciosCliente.setClienteBean(null);
 
 		return preciosCliente;
+	}
+	
+	
+
+	public List<FacturasCliente> getFacturasCliente() {
+		return facturasCliente;
+	}
+
+	public void setFacturasCliente(List<FacturasCliente> facturasCliente) {
+		this.facturasCliente = facturasCliente;
 	}
 
 	@Override

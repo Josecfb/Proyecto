@@ -2,6 +2,8 @@ package modelo.persistencia;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+
+import model.Cliente;
 import model.Proveedor;
 
 public class DaoProveedor {
@@ -66,5 +68,15 @@ public class DaoProveedor {
 		em.getTransaction().commit();
 		em.close();
 		return 0;
+	}
+	
+	public void borrarProveedor(Proveedor pro) {
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		Proveedor borrar=em.find(Proveedor.class, pro.getNumero());
+		em.getTransaction().begin();
+		em.remove(borrar);
+		em.getTransaction().commit();
+		em.close();
 	}
 }

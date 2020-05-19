@@ -47,4 +47,18 @@ public class GestorCliente {
 		ok[2]=cli.getEmail().length()>0;
 		return ok;
 	}
+
+	public String borrarCliente(Cliente cli) {
+		if (cli!=null) {
+			if (cli.getAlbaranClientes().size()>0) 
+				return "No se puede borrar, tiene albaranes";
+			if (cli.getPedidosClientes().size()>0) 
+				return "No se puede borrar, tiene pedidos";
+			if (cli.getFacturasCliente().size()>0) 
+				return "No se puede borrar, tiene facturas";
+			dc.borrarCliente(cli);
+			return "Cliente borrado";
+		}
+		return "No hay ningún cliente que borrar";
+	}
 }

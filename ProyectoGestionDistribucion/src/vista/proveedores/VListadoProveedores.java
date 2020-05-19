@@ -51,6 +51,9 @@ public class VListadoProveedores extends JInternalFrame {
 		setTitle("Listado de Proveedores");
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		setBounds(10, 10, 1120, 600);
+		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/proveedores.png"));
+		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
+		setFrameIcon(icones);
 		getContentPane().setLayout(null);
 		inicializar();
 

@@ -21,8 +21,8 @@ public class AlbaranCliente implements Serializable {
 	@Column(name="NUM")
 	private int num;
 
-	@Column(name="ENTREGADO")
-	private byte entregado;
+	@Column(name="FACTURADO")
+	private boolean facturado;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA")
@@ -32,6 +32,9 @@ public class AlbaranCliente implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="CLIENTE")
 	private Cliente clienteBean;
+	
+	@Column(name="ACTUALIZADO_ALMACEN")
+	private boolean actualizadoAlmacen;
 
 	//bi-directional many-to-one association to FacturasCliente
 	@ManyToOne
@@ -57,12 +60,12 @@ public class AlbaranCliente implements Serializable {
 		this.num = num;
 	}
 
-	public byte getEntregado() {
-		return this.entregado;
+	public boolean getFacturado() {
+		return this.facturado;
 	}
 
-	public void setEntregado(byte entregado) {
-		this.entregado = entregado;
+	public void setFacturado(boolean facturado) {
+		this.facturado = facturado;
 	}
 
 	public Date getFecha() {
@@ -132,5 +135,15 @@ public class AlbaranCliente implements Serializable {
 
 		return pedidosCliente;
 	}
+
+	public boolean isActualizadoAlmacen() {
+		return actualizadoAlmacen;
+	}
+
+	public void setActualizadoAlmacen(boolean actualizadoAlmacen) {
+		this.actualizadoAlmacen = actualizadoAlmacen;
+	}
+	
+	
 
 }

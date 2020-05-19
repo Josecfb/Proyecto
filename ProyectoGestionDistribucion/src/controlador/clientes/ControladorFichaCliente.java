@@ -120,8 +120,6 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			filasPrecio.add(filaModif);
 		}
 		cliModif.setPreciosClientes(filasPrecio);
-		for(PrecioCliente fila:cliModif.getPreciosClientes())
-			System.out.println(fila.getArticuloBean()+" "+fila.getPrecio());
 	}
 	
 	private void asignaCamposFila(VFilaPrecioCliente fila,PrecioCliente filaModif,Cliente cliModif) {
@@ -206,7 +204,17 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		if (e.getSource()==fichaCliente.getbNuevaFila()) {
 			fichaCliente.nuevaFilaPrecio();
 		}
+		if (e.getSource()==fichaCliente.getbBorrar()) {
+			borrarCliente();
+		}
 		
+	}
+	
+
+	private void borrarCliente() {
+		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Está seguro que quiere eliminar este cliente premanentemente?");
+		if (res==JOptionPane.YES_OPTION)
+			JOptionPane.showMessageDialog(fichaCliente, gc.borrarCliente(fichaCliente.getCli()), "Borrar cliente", JOptionPane.INFORMATION_MESSAGE);
 	}
 	@Override
 	public void internalFrameDeactivated(InternalFrameEvent e) {

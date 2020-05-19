@@ -47,6 +47,9 @@ public class VListadoArticulos extends JInternalFrame {
 		setTitle("Listado de Art\u00EDculos");
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		setBounds(10, 10, 1120, 600);
+		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/articulos.png"));
+		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
+		setFrameIcon(icones);
 		getContentPane().setLayout(null);
 		inicializar();
 

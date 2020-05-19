@@ -1,5 +1,7 @@
 package modelo.negocio;
 import java.util.List;
+
+import model.Cliente;
 import model.Proveedor;
 import modelo.persistencia.DaoProveedor;
 
@@ -43,6 +45,21 @@ public class GestorProveedor {
 		ok[1]=pro.getNif().length()>0;
 		ok[2]=pro.getEmail().length()>0;
 		return ok;
+	}
+	
+	public String borrarProveedor(Proveedor pro) {
+		DaoProveedor dp=new DaoProveedor();
+		if (pro!=null) {
+			if (pro.getAlbaranesProveedors().size()>0) 
+				return "No se puede borrar, tiene albaranes";
+			if (pro.getPedidosProveedors().size()>0) 
+				return "No se puede borrar, tiene pedidos";
+			if (pro.getFacturasProveedors().size()>0) 
+				return "No se puede borrar, tiene facturas";
+			dp.borrarProveedor(pro);
+			return "Proveedor borrado";
+		}
+		return "No hay ningún cliente que borrar";
 	}
 	
 }

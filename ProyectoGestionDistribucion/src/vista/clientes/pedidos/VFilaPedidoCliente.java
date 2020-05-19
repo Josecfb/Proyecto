@@ -28,7 +28,6 @@ public class VFilaPedidoCliente extends JPanel {
 	private JTextField tCod;
 	private JComboBox<Articulo> articulo;
 	private JTextField tUnidades;
-	private JTextField tCajas;
 	private JTextField tPrecio;
 	private JTextField tTotal;
 	private JButton bBorrar;
@@ -54,41 +53,38 @@ public class VFilaPedidoCliente extends JPanel {
 		articulo.setSelectedItem(null);
 		articulo.setBounds(67, 1, 363, 20);
 		articulo.setAutoscrolls(true);
+		GestorArticulo ga=new GestorArticulo();
+		List<Articulo> artis=ga.listar("");
+		for (Articulo arti:artis)
+			articulo.addItem(arti);
 		AutoCompleteDecorator.decorate(articulo);
 		add(articulo);
 		
 		tUnidades = new JTextField();
 		tUnidades.setColumns(10);
-		tUnidades.setBounds(482, 1, 32, 20);
+		tUnidades.setBounds(440, 1, 32, 20);
 		tUnidades.setHorizontalAlignment(JTextField.RIGHT);
 		tUnidades.setText("0");
 		tUnidades.setFocusable(false);
 		add(tUnidades);
 		
-		tCajas = new JTextField();
-		tCajas.setColumns(10);
-		tCajas.setBounds(440, 1, 32, 20);
-		tCajas.setHorizontalAlignment(JTextField.RIGHT);
-		tCajas.setText("0");
-		add(tCajas);
-		
 		tPrecio = new JTextField();
 		tPrecio.setColumns(10);
-		tPrecio.setBounds(524, 1, 64, 20);
+		tPrecio.setBounds(482, 1, 64, 20);
 		tPrecio.setHorizontalAlignment(JTextField.RIGHT);
 		tPrecio.setText("0,00 €");
 		add(tPrecio);
 		
 		tTotal = new JTextField();
 		tTotal.setColumns(10);
-		tTotal.setBounds(598, 1, 76, 20);
+		tTotal.setBounds(556, 1, 76, 20);
 		tTotal.setHorizontalAlignment(JTextField.RIGHT);
 		tTotal.setFocusable(false);
 		tTotal.setText("0,00 €");
 		add(tTotal);
 		
 		bBorrar = new JButton("");
-		bBorrar.setBounds(681, 0, 20, 20);
+		bBorrar.setBounds(639, 0, 20, 20);
 		bBorrar.setIcon(new ImageIcon("src/img/borrarfila.png"));
 		add(bBorrar);
 		setVisible(true);
@@ -122,9 +118,6 @@ public class VFilaPedidoCliente extends JPanel {
 		return tUnidades;
 	}
 
-	public JTextField gettCajas() {
-		return tCajas;
-	}
 
 	public JTextField gettPrecio() {
 		return tPrecio;

@@ -42,7 +42,10 @@ public class VListadoClientes extends JInternalFrame {
 	private JButton bFacturas;
 	private VentanaPrincipal v;
 
-
+	/**
+	 * Constuctor de la ventana Listado de eClientes
+	 * @param v Ventana Principal
+	 */
 	public VListadoClientes(VentanaPrincipal v) {
 		this.v=v;
 		setResizable(false);
@@ -52,10 +55,15 @@ public class VListadoClientes extends JInternalFrame {
 		setTitle("Listadio de Clientes");
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		setBounds(10, 10, 1120, 600);
+		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/clientes.png"));
+		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
+		setFrameIcon(icones);
 		getContentPane().setLayout(null);
 		inicializar();
 	}
-	
+	/**
+	 * Inicializa los componentes de la ventana Listado de Clientes
+	 */
 	private void inicializar() {
 		Color fondo=new Color(100,100,100);
 		numero=new JLabel("Número");
@@ -195,9 +203,12 @@ public class VListadoClientes extends JInternalFrame {
 		bFacturas.setHorizontalTextPosition(SwingConstants.CENTER );
 		bFacturas.setVerticalTextPosition( SwingConstants.BOTTOM );
 		
-		ControladorListadoClientes controladorListadoClientes=new ControladorListadoClientes(this);		
+		new ControladorListadoClientes(this);		
 	}
-	
+	/**
+	 * Muestra las filas con los datos de los clientes
+	 * @param filas Lista con todos los clientes
+	 */
 	public void muestra(List<Cliente> filas) {
 		
 		panel = new JPanel();
@@ -225,7 +236,10 @@ public class VListadoClientes extends JInternalFrame {
 			panel.add(fila);
 		}
 	}
-	
+	/**
+	 * Establece en controlador para los botones del listado de clientes
+	 * @param controlador del listado de clientes implementa ActionListener
+	 */
 	public void establecerControlador(ControladorListadoClientes controlador) {
 		bFiltrar.addActionListener(controlador);
 		bNuevo.addActionListener(controlador);

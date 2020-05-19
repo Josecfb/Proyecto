@@ -8,6 +8,7 @@ import java.awt.event.FocusListener;
 import java.text.NumberFormat;
 import javax.swing.JTextField;
 import model.Articulo;
+import model.Proveedor;
 import modelo.negocio.GestorArticulo;
 import vista.proveedores.pedidos.VFilaPedidoProveedor;
 
@@ -51,8 +52,9 @@ public class ControladorFilaPedidoProveedor implements FocusListener, ActionList
 		
 		if (e.getSource()==vFilaPedido.gettCod()) {
 			vFilaPedido.updateUI();
+			GestorArticulo ga=new GestorArticulo();
 			if (!vFilaPedido.gettCod().getText().equals("0"))
-				vFilaPedido.getArticulo().setSelectedItem(new GestorArticulo().existe(Integer.parseInt(vFilaPedido.gettCod().getText())));
+				vFilaPedido.getArticulo().setSelectedItem(ga.existe(Integer.parseInt(vFilaPedido.gettCod().getText()),(Proveedor)vFilaPedido.getvPedido().getComboProveedor().getSelectedItem()));
 			vFilaPedido.gettCod().setBackground(Color.WHITE);
 			return;
 		}

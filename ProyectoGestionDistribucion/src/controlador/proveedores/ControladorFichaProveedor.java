@@ -2,6 +2,8 @@ package controlador.proveedores;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -22,7 +24,7 @@ import modelo.persistencia.DaoProvincia;
 import vista.proveedores.VFichaProveedor;
 import vista.proveedores.VListadoProveedores;
 
-public class ControladorFichaProveedor implements InternalFrameListener, KeyListener, FocusListener{
+public class ControladorFichaProveedor implements InternalFrameListener, KeyListener, FocusListener, ActionListener{
 	private VFichaProveedor fichaProveedor;
 	
 	public ControladorFichaProveedor(VFichaProveedor fichaProveedor) {
@@ -199,6 +201,20 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 		if (e.getSource()==fichaProveedor.gettNif())
 			if(fichaProveedor.gettNif().getText().length()==9)
 				e.consume();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==fichaProveedor.getbBorrar()) {
+			borrarProveedor();
+		}
+	}
+	
+	private void borrarProveedor() {
+		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Está seguro que quiere eliminar este proveedor premanentemente?");
+		GestorProveedor gp=new GestorProveedor();
+		if (res==JOptionPane.YES_OPTION)
+			JOptionPane.showMessageDialog(fichaProveedor, gp.borrarProveedor(fichaProveedor.getPro()), "Borrar proveedor", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }

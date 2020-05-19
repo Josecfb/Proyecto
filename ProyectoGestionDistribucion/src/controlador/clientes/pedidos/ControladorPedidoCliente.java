@@ -114,6 +114,7 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 	private void asignaCamposFila(VFilaPedidoCliente fila,FilasPedidosCliente filaModif,PedidoCliente pedModif) {
 		fila.updateUI();
 		fila.getArticulo().requestFocus();
+		System.out.println(fila.getArticulo().getSelectedItem());
 		Articulo arti=(Articulo) fila.getArticulo().getSelectedItem();
 		filaModif.setPedidosCliente(pedModif);
 		filaModif.setArticuloBean(arti);

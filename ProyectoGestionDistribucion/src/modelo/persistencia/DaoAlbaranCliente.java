@@ -85,7 +85,8 @@ public class DaoAlbaranCliente {
 		abrir();
 		if (em==null) return null;
 		List<Object[]> filas;
-		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad),fil.articuloBean.coste from FilaPedidoProveedor fil where fil.pedidosProveedor.albaranesProveedor=:alb group by fil.articuloBean").setParameter("alb", alb).getResultList();
+		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad),fil.precio from FilasPedidosCliente fil where fil.pedidosCliente.albaranCliente=:alb group by fil.articuloBean").setParameter("alb", alb).getResultList();
+		System.out.println("numero de filas para albaran generado= "+filas.size());
 		for (Object[] fila:filas) {
 			Articulo art=(Articulo) fila[0];
 			FilasAlbaranCliente filaAlb=new FilasAlbaranCliente();

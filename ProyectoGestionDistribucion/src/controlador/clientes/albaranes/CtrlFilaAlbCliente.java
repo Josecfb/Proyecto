@@ -48,7 +48,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener{
 			art=(Articulo) vFilaAlb.getArticulo().getSelectedItem();
 			vFilaAlb.getFila().setArticuloBean(art);
 			vFilaAlb.updateUI();
-			vFilaAlb.gettCoste().setText(formatoeuro.format(art.getCoste())); 
+			vFilaAlb.gettPrecio().setText(formatoeuro.format(vFilaAlb.getFila().getPrecio())); 
 			vFilaAlb.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaAlb.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
 			return;
@@ -65,7 +65,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener{
 			vFilaAlb.updateUI();
 			art=(Articulo) vFilaAlb.getArticulo().getSelectedItem();
 			vFilaAlb.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaAlb.gettCajas().getText())*art.getUnidadesCaja()));
-			vFilaAlb.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaAlb.gettUnidades().getText())*euroADoble(vFilaAlb.gettCoste().getText())));
+			vFilaAlb.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaAlb.gettUnidades().getText())*euroADoble(vFilaAlb.gettPrecio().getText())));
 			vFilaAlb.gettCajas().setBackground(Color.WHITE);
 			vFilaAlb.getvAlbaran().actualizaTotal();
 			return;

@@ -5,20 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.text.NumberFormat;
 import javax.swing.JTextField;
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
 import vista.clientes.pedidos.VFilaPedidoCliente;
-import vista.proveedores.pedidos.VFilaPedidoProveedor;
 
 public class ControladorFilaPedidoCliente implements FocusListener, ActionListener{
 	private VFilaPedidoCliente vFilaPedido;
-	private NumberFormat formatoeuro;
 	
 	public ControladorFilaPedidoCliente(VFilaPedidoCliente vFilaPedido) {
 		this.vFilaPedido=vFilaPedido;
-		formatoeuro = NumberFormat.getCurrencyInstance();
 	}
 	
 

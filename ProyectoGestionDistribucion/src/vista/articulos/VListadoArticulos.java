@@ -4,6 +4,7 @@ package vista.articulos;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.text.NumberFormat;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ import javax.swing.JToggleButton;
 public class VListadoArticulos extends JInternalFrame {
 
 	private static final long serialVersionUID = -4178570588145846454L;
+	private NumberFormat formatoeuro;
 	private VentanaPrincipal v;
 	private JScrollPane scroll;
 	private VFilaListadoArticulos fila;
@@ -40,6 +42,7 @@ public class VListadoArticulos extends JInternalFrame {
 
 
 	public VListadoArticulos(VentanaPrincipal v) {
+		formatoeuro = NumberFormat.getCurrencyInstance();
 		this.v=v;
 		setResizable(false);
 		setClosable(true);
@@ -190,7 +193,7 @@ public class VListadoArticulos extends JInternalFrame {
 		scroll.setViewportView(panel);
 		for (Articulo arti:filas) {
 			i++;
-			fila=new VFilaListadoArticulos(v);
+			fila=new VFilaListadoArticulos(this);
 			
 			ControlaFilaListadoArticulos controlaFila=new ControlaFilaListadoArticulos(fila);
 			fila.establecerControlador(controlaFila);
@@ -200,9 +203,9 @@ public class VListadoArticulos extends JInternalFrame {
 			fila.getcProv().setText(arti.getCodpro());
 			fila.getNombre().setText(arti.getNombre());
 			fila.getFamilia().setText(arti.getFamiliaBean().getNombre());
-			fila.getCoste().setText(String.valueOf(arti.getCoste()));
-			fila.getPrecioMay().setText(String.valueOf(arti.getPrecioMayorista()));
-			fila.getPrecioMin().setText(String.valueOf(arti.getPrecioMinorista()));
+			fila.getCoste().setText(formatoeuro.format(arti.getCoste()));
+			fila.getPrecioMay().setText(formatoeuro.format(arti.getPrecioMayorista()));
+			fila.getPrecioMin().setText(formatoeuro.format(arti.getPrecioMinorista()));
 			fila.getStock().setText(String.valueOf(arti.getStock()));
 			fila.getStockMin().setText(String.valueOf(arti.getStockMinimo()));
 			panel.add(fila);

@@ -211,13 +211,10 @@ public class VPedidoProveedor extends JInternalFrame {
 		panel.setPreferredSize(new Dimension(710,filas.size()*23));
 		panel.setBackground(SystemColor.control);
 		panel.setBorder(null);
-		
-		int i=0;
 		scrollPendientes.setViewportView(panel);
 		double total=0;
 		ControladorFilaPedidoProveedor cfpp =new ControladorFilaPedidoProveedor(filaPed);
 		for (FilaPedidoProveedor fil:filas) {
-			i++;
 			filaPed=new VFilaPedidoProveedor(this,fil);
 			ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(filaPed);
 			filaPed.establecerControlador(controla);

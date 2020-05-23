@@ -57,10 +57,7 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 		if (ok==0) {
 			ControladorAlbaranesProveedores cap = new ControladorAlbaranesProveedores(vAlbaran.getvAlbsPro());
 			cap.listar(vAlbaran.getvAlbsPro());
-			if (albModif.getActualizadoAlmacen())
-				gap.actualizaAlmacen(albModif,1);
-			else
-				gap.actualizaAlmacen(albModif,-1);
+			
 			
 		}
 //		//else 
@@ -165,6 +162,10 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 		if (e.getSource()==vAlbaran.getbNuevaFila())
 			vAlbaran.nuevaFila();
 		if (e.getSource()==vAlbaran.getChecAlmacen()) {
+			if (vAlbaran.getChecAlmacen().isSelected())
+				gap.actualizaAlmacen(vAlbaran.getAlb(),1);
+			else
+				gap.actualizaAlmacen(vAlbaran.getAlb(),-1);
 			modificaAlbaran();
 			
 			vAlbaran.getChecAlmacen().requestFocus();

@@ -27,7 +27,6 @@ public class VPedidosProveedores extends JInternalFrame {
 	private JPanel panelPendientes, panelEnviados, panelRecibidos;
 	private JScrollPane scrollPendientes, scrollEnviados, scrollRecibidos;
 	private VFilaPedidoPendienteProveedor filaPed;
-	//private NumberFormat formatoeuro;
 	private VentanaPrincipal v;
 	private JButton bNuevoPendiente;
 
@@ -78,7 +77,7 @@ public class VPedidosProveedores extends JInternalFrame {
 		scrollRecibidos = new JScrollPane();
 		scrollRecibidos.setBounds(10, 11, 783, 439);
 		pRecibidos.add(scrollRecibidos);
-		ControladorPedidosProveedores cpp=new ControladorPedidosProveedores(this);
+		new ControladorPedidosProveedores(this);
 	}
 	
 	public void muestraPendientes(List<PedidoProveedor> lista) {

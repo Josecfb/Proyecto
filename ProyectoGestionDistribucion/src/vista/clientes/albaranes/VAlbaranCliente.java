@@ -137,7 +137,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		lblNewLabel_4.setBounds(510, 102, 29, 18);
 		getContentPane().add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Coste");
+		JLabel lblNewLabel_5 = new JLabel("Precio");
 		lblNewLabel_5.setOpaque(true);
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -164,7 +164,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		tNumAlb.setFocusable(false);
 		getContentPane().add(tNumAlb);
 		
-		checAlmacen = new JCheckBox("Alta almacen");
+		checAlmacen = new JCheckBox("Baja almacen");
 		checAlmacen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		checAlmacen.setBounds(311, 61, 141, 23);
 		getContentPane().add(checAlmacen);
@@ -242,14 +242,14 @@ public class VAlbaranCliente extends JInternalFrame {
 			vFilaAlb.getArticulo().setSelectedItem(fil.getArticuloBean());
 			vFilaAlb.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
 			vFilaAlb.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
-			vFilaAlb.gettCoste().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
-			vFilaAlb.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
+			vFilaAlb.gettPrecio().setText(formatoeuro.format(fil.getPrecio()));
+			vFilaAlb.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getPrecio()));
 			if (albaran.isActualizadoAlmacen()) {
 				vFilaAlb.gettCod().setFocusable(false);
 				vFilaAlb.getArticulo().setEnabled(false);
 				vFilaAlb.gettUnidades().setFocusable(false);
 				vFilaAlb.gettCajas().setFocusable(false);
-				vFilaAlb.gettCoste().setFocusable(false);
+				vFilaAlb.gettPrecio().setFocusable(false);
 				vFilaAlb.gettTotal().setFocusable(false);
 				vFilaAlb.getbBorrar().setEnabled(false);
 			}
@@ -265,7 +265,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		double total=0;
 		for (Component fila:filas) {
 			VFilaAlbaranCliente fil=(VFilaAlbaranCliente) fila;
-			total+=(new CtrlFilaAlbCliente(fil).euroADoble(fil.gettCoste().getText()))*Integer.parseInt(fil.gettUnidades().getText());
+			total+=(new CtrlFilaAlbCliente(fil).euroADoble(fil.gettPrecio().getText()))*Integer.parseInt(fil.gettUnidades().getText());
 		}
 		lBase.setText(formatoeuro.format(total));
 		lIva.setText(formatoeuro.format(total*0.1));

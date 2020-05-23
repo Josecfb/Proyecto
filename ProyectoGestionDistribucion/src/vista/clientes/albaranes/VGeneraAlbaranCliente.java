@@ -12,17 +12,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import controlador.clientes.albaranes.CtrlGenAlbCli;
 import model.Cliente;
-import model.PedidoProveedor;
+import model.PedidoCliente;
 import modelo.negocio.GestorCliente;
 import vista.VentanaPrincipal;
 import javax.swing.JButton;
 
 public class VGeneraAlbaranCliente extends JInternalFrame {
-
 	private static final long serialVersionUID = -8073649338631908268L;
 	private VentanaPrincipal v;
 	private JComboBox<Cliente> comboCliente;
-	private JLabel lProve, linea1,linea2;
+	private JLabel lCliente, linea1,linea2;
 	private JButton bAceptar, bCancelar, bSiguiente;
 	private JPanel panelFila;
 	private JScrollPane scrollPane;
@@ -44,10 +43,10 @@ public class VGeneraAlbaranCliente extends JInternalFrame {
 		comboCliente.setSelectedItem(null);
 		getContentPane().add(comboCliente);
 		
-		lProve = new JLabel("Proveedor");
-		lProve.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lProve.setBounds(53, 145, 86, 25);
-		getContentPane().add(lProve);
+		lCliente = new JLabel("Cliente");
+		lCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lCliente.setBounds(84, 145, 55, 25);
+		getContentPane().add(lCliente);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(154, 86, 420, 188);
@@ -65,12 +64,12 @@ public class VGeneraAlbaranCliente extends JInternalFrame {
 		bCancelar.setBounds(423, 304, 123, 30);
 		getContentPane().add(bCancelar);
 		
-		linea1 = new JLabel("Este asistente le ayudar\u00E1 a generar el albar\u00E1n correspondiente a los pedidos realizados a un proveedor");
+		linea1 = new JLabel("Este asistente le ayudar\u00E1 a generar el albar\u00E1n correspondiente a los pedidos realizados a un cliente");
 		linea1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		linea1.setBounds(53, 11, 631, 25);
 		getContentPane().add(linea1);
 		
-		linea2 = new JLabel("Comienze seleccionando el proveedor y pulse el bot\u00F3n siguiente");
+		linea2 = new JLabel("Comienze seleccionando el cliente y pulse el bot\u00F3n siguiente");
 		linea2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		linea2.setBounds(53, 35, 589, 25);
 		getContentPane().add(linea2);
@@ -79,16 +78,16 @@ public class VGeneraAlbaranCliente extends JInternalFrame {
 		bSiguiente.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		bSiguiente.setBounds(174, 304, 123, 30);
 		getContentPane().add(bSiguiente);
-		setTitle("Genera Nuevo Albaran Proveedor");
+		setTitle("Genera Nuevo Albaran Cliente");
 
 	}
 
-	public void muestraPedidos(List<PedidoProveedor> listaPed) {
+	public void muestraPedidos(List<PedidoCliente> listaPed) {
 		panelFila=new JPanel();
-			panelFila.setPreferredSize(new Dimension(410,180));
-			panelFila.setBackground(Color.WHITE);
-			scrollPane.setViewportView(panelFila);
-		for (PedidoProveedor ped:listaPed) {
+		panelFila.setPreferredSize(new Dimension(410,180));
+		panelFila.setBackground(Color.WHITE);
+		scrollPane.setViewportView(panelFila);
+		for (PedidoCliente ped:listaPed) {
 			vfila=new VFilaPedGeneraAlbCliente();
 			vfila.setPreferredSize(new Dimension(400,40));
 			vfila.getlNum().setText(String.valueOf(ped.getNum()));
@@ -118,7 +117,7 @@ public class VGeneraAlbaranCliente extends JInternalFrame {
 	}
 	
 	public JLabel getlProve() {
-		return lProve;
+		return lCliente;
 	}
 	
 

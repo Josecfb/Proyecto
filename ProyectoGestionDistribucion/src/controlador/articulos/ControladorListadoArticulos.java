@@ -3,9 +3,7 @@ package controlador.articulos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.ImageIcon;
-
 import model.Articulo;
 import modelo.negocio.GestorArticulo;
 import vista.articulos.VFichaArticulo;
@@ -13,7 +11,6 @@ import vista.articulos.VListadoArticulos;
 
 public class ControladorListadoArticulos implements ActionListener{
 	private VListadoArticulos listado;
-
 	
 	public ControladorListadoArticulos(VListadoArticulos listado) {
 		listar(listado);		
@@ -61,14 +58,14 @@ public class ControladorListadoArticulos implements ActionListener{
 		listar(listado);
 	}
 	
-	private void actualizar() {
+	public void actualizar() {
 		
 		listar(listado);
 	}
 	
 	private void nuevoArticulo() {
 		//GestorArticulo ga=new GestorArticulo();
-		VFichaArticulo fa=new VFichaArticulo(null,listado.getV());
+		VFichaArticulo fa=new VFichaArticulo(null,listado);
 		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
 		fa.EstablecerManejadorVentana(cfa);
 		listado.getV().getPanelInterior().add(fa);

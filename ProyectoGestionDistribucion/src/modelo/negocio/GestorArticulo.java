@@ -77,4 +77,24 @@ public class GestorArticulo {
 	public void actualizaArticulosAlbaranCliente(AlbaranCliente albModif,int masmenos) {
 		da.actualizaArticulosAlbaranCliente(albModif,masmenos);
 	}
+	
+	public String borrarArticulo(Articulo art) {
+		if (art!=null) {
+			if (art.getFilasAlbaranClientes().size()>0) 
+				return "No se puede borrar, está en albaranes de clientes";
+			if (art.getFilasAlbaranProveedors().size()>0) 
+				return "No se puede borrar, está en albaranes de proveedores";
+			if (art.getFilasFacturasClientes().size()>0) 
+				return "No se puede borrar, está en facturas de clientes";
+			if (art.getFilasFacturasProveedors().size()>0) 
+				return "No se puede borrar, está en facturas de proveedores";
+			if (art.getFilasPedidosClientes().size()>0) 
+				return "No se puede borrar, está en pedidos de clientes";
+			if (art.getFilasPedidosProveedors().size()>0) 
+				return "No se puede borrar, está en pedidos de proveedores";
+			da.borrarArticulo(art);
+			return "Artículo borrado";
+		}
+		return "No hay ningún artículo que borrar";
+	}
 }

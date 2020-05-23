@@ -9,17 +9,13 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
-
-import javax.persistence.EntityManager;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-
 import model.Proveedor;
 import modelo.negocio.GestorProveedor;
-import modelo.persistencia.DaoCliente;
 import modelo.persistencia.DaoProvincia;
 import vista.proveedores.VFichaProveedor;
 import vista.proveedores.VListadoProveedores;
@@ -42,7 +38,6 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 		
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
 		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
@@ -150,7 +145,7 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 			JTextField campo=(JTextField) e.getSource();
 			campo.setBackground(Color.WHITE);
 		}
-		if (e.getSource()==fichaProveedor.gettCodPos() && !fichaProveedor.gettCodPos().equals("")) {
+		if (e.getSource()==fichaProveedor.gettCodPos() && !fichaProveedor.gettCodPos().getText().equals("")) {
 			DaoProvincia dp = new DaoProvincia();
 			fichaProveedor.gettProvincia().setText(dp.nomProvincia(fichaProveedor.gettCodPos().getText()));
 			List<String> poblaciones=dp.nomPoblaciones(fichaProveedor.gettCodPos().getText());

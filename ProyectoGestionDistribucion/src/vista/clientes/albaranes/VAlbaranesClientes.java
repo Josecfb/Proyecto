@@ -12,15 +12,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import controlador.clientes.albaranes.ControladorAlbaranesClientes;
 import controlador.clientes.albaranes.CtrlFilaAlbaranesGenCliente;
-import controlador.proveedores.albaranes.ControladorAlbaranesProveedores;
-import controlador.proveedores.albaranes.CtrlFilaAlbaranesGenProveedor;
 import model.AlbaranCliente;
-import model.AlbaranProveedor;
 import model.Cliente;
-import model.Proveedor;
 import vista.VentanaPrincipal;
 
 
@@ -43,7 +38,7 @@ public class VAlbaranesClientes extends JInternalFrame {
 		setClosable(true);
 		setMaximizable(false);
 		setIconifiable(true);
-		setTitle("Albaranes Proveedores");
+		setTitle("Albaranes de Clientes");
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -81,10 +76,8 @@ public class VAlbaranesClientes extends JInternalFrame {
 		scrollFacturados = new JScrollPane();
 		scrollFacturados.setBounds(10, 62, 783, 386);
 		pFacturados.add(scrollFacturados);
-		
-		
-		
-		ControladorAlbaranesClientes cap=new ControladorAlbaranesClientes(this);
+
+		new ControladorAlbaranesClientes(this);
 	}
 	
 	public void muestraPendientes(List<AlbaranCliente> lista) {
@@ -125,7 +118,7 @@ public class VAlbaranesClientes extends JInternalFrame {
 		}
 	}
 	
-	public void establecerManejador(ControladorAlbaranesProveedores controlador) {
+	public void establecerManejador(ControladorAlbaranesClientes controlador) {
 		bNuevoGenerado.addActionListener(controlador);
 	}
 

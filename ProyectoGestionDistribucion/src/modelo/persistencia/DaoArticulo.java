@@ -124,8 +124,18 @@ public class DaoArticulo {
 		for (FilasAlbaranCliente fila:albModif.getFilasAlbaranClientes()) {
 			artAlb=fila.getArticuloBean();
 			cantidad=fila.getCantidad();
-			em.createQuery("Update Articulo art set art.stock = art.stock+ :cantidad*:masmenos where art=:artAlb").setParameter("cantidad", cantidad).setParameter("masmenos", masmenos).setParameter("artAlb", artAlb).executeUpdate();
+			em.createQuery("Update Articulo art set art.stock = art.stock+ :cantidad*:masmenos, art.reservados=art.reservados+ :cantidad*:masmenos where art=:artAlb").setParameter("cantidad", cantidad).setParameter("masmenos", masmenos).setParameter("artAlb", artAlb).executeUpdate();
 		}
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public void borrarArticulo(Articulo art) {
+		AbreCierra ab=new AbreCierra();
+		em=ab.abrirConexion();
+		Articulo borrar=em.find(Articulo.class, art.getCod());
+		em.getTransaction().begin();
+		em.remove(borrar);
 		em.getTransaction().commit();
 		em.close();
 	}

@@ -34,11 +34,13 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
-			if (res==JOptionPane.YES_OPTION)
+			if (res==JOptionPane.YES_OPTION) {
 				if (!vpedidoProveedor.gettNumpedido().getText().equals(""))
 					modificaPedido();
 				else
 					nuevoPedido();
+				actualizarListaPedidos();
+			}
 			else
 				vpedidoProveedor.dispose();
 	}
@@ -49,13 +51,10 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		asignaCampos(pedModif);
 		ponFilas(pedModif);
 		int ok=gpp.modificarPedido(pedModif);
-		if (ok==0) {
-			actualizarListaPedidos();
+		if (ok==0) 
 			vpedidoProveedor.dispose();
-			
-		}
-		//else 
-			//muestraErrores(ok);		
+//		else 
+//			muestraErrores(ok);		
 	}
 
 	private void actualizarListaPedidos() {
@@ -70,10 +69,8 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		ok=gpp.nuevoPedido(pedidoNuevo);
 		ponFilas(pedidoNuevo);
 		if (ok[3]) gpp.modificarPedido(pedidoNuevo);
-		if (ok[3]) {
-			actualizarListaPedidos();
+		if (ok[3]) 
 			vpedidoProveedor.dispose();
-		}
 		else
 			muestraErrores(ok);
 		

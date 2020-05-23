@@ -56,10 +56,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		if (ok==0) {
 			ControladorAlbaranesClientes cac = new ControladorAlbaranesClientes(vAlbaran.getvAlbsCli());
 			cac.listar(vAlbaran.getvAlbsCli());
-			if (albModif.isActualizadoAlmacen())
-				gac.actualizaAlmacen(albModif,1);
-			else
-				gac.actualizaAlmacen(albModif,-1);
+			
 			
 		}
 //		//else 
@@ -105,7 +102,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		filaModif.setAlbaranCliente(albModif);
 		filaModif.setArticuloBean(arti);
 		filaModif.setCantidad(Integer.parseInt(fila.gettUnidades().getText()));
-		filaModif.setPrecio(euroADoble(fila.gettCoste().getText()));
+		filaModif.setPrecio(euroADoble(fila.gettPrecio().getText()));
 	}
 	
 	public Double euroADoble(String cad) {
@@ -164,8 +161,11 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		if (e.getSource()==vAlbaran.getbNuevaFila())
 			vAlbaran.nuevaFila();
 		if (e.getSource()==vAlbaran.getChecAlmacen()) {
+			if (vAlbaran.getChecAlmacen().isSelected())
+				gac.actualizaAlmacen(vAlbaran.getAlb(),-1);
+			else
+				gac.actualizaAlmacen(vAlbaran.getAlb(),1);
 			modificaAlbaran();
-			
 			vAlbaran.getChecAlmacen().requestFocus();
 		}
 				

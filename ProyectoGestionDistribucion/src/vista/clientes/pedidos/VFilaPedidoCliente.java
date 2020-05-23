@@ -5,13 +5,9 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
 import controlador.clientes.pedidos.ControladorFilaPedidoCliente;
-import controlador.proveedores.pedidos.ControladorFilaPedidoProveedor;
 import model.Articulo;
-import model.FilaPedidoProveedor;
 import model.FilasPedidosCliente;
 import model.PedidoProveedor;
 import modelo.negocio.GestorArticulo;

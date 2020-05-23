@@ -1,7 +1,5 @@
 package modelo.negocio;
 import java.util.List;
-
-import model.Cliente;
 import model.Proveedor;
 import modelo.persistencia.DaoProveedor;
 

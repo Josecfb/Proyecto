@@ -5,21 +5,15 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
 import controlador.proveedores.pedidos.ControladorFilaPedidoProveedor;
 import model.Articulo;
 import model.FilaPedidoProveedor;
 import model.PedidoProveedor;
 import modelo.negocio.GestorArticulo;
-import vista.VentanaPrincipal;
-
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.SystemColor;
-import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 

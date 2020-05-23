@@ -3,17 +3,16 @@ package controlador.clientes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 
-import controlador.clientes.pedidos.ControladorPedidosClientes;
-import controlador.proveedores.pedidos.ControladorPedidosProveedores;
+import controlador.clientes.albaranes.ControladorAlbaranesClientes;
 import model.Cliente;
 import modelo.negocio.GestorCliente;
 import vista.clientes.VFichaCliente;
 import vista.clientes.VListadoClientes;
+import vista.clientes.albaranes.VAlbaranesClientes;
 import vista.clientes.pedidos.VPedidosClientes;
-import vista.proveedores.pedidos.VPedidosProveedores;
+
 
 public class ControladorListadoClientes implements ActionListener{
 	private VListadoClientes listado;
@@ -45,12 +44,23 @@ public class ControladorListadoClientes implements ActionListener{
 			actualizar();
 		if (e.getSource()==listado.getbPedidos())
 			abrePedidos();
+		if (e.getSource()==listado.getbAlbaranes()) {
+			abreAlbaranes();
+		}
 	}
 	
 	private void abrePedidos() {
 		VPedidosClientes pp=new VPedidosClientes(listado.getV());
 		listado.getV().getPanelInterior().add(pp);
 		pp.setVisible(true);
+	}
+	
+	private void abreAlbaranes() {
+		VAlbaranesClientes vac=new VAlbaranesClientes(listado.getV());
+		ControladorAlbaranesClientes cac=new ControladorAlbaranesClientes(vac);
+		vac.establecerManejador(cac);
+		listado.getV().getPanelInterior().add(vac);
+		vac.setVisible(true);
 	}
 	
 	private void muestraFiltros() {
@@ -72,6 +82,7 @@ public class ControladorListadoClientes implements ActionListener{
 	}
 	
 	private void actualizar() {
+		listar(listado);
 		listado.getPanel().updateUI();
 	}
 	

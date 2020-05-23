@@ -25,7 +25,7 @@ public class VFilaAlbaranCliente extends JPanel {
 	private JComboBox<Articulo> articulo;
 	private JTextField tUnidades;
 	private JTextField tCajas;
-	private JTextField tCoste;
+	private JTextField tPrecio;
 	private JTextField tTotal;
 	private JButton bBorrar;
 	private PedidoProveedor ped;
@@ -69,12 +69,12 @@ public class VFilaAlbaranCliente extends JPanel {
 		tCajas.setText("0");
 		add(tCajas);
 		
-		tCoste = new JTextField();
-		tCoste.setColumns(10);
-		tCoste.setBounds(524, 1, 64, 20);
-		tCoste.setHorizontalAlignment(JTextField.RIGHT);
-		tCoste.setText("0,00 €");
-		add(tCoste);
+		tPrecio = new JTextField();
+		tPrecio.setColumns(10);
+		tPrecio.setBounds(524, 1, 64, 20);
+		tPrecio.setHorizontalAlignment(JTextField.RIGHT);
+		tPrecio.setText("0,00 €");
+		add(tPrecio);
 		
 		tTotal = new JTextField();
 		tTotal.setColumns(10);
@@ -128,8 +128,8 @@ public class VFilaAlbaranCliente extends JPanel {
 		return tCajas;
 	}
 
-	public JTextField gettCoste() {
-		return tCoste;
+	public JTextField gettPrecio() {
+		return tPrecio;
 	}
 
 	public JTextField gettTotal() {

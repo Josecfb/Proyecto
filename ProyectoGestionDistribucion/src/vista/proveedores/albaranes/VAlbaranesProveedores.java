@@ -78,10 +78,8 @@ public class VAlbaranesProveedores extends JInternalFrame {
 		scrollFacturados = new JScrollPane();
 		scrollFacturados.setBounds(10, 62, 783, 386);
 		pFacturados.add(scrollFacturados);
-		
-		
-		
-		ControladorAlbaranesProveedores cap=new ControladorAlbaranesProveedores(this);
+
+		new ControladorAlbaranesProveedores(this);
 	}
 	
 	public void muestraPendientes(List<AlbaranProveedor> lista) {

@@ -1,10 +1,7 @@
 package vista.articulos;
 
 import javax.swing.JPanel;
-
 import controlador.articulos.ControlaFilaListadoArticulos;
-import vista.VentanaPrincipal;
-
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,11 +10,11 @@ import javax.swing.JLabel;
 public class VFilaListadoArticulos extends JPanel {
 
 	private static final long serialVersionUID = 4813844448451936303L;
-	private VentanaPrincipal v;
+	private VListadoArticulos v;
 	private JLabel codigo, cProv, nombre,familia, coste, precioMay, precioMin, stock, stockMin;
 	private JButton bEditar;
 
-	public VFilaListadoArticulos(VentanaPrincipal v) {
+	public VFilaListadoArticulos(VListadoArticulos v) {
 		this.v=v;
 		setLayout(null);
 		setSize(975, 20);
@@ -104,7 +101,7 @@ public class VFilaListadoArticulos extends JPanel {
 		this.bEditar = bEditar;
 	}
 
-	public VentanaPrincipal getV() {
+	public VListadoArticulos getV() {
 		return v;
 	}
 

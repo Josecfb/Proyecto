@@ -25,7 +25,7 @@ public class ControlaFilaListadoArticulos implements ActionListener{
 			fa=new VFichaArticulo(null,filaListadoArticulos.getV());
 		ControladorFichaArticulo cfa=new ControladorFichaArticulo(fa);
 		fa.EstablecerManejadorVentana(cfa);
-		filaListadoArticulos.getV().getPanelInterior().add(fa);
+		filaListadoArticulos.getV().getV().getPanelInterior().add(fa);
 		fa.setVisible(true);
 	}
 

@@ -4,7 +4,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
-
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
@@ -12,22 +11,20 @@ import java.text.NumberFormat;
 import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import controlador.articulos.ControladorFichaArticulo;
 import model.Articulo;
 import model.Familia;
 import model.Proveedor;
 import modelo.negocio.GestorFamilia;
 import modelo.negocio.GestorProveedor;
-import vista.VentanaPrincipal;
-
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 public class VFichaArticulo extends JInternalFrame {
 
 	private static final long serialVersionUID = 3871990475316407616L;
-	private VentanaPrincipal v;
+	private VListadoArticulos vla;
 	private JTextField tCodigo;
 	private JTextField tNombre;
 	private JTextField tCProv;
@@ -40,18 +37,19 @@ public class VFichaArticulo extends JInternalFrame {
 	private JTextField tStockMin;
 	private JComboBox<Familia> comboFamilia;
 	private JComboBox<Proveedor> comboProveedor;
+	private JButton bBorrar;
 	private NumberFormat formatoeuro, formatoPorcentaje;
 	private Articulo art;
 	private JLabel lFoto;
 	private JPanel panel;
 	private JTextField tReservados;
 
-	public VFichaArticulo(Articulo art,VentanaPrincipal v) {
+	public VFichaArticulo(Articulo art,VListadoArticulos vla) {
 		this.art=art;
-		this.v=v;
+		this.vla=vla;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
-		setBounds(100, 100, 870, 476);
+		setBounds(100, 100, 870, 490);
 		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/articulos.png"));
 		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
 		setFrameIcon(icones);
@@ -68,7 +66,7 @@ public class VFichaArticulo extends JInternalFrame {
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tabbedPane.setBounds(51, 47, 772, 373);
+		tabbedPane.setBounds(42, 11, 772, 373);
 		getContentPane().add(tabbedPane);
 		
 		panel = new JPanel();
@@ -255,6 +253,10 @@ public class VFichaArticulo extends JInternalFrame {
 		lFoto = new JLabel("");
 		lFoto.setBounds(98, 27, 603, 274);
 		pFoto.add(lFoto);
+		bBorrar = new JButton("");
+		bBorrar.setBounds(764, 395, 49, 51);
+		getContentPane().add(bBorrar);
+		bBorrar.setIcon(new ImageIcon(new ImageIcon("src/img/eliminar.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		if (art!=null)
 			llenaFicha(art);
 	}
@@ -279,6 +281,7 @@ public class VFichaArticulo extends JInternalFrame {
 	@SuppressWarnings("rawtypes")
 	public void EstablecerManejadorVentana(ControladorFichaArticulo manejador) {
 		this.addInternalFrameListener(manejador);
+		bBorrar.addActionListener(manejador);
 		Component[] componentes=panel.getComponents();
 		comboFamilia.addFocusListener(manejador);
 		for (Component componente:componentes) {
@@ -345,8 +348,12 @@ public class VFichaArticulo extends JInternalFrame {
 	public JComboBox<Proveedor> getComboProveedor() {
 		return comboProveedor;
 	}
+	
+	public JButton getbBorrar() {
+		return bBorrar;
+	}
 
-	public VentanaPrincipal getV() {
-		return v;
+	public VListadoArticulos getV() {
+		return vla;
 	}
 }

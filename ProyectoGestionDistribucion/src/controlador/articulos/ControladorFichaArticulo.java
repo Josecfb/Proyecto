@@ -1,10 +1,10 @@
 package controlador.articulos;
 
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,9 +16,8 @@ import model.Familia;
 import model.Proveedor;
 import modelo.negocio.GestorArticulo;
 import vista.articulos.VFichaArticulo;
-import vista.articulos.VListadoArticulos;
 
-public class ControladorFichaArticulo implements InternalFrameListener, FocusListener {
+public class ControladorFichaArticulo implements InternalFrameListener, FocusListener, ActionListener {
 	private VFichaArticulo fichaArticulo;
 	private GestorArticulo ga;
 	
@@ -37,12 +36,8 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 					modificaArticulo();
 				else
 					nuevoArticulo();
-				Component[] componentes=fichaArticulo.getV().getPanelInterior().getComponents();
-				for (Component componente:componentes)
-					if (componente.getClass()==VListadoArticulos.class) {
-						VListadoArticulos vlistado=(VListadoArticulos) componente;
-						vlistado.getbActualizar().doClick();
-					}
+				ControladorListadoArticulos cla=new ControladorListadoArticulos(fichaArticulo.getV());
+				cla.actualizar();
 			}
 			else 
 				fichaArticulo.dispose();							
@@ -194,6 +189,17 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	@Override
 	public void internalFrameClosed(InternalFrameEvent e) {
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==fichaArticulo.getbBorrar())
+			borrarArticulo();
+	}
+	private void borrarArticulo() {
+		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Está seguro que quiere eliminar este artículo premanentemente?");
+		if (res==JOptionPane.YES_OPTION)
+			JOptionPane.showMessageDialog(fichaArticulo, ga.borrarArticulo(fichaArticulo.getArt()), "Borrar artículo", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }

@@ -10,23 +10,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-
 import model.Articulo;
 import model.Cliente;
-import model.FacturaProveedor;
-import model.FilaFacturaProveedor;
 import model.PrecioCliente;
 import modelo.negocio.GestorCliente;
 import modelo.persistencia.DaoProvincia;
 import vista.clientes.VFichaCliente;
 import vista.clientes.VFilaPrecioCliente;
-import vista.proveedores.facturas.VFilaFacturaProveedor;
 
 public class ControladorFichaCliente implements InternalFrameListener, KeyListener, FocusListener, ActionListener {
 	private VFichaCliente fichaCliente;
@@ -36,7 +31,6 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	public ControladorFichaCliente(VFichaCliente fichaCliente) {
 		this.fichaCliente=fichaCliente;
 		gc=new GestorCliente();
-		
 	}
 
 	@Override
@@ -55,7 +49,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		Cliente cliNuevo=new Cliente();
 		asignaCampos(cliNuevo);
 		boolean[] ok=new boolean[4];
-		ponFilasPrecios(cliNuevo);
+		//ponFilasPrecios(cliNuevo);
 		ok=gc.nuevoCliente(cliNuevo);
 		if (ok[3])
 			fichaCliente.dispose();

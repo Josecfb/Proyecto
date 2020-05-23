@@ -11,11 +11,8 @@ import java.util.List;
 import model.AlbaranCliente;
 import model.Cliente;
 import model.PedidoCliente;
-import model.PedidoProveedor;
-import model.Proveedor;
 import modelo.negocio.GestorAlbaranCliente;
 import modelo.negocio.GestorPedidosCliente;
-import modelo.negocio.GestorPedidosProve;
 import vista.clientes.albaranes.VAlbaranCliente;
 import vista.clientes.albaranes.VAlbaranesClientes;
 import vista.clientes.albaranes.VFilaPedGeneraAlbCliente;
@@ -40,8 +37,8 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenAlvCli.getComboCliente().getEditor().getEditorComponent()) {
-			GestorPedidosProve gpp=new GestorPedidosProve();
-			List<PedidoProveedor> listaPed =gpp.listaEnviados(((Proveedor) vGenAlvCli.getComboCliente().getSelectedItem()));
+			GestorPedidosCliente gpc=new GestorPedidosCliente();
+			List<PedidoCliente> listaPed =gpc.listaEnviados(((Cliente) vGenAlvCli.getComboCliente().getSelectedItem()));
 			vGenAlvCli.muestraPedidos(listaPed);
 		}
 	}

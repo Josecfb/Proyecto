@@ -2,13 +2,10 @@ package modelo.persistencia;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-
-import model.Cliente;
 import model.Proveedor;
 
 public class DaoProveedor {
 	private EntityManager em;
-	
 
 	@SuppressWarnings("unchecked")
 	public List<Proveedor> Listado(String filtroNombre){

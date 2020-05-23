@@ -3,24 +3,16 @@ package vista.clientes.pedidos;
 import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-
 import controlador.clientes.pedidos.ControladorPedidosClientes;
 import controlador.clientes.pedidos.ControladorFilaPedidoPendienteCliente;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import model.Cliente;
 import model.PedidoCliente;
-import model.PedidoProveedor;
-import model.Proveedor;
 import vista.VentanaPrincipal;
 
 public class VPedidosClientes extends JInternalFrame {
@@ -62,7 +54,7 @@ public class VPedidosClientes extends JInternalFrame {
 		scrollEnviados = new JScrollPane();
 		scrollEnviados.setBounds(10, 11, 783, 439);
 		pEnviados.add(scrollEnviados);
-		ControladorPedidosClientes cpp=new ControladorPedidosClientes(this);
+		new ControladorPedidosClientes(this);
 	}
 	
 	public void muestraPendientes(List<PedidoCliente> lista) {

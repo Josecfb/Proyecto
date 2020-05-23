@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import model.AlbaranProveedor;
-import model.Articulo;
-import model.FilaAlbaranProveedor;
-import model.Proveedor;
+
+import entidades.AlbaranProveedor;
+import entidades.Articulo;
+import entidades.FilaAlbaranProveedor;
+import entidades.Proveedor;
 
 
 

@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JTextField;
-import model.Articulo;
+
+import entidades.Articulo;
 import modelo.negocio.GestorArticulo;
 import vista.clientes.pedidos.VFilaPedidoCliente;
 

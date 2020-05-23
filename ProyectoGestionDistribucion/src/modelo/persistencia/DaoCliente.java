@@ -2,7 +2,8 @@ package modelo.persistencia;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import model.Cliente;
+
+import entidades.Cliente;
 
 
 public class DaoCliente {

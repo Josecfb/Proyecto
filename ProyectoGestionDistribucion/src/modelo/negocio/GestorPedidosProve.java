@@ -2,10 +2,10 @@ package modelo.negocio;
 
 import java.util.List;
 
-import model.Articulo;
-import model.FilaPedidoProveedor;
-import model.PedidoProveedor;
-import model.Proveedor;
+import entidades.Articulo;
+import entidades.FilaPedidoProveedor;
+import entidades.PedidoProveedor;
+import entidades.Proveedor;
 import modelo.persistencia.DaoPedidosProveedores;
 
 public class GestorPedidosProve {

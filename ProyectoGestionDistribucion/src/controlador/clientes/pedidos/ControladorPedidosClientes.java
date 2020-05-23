@@ -3,7 +3,8 @@ package controlador.clientes.pedidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import model.PedidoCliente;
+
+import entidades.PedidoCliente;
 import modelo.negocio.GestorPedidosCliente;
 import vista.clientes.pedidos.VPedidosClientes;
 

@@ -15,8 +15,8 @@ import java.util.List;
 
 import controlador.proveedores.albaranes.ControladorAlbaranesProveedores;
 import controlador.proveedores.albaranes.CtrlFilaAlbaranesGenProveedor;
-import model.AlbaranProveedor;
-import model.Proveedor;
+import entidades.AlbaranProveedor;
+import entidades.Proveedor;
 import vista.VentanaPrincipal;
 
 

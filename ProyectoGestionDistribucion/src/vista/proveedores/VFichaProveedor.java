@@ -7,7 +7,6 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
 
-import model.Proveedor;
 import modelo.persistencia.DaoProvincia;
 import vista.VentanaPrincipal;
 
@@ -23,6 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import controlador.proveedores.ControladorFichaProveedor;
+import entidades.Proveedor;
 
 public class VFichaProveedor extends JInternalFrame {
 

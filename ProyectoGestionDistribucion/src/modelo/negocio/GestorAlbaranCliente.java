@@ -1,9 +1,10 @@
 package modelo.negocio;
 
 import java.util.List;
-import model.AlbaranCliente;
-import model.Cliente;
-import model.FilasAlbaranCliente;
+
+import entidades.AlbaranCliente;
+import entidades.Cliente;
+import entidades.FilasAlbaranCliente;
 import modelo.persistencia.DaoAlbaranCliente;
 
 public class GestorAlbaranCliente {

@@ -1,30 +1,30 @@
-package model;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the FILAS_ALBARAN_PROVEEDOR database table.
+ * The primary key class for the FILAS_PEDIDOS_PROVEEDOR database table.
  * 
  */
 @Embeddable
-public class FilasAlbaranProveedorPK implements Serializable {
+public class FilasPedidosProveedorPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="ALBARAN", insertable=false, updatable=false)
-	private int albaran;
+	@Column(name="PEDIDO", insertable=false, updatable=false)
+	private int pedido;
 
 	@Column(name="ARTICULO", insertable=false, updatable=false)
 	private int articulo;
 
-	public FilasAlbaranProveedorPK() {
+	public FilasPedidosProveedorPK() {
 	}
-	public int getAlbaran() {
-		return this.albaran;
+	public int getPedido() {
+		return this.pedido;
 	}
-	public void setAlbaran(int albaran) {
-		this.albaran = albaran;
+	public void setPedido(int pedido) {
+		this.pedido = pedido;
 	}
 	public int getArticulo() {
 		return this.articulo;
@@ -37,19 +37,19 @@ public class FilasAlbaranProveedorPK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof FilasAlbaranProveedorPK)) {
+		if (!(other instanceof FilasPedidosProveedorPK)) {
 			return false;
 		}
-		FilasAlbaranProveedorPK castOther = (FilasAlbaranProveedorPK)other;
+		FilasPedidosProveedorPK castOther = (FilasPedidosProveedorPK)other;
 		return 
-			(this.albaran == castOther.albaran)
+			(this.pedido == castOther.pedido)
 			&& (this.articulo == castOther.articulo);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.albaran;
+		hash = hash * prime + this.pedido;
 		hash = hash * prime + this.articulo;
 		
 		return hash;

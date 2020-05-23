@@ -8,9 +8,10 @@ import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import model.AlbaranCliente;
-import model.Cliente;
-import model.PedidoCliente;
+
+import entidades.AlbaranCliente;
+import entidades.Cliente;
+import entidades.PedidoCliente;
 import modelo.negocio.GestorAlbaranCliente;
 import modelo.negocio.GestorPedidosCliente;
 import vista.clientes.albaranes.VAlbaranCliente;

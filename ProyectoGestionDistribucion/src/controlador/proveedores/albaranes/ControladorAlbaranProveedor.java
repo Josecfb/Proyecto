@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
-import model.AlbaranProveedor;
-import model.Articulo;
-import model.FilaAlbaranProveedor;
-import model.Proveedor;
+import entidades.AlbaranProveedor;
+import entidades.Articulo;
+import entidades.FilaAlbaranProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorAlbaranProve;
 import vista.proveedores.albaranes.VAlbaranProveedor;
 import vista.proveedores.albaranes.VFilaAlbaranProveedor;

@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
-import model.Articulo;
-import model.FacturaProveedor;
-import model.FilaFacturaProveedor;
-import model.Proveedor;
+import entidades.Articulo;
+import entidades.FacturaProveedor;
+import entidades.FilaFacturaProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorFacturaProve;
 import vista.proveedores.facturas.VFacturaProveedor;
 import vista.proveedores.facturas.VFilaFacturaProveedor;

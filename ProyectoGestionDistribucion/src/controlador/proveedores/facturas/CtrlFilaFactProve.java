@@ -7,7 +7,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.text.NumberFormat;
 import javax.swing.JTextField;
-import model.Articulo;
+
+import entidades.Articulo;
 import modelo.negocio.GestorArticulo;
 import vista.proveedores.facturas.VFilaFacturaProveedor;
 

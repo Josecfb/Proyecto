@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 import controlador.articulos.ControlaFilaListadoArticulos;
 import controlador.articulos.ControladorListadoArticulos;
-import model.Articulo;
+import entidades.Articulo;
 import vista.VentanaPrincipal;
 
 import javax.swing.border.BevelBorder;

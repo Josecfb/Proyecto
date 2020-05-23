@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="ProyectoGestionDistribucion" transaction-type="RESOURCE_LOCAL">
-		<class>model.AlbaranCliente</class>
-		<class>model.AlbaranProveedor</class>
-		<class>model.Articulo</class>
-		<class>model.Cliente</class>
-		<class>model.Codigospostale</class>
-		<class>model.CodigospostalePK</class>
-		<class>model.Datosempresa</class>
-		<class>model.FacturasCliente</class>
-		<class>model.FacturaProveedor</class>
-		<class>model.Familia</class>
-		<class>model.FilasAlbaranCliente</class>
-		<class>model.FilasAlbaranClientePK</class>
-		<class>model.FilaAlbaranProveedor</class>
-		<class>model.FilasAlbaranProveedorPK</class>
-		<class>model.FilasFacturasCliente</class>
-		<class>model.FilasFacturasClientePK</class>
-		<class>model.FilaFacturaProveedor</class>
-		<class>model.FilasFacturasProveedorPK</class>
-		<class>model.FilasPedidosCliente</class>
-		<class>model.FilasPedidosClientePK</class>
-		<class>model.FilaPedidoProveedor</class>
-		<class>model.FilasPedidosProveedorPK</class>
-		<class>model.PedidoCliente</class>
-		<class>model.PedidoProveedor</class>
-		<class>model.Poblacione</class>
-		<class>model.PrecioCliente</class>
-		<class>model.PreciosClientePK</class>
-		<class>model.Proveedor</class>
-		<class>model.Provincia</class>
+		<class>entidades.AlbaranCliente</class>
+		<class>entidades.AlbaranProveedor</class>
+		<class>entidades.Articulo</class>
+		<class>entidades.Cliente</class>
+		<class>entidades.Codigospostale</class>
+		<class>entidades.CodigospostalePK</class>
+		<class>entidades.Datosempresa</class>
+		<class>entidades.FacturasCliente</class>
+		<class>entidades.FacturaProveedor</class>
+		<class>entidades.Familia</class>
+		<class>entidades.FilasAlbaranCliente</class>
+		<class>entidades.FilasAlbaranClientePK</class>
+		<class>entidades.FilaAlbaranProveedor</class>
+		<class>entidades.FilasAlbaranProveedorPK</class>
+		<class>entidades.FilasFacturasCliente</class>
+		<class>entidades.FilasFacturasClientePK</class>
+		<class>entidades.FilaFacturaProveedor</class>
+		<class>entidades.FilasFacturasProveedorPK</class>
+		<class>entidades.FilasPedidosCliente</class>
+		<class>entidades.FilasPedidosClientePK</class>
+		<class>entidades.FilaPedidoProveedor</class>
+		<class>entidades.FilasPedidosProveedorPK</class>
+		<class>entidades.PedidoCliente</class>
+		<class>entidades.PedidoProveedor</class>
+		<class>entidades.Poblacione</class>
+		<class>entidades.PrecioCliente</class>
+		<class>entidades.PreciosClientePK</class>
+		<class>entidades.Proveedor</class>
+		<class>entidades.Provincia</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/GestionDistribucion"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

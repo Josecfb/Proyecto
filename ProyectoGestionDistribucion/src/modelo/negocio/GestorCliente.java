@@ -1,7 +1,7 @@
 package modelo.negocio;
 import java.util.List;
 
-import model.Cliente;
+import entidades.Cliente;
 import modelo.persistencia.DaoCliente;
 
 

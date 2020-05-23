@@ -3,7 +3,7 @@ package vista.clientes.pedidos;
 import javax.swing.JPanel;
 
 import controlador.clientes.pedidos.ControladorFilaPedidoPendienteCliente;
-import model.PedidoCliente;
+import entidades.PedidoCliente;
 
 import javax.swing.JLabel;
 import java.awt.Font;

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.AlbaranProveedor;
-import model.PedidoProveedor;
-import model.Proveedor;
+import entidades.AlbaranProveedor;
+import entidades.PedidoProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorAlbaranProve;
 import modelo.negocio.GestorPedidosProve;
 import vista.proveedores.albaranes.VAlbaranProveedor;

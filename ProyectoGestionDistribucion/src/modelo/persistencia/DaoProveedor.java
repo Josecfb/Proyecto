@@ -2,7 +2,8 @@ package modelo.persistencia;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import model.Proveedor;
+
+import entidades.Proveedor;
 
 public class DaoProveedor {
 	private EntityManager em;

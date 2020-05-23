@@ -9,9 +9,9 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import controlador.proveedores.albaranes.CtrlFilaAlbProve;
-import model.Articulo;
-import model.FilaAlbaranProveedor;
-import model.PedidoProveedor;
+import entidades.Articulo;
+import entidades.FilaAlbaranProveedor;
+import entidades.PedidoProveedor;
 import modelo.negocio.GestorArticulo;
 import java.awt.Font;
 import java.awt.Component;

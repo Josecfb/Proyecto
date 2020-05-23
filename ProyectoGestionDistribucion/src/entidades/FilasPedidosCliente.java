@@ -1,20 +1,21 @@
-package model;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
+
 /**
- * The persistent class for the FILAS_ALBARAN_CLIENTE database table.
+ * The persistent class for the FILAS_PEDIDOS_CLIENTE database table.
  * 
  */
 @Entity
-@Table(name="FILAS_ALBARAN_CLIENTE")
-@NamedQuery(name="FilasAlbaranCliente.findAll", query="SELECT f FROM FilasAlbaranCliente f")
-public class FilasAlbaranCliente implements Serializable {
+@Table(name="FILAS_PEDIDOS_CLIENTE")
+@NamedQuery(name="FilasPedidosCliente.findAll", query="SELECT f FROM FilasPedidosCliente f")
+public class FilasPedidosCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private FilasAlbaranClientePK id;
+	private FilasPedidosClientePK id;
 
 	@Column(name="CANTIDAD")
 	private int cantidad;
@@ -22,24 +23,24 @@ public class FilasAlbaranCliente implements Serializable {
 	@Column(name="PRECIO")
 	private double precio;
 
-	//bi-directional many-to-one association to AlbaranCliente
+	//bi-directional many-to-one association to PedidosCliente
 	@ManyToOne
-	@JoinColumn(name="ALBARAN")
-	private AlbaranCliente albaranCliente;
+	@JoinColumn(name="PEDIDO")
+	private PedidoCliente pedidosCliente;
 
 	//bi-directional many-to-one association to Articulo
 	@ManyToOne
 	@JoinColumn(name="ARTICULO")
 	private Articulo articuloBean;
 
-	public FilasAlbaranCliente() {
+	public FilasPedidosCliente() {
 	}
 
-	public FilasAlbaranClientePK getId() {
+	public FilasPedidosClientePK getId() {
 		return this.id;
 	}
 
-	public void setId(FilasAlbaranClientePK id) {
+	public void setId(FilasPedidosClientePK id) {
 		this.id = id;
 	}
 
@@ -59,12 +60,12 @@ public class FilasAlbaranCliente implements Serializable {
 		this.precio = precio;
 	}
 
-	public AlbaranCliente getAlbaranCliente() {
-		return this.albaranCliente;
+	public PedidoCliente getPedidosCliente() {
+		return this.pedidosCliente;
 	}
 
-	public void setAlbaranCliente(AlbaranCliente albaranCliente) {
-		this.albaranCliente = albaranCliente;
+	public void setPedidosCliente(PedidoCliente pedidosCliente) {
+		this.pedidosCliente = pedidosCliente;
 	}
 
 	public Articulo getArticuloBean() {
@@ -74,7 +75,5 @@ public class FilasAlbaranCliente implements Serializable {
 	public void setArticuloBean(Articulo articuloBean) {
 		this.articuloBean = articuloBean;
 	}
-
-
 
 }

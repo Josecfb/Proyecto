@@ -3,7 +3,8 @@ package controlador.clientes.albaranes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import model.AlbaranCliente;
+
+import entidades.AlbaranCliente;
 import modelo.negocio.GestorAlbaranCliente;
 import vista.clientes.albaranes.VAlbaranesClientes;
 import vista.clientes.albaranes.VGeneraAlbaranCliente;

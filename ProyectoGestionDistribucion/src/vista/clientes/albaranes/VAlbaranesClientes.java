@@ -14,8 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import controlador.clientes.albaranes.ControladorAlbaranesClientes;
 import controlador.clientes.albaranes.CtrlFilaAlbaranesGenCliente;
-import model.AlbaranCliente;
-import model.Cliente;
+import entidades.AlbaranCliente;
+import entidades.Cliente;
 import vista.VentanaPrincipal;
 
 

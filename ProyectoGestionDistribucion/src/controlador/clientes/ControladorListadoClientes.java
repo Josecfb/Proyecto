@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import controlador.clientes.albaranes.ControladorAlbaranesClientes;
-import model.Cliente;
+import entidades.Cliente;
 import modelo.negocio.GestorCliente;
 import vista.clientes.VFichaCliente;
 import vista.clientes.VListadoClientes;

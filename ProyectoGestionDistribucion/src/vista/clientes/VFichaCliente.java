@@ -18,8 +18,8 @@ import javax.swing.UIManager;
 
 import controlador.clientes.ControlaFilaPrecioCli;
 import controlador.clientes.ControladorFichaCliente;
-import model.Cliente;
-import model.PrecioCliente;
+import entidades.Cliente;
+import entidades.PrecioCliente;
 import modelo.persistencia.DaoProvincia;
 
 import javax.swing.JComboBox;

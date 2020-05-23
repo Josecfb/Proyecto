@@ -12,8 +12,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import controlador.proveedores.facturas.ControladorFacturasProveedores;
 import controlador.proveedores.facturas.CtrlFilaFacturasGenProveedor;
-import model.FacturaProveedor;
-import model.Proveedor;
+import entidades.FacturaProveedor;
+import entidades.Proveedor;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 

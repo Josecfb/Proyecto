@@ -1,24 +1,30 @@
-package model;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the PRECIOS_CLIENTE database table.
+ * The primary key class for the FILAS_FACTURAS_CLIENTE database table.
  * 
  */
 @Embeddable
-public class PreciosClientePK implements Serializable {
+public class FilasFacturasClientePK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
+
+	@Column(name="FACTURA", insertable=false, updatable=false)
+	private int factura;
 
 	@Column(name="ARTICULO", insertable=false, updatable=false)
 	private int articulo;
 
-	@Column(name="CLIENTE", insertable=false, updatable=false)
-	private int cliente;
-
-	public PreciosClientePK() {
+	public FilasFacturasClientePK() {
+	}
+	public int getFactura() {
+		return this.factura;
+	}
+	public void setFactura(int factura) {
+		this.factura = factura;
 	}
 	public int getArticulo() {
 		return this.articulo;
@@ -26,32 +32,26 @@ public class PreciosClientePK implements Serializable {
 	public void setArticulo(int articulo) {
 		this.articulo = articulo;
 	}
-	public int getCliente() {
-		return this.cliente;
-	}
-	public void setCliente(int cliente) {
-		this.cliente = cliente;
-	}
 
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof PreciosClientePK)) {
+		if (!(other instanceof FilasFacturasClientePK)) {
 			return false;
 		}
-		PreciosClientePK castOther = (PreciosClientePK)other;
+		FilasFacturasClientePK castOther = (FilasFacturasClientePK)other;
 		return 
-			(this.articulo == castOther.articulo)
-			&& (this.cliente == castOther.cliente);
+			(this.factura == castOther.factura)
+			&& (this.articulo == castOther.articulo);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
+		hash = hash * prime + this.factura;
 		hash = hash * prime + this.articulo;
-		hash = hash * prime + this.cliente;
-		
+
 		return hash;
 	}
 }

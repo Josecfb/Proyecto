@@ -11,9 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import model.Articulo;
-import model.Familia;
-import model.Proveedor;
+
+import entidades.Articulo;
+import entidades.Familia;
+import entidades.Proveedor;
 import modelo.negocio.GestorArticulo;
 import vista.articulos.VFichaArticulo;
 

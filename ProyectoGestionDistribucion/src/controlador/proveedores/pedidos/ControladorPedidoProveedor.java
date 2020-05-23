@@ -11,11 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import model.Articulo;
-import model.FilaPedidoProveedor;
-import model.FilasPedidosProveedorPK;
-import model.PedidoProveedor;
-import model.Proveedor;
+
+import entidades.Articulo;
+import entidades.FilaPedidoProveedor;
+import entidades.FilasPedidosProveedorPK;
+import entidades.PedidoProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorPedidosProve;
 import vista.pdf.PdfPedidoProveedor;
 import vista.proveedores.pedidos.VFilaPedidoProveedor;

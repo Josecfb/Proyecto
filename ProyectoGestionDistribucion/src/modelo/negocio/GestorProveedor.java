@@ -1,6 +1,7 @@
 package modelo.negocio;
 import java.util.List;
-import model.Proveedor;
+
+import entidades.Proveedor;
 import modelo.persistencia.DaoProveedor;
 
 public class GestorProveedor {

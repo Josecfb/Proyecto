@@ -17,9 +17,9 @@ import com.toedter.calendar.JDateChooser;
 
 import controlador.proveedores.facturas.ControladorFacturaProveedor;
 import controlador.proveedores.facturas.CtrlFilaFactProve;
-import model.FacturaProveedor;
-import model.FilaFacturaProveedor;
-import model.Proveedor;
+import entidades.FacturaProveedor;
+import entidades.FilaFacturaProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 
 import javax.swing.JScrollPane;

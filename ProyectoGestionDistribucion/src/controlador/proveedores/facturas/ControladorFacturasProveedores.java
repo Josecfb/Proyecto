@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import model.FacturaProveedor;
+import entidades.FacturaProveedor;
 import modelo.negocio.GestorFacturaProve;
 import vista.proveedores.facturas.VFacturasProveedores;
 import vista.proveedores.facturas.VGeneraFacturaProve;

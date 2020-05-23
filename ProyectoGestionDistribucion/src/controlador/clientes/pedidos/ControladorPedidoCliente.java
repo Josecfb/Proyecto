@@ -11,10 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import model.Articulo;
-import model.Cliente;
-import model.FilasPedidosCliente;
-import model.PedidoCliente;
+
+import entidades.Articulo;
+import entidades.Cliente;
+import entidades.FilasPedidosCliente;
+import entidades.PedidoCliente;
 import modelo.negocio.GestorPedidosCliente;
 import vista.clientes.pedidos.VPedidoCliente;
 import vista.clientes.pedidos.VFilaPedidoCliente;

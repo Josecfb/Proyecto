@@ -1,14 +1,14 @@
-package model;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the FILAS_PEDIDOS_PROVEEDOR database table.
+ * The primary key class for the FILAS_PEDIDOS_CLIENTE database table.
  * 
  */
 @Embeddable
-public class FilasPedidosProveedorPK implements Serializable {
+public class FilasPedidosClientePK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class FilasPedidosProveedorPK implements Serializable {
 	@Column(name="ARTICULO", insertable=false, updatable=false)
 	private int articulo;
 
-	public FilasPedidosProveedorPK() {
+	public FilasPedidosClientePK() {
 	}
 	public int getPedido() {
 		return this.pedido;
@@ -37,10 +37,10 @@ public class FilasPedidosProveedorPK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof FilasPedidosProveedorPK)) {
+		if (!(other instanceof FilasPedidosClientePK)) {
 			return false;
 		}
-		FilasPedidosProveedorPK castOther = (FilasPedidosProveedorPK)other;
+		FilasPedidosClientePK castOther = (FilasPedidosClientePK)other;
 		return 
 			(this.pedido == castOther.pedido)
 			&& (this.articulo == castOther.articulo);

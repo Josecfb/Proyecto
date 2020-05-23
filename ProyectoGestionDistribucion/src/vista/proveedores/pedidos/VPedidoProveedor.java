@@ -21,9 +21,9 @@ import com.toedter.calendar.JDateChooser;
 
 import controlador.proveedores.pedidos.ControladorFilaPedidoProveedor;
 import controlador.proveedores.pedidos.ControladorPedidoProveedor;
-import model.FilaPedidoProveedor;
-import model.PedidoProveedor;
-import model.Proveedor;
+import entidades.FilaPedidoProveedor;
+import entidades.PedidoProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 
 import javax.swing.JScrollPane;

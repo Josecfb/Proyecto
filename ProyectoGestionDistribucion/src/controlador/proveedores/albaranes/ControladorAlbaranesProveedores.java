@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import model.AlbaranProveedor;
+import entidades.AlbaranProveedor;
 import modelo.negocio.GestorAlbaranProve;
 import vista.proveedores.albaranes.VAlbaranesProveedores;
 import vista.proveedores.albaranes.VGeneraAlbaranProve;

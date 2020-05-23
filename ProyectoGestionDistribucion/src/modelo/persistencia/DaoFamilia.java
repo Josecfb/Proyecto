@@ -3,7 +3,8 @@ package modelo.persistencia;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import model.Familia;
+
+import entidades.Familia;
 
 public class DaoFamilia {
 private EntityManager em;

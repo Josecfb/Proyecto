@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import controlador.proveedores.albaranes.CtrlGenAlbProv;
-import model.PedidoProveedor;
-import model.Proveedor;
+import entidades.PedidoProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 import vista.VentanaPrincipal;
 

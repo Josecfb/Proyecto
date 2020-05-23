@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import model.Provincia;
+import entidades.Provincia;
 
 public class DaoProvincia {
 	private EntityManager em;

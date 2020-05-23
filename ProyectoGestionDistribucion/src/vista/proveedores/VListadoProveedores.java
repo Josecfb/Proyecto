@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 
 import controlador.proveedores.ControlaFilaListadoProveedores;
 import controlador.proveedores.ControladorListadoProveedores;
-import model.Proveedor;
+import entidades.Proveedor;
 import vista.VentanaPrincipal;
 
 import javax.swing.border.BevelBorder;

@@ -1,21 +1,17 @@
-package model;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 
-/**
- * The persistent class for the FILAS_PEDIDOS_CLIENTE database table.
- * 
- */
 @Entity
-@Table(name="FILAS_PEDIDOS_CLIENTE")
-@NamedQuery(name="FilasPedidosCliente.findAll", query="SELECT f FROM FilasPedidosCliente f")
-public class FilasPedidosCliente implements Serializable {
+@Table(name="FILAS_FACTURAS_PROVEEDOR")
+@NamedQuery(name="FilaFacturasroveedor.findAll", query="SELECT f FROM FilaFacturaProveedor f")
+public class FilaFacturaProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private FilasPedidosClientePK id;
+	private FilasFacturasProveedorPK id;
 
 	@Column(name="CANTIDAD")
 	private int cantidad;
@@ -23,24 +19,24 @@ public class FilasPedidosCliente implements Serializable {
 	@Column(name="PRECIO")
 	private double precio;
 
-	//bi-directional many-to-one association to PedidosCliente
+	//bi-directional many-to-one association to FacturasProveedor
 	@ManyToOne
-	@JoinColumn(name="PEDIDO")
-	private PedidoCliente pedidosCliente;
+	@JoinColumn(name="FACTURA")
+	private FacturaProveedor facturasProveedor;
 
 	//bi-directional many-to-one association to Articulo
 	@ManyToOne
 	@JoinColumn(name="ARTICULO")
 	private Articulo articuloBean;
 
-	public FilasPedidosCliente() {
+	public FilaFacturaProveedor() {
 	}
 
-	public FilasPedidosClientePK getId() {
+	public FilasFacturasProveedorPK getId() {
 		return this.id;
 	}
 
-	public void setId(FilasPedidosClientePK id) {
+	public void setId(FilasFacturasProveedorPK id) {
 		this.id = id;
 	}
 
@@ -60,12 +56,12 @@ public class FilasPedidosCliente implements Serializable {
 		this.precio = precio;
 	}
 
-	public PedidoCliente getPedidosCliente() {
-		return this.pedidosCliente;
+	public FacturaProveedor getFacturasProveedor() {
+		return this.facturasProveedor;
 	}
 
-	public void setPedidosCliente(PedidoCliente pedidosCliente) {
-		this.pedidosCliente = pedidosCliente;
+	public void setFacturasProveedor(FacturaProveedor facturasProveedor) {
+		this.facturasProveedor = facturasProveedor;
 	}
 
 	public Articulo getArticuloBean() {

@@ -2,7 +2,7 @@ package modelo.negocio;
 
 import java.util.List;
 
-import model.Familia;
+import entidades.Familia;
 import modelo.persistencia.DaoFamilia;
 
 public class GestorFamilia {

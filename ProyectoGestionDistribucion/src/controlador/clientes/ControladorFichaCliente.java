@@ -15,9 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import model.Articulo;
-import model.Cliente;
-import model.PrecioCliente;
+
+import entidades.Articulo;
+import entidades.Cliente;
+import entidades.PrecioCliente;
 import modelo.negocio.GestorCliente;
 import modelo.persistencia.DaoProvincia;
 import vista.clientes.VFichaCliente;

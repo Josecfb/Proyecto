@@ -2,7 +2,7 @@ package modelo.persistencia;
 
 import javax.persistence.EntityManager;
 
-import model.Datosempresa;
+import entidades.Datosempresa;
 
 public class DaoDatosEmpresa {
 	private EntityManager em;

@@ -3,7 +3,7 @@ package vista.proveedores.albaranes;
 import javax.swing.JPanel;
 
 import controlador.proveedores.albaranes.CtrlFilaAlbaranesGenProveedor;
-import model.AlbaranProveedor;
+import entidades.AlbaranProveedor;
 
 import javax.swing.JLabel;
 import java.awt.Font;

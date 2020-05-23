@@ -17,7 +17,7 @@ import javax.swing.JToolBar;
 
 import controlador.clientes.ControlaFilaListadoClientes;
 import controlador.clientes.ControladorListadoClientes;
-import model.Cliente;
+import entidades.Cliente;
 import vista.VentanaPrincipal;
 
 import java.awt.Font;

@@ -11,9 +11,9 @@ import javax.swing.JButton;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import controlador.proveedores.facturas.CtrlFilaFactProve;
-import model.Articulo;
-import model.FilaFacturaProveedor;
-import model.PedidoProveedor;
+import entidades.Articulo;
+import entidades.FilaFacturaProveedor;
+import entidades.PedidoProveedor;
 import modelo.negocio.GestorArticulo;
 import java.awt.Font;
 import java.awt.Component;

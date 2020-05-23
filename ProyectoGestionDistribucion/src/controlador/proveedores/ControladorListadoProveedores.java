@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import controlador.proveedores.albaranes.ControladorAlbaranesProveedores;
 import controlador.proveedores.facturas.ControladorFacturasProveedores;
 import controlador.proveedores.pedidos.ControladorPedidosProveedores;
-import model.Proveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 import vista.proveedores.VFichaProveedor;
 import vista.proveedores.VListadoProveedores;

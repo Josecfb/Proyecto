@@ -3,12 +3,12 @@ package modelo.persistencia;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-import model.AlbaranCliente;
-import model.AlbaranProveedor;
-import model.Articulo;
-import model.FilaAlbaranProveedor;
-import model.FilasAlbaranCliente;
-import model.Proveedor;
+import entidades.AlbaranCliente;
+import entidades.AlbaranProveedor;
+import entidades.Articulo;
+import entidades.FilaAlbaranProveedor;
+import entidades.FilasAlbaranCliente;
+import entidades.Proveedor;
 
 public class DaoArticulo {
 	private EntityManager em;

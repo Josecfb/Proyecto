@@ -1,17 +1,20 @@
-package model;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
-
+/**
+ * The persistent class for the FILAS_ALBARAN_CLIENTE database table.
+ * 
+ */
 @Entity
-@Table(name="FILAS_FACTURAS_PROVEEDOR")
-@NamedQuery(name="FilaFacturasroveedor.findAll", query="SELECT f FROM FilaFacturaProveedor f")
-public class FilaFacturaProveedor implements Serializable {
+@Table(name="FILAS_ALBARAN_CLIENTE")
+@NamedQuery(name="FilasAlbaranCliente.findAll", query="SELECT f FROM FilasAlbaranCliente f")
+public class FilasAlbaranCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private FilasFacturasProveedorPK id;
+	private FilasAlbaranClientePK id;
 
 	@Column(name="CANTIDAD")
 	private int cantidad;
@@ -19,24 +22,24 @@ public class FilaFacturaProveedor implements Serializable {
 	@Column(name="PRECIO")
 	private double precio;
 
-	//bi-directional many-to-one association to FacturasProveedor
+	//bi-directional many-to-one association to AlbaranCliente
 	@ManyToOne
-	@JoinColumn(name="FACTURA")
-	private FacturaProveedor facturasProveedor;
+	@JoinColumn(name="ALBARAN")
+	private AlbaranCliente albaranCliente;
 
 	//bi-directional many-to-one association to Articulo
 	@ManyToOne
 	@JoinColumn(name="ARTICULO")
 	private Articulo articuloBean;
 
-	public FilaFacturaProveedor() {
+	public FilasAlbaranCliente() {
 	}
 
-	public FilasFacturasProveedorPK getId() {
+	public FilasAlbaranClientePK getId() {
 		return this.id;
 	}
 
-	public void setId(FilasFacturasProveedorPK id) {
+	public void setId(FilasAlbaranClientePK id) {
 		this.id = id;
 	}
 
@@ -56,12 +59,12 @@ public class FilaFacturaProveedor implements Serializable {
 		this.precio = precio;
 	}
 
-	public FacturaProveedor getFacturasProveedor() {
-		return this.facturasProveedor;
+	public AlbaranCliente getAlbaranCliente() {
+		return this.albaranCliente;
 	}
 
-	public void setFacturasProveedor(FacturaProveedor facturasProveedor) {
-		this.facturasProveedor = facturasProveedor;
+	public void setAlbaranCliente(AlbaranCliente albaranCliente) {
+		this.albaranCliente = albaranCliente;
 	}
 
 	public Articulo getArticuloBean() {
@@ -71,5 +74,7 @@ public class FilaFacturaProveedor implements Serializable {
 	public void setArticuloBean(Articulo articuloBean) {
 		this.articuloBean = articuloBean;
 	}
+
+
 
 }

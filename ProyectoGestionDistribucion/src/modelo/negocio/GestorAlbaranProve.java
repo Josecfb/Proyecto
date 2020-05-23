@@ -2,9 +2,9 @@ package modelo.negocio;
 
 import java.util.List;
 
-import model.AlbaranProveedor;
-import model.FilaAlbaranProveedor;
-import model.Proveedor;
+import entidades.AlbaranProveedor;
+import entidades.FilaAlbaranProveedor;
+import entidades.Proveedor;
 import modelo.persistencia.DaoAlbaranProve;
 
 public class GestorAlbaranProve {

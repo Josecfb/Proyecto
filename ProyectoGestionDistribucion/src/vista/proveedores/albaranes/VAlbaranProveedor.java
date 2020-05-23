@@ -17,11 +17,9 @@ import com.toedter.calendar.JDateChooser;
 
 import controlador.proveedores.albaranes.ControladorAlbaranProveedor;
 import controlador.proveedores.albaranes.CtrlFilaAlbProve;
-import model.AlbaranProveedor;
-
-import model.FilaAlbaranProveedor;
-
-import model.Proveedor;
+import entidades.AlbaranProveedor;
+import entidades.FilaAlbaranProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 
 import javax.swing.JScrollPane;

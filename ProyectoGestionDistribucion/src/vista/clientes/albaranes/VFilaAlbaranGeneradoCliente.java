@@ -3,7 +3,7 @@ package vista.clientes.albaranes;
 import javax.swing.JPanel;
 
 import controlador.clientes.albaranes.CtrlFilaAlbaranesGenCliente;
-import model.AlbaranCliente;
+import entidades.AlbaranCliente;
 
 import javax.swing.JLabel;
 import java.awt.Font;

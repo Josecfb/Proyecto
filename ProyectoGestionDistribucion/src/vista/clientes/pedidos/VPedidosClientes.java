@@ -5,14 +5,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import controlador.clientes.pedidos.ControladorPedidosClientes;
+import entidades.Cliente;
+import entidades.PedidoCliente;
 import controlador.clientes.pedidos.ControladorFilaPedidoPendienteCliente;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import model.Cliente;
-import model.PedidoCliente;
+
 import vista.VentanaPrincipal;
 
 public class VPedidosClientes extends JInternalFrame {

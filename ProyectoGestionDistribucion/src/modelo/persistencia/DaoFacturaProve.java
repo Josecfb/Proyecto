@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import model.Articulo;
-import model.FacturaProveedor;
-import model.FilaFacturaProveedor;
+import entidades.Articulo;
+import entidades.FacturaProveedor;
+import entidades.FilaFacturaProveedor;
 
 public class DaoFacturaProve {
 	private EntityManager em;

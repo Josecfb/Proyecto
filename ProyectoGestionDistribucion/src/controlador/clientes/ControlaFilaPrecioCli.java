@@ -9,7 +9,7 @@ import java.text.NumberFormat;
 
 import javax.swing.JTextField;
 
-import model.Articulo;
+import entidades.Articulo;
 import vista.clientes.VFilaPrecioCliente;
 
 public class ControlaFilaPrecioCli implements FocusListener, ActionListener{

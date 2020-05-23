@@ -10,6 +10,8 @@ import javax.swing.JToolBar;
 
 import controlador.proveedores.pedidos.ControladorFilaPedidoPendienteProveedor;
 import controlador.proveedores.pedidos.ControladorPedidosProveedores;
+import entidades.PedidoProveedor;
+import entidades.Proveedor;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,8 +19,6 @@ import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import model.PedidoProveedor;
-import model.Proveedor;
 import vista.VentanaPrincipal;
 
 public class VPedidosProveedores extends JInternalFrame {

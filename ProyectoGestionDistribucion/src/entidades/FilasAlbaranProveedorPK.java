@@ -1,14 +1,14 @@
-package model;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the FILAS_ALBARAN_CLIENTE database table.
+ * The primary key class for the FILAS_ALBARAN_PROVEEDOR database table.
  * 
  */
 @Embeddable
-public class FilasAlbaranClientePK implements Serializable {
+public class FilasAlbaranProveedorPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class FilasAlbaranClientePK implements Serializable {
 	@Column(name="ARTICULO", insertable=false, updatable=false)
 	private int articulo;
 
-	public FilasAlbaranClientePK() {
+	public FilasAlbaranProveedorPK() {
 	}
 	public int getAlbaran() {
 		return this.albaran;
@@ -37,10 +37,10 @@ public class FilasAlbaranClientePK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof FilasAlbaranClientePK)) {
+		if (!(other instanceof FilasAlbaranProveedorPK)) {
 			return false;
 		}
-		FilasAlbaranClientePK castOther = (FilasAlbaranClientePK)other;
+		FilasAlbaranProveedorPK castOther = (FilasAlbaranProveedorPK)other;
 		return 
 			(this.albaran == castOther.albaran)
 			&& (this.articulo == castOther.articulo);
@@ -51,7 +51,6 @@ public class FilasAlbaranClientePK implements Serializable {
 		int hash = 17;
 		hash = hash * prime + this.albaran;
 		hash = hash * prime + this.articulo;
-
 		
 		return hash;
 	}

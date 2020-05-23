@@ -2,10 +2,10 @@ package modelo.negocio;
 
 import java.util.List;
 
-import model.Articulo;
-import model.Cliente;
-import model.FilasPedidosCliente;
-import model.PedidoCliente;
+import entidades.Articulo;
+import entidades.Cliente;
+import entidades.FilasPedidosCliente;
+import entidades.PedidoCliente;
 import modelo.persistencia.DaoPedidosClientes;
 
 public class GestorPedidosCliente {

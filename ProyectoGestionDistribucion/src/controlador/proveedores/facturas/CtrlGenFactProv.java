@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.AlbaranProveedor;
-import model.FacturaProveedor;
-import model.Proveedor;
+import entidades.AlbaranProveedor;
+import entidades.FacturaProveedor;
+import entidades.Proveedor;
 import modelo.negocio.GestorAlbaranProve;
 import modelo.negocio.GestorFacturaProve;
 import vista.proveedores.facturas.VFacturaProveedor;

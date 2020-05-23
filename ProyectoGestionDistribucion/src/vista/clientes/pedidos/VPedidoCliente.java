@@ -16,9 +16,9 @@ import com.toedter.calendar.JDateChooser;
 
 import controlador.clientes.pedidos.ControladorFilaPedidoCliente;
 import controlador.clientes.pedidos.ControladorPedidoCliente;
-import model.Cliente;
-import model.FilasPedidosCliente;
-import model.PedidoCliente;
+import entidades.Cliente;
+import entidades.FilasPedidosCliente;
+import entidades.PedidoCliente;
 import modelo.negocio.GestorCliente;
 
 import javax.swing.JScrollPane;

@@ -1,8 +1,5 @@
 package vista.pdf;
 
-import model.Datosempresa;
-import model.FilaPedidoProveedor;
-import model.PedidoProveedor;
 import modelo.negocio.GestorPedidosProve;
 import modelo.persistencia.DaoDatosEmpresa;
 import vista.correo.EnviarCorreo;
@@ -23,6 +20,10 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import entidades.Datosempresa;
+import entidades.FilaPedidoProveedor;
+import entidades.PedidoProveedor;
 
 public class PdfPedidoProveedor {
 

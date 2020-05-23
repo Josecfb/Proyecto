@@ -3,7 +3,7 @@ package vista.proveedores.facturas;
 import javax.swing.JPanel;
 
 import controlador.proveedores.facturas.CtrlFilaFacturasGenProveedor;
-import model.FacturaProveedor;
+import entidades.FacturaProveedor;
 
 import javax.swing.JLabel;
 import java.awt.Font;

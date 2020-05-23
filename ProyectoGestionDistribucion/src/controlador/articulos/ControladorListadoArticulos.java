@@ -4,7 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.ImageIcon;
-import model.Articulo;
+
+import entidades.Articulo;
 import modelo.negocio.GestorArticulo;
 import vista.articulos.VFichaArticulo;
 import vista.articulos.VListadoArticulos;

@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import model.PedidoProveedor;
+import entidades.PedidoProveedor;
 import modelo.negocio.GestorPedidosProve;
 import vista.proveedores.pedidos.VPedidoProveedor;
 import vista.proveedores.pedidos.VPedidosProveedores;

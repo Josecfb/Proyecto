@@ -2,8 +2,8 @@ package modelo.negocio;
 
 import java.util.List;
 
-import model.FacturaProveedor;
-import model.FilaFacturaProveedor;
+import entidades.FacturaProveedor;
+import entidades.FilaFacturaProveedor;
 import modelo.persistencia.DaoFacturaProve;
 
 public class GestorFacturaProve {

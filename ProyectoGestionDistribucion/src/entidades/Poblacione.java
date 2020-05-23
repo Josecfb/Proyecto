@@ -1,4 +1,4 @@
-package model;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;

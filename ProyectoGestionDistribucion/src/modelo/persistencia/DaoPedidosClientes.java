@@ -3,11 +3,11 @@ package modelo.persistencia;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-import model.Articulo;
-import model.PedidoCliente;
-import model.Cliente;
-import model.FilasPedidosCliente;
-import model.FilasPedidosClientePK;
+import entidades.Articulo;
+import entidades.Cliente;
+import entidades.FilasPedidosCliente;
+import entidades.FilasPedidosClientePK;
+import entidades.PedidoCliente;
 
 public class DaoPedidosClientes {
 	private EntityManager em;

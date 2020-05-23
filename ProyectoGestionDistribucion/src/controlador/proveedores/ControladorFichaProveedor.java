@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import model.Proveedor;
+
+import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 import modelo.persistencia.DaoProvincia;
 import vista.proveedores.VFichaProveedor;

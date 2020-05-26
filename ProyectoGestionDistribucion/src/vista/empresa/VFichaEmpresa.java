@@ -1,7 +1,8 @@
-package vista.proveedores;
+package vista.empresa;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
@@ -15,78 +16,61 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import controlador.proveedores.ControladorFichaProveedor;
-import entidades.Proveedor;
+import entidades.Datosempresa;
 
-public class VFichaProveedor extends JInternalFrame {
+public class VFichaEmpresa extends JInternalFrame {
 
 	private static final long serialVersionUID = -4232463625349427321L;
-	private VListadoProveedores v;
-	private Proveedor pro;
-	private JTextField tNumero;
+
+	private Datosempresa dat;
+	private JColorChooser colorChooser;
+	private JTextField tNombre;
 	private JTextField tDireccion;
-	private JComboBox<String> tPoblacion;
 	private JTextField tProvincia;
 	private JTextField tCodPos;
 	private JTextField tFijo;
 	private JTextField tMovil;
-	private JTextField tNombre;
-	private JTextField tEMail;
-	private JTextField tSubcuenta;
+	private JTextField tEmail;
 	private JTextField tNif;
+	private JComboBox<String> tPoblacion;
 	private JPanel panel;
-	private JButton bBorrar;
+	private JPanel panel_1;
+	private JTextField tColor;
 
-	public VFichaProveedor(Proveedor pro,VListadoProveedores v) {
-		this.pro=pro;
-		this.v=v;
-		setAutoscrolls(true);
-		setBorder(UIManager.getBorder("InternalFrame.border"));
-		setBounds(100, 100, 997, 481);
-		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/proveedores.png"));
-		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
-		setFrameIcon(icones);
-		getContentPane().setLayout(null);
+	public VFichaEmpresa(Datosempresa dat) {
+		this.dat=dat;
+		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		setClosable(true);
 		setMaximizable(false);
 		setIconifiable(true);
-		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-		if (pro!=null)
-			setTitle("Ficha de "+pro.getNombre());
-		else
-			setTitle("Nuevo Proveedor");
+		setAutoscrolls(true);
+		setBorder(UIManager.getBorder("InternalFrame.border"));
+		setBounds(100, 100, 997, 481);
+		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/config.png"));
+		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
+		setFrameIcon(icones);
+		getContentPane().setLayout(null);
+		
+		colorChooser=new JColorChooser();
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tabbedPane.setBounds(99, 11, 800, 374);
+		tabbedPane.setBounds(45, 32, 847, 365);
 		getContentPane().add(tabbedPane);
 		
 		panel = new JPanel();
-		tabbedPane.addTab("Datos Proveedor", null, panel, null);
 		panel.setLayout(null);
-		
-		JLabel lNumero = new JLabel("N\u00FAmero");
-		lNumero.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lNumero.setBounds(110, 47, 55, 25);
-		panel.add(lNumero);
-		
-		tNumero = new JTextField();
-		tNumero.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tNumero.setColumns(10);
-		tNumero.setBounds(175, 47, 86, 25);
-		tNumero.setHorizontalAlignment(JTextField.RIGHT);
-		tNumero.setFocusable(false);
-		panel.add(tNumero);
+		tabbedPane.addTab("Datos Empresa", null, panel, null);
 		
 		JLabel lNombre_1 = new JLabel("Nombre");
 		lNombre_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lNombre_1.setBounds(282, 47, 55, 25);
+		lNombre_1.setBounds(99, 47, 66, 25);
 		panel.add(lNombre_1);
 		
 		tNombre = new JTextField();
 		tNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tNombre.setColumns(10);
-		tNombre.setBounds(347, 47, 395, 25);
+		tNombre.setBounds(175, 47, 567, 25);
 		panel.add(tNombre);
 		
 		JLabel lDireccion = new JLabel("Direcci\u00F3n");
@@ -106,8 +90,8 @@ public class VFichaProveedor extends JInternalFrame {
 		panel.add(lPoblación);
 		
 		tPoblacion = new JComboBox<String>();
-		tPoblacion.setEditable(true);
 		tPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tPoblacion.setEditable(true);
 		tPoblacion.setBounds(494, 210, 248, 25);
 		panel.add(tPoblacion);
 		
@@ -155,31 +139,17 @@ public class VFichaProveedor extends JInternalFrame {
 		tMovil.setBounds(583, 157, 159, 25);
 		panel.add(tMovil);
 		
-		tEMail = new JTextField();
-		tEMail.setText((String) null);
-		tEMail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tEMail.setColumns(10);
-		tEMail.setBounds(175, 267, 200, 25);
-		panel.add(tEMail);
+		tEmail = new JTextField();
+		tEmail.setText((String) null);
+		tEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tEmail.setColumns(10);
+		tEmail.setBounds(175, 267, 200, 25);
+		panel.add(tEmail);
 		
 		JLabel lEMail = new JLabel("Email");
 		lEMail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lEMail.setBounds(118, 267, 47, 25);
 		panel.add(lEMail);
-		
-		tSubcuenta = new JTextField();
-		tSubcuenta.setText((String) null);
-		tSubcuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tSubcuenta.setColumns(10);
-		tSubcuenta.setBounds(444, 267, 104, 25);
-		tSubcuenta.setHorizontalAlignment(JTextField.RIGHT);
-		tSubcuenta.setText("0");
-		panel.add(tSubcuenta);
-		
-		JLabel lSubcuent = new JLabel("Sub cta.");
-		lSubcuent.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lSubcuent.setBounds(385, 267, 60, 25);
-		panel.add(lSubcuent);
 		
 		JLabel lNif = new JLabel("NIF");
 		lNif.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -194,33 +164,37 @@ public class VFichaProveedor extends JInternalFrame {
 		tNif.setBounds(583, 267, 159, 25);
 		panel.add(tNif);
 		
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Facturas", null, panel_1, null);
-		bBorrar = new JButton("");
-		bBorrar.setBounds(924, 385, 49, 51);
-		getContentPane().add(bBorrar);
-		bBorrar.setIcon(new ImageIcon(new ImageIcon("src/img/eliminar.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
-		if (pro!=null)
-			llenaFicha(pro);
+		panel_1 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_1, null);
+		
+		panel_1.setLayout(null);
+		
+		tColor = new JTextField();
+		tColor.setBounds(78, 61, 86, 20);
+		panel_1.add(tColor);
+		
+		if (dat!=null)
+			setTitle("Ficha de "+dat.getNombre());
+		else
+			setTitle("Nuevo Proveedor");
+		if (dat!=null)
+			llenaFicha(dat);
 		
 	}
 	
-	public void llenaFicha(Proveedor pro) {
-		tNumero.setText(String.valueOf(pro.getNumero()));
-		tNombre.setText(pro.getNombre());
-		tDireccion.setText(pro.getDireccion());
-		
-		tProvincia.setText(pro.getProvincia());
-		tCodPos.setText(pro.getCodPost());
+	public void llenaFicha(Datosempresa dat) {
+		tNombre.setText(dat.getNombre());
+		tDireccion.setText(dat.getDireccion());
+		tProvincia.setText(dat.getProvincia());
+		tCodPos.setText(dat.getCodpos());
 		DaoProvincia dp=new DaoProvincia();
-		for (String poblacion:dp.nomPoblaciones(pro.getCodPost()))
+		for (String poblacion:dp.nomPoblaciones(dat.getCodpos()))
 			tPoblacion.addItem(poblacion);
-		tPoblacion.setSelectedItem(pro.getPoblacion());
-		tFijo.setText(pro.getTelefonoFijo());
-		tMovil.setText(pro.getTelefonoMovil());
-		tEMail.setText(pro.getEmail());
-		tSubcuenta.setText(String.valueOf(pro.getNumCuentaContable()));
-		tNif.setText(pro.getNif());
+		tPoblacion.setSelectedItem(dat.getPoblacion());
+		tFijo.setText(dat.getFijo());
+		tMovil.setText(dat.getMovil());
+		tEmail.setText(dat.getEmail());
+		tNif.setText(dat.getNif());
 	}
 	
 	public void EstablecerManejadorVentana(ControladorFichaProveedor manejador) {
@@ -232,7 +206,6 @@ public class VFichaProveedor extends JInternalFrame {
 				componente.addFocusListener(manejador);
 				componente.addKeyListener(manejador);
 			}
-		bBorrar.addActionListener(manejador);
 	}
 	public JTextField gettDireccion() {
 		return tDireccion;
@@ -256,30 +229,14 @@ public class VFichaProveedor extends JInternalFrame {
 		return tNombre;
 	}
 	public JTextField gettEMail() {
-		return tEMail;
+		return tEmail;
 	}
-	public JTextField gettSubcuenta() {
-		return tSubcuenta;
-	}
+
 	public JTextField gettNif() {
 		return tNif;
 	}
-	public JTextField gettNumero() {
-		return tNumero;
-	}
 
-	public Proveedor getPro() {
-		return pro;
+	public Datosempresa getEmp() {
+		return dat;
 	}
-
-	public VListadoProveedores getVListProv() {
-		return v;
-	}
-
-	public JButton getbBorrar() {
-		return bBorrar;
-	}
-
-	
-	
 }

@@ -1,13 +1,8 @@
 package vista.proveedores;
 
 import javax.swing.JPanel;
-
 import controlador.proveedores.ControlaFilaListadoProveedores;
-import vista.VentanaPrincipal;
-
 import java.awt.Color;
-
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,11 +10,11 @@ import javax.swing.JLabel;
 public class VFilaListadoProveedores extends JPanel {
 
 	private static final long serialVersionUID = 4813844448451936303L;
-	private VentanaPrincipal v;
+	private VListadoProveedores v;
 	private JLabel numero, nombre, direccion, codPost, poblacion, provincia, fijo, movil;
 	private JButton bEditar;
 
-	public VFilaListadoProveedores(VentanaPrincipal v) {
+	public VFilaListadoProveedores(VListadoProveedores v) {
 		this.v=v;
 		setLayout(null);
 		setSize(975, 20);
@@ -103,7 +98,7 @@ public class VFilaListadoProveedores extends JPanel {
 		this.bEditar = bEditar;
 	}
 
-	public VentanaPrincipal getV() {
+	public VListadoProveedores getVListProv() {
 		return v;
 	}
 	

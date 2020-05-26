@@ -19,10 +19,10 @@ public class ControlaFilaListadoProveedores implements ActionListener{
 		System.out.println("hola");
 		if(e.getSource()==filaListadoProveedores.getbEditar()) {
 			GestorProveedor gp=new GestorProveedor();
-			VFichaProveedor fp=new VFichaProveedor(gp.existe(Integer.valueOf(filaListadoProveedores.getNumero().getText())),filaListadoProveedores.getV());
+			VFichaProveedor fp=new VFichaProveedor(gp.existe(Integer.valueOf(filaListadoProveedores.getNumero().getText())),filaListadoProveedores.getVListProv());
 			ControladorFichaProveedor cfp=new ControladorFichaProveedor(fp);
 			fp.EstablecerManejadorVentana(cfp);
-			filaListadoProveedores.getV().getPanelInterior().add(fp);
+			filaListadoProveedores.getVListProv().getV().getPanelInterior().add(fp);
 			fp.setVisible(true);
 		}
 	}

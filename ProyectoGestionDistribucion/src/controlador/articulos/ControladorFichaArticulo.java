@@ -37,8 +37,8 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 					modificaArticulo();
 				else
 					nuevoArticulo();
-				ControladorListadoArticulos cla=new ControladorListadoArticulos(fichaArticulo.getV());
-				cla.actualizar();
+				ControladorListadoArticulos cla=new ControladorListadoArticulos(fichaArticulo.getVListadoArt());
+				cla.listar();
 			}
 			else 
 				fichaArticulo.dispose();							

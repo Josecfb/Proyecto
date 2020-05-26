@@ -14,20 +14,33 @@ public class Datosempresa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="NIF")
 	private String nif;
-
+	
+	@Column(name="CODPOS")
 	private String codpos;
-
+	
+	@Column(name="DIRECCION")
 	private String direccion;
-
+	
+	@Column(name="EMAIL")
 	private String email;
-
+	
+	@Column(name="FIJO")
 	private String fijo;
-
+	
+	@Column(name="MOVIL")
 	private String movil;
-
+	
+	@Column(name="NOMBRE")
 	private String nombre;
-
+	
+	@Column(name="POBLACION")
+	private String poblacion;
+	
+	@Column(name="PROVINCIA")
+	private String provincia;
+	
 	public Datosempresa() {
 	}
 
@@ -85,6 +98,22 @@ public class Datosempresa implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getPoblacion() {
+		return this.poblacion;
+	}
+
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	}
+
+	public String getProvincia() {
+		return this.provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
 	}
 
 }

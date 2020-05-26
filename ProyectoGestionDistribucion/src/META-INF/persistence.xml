@@ -7,7 +7,6 @@
 		<class>entidades.Cliente</class>
 		<class>entidades.Codigospostale</class>
 		<class>entidades.CodigospostalePK</class>
-		<class>entidades.Datosempresa</class>
 		<class>entidades.FacturasCliente</class>
 		<class>entidades.FacturaProveedor</class>
 		<class>entidades.Familia</class>
@@ -30,6 +29,7 @@
 		<class>entidades.PreciosClientePK</class>
 		<class>entidades.Proveedor</class>
 		<class>entidades.Provincia</class>
+		<class>entidades.Datosempresa</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/GestionDistribucion"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

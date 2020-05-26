@@ -20,11 +20,11 @@ public class ControladorListadoProveedores implements ActionListener{
 	private VListadoProveedores listado;
 	
 	public ControladorListadoProveedores(VListadoProveedores listado) {
-		listar(listado);		
+		this.listado=listado;
+		listar();		
 	}
 
-	public void listar(VListadoProveedores listado) {
-		this.listado=listado;
+	public void listar() {
 		List<Proveedor> filas;
 		GestorProveedor gp=new GestorProveedor();
 		filas=gp.listar(listado.getTFiltroNombre().getText());
@@ -34,13 +34,13 @@ public class ControladorListadoProveedores implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==listado.getbFiltrar()) 
-			filtrar();
+			listar();
 		if (e.getSource()==listado.getbFiltros()) 
 			muestraFiltros();
 		if (e.getSource()==listado.getbNuevo())
 			nuevoProveedor();
 		if (e.getSource()==listado.getbActualizar())
-			actualizar();
+			listar();
 		if (e.getSource()==listado.getbPedidos())
 			abrePedidos();
 		if (e.getSource()==listado.getbAlbaranes())
@@ -49,17 +49,14 @@ public class ControladorListadoProveedores implements ActionListener{
 			abreFacturas();
 	}
 	
-	private void filtrar() {
-		listado.getPanel().updateUI();
-		listar(listado);
-	}
+
 	
 	private void muestraFiltros() {
 		if (listado.getbFiltrar().isVisible()) {
 			listado.getbFiltrar().setVisible(false);
 			listado.getTFiltroNombre().setVisible(false);
 			listado.getTFiltroNombre().setText("");
-			listar(listado);
+			listar();
 			listado.getbFiltros().setIcon(new ImageIcon("src/img/filtro.png"));
 		}
 		else {
@@ -68,12 +65,10 @@ public class ControladorListadoProveedores implements ActionListener{
 			listado.getbFiltros().setIcon(new ImageIcon("src/img/nofiltro.png"));
 		}
 	}
-	private void actualizar() {
-		listar(listado);
-	}
+
 	
 	private void nuevoProveedor() {
-		VFichaProveedor fp=new VFichaProveedor(null,listado.getV());
+		VFichaProveedor fp=new VFichaProveedor(null,listado);
 		ControladorFichaProveedor cfp=new ControladorFichaProveedor(fp);
 		fp.EstablecerManejadorVentana(cfp);
 		listado.getV().getPanelInterior().add(fp);

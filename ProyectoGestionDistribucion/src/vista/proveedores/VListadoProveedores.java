@@ -192,20 +192,11 @@ public class VListadoProveedores extends JInternalFrame {
 		bFacturas.setMaximumSize(new Dimension(60, 60));
 		bFacturas.setHorizontalTextPosition(SwingConstants.CENTER );
 		bFacturas.setVerticalTextPosition( SwingConstants.BOTTOM );
-
-		ControladorListadoProveedores controladorListadoProveedores=new ControladorListadoProveedores(this);
-		controladorListadoProveedores.listar(this);
-
-		
+		new ControladorListadoProveedores(this);
 	}
 	
 	public void muestra(List<Proveedor> filas) {
-		
-		//FilaListadoProveedores fila;
 		panel = new JPanel();
-
-
-		//panel.setBounds(0,0,727,600);
 		panel.setPreferredSize(new Dimension(800,filas.size()*25));
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(null);
@@ -216,7 +207,7 @@ public class VListadoProveedores extends JInternalFrame {
 			i++;
 			
 			
-			fila=new VFilaListadoProveedores(v);
+			fila=new VFilaListadoProveedores(this);
 			ControlaFilaListadoProveedores controlaFila=new ControlaFilaListadoProveedores(fila);
 			fila.establecerControlador(controlaFila);
 			fila.setPreferredSize(new Dimension(1100,20));

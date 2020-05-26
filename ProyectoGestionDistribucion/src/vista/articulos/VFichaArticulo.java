@@ -353,7 +353,7 @@ public class VFichaArticulo extends JInternalFrame {
 		return bBorrar;
 	}
 
-	public VListadoArticulos getV() {
+	public VListadoArticulos getVListadoArt() {
 		return vla;
 	}
 }

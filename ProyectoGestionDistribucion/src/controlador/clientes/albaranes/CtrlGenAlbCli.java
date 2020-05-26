@@ -39,7 +39,7 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenAlvCli.getComboCliente().getEditor().getEditorComponent()) {
 			GestorPedidosCliente gpc=new GestorPedidosCliente();
-			List<PedidoCliente> listaPed =gpc.listaEnviados(((Cliente) vGenAlvCli.getComboCliente().getSelectedItem()));
+			List<PedidoCliente> listaPed =gpc.listaNoEnviados(((Cliente) vGenAlvCli.getComboCliente().getSelectedItem()));
 			vGenAlvCli.muestraPedidos(listaPed);
 		}
 	}
@@ -76,7 +76,7 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 				vfila=(VFilaPedGeneraAlbCliente) compo;
 				if (vfila.getChecMarca().isSelected()) {	
 					PedidoCliente ped=gpc.existe(Integer.parseInt(vfila.getlNum().getText()));
-					if (!ped.getConfirmado())
+					if (!ped.getEnviado())
 						pedidos.add(ped);
 				}
 			}
@@ -85,7 +85,7 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 			gac.nuevoAlbaran(alb);
 			for (PedidoCliente ped:alb.getPedidosClientes()) {
 				ped.setAlbaranCliente(alb);
-				ped.setConfirmado(true);
+				ped.setEnviado(true);
 				gpc.modificarPedido(ped);
 			}
 			alb.setFilasAlbaranClientes(gac.generaFilas(alb));

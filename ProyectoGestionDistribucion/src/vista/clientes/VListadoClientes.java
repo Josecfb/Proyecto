@@ -219,7 +219,7 @@ public class VListadoClientes extends JInternalFrame {
 		scroll.setViewportView(panel);
 		for (Cliente cli:filas) {
 			i++;
-			fila=new VFilaListadoClientes(v);
+			fila=new VFilaListadoClientes(this);
 			ControlaFilaListadoClientes controlaFila=new ControlaFilaListadoClientes(fila);
 			fila.establecerControlador(controlaFila);
 			fila.setPreferredSize(new Dimension(1100,25));

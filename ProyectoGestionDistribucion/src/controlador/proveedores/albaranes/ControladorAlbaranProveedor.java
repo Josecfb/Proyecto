@@ -51,8 +51,6 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 		asignaCampos(albModif);
 		ponFilas(albModif);
 		vAlbaran.muestraFilas(albModif);
-		
-			
 		int ok=gap.modificaAlbaran(albModif);
 		if (ok==0) {
 			ControladorAlbaranesProveedores cap = new ControladorAlbaranesProveedores(vAlbaran.getvAlbsPro());
@@ -67,9 +65,9 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 	private void nuevoAlbaran() {
 		AlbaranProveedor albaranNuevo=new AlbaranProveedor();
 		asignaCampos(albaranNuevo);
-		int ok=gap.nuevoAlbaran(albaranNuevo);
+		
 		ponFilas(albaranNuevo);
-		gap.modificaAlbaranGenerado(albaranNuevo);
+		int ok=gap.nuevoAlbaran(albaranNuevo);
 		if (ok==0)
 			vAlbaran.dispose();
 	}

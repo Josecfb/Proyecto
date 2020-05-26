@@ -20,9 +20,6 @@ public class PedidoCliente implements Serializable {
 	@Column(name="NUM")
 	private int num;
 
-	@Column(name="CONFIRMADO")
-	private boolean confirmado;
-	
 	@Column(name="ENVIADO")
 	private boolean enviado;
 
@@ -53,14 +50,6 @@ public class PedidoCliente implements Serializable {
 
 	public void setNum(int num) {
 		this.num = num;
-	}
-
-	public boolean getConfirmado() {
-		return this.confirmado;
-	}
-
-	public void setConfirmado(boolean confirmado) {
-		this.confirmado = confirmado;
 	}
 
 	public Date getFecha() {

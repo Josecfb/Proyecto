@@ -32,6 +32,7 @@ import javax.swing.JButton;
 public class VFichaCliente extends JInternalFrame {
 	private static final long serialVersionUID = 7007272565978130446L;
 	private Cliente cli;
+	private VListadoClientes vlc;
 	private JTextField tNumero;
 	private JTextField tDireccion;
 	private JComboBox<String> tPoblacion;
@@ -52,8 +53,9 @@ public class VFichaCliente extends JInternalFrame {
 	private JPanel panel;
 	private  NumberFormat formatoeuro,formatoPorcentaje;
 
-	public VFichaCliente(Cliente cli) {
+	public VFichaCliente(Cliente cli,VListadoClientes vlc) {
 		this.cli=cli;
+		this.vlc=vlc;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		formatoPorcentaje.setMinimumFractionDigits(2);
@@ -453,6 +455,10 @@ public class VFichaCliente extends JInternalFrame {
 
 	public JButton getbBorrar() {
 		return bBorrar;
+	}
+
+	public VListadoClientes getVlc() {
+		return vlc;
 	}
 	
 }

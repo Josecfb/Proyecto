@@ -19,14 +19,14 @@ public class ControladorListadoClientes implements ActionListener{
 
 	
 	public ControladorListadoClientes(VListadoClientes listado) {
-		listar(listado);		
+		this.listado=listado;
+		listar();		
 	}
 	/**
 	 * Obtiene la lista con todos los clientes y llama al método muestra(filas de la ventana listado de clientes
 	 * @param listado Ventana listado de clientes
 	 */
-	private void listar(VListadoClientes listado) {
-		this.listado=listado;
+	public void listar() {
 		GestorCliente gc=new GestorCliente();
 		List<Cliente> filas=gc.listar(listado.getTFiltroNombre().getText());
 		listado.muestra(filas);
@@ -35,13 +35,13 @@ public class ControladorListadoClientes implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==listado.getbFiltrar()) 
-			filtrar();
+			listar();
 		if (e.getSource()==listado.getbFiltros()) 
 			muestraFiltros();
 		if (e.getSource()==listado.getbNuevo())
 			nuevoCliente();
 		if (e.getSource()==listado.getbActualizar())
-			actualizar();
+			listar();
 		if (e.getSource()==listado.getbPedidos())
 			abrePedidos();
 		if (e.getSource()==listado.getbAlbaranes()) {
@@ -67,6 +67,8 @@ public class ControladorListadoClientes implements ActionListener{
 		if (listado.getbFiltrar().isVisible()) {
 			listado.getbFiltrar().setVisible(false);
 			listado.getTFiltroNombre().setVisible(false);
+			listado.getTFiltroNombre().setText("");
+			listar();
 			listado.getbFiltros().setIcon(new ImageIcon("src/img/filtro.png"));
 		}
 		else {
@@ -76,18 +78,8 @@ public class ControladorListadoClientes implements ActionListener{
 		}
 	}
 
-	private void filtrar() {
-		listado.getPanel().updateUI();
-		listar(listado);
-	}
-	
-	private void actualizar() {
-		listar(listado);
-		listado.getPanel().updateUI();
-	}
-	
 	private void nuevoCliente() {
-		VFichaCliente fc=new VFichaCliente(null);
+		VFichaCliente fc=new VFichaCliente(null,listado);
 		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);
 		fc.establecerManejadorVentana(cfc);
 		listado.getV().getPanelInterior().add(fc);

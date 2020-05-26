@@ -90,7 +90,6 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 	private void asignaCampos(PedidoCliente pedModif) {
 		pedModif.setFecha(vpedidoCliente.getcFecha().getDate());
 		pedModif.setClienteBean((Cliente) vpedidoCliente.getComboCliente().getSelectedItem());
-		pedModif.setConfirmado(vpedidoCliente.getChecConfirmado().isSelected());
 		pedModif.setEnviado(vpedidoCliente.getChecEnviado().isSelected());	
 		
 		vpedidoCliente.getPanel().updateUI();

@@ -1,29 +1,17 @@
 package vista;
 
-
-
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
 import controlador.ControladorPrincipal;
-import controlador.articulos.ControladorListadoArticulos;
-import controlador.clientes.ControladorListadoClientes;
-import controlador.proveedores.ControladorListadoProveedores;
-import vista.articulos.VListadoArticulos;
-import vista.clientes.VListadoClientes;
-import vista.proveedores.VListadoProveedores;
-
 import javax.swing.JDesktopPane;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-
 import java.awt.BorderLayout;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Dimension;
@@ -31,6 +19,9 @@ import java.awt.Toolkit;
 
 public class VentanaPrincipal extends JFrame {
 	private static final long serialVersionUID = -2711106703828276308L;
+	/**
+	 * 
+	 */
 	private JMenuBar barra;
 	private JMenu menuFichero, menuProveedores, menuClientes, menuArticulos;
 	private JMenuItem salir,listarProveedores,listarClientes,listarArticulos;
@@ -39,9 +30,7 @@ public class VentanaPrincipal extends JFrame {
 	private JButton bArticulos;
 	private JButton bClientes;
 	private JButton bProveedores;
-	//private JButton bFacturas;
-	
-
+	private JButton bConfiguracion;
 	
 	public VentanaPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaPrincipal.class.getResource("/img/icono.png")));
@@ -88,6 +77,13 @@ public class VentanaPrincipal extends JFrame {
 		bProveedores.setHorizontalTextPosition(SwingConstants.CENTER );
 		bProveedores.setVerticalTextPosition( SwingConstants.BOTTOM );
 		
+		bConfiguracion = new JButton("Configuracion");
+		bConfiguracion.setMaximumSize(new Dimension(90, 90));
+		toolBar.add(bConfiguracion);
+		bConfiguracion.setIcon(new ImageIcon(new ImageIcon("src/img/config.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		bConfiguracion.setHorizontalTextPosition(SwingConstants.CENTER );
+		bConfiguracion.setVerticalTextPosition( SwingConstants.BOTTOM );
+		
 		panelInterior.setVisible(true);
 	}
 	private void pintaMenu() {
@@ -111,31 +107,7 @@ public class VentanaPrincipal extends JFrame {
 		menuClientes.add(listarClientes);
 		menuArticulos.add(listarArticulos);
 	}
-	public void listadoProveedores() {
-		VListadoProveedores lp=new VListadoProveedores(this);
-		ControladorListadoProveedores controla =new ControladorListadoProveedores(lp);
-		lp.establecerControlador(controla);
-		panelInterior.add(lp);
-		lp.setVisible(true);
-	}
-	
-	public void listadoClientes() {
-		VListadoClientes lc=new VListadoClientes(this);
-		ControladorListadoClientes controlacli=new ControladorListadoClientes(lc);
-		lc.establecerControlador(controlacli);
-		panelInterior.add(lc);
-		lc.setVisible(true);
-	}
-	
-	public void listadoArticulos() {
-		VListadoArticulos la=new VListadoArticulos(this);
-		ControladorListadoArticulos controlala=new ControladorListadoArticulos(la);
-		la.establecerControlador(controlala);
-		panelInterior.add(la);
-		la.setVisible(true);
 		
-	}
-	
 	public void establecerControlador(ControladorPrincipal controlador) {
 		listarProveedores.addActionListener(controlador);
 		listarClientes.addActionListener(controlador);
@@ -143,6 +115,7 @@ public class VentanaPrincipal extends JFrame {
 		bArticulos.addActionListener(controlador);
 		bClientes.addActionListener(controlador);
 		bProveedores.addActionListener(controlador);
+		bConfiguracion.addActionListener(controlador);
 	}
 	public JMenuItem getListarProveedores() {
 		return listarProveedores;
@@ -164,6 +137,9 @@ public class VentanaPrincipal extends JFrame {
 	}
 	public JButton getbProveedores() {
 		return bProveedores;
+	}
+	public JButton getbConfiguracion() {
+		return bConfiguracion;
 	}
 	
 	

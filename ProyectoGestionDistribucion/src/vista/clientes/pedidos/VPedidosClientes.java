@@ -86,13 +86,10 @@ public class VPedidosClientes extends JInternalFrame {
 			filaPed.getlProveedor().setText(String.valueOf(cli.getNombre()));
 			if (fila.getFecha()!=null) filaPed.getlFecha().setText(formatter.format(fila.getFecha()));
 			filaPed.getlNum().setText(String.valueOf(fila.getNum()));
-			if (fila.getEnviado() && fila.getConfirmado())
-				panelRecibidos.add(filaPed);
+			if (fila.getEnviado())
+				panelEnviados.add(filaPed);
 			else
-				if (fila.getEnviado())
-					panelEnviados.add(filaPed);
-				else
-					panelPendientes.add(filaPed);
+				panelPendientes.add(filaPed);
 		}
 	}
 	

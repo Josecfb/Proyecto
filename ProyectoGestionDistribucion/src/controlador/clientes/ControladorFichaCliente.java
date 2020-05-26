@@ -37,11 +37,14 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
 		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
-		if (res==JOptionPane.YES_OPTION)
+		if (res==JOptionPane.YES_OPTION) {
 			if (fichaCliente.getCli()!=null)
 				modificaCliente();
 			else
 				nuevoCliente();
+		ControladorListadoClientes clc=new ControladorListadoClientes(fichaCliente.getVlc());
+		clc.listar();
+		}
 		else
 			fichaCliente.dispose();
 	}

@@ -67,9 +67,8 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		PedidoProveedor pedidoNuevo=new PedidoProveedor();
 		asignaCampos(pedidoNuevo);
 		boolean[] ok=new boolean[4];
-		ok=gpp.nuevoPedido(pedidoNuevo);
 		ponFilas(pedidoNuevo);
-		if (ok[3]) gpp.modificarPedido(pedidoNuevo);
+		ok=gpp.nuevoPedido(pedidoNuevo);
 		if (ok[3]) 
 			vpedidoProveedor.dispose();
 		else

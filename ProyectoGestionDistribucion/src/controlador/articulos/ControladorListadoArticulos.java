@@ -14,11 +14,11 @@ public class ControladorListadoArticulos implements ActionListener{
 	private VListadoArticulos listado;
 	
 	public ControladorListadoArticulos(VListadoArticulos listado) {
-		listar(listado);		
+		this.listado=listado;
+		listar();		
 	}
 
-	public void listar(VListadoArticulos listado) {
-		this.listado=listado;
+	public void listar() {
 		List<Articulo> filas;
 		GestorArticulo gp=new GestorArticulo();
 		filas=gp.listar(listado.getTFiltroNombre().getText());
@@ -29,13 +29,13 @@ public class ControladorListadoArticulos implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource()==listado.getbFiltrar()) 
-			filtrar();
+			listar();
 		if (e.getSource()==listado.getbFiltros()) 
 			muestraFiltros();
 		if (e.getSource()==listado.getbNuevo())
 			nuevoArticulo();
 		if (e.getSource()==listado.getbActualizar())
-			actualizar();
+			listar();
 		
 	}
 
@@ -44,7 +44,7 @@ public class ControladorListadoArticulos implements ActionListener{
 			listado.getbFiltrar().setVisible(false);
 			listado.getTFiltroNombre().setVisible(false);
 			listado.getTFiltroNombre().setText("");
-			listar(listado);
+			listar();
 			listado.getbFiltros().setIcon(new ImageIcon("src/img/filtro.png"));
 		}
 		else {
@@ -54,16 +54,6 @@ public class ControladorListadoArticulos implements ActionListener{
 		}
 	}
 
-	private void filtrar() {
-		listado.getPanel().updateUI();
-		listar(listado);
-	}
-	
-	public void actualizar() {
-		
-		listar(listado);
-	}
-	
 	private void nuevoArticulo() {
 		//GestorArticulo ga=new GestorArticulo();
 		VFichaArticulo fa=new VFichaArticulo(null,listado);

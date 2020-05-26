@@ -1,12 +1,8 @@
 package vista.clientes;
 
 import javax.swing.JPanel;
-
 import controlador.clientes.ControlaFilaListadoClientes;
-import vista.VentanaPrincipal;
-
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,9 +12,9 @@ public class VFilaListadoClientes extends JPanel {
 	private static final long serialVersionUID = 4813844448451936303L;
 	private JLabel numero, nif, nombreComercial, nombreFiscal,codPost, poblacion, provincia, fijo, movil;
 	private JButton bEditar;
-	private VentanaPrincipal v;
+	private VListadoClientes v;
 
-	public VFilaListadoClientes(VentanaPrincipal v) {
+	public VFilaListadoClientes(VListadoClientes v) {
 		this.v=v;
 		setLayout(null);
 		setSize(1074, 25);
@@ -111,7 +107,7 @@ public class VFilaListadoClientes extends JPanel {
 		this.bEditar = bEditar;
 	}
 
-	public VentanaPrincipal getV() {
+	public VListadoClientes getVListCli() {
 		return v;
 	}
 	

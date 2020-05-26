@@ -1,7 +1,6 @@
 package controlador.proveedores;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -14,12 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-
 import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 import modelo.persistencia.DaoProvincia;
 import vista.proveedores.VFichaProveedor;
-import vista.proveedores.VListadoProveedores;
 
 public class ControladorFichaProveedor implements InternalFrameListener, KeyListener, FocusListener, ActionListener{
 	private VFichaProveedor fichaProveedor;
@@ -47,12 +44,8 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 				modificaProveedor();
 			else
 				nuevoProvedor();
-			Component[] componentes=fichaProveedor.getV().getPanelInterior().getComponents();
-			for (Component componente:componentes)
-				if (componente.getClass()==VListadoProveedores.class) {
-					VListadoProveedores lista=(VListadoProveedores) componente;
-					lista.getbActualizar().doClick();
-				}
+			ControladorListadoProveedores clp=new ControladorListadoProveedores(fichaProveedor.getVListProv());
+			clp.listar();
 		}
 		else 
 			fichaProveedor.dispose();

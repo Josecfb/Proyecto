@@ -42,7 +42,7 @@ public class VPedidoCliente extends JInternalFrame {
 	private JLabel lTotal;
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumpedido;
-	private JCheckBox checConfirmado, checEnviado;
+	private JCheckBox checEnviado;
 	private JButton bNuevaFila;
 
 
@@ -150,11 +150,6 @@ public class VPedidoCliente extends JInternalFrame {
 		tNumpedido.setFocusable(false);
 		getContentPane().add(tNumpedido);
 		
-		checConfirmado = new JCheckBox("Confirmado");
-		checConfirmado.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		checConfirmado.setBounds(311, 61, 97, 23);
-		getContentPane().add(checConfirmado);
-		
 		checEnviado = new JCheckBox("Enviado");
 		checEnviado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		checEnviado.setBounds(442, 61, 97, 23);
@@ -189,7 +184,6 @@ public class VPedidoCliente extends JInternalFrame {
 		tNumpedido.setText(String.valueOf(ped.getNum()));
 		comboCliente.setSelectedItem(ped.getClienteBean());
 		cFecha.setDate(ped.getFecha());
-		checConfirmado.setSelected(ped.getConfirmado());
 		checEnviado.setSelected(ped.getEnviado());
 	}
 	
@@ -257,10 +251,6 @@ public class VPedidoCliente extends JInternalFrame {
 
 	public JDateChooser getcFecha() {
 		return cFecha;
-	}
-
-	public JCheckBox getChecConfirmado() {
-		return checConfirmado;
 	}
 
 	public JCheckBox getChecEnviado() {

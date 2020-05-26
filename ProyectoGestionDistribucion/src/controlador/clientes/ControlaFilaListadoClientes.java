@@ -20,12 +20,12 @@ public class ControlaFilaListadoClientes implements ActionListener{
 		VFichaCliente fc;
 		GestorCliente gc=new GestorCliente();
 		if(e.getSource()==filaListadoClientes.getbEditar())
-			fc=new VFichaCliente(gc.existe(Integer.valueOf(filaListadoClientes.getNumero().getText())));
+			fc=new VFichaCliente(gc.existe(Integer.valueOf(filaListadoClientes.getNumero().getText())),filaListadoClientes.getVListCli());
 		else
-			fc=new VFichaCliente(null);
+			fc=new VFichaCliente(null,filaListadoClientes.getVListCli());
 		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);
 		fc.establecerManejadorVentana(cfc);
-		filaListadoClientes.getV().getPanelInterior().add(fc);
+		filaListadoClientes.getVListCli().getV().getPanelInterior().add(fc);
 		fc.setVisible(true);
 	}
 

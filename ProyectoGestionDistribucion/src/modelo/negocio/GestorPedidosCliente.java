@@ -53,7 +53,7 @@ public class GestorPedidosCliente {
 		return dpc.listadoPendientes(cli);
 	}
 	
-	public List<PedidoCliente> listaEnviados(Cliente cli){
-		return dpc.listaEnviados(cli);
+	public List<PedidoCliente> listaNoEnviados(Cliente cli){
+		return dpc.listaNoEnviados(cli);
 	}
 }

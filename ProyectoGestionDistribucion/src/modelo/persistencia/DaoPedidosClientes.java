@@ -29,14 +29,14 @@ public class DaoPedidosClientes {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<PedidoCliente> listaEnviados(Cliente cli){
+	public List<PedidoCliente> listaNoEnviados(Cliente cli){
 		List<PedidoCliente> lista;
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
 		if (em==null)
 			return null;
 		else
-			lista=em.createQuery("select ped from PedidoCliente ped where ped.clienteBean=:cli and ped.enviado=TRUE and ped.confirmado=FALSE order by ped.fecha desc").setParameter("cli", cli).getResultList();
+			lista=em.createQuery("select ped from PedidoCliente ped where ped.clienteBean=:cli and ped.enviado=FALSE order by ped.fecha desc").setParameter("cli", cli).getResultList();
 		ab.cerrarConexion();
 		return lista;
 	}
@@ -89,7 +89,6 @@ public class DaoPedidosClientes {
 		if (em==null) return -1;
 		antiguo.setNum(ped.getNum());
 		antiguo.setFecha(ped.getFecha());
-		antiguo.setConfirmado(ped.getConfirmado());
 		antiguo.setEnviado(ped.getEnviado());
 		antiguo.setAlbaranCliente(ped.getAlbaranCliente());
 		antiguo.getFilasPedidosClientes().clear();

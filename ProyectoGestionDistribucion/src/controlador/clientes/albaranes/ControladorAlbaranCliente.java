@@ -17,6 +17,7 @@ import entidades.Articulo;
 import entidades.Cliente;
 import entidades.FilasAlbaranCliente;
 import modelo.negocio.GestorAlbaranCliente;
+import modelo.negocio.GestorFacturaCliente;
 import vista.clientes.albaranes.VAlbaranCliente;
 import vista.clientes.albaranes.VFilaAlbaranCliente;
 
@@ -50,8 +51,11 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		asignaCampos(albModif);
 		ponFilas(albModif);
 		vAlbaran.muestraFilas(albModif);
-		
-			
+		if (albModif.isActualizadoAlmacen() && !albModif.getFacturado() && albModif.getClienteBean().getTipo()==0) {
+			GestorFacturaCliente gfc=new GestorFacturaCliente();
+			gfc.generaFacturaAlbaranMinorista(albModif);
+			albModif.setFacturado(true);
+		}
 		int ok=gac.modificaAlbaran(albModif);
 		if (ok==0) {
 			ControladorAlbaranesClientes cac = new ControladorAlbaranesClientes(vAlbaran.getvAlbsCli());
@@ -77,6 +81,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		albModif.setFecha(vAlbaran.getcFecha().getDate());
 		albModif.setClienteBean((Cliente) vAlbaran.getComboCliente().getSelectedItem());
 		albModif.setActualizadoAlmacen(vAlbaran.getChecAlmacen().isSelected());
+		albModif.setFacturado(vAlbaran.getChecFacturado().isSelected());
 		vAlbaran.getPanel().updateUI();	
 	}
 

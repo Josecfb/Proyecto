@@ -40,7 +40,7 @@ public class VAlbaranCliente extends JInternalFrame {
 	private JLabel lBase,lIva,lTotal;
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumAlb;
-	private JCheckBox checAlmacen;
+	private JCheckBox checAlmacen, checFacturado;
 	private JButton bNuevaFila;
 
 
@@ -89,19 +89,19 @@ public class VAlbaranCliente extends JInternalFrame {
 		
 		lBase = new JLabel("");
 		lBase.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lBase.setBounds(610, 392, 89, 25);
+		lBase.setBounds(580, 392, 89, 25);
 		lBase.setHorizontalAlignment(JTextField.RIGHT);
 		getContentPane().add(lBase);
 		
 		lIva = new JLabel("0,00 \u20AC");
 		lIva.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lIva.setBounds(610, 423, 89, 25);
+		lIva.setBounds(580, 423, 89, 25);
 		lIva.setHorizontalAlignment(JTextField.RIGHT);
 		getContentPane().add(lIva);
 		
 		lTotal = new JLabel("0,00 \u20AC");
 		lTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lTotal.setBounds(610, 453, 89, 25);
+		lTotal.setBounds(580, 453, 89, 25);
 		lTotal.setHorizontalAlignment(JTextField.RIGHT);
 		getContentPane().add(lTotal);
 		
@@ -121,20 +121,12 @@ public class VAlbaranCliente extends JInternalFrame {
 		lblNewLabel_2.setBounds(94, 102, 358, 18);
 		getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Cajas");
-		lblNewLabel_3.setOpaque(true);
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3.setBackground(new Color(0, 0, 128));
-		lblNewLabel_3.setBounds(462, 102, 38, 18);
-		getContentPane().add(lblNewLabel_3);
-		
 		JLabel lblNewLabel_4 = new JLabel("Unidades");
 		lblNewLabel_4.setOpaque(true);
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_4.setBackground(new Color(0, 0, 128));
-		lblNewLabel_4.setBounds(510, 102, 29, 18);
+		lblNewLabel_4.setBounds(462, 102, 55, 18);
 		getContentPane().add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Precio");
@@ -142,7 +134,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_5.setBackground(new Color(0, 0, 128));
-		lblNewLabel_5.setBounds(549, 102, 64, 18);
+		lblNewLabel_5.setBounds(527, 102, 68, 18);
 		getContentPane().add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Total");
@@ -150,7 +142,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		lblNewLabel_6.setForeground(Color.WHITE);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_6.setBackground(new Color(0, 0, 128));
-		lblNewLabel_6.setBounds(623, 102, 76, 18);
+		lblNewLabel_6.setBounds(605, 102, 76, 18);
 		getContentPane().add(lblNewLabel_6);
 		
 		JLabel lNum = new JLabel("Numero");
@@ -166,7 +158,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		
 		checAlmacen = new JCheckBox("Baja almacen");
 		checAlmacen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		checAlmacen.setBounds(311, 61, 141, 23);
+		checAlmacen.setBounds(311, 61, 105, 23);
 		getContentPane().add(checAlmacen);
 
 		bNuevaFila = new JButton("");
@@ -177,20 +169,25 @@ public class VAlbaranCliente extends JInternalFrame {
 		JLabel lblBase = new JLabel("Base");
 		lblBase.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblBase.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBase.setBounds(511, 392, 89, 25);
+		lblBase.setBounds(481, 392, 89, 25);
 		getContentPane().add(lblBase);
 		
 		JLabel lblIva = new JLabel("IVA");
 		lblIva.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblIva.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblIva.setBounds(511, 423, 89, 25);
+		lblIva.setBounds(481, 423, 89, 25);
 		getContentPane().add(lblIva);
 		
 		JLabel lblTotal = new JLabel("Total");
 		lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTotal.setBounds(511, 453, 89, 25);
+		lblTotal.setBounds(481, 453, 89, 25);
 		getContentPane().add(lblTotal);
+		
+		checFacturado = new JCheckBox("Facturado");
+		checFacturado.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		checFacturado.setBounds(430, 61, 141, 23);
+		getContentPane().add(checFacturado);
 		
 		setTitle("Albaran Cliente");
 		//contrAlbPro.articulosPendientesPedido(alb);
@@ -217,6 +214,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		comboCliente.setSelectedItem(alb.getClienteBean());
 		cFecha.setDate(alb.getFecha());
 		checAlmacen.setSelected(alb.isActualizadoAlmacen());
+		checFacturado.setSelected(alb.getFacturado());
 		if (alb.isActualizadoAlmacen()) {
 			tNumAlb.setFocusable(false);
 			comboCliente.setFocusable(false);
@@ -241,14 +239,12 @@ public class VAlbaranCliente extends JInternalFrame {
 			vFilaAlb.gettCod().setText(String.valueOf(fil.getArticuloBean().getCod()));
 			vFilaAlb.getArticulo().setSelectedItem(fil.getArticuloBean());
 			vFilaAlb.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
-			vFilaAlb.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
 			vFilaAlb.gettPrecio().setText(formatoeuro.format(fil.getPrecio()));
 			vFilaAlb.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getPrecio()));
 			if (albaran.isActualizadoAlmacen()) {
 				vFilaAlb.gettCod().setFocusable(false);
 				vFilaAlb.getArticulo().setEnabled(false);
 				vFilaAlb.gettUnidades().setFocusable(false);
-				vFilaAlb.gettCajas().setFocusable(false);
 				vFilaAlb.gettPrecio().setFocusable(false);
 				vFilaAlb.gettTotal().setFocusable(false);
 				vFilaAlb.getbBorrar().setEnabled(false);
@@ -298,6 +294,11 @@ public class VAlbaranCliente extends JInternalFrame {
 
 	public JCheckBox getChecAlmacen() {
 		return checAlmacen;
+	}
+	
+
+	public JCheckBox getChecFacturado() {
+		return checFacturado;
 	}
 
 	public JPanel getPanel() {

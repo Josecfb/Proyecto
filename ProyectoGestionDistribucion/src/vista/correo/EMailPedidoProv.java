@@ -14,18 +14,17 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class EnviarCorreo implements Runnable{
+public class EMailPedidoProv implements Runnable{
 	private Properties props;
 	private Session session;
 	private String para,archivo;
 	
-	public EnviarCorreo(String para,String archivo) {
+	public EMailPedidoProv(String para,String archivo) {
 		this.archivo=archivo;
 		this.para=para;
 		props=new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.clave", decodif("%pssfQ3tjN$"));
-	    props.put("mail.smtp.clave", "#Mis2Perro$");
 	    props.put("mail.smtp.auth", "true");
 	    props.put("mail.smtp.starttls.enable", "true");
 	    props.put("mail.smtp.port", "587");
@@ -33,8 +32,6 @@ public class EnviarCorreo implements Runnable{
 	    session = Session.getDefaultInstance(props);
 	    Thread hilo=new Thread(this);
 		hilo.start();
-       
-	    
 	}
 
 	@Override

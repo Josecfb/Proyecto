@@ -17,6 +17,7 @@ public class FacturasCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="NUM")
 	private int num;
 
@@ -29,14 +30,14 @@ public class FacturasCliente implements Serializable {
 	private Date fecha;
 
 	@Column(name="PAGADA")
-	private byte pagada;
+	private boolean pagada;
 
 	//bi-directional many-to-one association to AlbaranCliente
 	@OneToMany(mappedBy="facturasCliente")
 	private List<AlbaranCliente> albaranClientes;
 
 	//bi-directional many-to-one association to FilasFacturasCliente
-	@OneToMany(mappedBy="facturasCliente")
+	@OneToMany(mappedBy="facturasCliente",cascade = CascadeType.ALL)
 	private List<FilasFacturasCliente> filasFacturasClientes;
 
 	public FacturasCliente() {
@@ -66,11 +67,11 @@ public class FacturasCliente implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public byte getPagada() {
+	public boolean getPagada() {
 		return this.pagada;
 	}
 
-	public void setPagada(byte pagada) {
+	public void setPagada(boolean pagada) {
 		this.pagada = pagada;
 	}
 

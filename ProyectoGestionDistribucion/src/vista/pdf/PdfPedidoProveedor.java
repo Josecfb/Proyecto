@@ -1,16 +1,13 @@
 package vista.pdf;
 
-import modelo.negocio.GestorPedidosProve;
 import modelo.persistencia.DaoDatosEmpresa;
-import vista.correo.EnviarCorreo;
-
+import vista.correo.EMailPedidoProv;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -20,7 +17,6 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-
 import entidades.Datosempresa;
 import entidades.FilaPedidoProveedor;
 import entidades.PedidoProveedor;
@@ -28,8 +24,8 @@ import entidades.PedidoProveedor;
 public class PdfPedidoProveedor {
 
 	public PdfPedidoProveedor(PedidoProveedor ped) {
-		GestorPedidosProve gpp=new GestorPedidosProve();
-		ped=gpp.existe(ped.getNum());
+		//GestorPedidosProve gpp=new GestorPedidosProve();
+		//ped=gpp.existe(ped.getNum());
 		Document pedido=new Document();
 		DaoDatosEmpresa de=new DaoDatosEmpresa();
 		Datosempresa empresa=de.empresa();
@@ -81,6 +77,6 @@ public class PdfPedidoProveedor {
 		} catch (FileNotFoundException | DocumentException e) {
 			e.printStackTrace();
 		}
-		new EnviarCorreo(ped.getProveedore().getEmail(), archivo);
+		new EMailPedidoProv(ped.getProveedore().getEmail(), archivo);
 	}
 }

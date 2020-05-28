@@ -1,8 +1,6 @@
 package vista.empresa;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
@@ -10,7 +8,6 @@ import modelo.persistencia.DaoProvincia;
 import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.Image;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -23,7 +20,6 @@ public class VFichaEmpresa extends JInternalFrame {
 	private static final long serialVersionUID = -4232463625349427321L;
 
 	private Datosempresa dat;
-	private JColorChooser colorChooser;
 	private JTextField tNombre;
 	private JTextField tDireccion;
 	private JTextField tProvincia;
@@ -51,8 +47,6 @@ public class VFichaEmpresa extends JInternalFrame {
 		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
 		setFrameIcon(icones);
 		getContentPane().setLayout(null);
-		
-		colorChooser=new JColorChooser();
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(45, 32, 847, 365);

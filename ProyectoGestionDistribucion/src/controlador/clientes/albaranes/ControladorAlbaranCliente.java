@@ -55,6 +55,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 			GestorFacturaCliente gfc=new GestorFacturaCliente();
 			gfc.generaFacturaAlbaranMinorista(albModif);
 			albModif.setFacturado(true);
+			vAlbaran.correoFactura();
 		}
 		int ok=gac.modificaAlbaran(albModif);
 		if (ok==0) {

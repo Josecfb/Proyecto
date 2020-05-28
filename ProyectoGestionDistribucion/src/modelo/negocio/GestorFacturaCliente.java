@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import entidades.AlbaranCliente;
+import entidades.FacturaProveedor;
 import entidades.FacturasCliente;
+import entidades.FilaFacturaProveedor;
 import entidades.FilasAlbaranCliente;
 import entidades.FilasFacturasCliente;
 import modelo.persistencia.DaoFacturaCliente;
@@ -38,6 +40,26 @@ public class GestorFacturaCliente {
 		fac.setFilasFacturasClientes(filasFacturasClientes);
 		dfc.nuevaFactura(fac);
 		new PdfFacturaCliente(fac);
+	}
+	
+	public int modificaFactura(FacturasCliente fact) {
+		return dfc.modificaFactura(fact);
+	}
+	
+	public List<FacturasCliente> listarFacturas(){
+		return dfc.listarFacturas();
+	}
+	
+	public int nuevaFactura(FacturasCliente fact) {
+		return dfc.nuevaFactura(fact);
+	}
+	
+	public List<FilasFacturasCliente> generaFilas(FacturasCliente fac){
+		return dfc.generaFilas(fac);
+	}
+	
+	public int modificaFacturaGenerada(FacturasCliente fact) {
+		return dfc.modificaFacturaGenerada(fact);
 	}
 
 }

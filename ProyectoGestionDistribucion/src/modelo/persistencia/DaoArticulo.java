@@ -45,6 +45,7 @@ public class DaoArticulo {
 		return lista;
 	}
 	
+	
 	public Articulo existe(int num) {
 		Articulo art;
 		AbreCierra ab=new AbreCierra();

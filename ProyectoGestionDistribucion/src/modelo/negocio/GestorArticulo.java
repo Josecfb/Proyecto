@@ -4,6 +4,7 @@ import java.util.List;
 import entidades.AlbaranCliente;
 import entidades.AlbaranProveedor;
 import entidades.Articulo;
+import entidades.Cliente;
 import entidades.Proveedor;
 import modelo.persistencia.DaoArticulo;
 

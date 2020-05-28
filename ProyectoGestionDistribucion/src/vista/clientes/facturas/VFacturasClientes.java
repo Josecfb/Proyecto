@@ -10,6 +10,8 @@ import java.util.List;
 import vista.VentanaPrincipal;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+
+import controlador.clientes.facturas.ControladorFacturasClientes;
 import controlador.clientes.facturas.CtrlFilaFacturasGenCliente;
 import controlador.proveedores.facturas.ControladorFacturasProveedores;
 import entidades.Cliente;
@@ -71,7 +73,7 @@ public class VFacturasClientes extends JInternalFrame {
 		}
 	}
 	
-	public void establecerManejador(ControladorFacturasProveedores cfp) {
+	public void establecerManejador(ControladorFacturasClientes cfp) {
 		bNueva.addActionListener(cfp);
 	}
 

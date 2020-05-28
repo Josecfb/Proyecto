@@ -4,13 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.ImageIcon;
-
 import controlador.clientes.albaranes.ControladorAlbaranesClientes;
+import controlador.clientes.facturas.ControladorFacturasClientes;
 import entidades.Cliente;
 import modelo.negocio.GestorCliente;
 import vista.clientes.VFichaCliente;
 import vista.clientes.VListadoClientes;
 import vista.clientes.albaranes.VAlbaranesClientes;
+import vista.clientes.facturas.VFacturasClientes;
 import vista.clientes.pedidos.VPedidosClientes;
 
 
@@ -47,12 +48,23 @@ public class ControladorListadoClientes implements ActionListener{
 		if (e.getSource()==listado.getbAlbaranes()) {
 			abreAlbaranes();
 		}
+		if (e.getSource()==listado.getbFacturas()) {
+			abreFacturas();
+		}
 	}
 	
 	private void abrePedidos() {
-		VPedidosClientes pp=new VPedidosClientes(listado.getV());
-		listado.getV().getPanelInterior().add(pp);
-		pp.setVisible(true);
+		VPedidosClientes pc=new VPedidosClientes(listado.getV());
+		listado.getV().getPanelInterior().add(pc);
+		pc.setVisible(true);
+	}
+	
+	private void abreFacturas() {
+		VFacturasClientes vfc=new VFacturasClientes(listado.getV());
+		ControladorFacturasClientes cfc=new ControladorFacturasClientes(vfc);
+		vfc.establecerManejador(cfc);
+		listado.getV().getPanelInterior().add(vfc);
+		vfc.setVisible(true);
 	}
 	
 	private void abreAlbaranes() {

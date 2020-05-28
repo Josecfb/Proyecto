@@ -3,11 +3,8 @@ package modelo.negocio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import entidades.AlbaranCliente;
-import entidades.FacturaProveedor;
 import entidades.FacturasCliente;
-import entidades.FilaFacturaProveedor;
 import entidades.FilasAlbaranCliente;
 import entidades.FilasFacturasCliente;
 import modelo.persistencia.DaoFacturaCliente;

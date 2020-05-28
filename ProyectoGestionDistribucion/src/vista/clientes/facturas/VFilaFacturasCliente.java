@@ -1,12 +1,8 @@
 package vista.clientes.facturas;
 
 import javax.swing.JPanel;
-
 import controlador.clientes.facturas.CtrlFilaFacturasGenCliente;
-import controlador.proveedores.facturas.CtrlFilaFacturasGenProveedor;
-import entidades.FacturaProveedor;
 import entidades.FacturasCliente;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;

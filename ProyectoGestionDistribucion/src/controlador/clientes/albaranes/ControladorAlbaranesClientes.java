@@ -8,7 +8,11 @@ import entidades.AlbaranCliente;
 import modelo.negocio.GestorAlbaranCliente;
 import vista.clientes.albaranes.VAlbaranesClientes;
 import vista.clientes.albaranes.VGeneraAlbaranCliente;
-
+/**
+ * 
+ * @author Jose Carlos
+ *
+ */
 public class ControladorAlbaranesClientes implements ActionListener{
 	private VAlbaranesClientes vAlbaranes;
 	
@@ -26,7 +30,6 @@ public class ControladorAlbaranesClientes implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vAlbaranes.getbNuevoGenerado()) {
-			System.out.println("Nuevo albaran cliente");
 			VGeneraAlbaranCliente vGenAlb=new VGeneraAlbaranCliente(vAlbaranes.getV());
 			CtrlGenAlbCli cgac=new CtrlGenAlbCli(vGenAlb,vAlbaranes);
 			vGenAlb.establecerControlador(cgac);

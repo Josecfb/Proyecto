@@ -18,19 +18,32 @@ import entidades.Cliente;
 import entidades.FilasAlbaranCliente;
 import modelo.negocio.GestorAlbaranCliente;
 import modelo.negocio.GestorFacturaCliente;
+import util.Util;
 import vista.clientes.albaranes.VAlbaranCliente;
 import vista.clientes.albaranes.VFilaAlbaranCliente;
-
+/**
+ * Controla el comportamiento de la ventana albarán de un cliente
+ * @author Jose Carlos
+ *
+ */
 public class ControladorAlbaranCliente implements InternalFrameListener, FocusListener,ActionListener{
 	private GestorAlbaranCliente gac;
 	private VAlbaranCliente vAlbaran;
 	private List<FilasAlbaranCliente> filasAlb;
-	
+	private Util u;
+	/**
+	 * El constructor recibe la ventana del albaran del cliente
+	 * @param vAlbaran
+	 */
 	public ControladorAlbaranCliente(VAlbaranCliente vAlbaran) {
 		this.vAlbaran=vAlbaran;
+		u=new Util();
 		gac=new GestorAlbaranCliente();
 	}
-	
+	/**
+	 * Cuando se cierra la ventana pregunta si desea guardar, en caso afirmativo si el albaran es nuevo lo crea nuevo en la base de datos 
+	 * y si el albarán es editado lo modifica en la base de datos
+	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
@@ -44,7 +57,10 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 			else
 				vAlbaran.dispose();
 	}
-	
+	/**
+	 * Modifica el albaran, en caso de que esté actualizado en almacen y el clienet es minorista, 
+	 * si no está facturado crea la factura en pdf y se la envia al cliente por email
+	 */
 	private void modificaAlbaran() {
 		AlbaranCliente albModif=new AlbaranCliente();
 		albModif.setNum(Integer.valueOf(vAlbaran.gettNumAlb().getText()));
@@ -67,7 +83,9 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 //		//else 
 //			//muestraErrores(ok);		
 	}
-	
+	/**
+	 * Guarda el albaran como nuevo en la base de datos
+	 */
 	private void nuevoAlbaran() {
 		AlbaranCliente albaranNuevo=new AlbaranCliente();
 		asignaCampos(albaranNuevo);
@@ -77,7 +95,10 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		if (ok==0)
 			vAlbaran.dispose();
 	}
-	
+	/**
+	 * Asigna los campos de la cabecera de la  ficha del albaran al objeto albModif
+	 * @param albModif
+	 */
 	private void asignaCampos(AlbaranCliente albModif) {
 		albModif.setFecha(vAlbaran.getcFecha().getDate());
 		albModif.setClienteBean((Cliente) vAlbaran.getComboCliente().getSelectedItem());
@@ -85,7 +106,10 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		albModif.setFacturado(vAlbaran.getChecFacturado().isSelected());
 		vAlbaran.getPanel().updateUI();	
 	}
-
+	/**
+	 * Asigna las filas de la ficha del albaran al objeto albModif
+	 * @param albModif
+	 */
 	private void ponFilas(AlbaranCliente albModif) {
 		FilasAlbaranCliente filaModif;
 		Component[] componentes=vAlbaran.getPanel().getComponents();
@@ -100,7 +124,12 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		}
 		albModif.setFilasAlbaranClientes(filasAlb);
 	}
-	
+	/**
+	 * Asigna los campos de una fila del albaran a la fila de albaran de la entidad albModif
+	 * @param fila
+	 * @param filaModif
+	 * @param albModif
+	 */
 	private void asignaCamposFila(VFilaAlbaranCliente fila,FilasAlbaranCliente filaModif,AlbaranCliente albModif) {
 		fila.updateUI();
 		fila.getArticulo().requestFocus();
@@ -108,12 +137,25 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		filaModif.setAlbaranCliente(albModif);
 		filaModif.setArticuloBean(arti);
 		filaModif.setCantidad(Integer.parseInt(fila.gettUnidades().getText()));
-		filaModif.setPrecio(euroADoble(fila.gettPrecio().getText()));
+		filaModif.setPrecio(u.euroADoble(fila.gettPrecio().getText()));
+	}
+	/**
+	 * Asigna las acciones para el botón de nueva fila y la casilla de verificación de actualizar alamacen
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==vAlbaran.getbNuevaFila())
+			vAlbaran.nuevaFila();
+		if (e.getSource()==vAlbaran.getChecAlmacen()) {
+			if (vAlbaran.getChecAlmacen().isSelected())
+				gac.actualizaAlmacen(vAlbaran.getAlb(),-1);
+			else
+				gac.actualizaAlmacen(vAlbaran.getAlb(),1);
+			modificaAlbaran();
+			vAlbaran.getChecAlmacen().requestFocus();
+		}
 	}
 	
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
 	
 	@Override
 	public void focusGained(FocusEvent arg0) {
@@ -161,21 +203,4 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==vAlbaran.getbNuevaFila())
-			vAlbaran.nuevaFila();
-		if (e.getSource()==vAlbaran.getChecAlmacen()) {
-			if (vAlbaran.getChecAlmacen().isSelected())
-				gac.actualizaAlmacen(vAlbaran.getAlb(),-1);
-			else
-				gac.actualizaAlmacen(vAlbaran.getAlb(),1);
-			modificaAlbaran();
-			vAlbaran.getChecAlmacen().requestFocus();
-		}
-				
-		
-	}
-	
 }

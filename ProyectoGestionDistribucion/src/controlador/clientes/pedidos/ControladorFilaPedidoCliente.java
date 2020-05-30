@@ -5,17 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.text.NumberFormat;
+
 import javax.swing.JTextField;
 
 import entidades.Articulo;
+import entidades.PrecioCliente;
 import modelo.negocio.GestorArticulo;
 import vista.clientes.pedidos.VFilaPedidoCliente;
 
 public class ControladorFilaPedidoCliente implements FocusListener, ActionListener{
 	private VFilaPedidoCliente vFilaPedido;
+	private NumberFormat formatoeuro;
 	
 	public ControladorFilaPedidoCliente(VFilaPedidoCliente vFilaPedido) {
 		this.vFilaPedido=vFilaPedido;
+		formatoeuro = NumberFormat.getCurrencyInstance();
 	}
 	
 
@@ -31,6 +36,7 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
 
+
 	@Override
 	public void focusLost(FocusEvent e) throws NullPointerException, NumberFormatException {
 
@@ -43,7 +49,23 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.updateUI();
 			vFilaPedido.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaPedido.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
+			PrecioCliente precli=new PrecioCliente(vFilaPedido.getvPedido().getPed().getClienteBean(), art);
+			//System.out.println();
+			if(vFilaPedido.getvPedido().getPed().getClienteBean().getPreciosClientes().contains(precli))
+				vFilaPedido.gettPrecio().setText(formatoeuro.format(vFilaPedido.getvPedido().getPed().getClienteBean().getPreciosClientes().get(vFilaPedido.getvPedido().getPed().getClienteBean().getPreciosClientes().indexOf(precli)).getPrecio()));
+			else 
+				if(vFilaPedido.getvPedido().getPed().getClienteBean().getTipo()==1)
+					vFilaPedido.gettPrecio().setText(formatoeuro.format(art.getPrecioMayorista()));
+				else
+					vFilaPedido.gettPrecio().setText(formatoeuro.format(art.getPrecioMinorista()));
 			return;
+		}
+		
+		if (e.getSource()==vFilaPedido.gettUnidades()) {
+			vFilaPedido.updateUI();
+			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
+			vFilaPedido.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaPedido.gettUnidades().getText())*euroADoble(vFilaPedido.gettPrecio().getText())));
+			vFilaPedido.getvPedido().actualizaTotal();
 		}
 		
 		if (e.getSource()==vFilaPedido.gettCod()) {

@@ -23,21 +23,31 @@ import modelo.negocio.GestorCliente;
 import modelo.persistencia.DaoProvincia;
 import vista.clientes.VFichaCliente;
 import vista.clientes.VFilaPrecioCliente;
-
+/**
+ * Controla la ficha de un cliente, implementa InternalFrameListener, KeyListener, FocusListener, ActionListener
+ * @author Jose Carlos
+ *
+ */
 public class ControladorFichaCliente implements InternalFrameListener, KeyListener, FocusListener, ActionListener {
 	private VFichaCliente fichaCliente;
 	private GestorCliente gc;
 	private List<PrecioCliente> filasPrecio;
-
+	/**
+	 * Recive la vista de la ficha del cliente
+	 * @param fichaCliente
+	 */
 	public ControladorFichaCliente(VFichaCliente fichaCliente) {
 		this.fichaCliente=fichaCliente;
 		gc=new GestorCliente();
 	}
-
+	/**
+	 * Al cerrar la ficha del cliente
+	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
 		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 		if (res==JOptionPane.YES_OPTION) {
+			// Si la ficha era de un cliente existente lo modifica y si era sin cliente lo crea nuevo en la base de datos
 			if (fichaCliente.getCli()!=null)
 				modificaCliente();
 			else
@@ -48,7 +58,9 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		else
 			fichaCliente.dispose();
 	}
-	
+	/**
+	 * Guarda nuevo cliente
+	 */
 	private void nuevoCliente() {
 		Cliente cliNuevo=new Cliente();
 		asignaCampos(cliNuevo);
@@ -61,7 +73,9 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			muestraErrores(ok);
 		}
 	}
-
+	/**
+	 * modifica cliente existente
+	 */
 	private void modificaCliente() {
 		Cliente cliModif=new Cliente();
 		cliModif.setNumero(Integer.valueOf(fichaCliente.gettNumero().getText()));
@@ -74,7 +88,10 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		else 
 			muestraErrores(ok);	
 	}
-	
+	/**
+	 * dependiendo de los valores de array ok muestra diferentes errores
+	 * @param ok
+	 */
 	private void muestraErrores(boolean[] ok) {
 		String mensaje="";
 		if (!ok[0])
@@ -85,7 +102,10 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			mensaje+="Email vacío \n";
 		JOptionPane.showMessageDialog(new JFrame(),mensaje,"error",JOptionPane.ERROR_MESSAGE);
 	}
-	
+	/**
+	 * Asigna los datos de la ficha al objeto cliModif
+	 * @param cliModif Cliente
+	 */
 	private void asignaCampos(Cliente cliModif) {
 		if (fichaCliente.getComboTipo().getSelectedItem()!=null)
 			if (fichaCliente.getComboTipo().getSelectedItem().equals("Mayorista"))
@@ -105,7 +125,10 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		cliModif.setPoblacion((String) fichaCliente.gettPoblacion().getSelectedItem());
 		cliModif.setProvincia(fichaCliente.gettProvincia().getText());
 	}
-	
+	/**
+	 * Asigna los precios de articulos especiales encontrados el la ficha del cliente para el cliente
+	 * @param cliModif Cliente que va a recibir los precios especiales de articulos
+	 */
 	private void ponFilasPrecios(Cliente cliModif) {
 		PrecioCliente filaModif;
 		Component[] componentes=fichaCliente.getPanel().getComponents();
@@ -119,21 +142,32 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		}
 		cliModif.setPreciosClientes(filasPrecio);
 	}
-	
-	private void asignaCamposFila(VFilaPrecioCliente fila,PrecioCliente filaModif,Cliente cliModif) {
-		fila.updateUI();
-		fila.getComboArt().requestFocus();
-		Articulo arti=(Articulo) fila.getComboArt().getSelectedItem();
+	/**
+	 * Asigna cada dato de la fila de precios cliente de la ficha del cliente a su lista de precios especiales
+	 * @param vFila Fila de la ficha con un precio especial
+	 * @param filaModif precio articulo cliente
+	 * @param cliModif cliente al que se le asignan los precios
+	 */
+	private void asignaCamposFila(VFilaPrecioCliente vFila,PrecioCliente filaModif,Cliente cliModif) {
+		vFila.updateUI();
+		vFila.getComboArt().requestFocus();
+		Articulo arti=(Articulo) vFila.getComboArt().getSelectedItem();
 		filaModif.setClienteBean(cliModif);
 		filaModif.setArticuloBean(arti);
-		filaModif.setPrecio(euroADoble(fila.gettPrecio().getText()));
+		filaModif.setPrecio(euroADoble(vFila.gettPrecio().getText()));
 	}
-	
+	/**
+	 * convierte una cadena con sigo € en un double
+	 * @param cad
+	 * @return
+	 */
 	public Double euroADoble(String cad) {
 		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
 	}
 
-
+	/**
+	 * Controla que no se excedan las longitudes de los campos
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
 		if (e.getSource()==fichaCliente.gettNif())
@@ -161,7 +195,9 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			if(fichaCliente.gettMovil().getText().length()==9)
 				e.consume();
 	}
-
+	/**
+	 * cuando un campo recibe foco cambia el color de fondo y selecciona su contenido
+	 */
 	@Override
 	public void focusGained(FocusEvent e) {
 		if (e.getSource().getClass()==JTextField.class) {
@@ -172,7 +208,10 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		if (e.getSource()==fichaCliente.getComboTipo().getEditor().getEditorComponent()) 
 			fichaCliente.getComboTipo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
-
+	/**
+	 * cuando un campo piered foco cambia de color, al salir de tipo de cliente pinta label con nombre y apellidos o nombre comercial y fiscal
+	 * al salir de código postal asigna la provincia y la población
+	 */
 	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public void focusLost(FocusEvent e) {
@@ -196,7 +235,10 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			}
 		}
 	}
-
+	/**
+	 * Al pulsar el boton nuefa fila de precio crea una nueva fila para precio especial
+	 * controla la pulsacion del botón de borrar cliente
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fichaCliente.getbNuevaFila()) {
@@ -208,7 +250,10 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		
 	}
 	
-
+	/**
+	 * Confirma si se desea borrar el cliente
+	 * y llama al metodo borrar cliente de la clase GestorCliente
+	 */
 	private void borrarCliente() {
 		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Está seguro que quiere eliminar este cliente premanentemente?");
 		if (res==JOptionPane.YES_OPTION)

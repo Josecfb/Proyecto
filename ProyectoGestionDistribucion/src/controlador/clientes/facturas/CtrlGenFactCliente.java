@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import entidades.AlbaranCliente;
-import entidades.AlbaranProveedor;
 import entidades.Cliente;
 import entidades.FacturasCliente;
-import entidades.Proveedor;
 import modelo.negocio.GestorAlbaranCliente;
-import modelo.negocio.GestorAlbaranProve;
 import modelo.negocio.GestorFacturaCliente;
 import vista.clientes.facturas.VFacturaCliente;
 import vista.clientes.facturas.VFacturasClientes;
@@ -40,8 +37,8 @@ public class CtrlGenFactCliente implements ActionListener, FocusListener{
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenFactCliente.getComboCli().getEditor().getEditorComponent()) {
-			GestorAlbaranProve gap=new GestorAlbaranProve();
-			List<AlbaranProveedor> listaAlb =gap.listaAlbaranesAlmacen(((Proveedor) vGenFactCliente.getComboCli().getSelectedItem()));
+			GestorAlbaranCliente gac=new GestorAlbaranCliente();
+			List<AlbaranCliente> listaAlb =gac.listaAlbaranesAlmacen(((Cliente) vGenFactCliente.getComboCli().getSelectedItem()));
 			vGenFactCliente.muestraAlbaranes(listaAlb);
 		}
 	}

@@ -82,7 +82,8 @@ public class DaoPedidosClientes {
 	
 	public int modificarPedido(PedidoCliente ped) {
 		AbreCierra ab=new AbreCierra();
-		
+		for (FilasPedidosCliente fila:ped.getFilasPedidosClientes())
+			System.out.println("en dao "+fila.getPrecio());
 		PedidoCliente antiguo=existe(ped.getNum());
 		em=ab.abrirConexion();
 		em.getTransaction().begin();

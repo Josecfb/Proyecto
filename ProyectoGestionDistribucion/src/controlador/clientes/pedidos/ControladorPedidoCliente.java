@@ -104,21 +104,30 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 			filaModif=new FilasPedidosCliente();
 			VFilaPedidoCliente fil=(VFilaPedidoCliente) fila;
 			fil.updateUI();
-			if (fil.getFila()!=null)
+//			if (fil.getFila()!=null)
 				asignaCamposFila(fil,filaModif,pedModif);
-			filasmodificadas.add(filaModif);
+			if (filasmodificadas.contains(filaModif))
+				filasmodificadas.get(filasmodificadas.indexOf(filaModif)).setCantidad(filasmodificadas.get(filasmodificadas.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+			else
+				filasmodificadas.add(filaModif);
 		}
 		pedModif.setFilasPedidosClientes(filasmodificadas);
 	}
 	
-	private void asignaCamposFila(VFilaPedidoCliente fila,FilasPedidosCliente filaModif,PedidoCliente pedModif) {
-		fila.updateUI();
-		fila.getArticulo().requestFocus();
-		System.out.println(fila.getArticulo().getSelectedItem());
-		Articulo arti=(Articulo) fila.getArticulo().getSelectedItem();
+	private void asignaCamposFila(VFilaPedidoCliente vFila,FilasPedidosCliente filaModif,PedidoCliente pedModif) {
+		vFila.updateUI();
+		vFila.getArticulo().requestFocus();
+		System.out.println(vFila.getArticulo().getSelectedItem());
+		Articulo arti=(Articulo) vFila.getArticulo().getSelectedItem();
 		filaModif.setPedidosCliente(pedModif);
 		filaModif.setArticuloBean(arti);
-		filaModif.setCantidad(Integer.parseInt(fila.gettUnidades().getText()));
+		filaModif.setCantidad(Integer.parseInt(vFila.gettUnidades().getText()));
+		filaModif.setPrecio(euroADoble(vFila.gettPrecio().getText()));
+		System.out.println("en objeto "+filaModif.getPrecio()+" en vista"+vFila.gettPrecio().getText());
+	}
+	
+	private Double euroADoble(String cad) {
+		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
 	}
 	
 	public List<FilasPedidosCliente> articulosPendientesPedido(PedidoCliente pedido){

@@ -75,6 +75,39 @@ public class FilasAlbaranCliente implements Serializable {
 		this.articuloBean = articuloBean;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((albaranCliente == null) ? 0 : albaranCliente.hashCode());
+		result = prime * result + ((articuloBean == null) ? 0 : articuloBean.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FilasAlbaranCliente other = (FilasAlbaranCliente) obj;
+		if (albaranCliente == null) {
+			if (other.albaranCliente != null)
+				return false;
+		} else if (!albaranCliente.equals(other.albaranCliente))
+			return false;
+		if (articuloBean == null) {
+			if (other.articuloBean != null)
+				return false;
+		} else if (!articuloBean.equals(other.articuloBean))
+			return false;
+		return true;
+	}
+
+
+
 
 
 }

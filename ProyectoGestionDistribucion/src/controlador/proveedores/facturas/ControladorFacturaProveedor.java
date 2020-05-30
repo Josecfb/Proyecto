@@ -90,7 +90,10 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 			fil.updateUI();
 			if (fil.getFila()!=null)
 				asignaCamposFila(fil,filaModif,factModif);
-			filasFact.add(filaModif);
+			if (filasFact.contains(filaModif))
+				filasFact.get(filasFact.indexOf(filaModif)).setCantidad(filasFact.get(filasFact.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+			else
+				filasFact.add(filaModif);
 		}
 		factModif.setFilasFacturasProveedors(filasFact);
 	}

@@ -229,4 +229,107 @@ public class Proveedor implements Serializable {
 		return nombre+"..";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((albaranesProveedors == null) ? 0 : albaranesProveedors.hashCode());
+		result = prime * result + ((articulosPro == null) ? 0 : articulosPro.hashCode());
+		result = prime * result + ((codPost == null) ? 0 : codPost.hashCode());
+		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((facturasProveedors == null) ? 0 : facturasProveedors.hashCode());
+		result = prime * result + ((nif == null) ? 0 : nif.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + numCuentaContable;
+		result = prime * result + numero;
+		result = prime * result + ((pedidosProveedors == null) ? 0 : pedidosProveedors.hashCode());
+		result = prime * result + ((poblacion == null) ? 0 : poblacion.hashCode());
+		result = prime * result + ((provincia == null) ? 0 : provincia.hashCode());
+		result = prime * result + ((telefonoFijo == null) ? 0 : telefonoFijo.hashCode());
+		result = prime * result + ((telefonoMovil == null) ? 0 : telefonoMovil.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Proveedor other = (Proveedor) obj;
+		if (albaranesProveedors == null) {
+			if (other.albaranesProveedors != null)
+				return false;
+		} else if (!albaranesProveedors.equals(other.albaranesProveedors))
+			return false;
+		if (articulosPro == null) {
+			if (other.articulosPro != null)
+				return false;
+		} else if (!articulosPro.equals(other.articulosPro))
+			return false;
+		if (codPost == null) {
+			if (other.codPost != null)
+				return false;
+		} else if (!codPost.equals(other.codPost))
+			return false;
+		if (direccion == null) {
+			if (other.direccion != null)
+				return false;
+		} else if (!direccion.equals(other.direccion))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (facturasProveedors == null) {
+			if (other.facturasProveedors != null)
+				return false;
+		} else if (!facturasProveedors.equals(other.facturasProveedors))
+			return false;
+		if (nif == null) {
+			if (other.nif != null)
+				return false;
+		} else if (!nif.equals(other.nif))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (numCuentaContable != other.numCuentaContable)
+			return false;
+		if (numero != other.numero)
+			return false;
+		if (pedidosProveedors == null) {
+			if (other.pedidosProveedors != null)
+				return false;
+		} else if (!pedidosProveedors.equals(other.pedidosProveedors))
+			return false;
+		if (poblacion == null) {
+			if (other.poblacion != null)
+				return false;
+		} else if (!poblacion.equals(other.poblacion))
+			return false;
+		if (provincia == null) {
+			if (other.provincia != null)
+				return false;
+		} else if (!provincia.equals(other.provincia))
+			return false;
+		if (telefonoFijo == null) {
+			if (other.telefonoFijo != null)
+				return false;
+		} else if (!telefonoFijo.equals(other.telefonoFijo))
+			return false;
+		if (telefonoMovil == null) {
+			if (other.telefonoMovil != null)
+				return false;
+		} else if (!telefonoMovil.equals(other.telefonoMovil))
+			return false;
+		return true;
+	}
+
 }

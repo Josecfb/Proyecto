@@ -7,14 +7,23 @@ import modelo.negocio.GestorArticulo;
 import vista.articulos.VFichaArticulo;
 import vista.articulos.VFilaListadoArticulos;
 
-
+/**
+ * Controla la pulsación del boton editar articulo de cada fila del listado de artículos
+ * @author Jose Carlos
+ *
+ */
 public class ControlaFilaListadoArticulos implements ActionListener{
 	private VFilaListadoArticulos filaListadoArticulos;
-	
+	/**
+	 * Recive la vista de una fila de articulo del listado de artículos
+	 * @param filaListadoArticulos
+	 */
 	public ControlaFilaListadoArticulos(VFilaListadoArticulos filaListadoArticulos) {
 		this.filaListadoArticulos=filaListadoArticulos;
 	}
-
+	/**
+	 * Si se pulsa el botón editar, abre una ventana dentro de la principal con la ficha de ese artículo
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		VFichaArticulo fa;

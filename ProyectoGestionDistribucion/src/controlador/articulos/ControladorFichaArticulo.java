@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,44 +19,60 @@ import entidades.Articulo;
 import entidades.Familia;
 import entidades.Proveedor;
 import modelo.negocio.GestorArticulo;
+import util.Util;
 import vista.articulos.VFichaArticulo;
-
-public class ControladorFichaArticulo implements InternalFrameListener, FocusListener, ActionListener {
+/**
+ * Implementa InternalFrameListener, FocusListener, ActionListener, KeyListener
+ * @author Jose Carlos
+ *
+ */
+public class ControladorFichaArticulo implements InternalFrameListener, FocusListener, ActionListener, KeyListener {
 	private VFichaArticulo fichaArticulo;
 	private GestorArticulo ga;
+	private Util u;
 	
-	
+	/**
+	 * 
+	 * @param fichaArticulo
+	 */
 	public ControladorFichaArticulo(VFichaArticulo fichaArticulo) {
 		this.fichaArticulo=fichaArticulo;
 		ga=new GestorArticulo();
+		u=new Util();
 	}
-
+	/**
+	 * Al cerrar la ventana
+	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
-
+			// pregunta
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION) {
+				//Si la ficha de artículo se abrió con un articulo lo modifica, si nó lo crea nuevo
 				if (fichaArticulo.getArt()!=null)
 					modificaArticulo();
 				else
 					nuevoArticulo();
 				ControladorListadoArticulos cla=new ControladorListadoArticulos(fichaArticulo.getVListadoArt());
+				//Actualiza el listado de artículos
 				cla.listar();
 			}
 			else 
 				fichaArticulo.dispose();							
 	}
-
+	/**
+	 * cuando un campo gana foco
+	 */
 	@Override
 	public void focusGained(FocusEvent e) {
 		if (e.getSource()==fichaArticulo.gettPrecioMay())
-			fichaArticulo.gettPrecioMay().setText(focoEuro(fichaArticulo.gettPrecioMay().getText()));
+			fichaArticulo.gettPrecioMay().setText(u.focoEuro(fichaArticulo.gettPrecioMay().getText()));
 		if (e.getSource()==fichaArticulo.gettPrecioMin())
-			fichaArticulo.gettPrecioMin().setText(focoEuro(fichaArticulo.gettPrecioMin().getText()));	
+			fichaArticulo.gettPrecioMin().setText(u.focoEuro(fichaArticulo.gettPrecioMin().getText()));	
 		if (e.getSource()==fichaArticulo.gettCoste())
-			fichaArticulo.gettCoste().setText(focoEuro(fichaArticulo.gettCoste().getText()));
+			fichaArticulo.gettCoste().setText(u.focoEuro(fichaArticulo.gettCoste().getText()));
 		if (e.getSource()==fichaArticulo.gettIva())
-			fichaArticulo.gettIva().setText(focoPorcentaje(fichaArticulo.gettIva().getText()));
+			fichaArticulo.gettIva().setText(u.focoPorcentaje(fichaArticulo.gettIva().getText()));
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
 			campo.selectAll();
@@ -66,15 +85,17 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 			jComboBox.getEditor().getEditorComponent().setBackground(Color.BLUE);
 		}
 	}
-
+	/**
+	 * Cuando un campo pierde el foco
+	 */
 	@Override
 	public void focusLost(FocusEvent e) {
 		if (e.getSource()==fichaArticulo.gettPrecioMay())
-			fichaArticulo.gettPrecioMay().setText(noFocoEuro(fichaArticulo.gettPrecioMay().getText()));
+			fichaArticulo.gettPrecioMay().setText(u.noFocoEuro(fichaArticulo.gettPrecioMay().getText()));
 		if (e.getSource()==fichaArticulo.gettPrecioMin())
-			fichaArticulo.gettPrecioMin().setText(noFocoEuro(fichaArticulo.gettPrecioMin().getText()));
+			fichaArticulo.gettPrecioMin().setText(u.noFocoEuro(fichaArticulo.gettPrecioMin().getText()));
 		if (e.getSource()==fichaArticulo.gettCoste())
-			fichaArticulo.gettCoste().setText(noFocoEuro(fichaArticulo.gettCoste().getText()));
+			fichaArticulo.gettCoste().setText(u.noFocoEuro(fichaArticulo.gettCoste().getText()));
 		if (e.getSource()==fichaArticulo.gettIva())
 			fichaArticulo.gettIva().setText(fichaArticulo.gettIva().getText()+"%");
 		if (e.getSource().getClass()==JTextField.class || e.getSource().getClass()==JComboBox.class) {
@@ -82,7 +103,9 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 			campo.setBackground(Color.WHITE);
 		}
 	}
-	
+	/**
+	 * Asigna los datos del formulario a un objeto Articulo y lo modifica en la base de datos
+	 */
 	private void modificaArticulo() {
 		Articulo artModif=new Articulo();
 		artModif.setCod(Integer.valueOf(fichaArticulo.gettCodigo().getText()));
@@ -95,7 +118,9 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 		else 
 			muestraErrores(ok);		
 	}
-	
+	/**
+	 * Asigna los datos del formulario a un objeto Articulo y lo crea nuevo en la base de datos
+	 */
 	private void nuevoArticulo() {
 		Articulo artNuevo=new Articulo();
 		asignaCampos(artNuevo);
@@ -107,14 +132,17 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 			muestraErrores(ok);
 		}
 	}
-
+	/**
+	 * rellena los atributos del objeto artModif con los datos del formulario
+	 * @param artModif de tipo Articulo
+	 */
 	private void asignaCampos(Articulo artModif) {
 		artModif.setCodpro(fichaArticulo.gettCProv().getText());
 		artModif.setNombre(fichaArticulo.gettNombre().getText());
-		artModif.setCoste(euroADoble(fichaArticulo.gettCoste().getText()));
-		artModif.setPrecioMayorista(euroADoble(fichaArticulo.gettPrecioMay().getText()));
-		artModif.setPrecioMinorista(euroADoble(fichaArticulo.gettPrecioMin().getText()));
-		artModif.setIva(porcentajeADoble(fichaArticulo.gettIva().getText()));
+		artModif.setCoste(u.euroADoble(fichaArticulo.gettCoste().getText()));
+		artModif.setPrecioMayorista(u.euroADoble(fichaArticulo.gettPrecioMay().getText()));
+		artModif.setPrecioMinorista(u.euroADoble(fichaArticulo.gettPrecioMin().getText()));
+		artModif.setIva(u.porcentajeADoble(fichaArticulo.gettIva().getText()));
 		artModif.setUnidadesCaja(Integer.valueOf(fichaArticulo.gettUnidadesCaja().getText()));
 		artModif.setProveedorBean((Proveedor) fichaArticulo.getComboProveedor().getSelectedItem());
 		artModif.setFamiliaBean((Familia) fichaArticulo.getComboFamilia().getSelectedItem());
@@ -122,7 +150,11 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 		artModif.setStockMinimo(Integer.valueOf(fichaArticulo.gettStockMin().getText()));
 		artModif.setReservados(Integer.valueOf(fichaArticulo.gettReservados().getText()));
 	}
-
+	
+	/**
+	 * dependiendo del valor de cada elemento del array ok muestra mensajes de error
+	 * @param ok
+	 */
 	private void muestraErrores(boolean[] ok) {
 		if (!ok[0])
 			JOptionPane.showMessageDialog(new JFrame(),"Nombre vacío","error",JOptionPane.ERROR_MESSAGE);
@@ -137,26 +169,6 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	}
 
 
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
-	
-	public String focoEuro(String cad) {
-		return cad.split(" ")[0];
-	}
-	
-	public String focoPorcentaje(String cad) {
-		return cad.split("%")[0];
-	}
-	
-	public String noFocoEuro(String cad) {
-		if (!cad.contains(",")) cad+=",00";
-		return cad+" €";
-	}
-	
-	public Double porcentajeADoble(String cad) {
-		return Double.valueOf(cad.split("%")[0])/100;
-	}
 
 	@Override
 	public void internalFrameDeactivated(InternalFrameEvent e) {
@@ -191,16 +203,44 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	public void internalFrameClosed(InternalFrameEvent e) {
 		
 	}
-
+	/**
+	 * Al pulsar sobre el botón borrar
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fichaArticulo.getbBorrar())
 			borrarArticulo();
 	}
+	/**
+	 * Confirma eliminación del artículo, si es afirmativo llama al metodo borrarArtículo de la clase GestorArticulo
+	 */
 	private void borrarArticulo() {
 		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Está seguro que quiere eliminar este artículo premanentemente?");
 		if (res==JOptionPane.YES_OPTION)
 			JOptionPane.showMessageDialog(fichaArticulo, ga.borrarArticulo(fichaArticulo.getArt()), "Borrar artículo", JOptionPane.INFORMATION_MESSAGE);
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	/**
+	 * Controla que no se excedan las longitudes de los campos
+	 */
+	@Override
+	public void keyTyped(KeyEvent e) {
+		if (e.getSource()==fichaArticulo.gettNombre())
+			if (fichaArticulo.gettNombre().getText().length()==50)
+				e.consume();
+		if (e.getSource()==fichaArticulo.gettCProv())
+			if(fichaArticulo.gettCProv().getText().length()==11)
+				e.consume();
+		
 	}
 
 }

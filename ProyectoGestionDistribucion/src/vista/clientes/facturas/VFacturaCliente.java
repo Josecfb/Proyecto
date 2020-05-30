@@ -63,7 +63,7 @@ public class VFacturaCliente extends JInternalFrame {
 		comboCliente.setSelectedItem(null);
 		getContentPane().add(comboCliente);
 		
-		JLabel lblNewLabel = new JLabel("Proveedor");
+		JLabel lblNewLabel = new JLabel("Cliente");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(216, 24, 76, 25);
 		getContentPane().add(lblNewLabel);
@@ -190,7 +190,7 @@ public class VFacturaCliente extends JInternalFrame {
 		lblTotal.setBounds(511, 453, 89, 25);
 		getContentPane().add(lblTotal);
 		
-		setTitle("Factura Proveedor");
+		setTitle("Factura Cliente");
 		//contrAlbPro.articulosPendientesPedido(alb);
 		muestraFilas(fact);
 		if (fact!=null)

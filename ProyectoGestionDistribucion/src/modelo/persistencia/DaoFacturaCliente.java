@@ -57,7 +57,7 @@ public class DaoFacturaCliente {
 		abrir();
 		if (em==null) return null;
 		List<Object[]> filas;
-		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad),fil.precio from FilaAlbaranCliente fil where fil.albaranCliente.facturasCliente=:fact group by fil.articuloBean").setParameter("fact", fact).getResultList();
+		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad),fil.precio from FilasAlbaranCliente fil where fil.albaranCliente.facturasCliente=:fact group by fil.articuloBean").setParameter("fact", fact).getResultList();
 		for (Object[] fila:filas) {
 			Articulo art=(Articulo) fila[0];
 			FilasFacturasCliente filaFact=new FilasFacturasCliente();

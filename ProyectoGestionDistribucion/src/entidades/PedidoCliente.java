@@ -29,7 +29,7 @@ public class PedidoCliente implements Serializable {
 	private Date fecha;
 
 	//bi-directional many-to-one association to FilasPedidosCliente
-	@OneToMany(mappedBy="pedidosCliente")
+	@OneToMany(mappedBy="pedidosCliente",cascade = CascadeType.ALL)
 	private List<FilasPedidosCliente> filasPedidosClientes;
 
 	//bi-directional many-to-one association to Cliente
@@ -105,6 +105,28 @@ public class PedidoCliente implements Serializable {
 
 	public void setEnviado(boolean enviado) {
 		this.enviado = enviado;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + num;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PedidoCliente other = (PedidoCliente) obj;
+		if (num != other.num)
+			return false;
+		return true;
 	}
 	
 

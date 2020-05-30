@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import controlador.clientes.facturas.CtrlGenFactCliente;
-import entidades.AlbaranProveedor;
+import entidades.AlbaranCliente;
 import entidades.Cliente;
 import modelo.negocio.GestorCliente;
 import vista.VentanaPrincipal;
@@ -83,12 +83,12 @@ public class VGeneraFacturaCliente extends JInternalFrame {
 
 	}
 
-	public void muestraAlbaranes(List<AlbaranProveedor> listaAlb) {
+	public void muestraAlbaranes(List<AlbaranCliente> listaAlb) {
 		panelFila=new JPanel();
-			panelFila.setPreferredSize(new Dimension(410,180));
-			panelFila.setBackground(Color.WHITE);
-			scrollPane.setViewportView(panelFila);
-		for (AlbaranProveedor alb:listaAlb) {
+		panelFila.setPreferredSize(new Dimension(410,180));
+		panelFila.setBackground(Color.WHITE);
+		scrollPane.setViewportView(panelFila);
+		for (AlbaranCliente alb:listaAlb) {
 			vfila=new VFilaAlbGeneraFactCliente();
 			vfila.setPreferredSize(new Dimension(400,40));
 			vfila.getlNum().setText(String.valueOf(alb.getNum()));

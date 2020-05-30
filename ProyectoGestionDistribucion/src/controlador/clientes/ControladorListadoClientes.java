@@ -14,7 +14,12 @@ import vista.clientes.albaranes.VAlbaranesClientes;
 import vista.clientes.facturas.VFacturasClientes;
 import vista.clientes.pedidos.VPedidosClientes;
 
-
+/**
+ * Controla las pulsaciones de los botones del listado de clientes
+ * y genera la lista de clientes
+ * @author Jose Carlos
+ *
+ */
 public class ControladorListadoClientes implements ActionListener{
 	private VListadoClientes listado;
 
@@ -32,7 +37,9 @@ public class ControladorListadoClientes implements ActionListener{
 		List<Cliente> filas=gc.listar(listado.getTFiltroNombre().getText());
 		listado.muestra(filas);
 	}
-	
+	/**
+	 * Si se pulsa un botón
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==listado.getbFiltrar()) 
@@ -52,13 +59,17 @@ public class ControladorListadoClientes implements ActionListener{
 			abreFacturas();
 		}
 	}
-	
+	/**
+	 * Abre la ventana de pedidos del cliente
+	 */
 	private void abrePedidos() {
 		VPedidosClientes pc=new VPedidosClientes(listado.getV());
 		listado.getV().getPanelInterior().add(pc);
 		pc.setVisible(true);
 	}
-	
+	/**
+	 * Abre la ventana de facturas del cliente
+	 */
 	private void abreFacturas() {
 		VFacturasClientes vfc=new VFacturasClientes(listado.getV());
 		ControladorFacturasClientes cfc=new ControladorFacturasClientes(vfc);
@@ -66,7 +77,9 @@ public class ControladorListadoClientes implements ActionListener{
 		listado.getV().getPanelInterior().add(vfc);
 		vfc.setVisible(true);
 	}
-	
+	/**
+	 * Abre la ventana de albaranes del cliente
+	 */
 	private void abreAlbaranes() {
 		VAlbaranesClientes vac=new VAlbaranesClientes(listado.getV());
 		ControladorAlbaranesClientes cac=new ControladorAlbaranesClientes(vac);
@@ -74,7 +87,9 @@ public class ControladorListadoClientes implements ActionListener{
 		listado.getV().getPanelInterior().add(vac);
 		vac.setVisible(true);
 	}
-	
+	/**
+	 * Activa desactiva el filtro por nombre de la lista de clientes
+	 */
 	private void muestraFiltros() {
 		if (listado.getbFiltrar().isVisible()) {
 			listado.getbFiltrar().setVisible(false);
@@ -89,7 +104,9 @@ public class ControladorListadoClientes implements ActionListener{
 			listado.getbFiltros().setIcon(new ImageIcon("src/img/nofiltro.png"));
 		}
 	}
-
+	/**
+	 * Abre una ficha para nuevo cliente
+	 */
 	private void nuevoCliente() {
 		VFichaCliente fc=new VFichaCliente(null,listado);
 		ControladorFichaCliente cfc=new ControladorFichaCliente(fc);

@@ -77,7 +77,7 @@ public class VentanaPrincipal extends JFrame {
 		bProveedores.setHorizontalTextPosition(SwingConstants.CENTER );
 		bProveedores.setVerticalTextPosition( SwingConstants.BOTTOM );
 		
-		bConfiguracion = new JButton("Configuracion");
+		bConfiguracion = new JButton("Empresa");
 		bConfiguracion.setMaximumSize(new Dimension(90, 90));
 		toolBar.add(bConfiguracion);
 		bConfiguracion.setIcon(new ImageIcon(new ImageIcon("src/img/config.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));

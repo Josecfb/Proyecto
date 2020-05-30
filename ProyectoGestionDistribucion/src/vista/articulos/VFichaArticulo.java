@@ -285,8 +285,10 @@ public class VFichaArticulo extends JInternalFrame {
 		Component[] componentes=panel.getComponents();
 		comboFamilia.addFocusListener(manejador);
 		for (Component componente:componentes) {
-			if (componente.getClass()==JTextField.class)
+			if (componente.getClass()==JTextField.class) {
 				componente.addFocusListener(manejador);
+				componente.addKeyListener(manejador);
+			}
 			if (componente.getClass()==JComboBox.class)
 				((JComboBox) componente).getEditor().getEditorComponent().addFocusListener(manejador);
 		}

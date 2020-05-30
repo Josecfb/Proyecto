@@ -355,5 +355,27 @@ public class Articulo implements Serializable {
 		return nombre;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cod;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Articulo other = (Articulo) obj;
+		if (cod != other.cod)
+			return false;
+		return true;
+	}
+
 	
 }

@@ -89,7 +89,10 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 			fil.updateUI();
 			if (fil.getFila()!=null)
 				asignaCamposFila(fil,filaModif,albModif);
-			filasAlb.add(filaModif);
+			if (filasAlb.contains(filaModif))
+				filasAlb.get(filasAlb.indexOf(filaModif)).setCantidad(filasAlb.get(filasAlb.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+			else
+				filasAlb.add(filaModif);
 		}
 		albModif.setFilasAlbaranProveedors(filasAlb);
 	}

@@ -10,19 +10,31 @@ import java.text.NumberFormat;
 import javax.swing.JTextField;
 
 import entidades.Articulo;
+import util.Util;
 import vista.clientes.VFilaPrecioCliente;
-
+/**
+ * controla las filas con los precios de artículos especiales de un cliente
+ * @author Jose Carlos
+ *
+ */
 public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 	private NumberFormat formatoeuro,formatoPorcentaje;
 	private VFilaPrecioCliente vFilaPre;
-
+	private Util u;
+	/**
+	 * Al constructor se le pasa lavista de la fila de precio cliente
+	 * @param vFilaPre
+	 */
 	public ControlaFilaPrecioCli(VFilaPrecioCliente vFilaPre) {
 		this.vFilaPre=vFilaPre;
+		u=new Util();
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		formatoPorcentaje.setMinimumFractionDigits(2);
 	}
-
+	/**
+	 * Al pulsar el botón borrar fila borra el precio de artículo espercial del cliente
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vFilaPre.getbBorrar()) {
@@ -32,13 +44,15 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 		}
 		
 	}
-
+	/**
+	 * Realiza cambios en los campos cuando estos ganan foco
+	 */
 	@Override
 	public void focusGained(FocusEvent e) {
 		if (e.getSource()==vFilaPre.gettPrecio())
-			vFilaPre.gettPrecio().setText(focoEuro(vFilaPre.gettPrecio().getText()));
+			vFilaPre.gettPrecio().setText(u.focoEuro(vFilaPre.gettPrecio().getText()));
 		if (e.getSource()==vFilaPre.gettPorcent())
-			vFilaPre.gettPorcent().setText(focoPorcent(vFilaPre.gettPorcent().getText()));
+			vFilaPre.gettPorcent().setText(u.focoPorcentaje(vFilaPre.gettPorcent().getText()));
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
 			campo.selectAll();
@@ -47,13 +61,17 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 		if (e.getSource()==vFilaPre.getComboArt().getEditor().getEditorComponent())
 			vFilaPre.getComboArt().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
-
+	/**
+	 * Cuando se pierde foco del cuadro combinado de articulo se muestra su precio en un label dependiendo de 
+	 * si el cliente es mayorista o minorista el precio será diferente
+	 * Cuando el porcentaje pierde foco calcula el precio especial para el cliente
+	 */
 	@Override
 	public void focusLost(FocusEvent e) {
 		if (e.getSource()==vFilaPre.gettPrecio()) 
-			vFilaPre.gettPrecio().setText(noFocoEuro(vFilaPre.gettPrecio().getText()));
+			vFilaPre.gettPrecio().setText(u.noFocoEuro(vFilaPre.gettPrecio().getText()));
 		if (e.getSource()==vFilaPre.gettPorcent())
-			vFilaPre.gettPorcent().setText(noFocoPorcent(vFilaPre.gettPorcent().getText()));
+			vFilaPre.gettPorcent().setText(vFilaPre.gettPorcent().getText()+"%");
 		Articulo art=null;
 		if (e.getSource()==vFilaPre.getComboArt().getEditor().getEditorComponent()) {
 			art=(Articulo) vFilaPre.getComboArt().getSelectedItem();
@@ -63,39 +81,19 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 				vFilaPre.gettPrecio().setText(formatoeuro.format(vFilaPre.getCli().getTipo()==1?art.getPrecioMayorista():art.getPrecioMinorista())); 
 			vFilaPre.gettCodArt().setText(String.valueOf(art.getCod()));
 			vFilaPre.getlPrecioReal().setText(formatoeuro.format(vFilaPre.getCli().getTipo()==1?art.getPrecioMayorista():art.getPrecioMinorista()));
-			double porcen=(euroADoble(vFilaPre.getlPrecioReal().getText())-euroADoble(vFilaPre.gettPrecio().getText()))/euroADoble((vFilaPre.getlPrecioReal().getText()));
+			double porcen=(u.euroADoble(vFilaPre.getlPrecioReal().getText())-u.euroADoble(vFilaPre.gettPrecio().getText()))/u.euroADoble((vFilaPre.getlPrecioReal().getText()));
 			System.out.println(porcen);
 			vFilaPre.gettPorcent().setText(formatoPorcentaje.format(porcen));
 			vFilaPre.getComboArt().getEditor().getEditorComponent().setBackground(Color.WHITE);
 			return;
 		}
 		if (e.getSource()==vFilaPre.gettPorcent())
-			vFilaPre.gettPrecio().setText(formatoeuro.format(euroADoble(vFilaPre.getlPrecioReal().getText())*(1-porcentADoble(vFilaPre.gettPorcent().getText())/100)));
+			vFilaPre.gettPrecio().setText(formatoeuro.format(u.euroADoble(vFilaPre.getlPrecioReal().getText())*(1-u.porcentajeADoble(vFilaPre.gettPorcent().getText())/100)));
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
 			campo.setBackground(Color.WHITE);
 		}
 		
 	}
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
-	public Double porcentADoble(String cad) {
-		return Double.valueOf(cad.split("%")[0].split(",")[0]+"."+cad.split("%")[0].split(",")[1]);
-	}
-	public String focoEuro(String cad) {
-		return cad.split(" ")[0];
-	}
-	public String focoPorcent(String cad) {
-		return cad.split("%")[0];
-	}
-	
-	public String noFocoEuro(String cad) {
-		if (!cad.contains(",")) cad+=",00";
-		return cad+" €";
-	}
-	public String noFocoPorcent(String cad) {
-		if (!cad.contains(",")) cad+=",00";
-		return cad+"%";
-	}
+
 }

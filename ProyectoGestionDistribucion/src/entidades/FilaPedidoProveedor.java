@@ -65,4 +65,37 @@ public class FilaPedidoProveedor implements Serializable {
 		this.articuloBean = articuloBean;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((articuloBean == null) ? 0 : articuloBean.hashCode());
+		result = prime * result + ((pedidosProveedor == null) ? 0 : pedidosProveedor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FilaPedidoProveedor other = (FilaPedidoProveedor) obj;
+		if (articuloBean == null) {
+			if (other.articuloBean != null)
+				return false;
+		} else if (!articuloBean.equals(other.articuloBean))
+			return false;
+		if (pedidosProveedor == null) {
+			if (other.pedidosProveedor != null)
+				return false;
+		} else if (!pedidosProveedor.equals(other.pedidosProveedor))
+			return false;
+		return true;
+	}
+
+
+
 }

@@ -54,6 +54,7 @@ public class VFilaPedidoCliente extends JPanel {
 		for (Articulo arti:artis)
 			articulo.addItem(arti);
 		AutoCompleteDecorator.decorate(articulo);
+		articulo.setSelectedItem(null);
 		add(articulo);
 		
 		tUnidades = new JTextField();
@@ -61,7 +62,6 @@ public class VFilaPedidoCliente extends JPanel {
 		tUnidades.setBounds(440, 1, 32, 20);
 		tUnidades.setHorizontalAlignment(JTextField.RIGHT);
 		tUnidades.setText("0");
-		tUnidades.setFocusable(false);
 		add(tUnidades);
 		
 		tPrecio = new JTextField();

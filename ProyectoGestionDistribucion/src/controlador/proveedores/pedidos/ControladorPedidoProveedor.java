@@ -106,7 +106,11 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 			fil.updateUI();
 			if (fil.getFila()!=null)
 				asignaCamposFila(fil,filaModif,pedModif);
-			filasmodificadas.add(filaModif);
+			//si no está la añade y si está le suma la cantidad
+			if (!filasmodificadas.contains(filaModif))
+				filasmodificadas.add(filaModif);
+			else
+				filasmodificadas.get(filasmodificadas.indexOf(filaModif)).setCantidad(filasmodificadas.get(filasmodificadas.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
 		}
 		pedModif.setFilaPedidoProveedor(filasmodificadas);
 	}

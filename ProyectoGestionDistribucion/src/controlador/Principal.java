@@ -2,7 +2,7 @@ package controlador;
 
 import vista.VentanaPrincipal;
 /**
- * 
+ * Es la clase Principal y tiene el método main con el que arranca el programa
  * @author Jose Carlos
  *
  */

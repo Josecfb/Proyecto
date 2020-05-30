@@ -117,4 +117,28 @@ public class PedidoProveedor implements Serializable {
 		this.albaranesProveedor = albaranesProveedor;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + num;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PedidoProveedor other = (PedidoProveedor) obj;
+		if (num != other.num)
+			return false;
+		return true;
+	}
+
+
+
 }

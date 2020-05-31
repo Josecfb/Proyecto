@@ -13,15 +13,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import entidades.FacturasCliente;
+import entidades.FacturaCliente;
 
 public class EMailFacturaCliente implements Runnable{
 	private Properties props;
 	private Session session;
 	private String archivo;
-	private FacturasCliente fac;
+	private FacturaCliente fac;
 	
-	public EMailFacturaCliente(FacturasCliente fac,String archivo) {
+	public EMailFacturaCliente(FacturaCliente fac,String archivo) {
 		this.archivo=archivo;
 		this.fac=fac;
 		props=new Properties();

@@ -18,12 +18,20 @@ import vista.clientes.albaranes.VAlbaranCliente;
 import vista.clientes.albaranes.VAlbaranesClientes;
 import vista.clientes.albaranes.VFilaPedGeneraAlbCliente;
 import vista.clientes.albaranes.VGeneraAlbaranCliente;
-
+/**
+ * Controla el asistente para generar los albaranes de cliente
+ * @author Jose Carlos
+ *
+ */
 public class CtrlGenAlbCli implements ActionListener, FocusListener{
 	private VGeneraAlbaranCliente vGenAlvCli; 
 	private VAlbaranesClientes vAlbsCli;
 
-	
+	/**
+	 * El constructor recibe como parámetros la ventana del asistente para generar los albaranes y la ventana de la lista de albaranes
+	 * @param vGenAlvCli
+	 * @param vAlbsCli
+	 */
 	public CtrlGenAlbCli(VGeneraAlbaranCliente vGenAlvCli,VAlbaranesClientes vAlbsCli) {
 		this.vGenAlvCli=vGenAlvCli;
 		this.vAlbsCli=vAlbsCli;
@@ -32,9 +40,10 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 	@Override
 	public void focusGained(FocusEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
-
+	/**
+	 * Cuando el combobox de cliente pierde foco obtiene la lista de pedidos no transformados en albaran
+	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenAlvCli.getComboCliente().getEditor().getEditorComponent()) {
@@ -43,10 +52,13 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 			vGenAlvCli.muestraPedidos(listaPed);
 		}
 	}
-
+	/**
+	 * Cuando se pulsa el botón de siguiente se oculta el combobox de cliente, y muestra la lista de pedidos seleccionados y el botón aceptar
+	 * Si se pulsa cancelar se cierra la ventana del asistente
+	 * Si se pulsa Aceptar genera el albará con los pedidos seleccionados
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		if (e.getSource()==vGenAlvCli.getbSiguiente()) {
 			vGenAlvCli.getComboCliente().setVisible(false);
 			vGenAlvCli.getScrollPane().setVisible(true);
@@ -56,18 +68,14 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 			vGenAlvCli.getLinea2().setText("y pulse el botón Aceptar. su Albarán quedará generado");
 			vGenAlvCli.getbAceptar().setVisible(true);
 		}
-		
-		if (e.getSource()==vGenAlvCli.getbCancelar()) {
+		if (e.getSource()==vGenAlvCli.getbCancelar()) 
 			vGenAlvCli.dispose();
-		}
-		
 		if (e.getSource()==vGenAlvCli.getbAceptar()) {
 			GestorPedidosCliente gpc=new GestorPedidosCliente();
 			GestorAlbaranCliente gac=new GestorAlbaranCliente();
 			AlbaranCliente alb=new AlbaranCliente();
 			alb.setClienteBean((Cliente) vGenAlvCli.getComboCliente().getSelectedItem());
 			alb.setFecha(new Date());
-	
 			Component[] compnentes;
 			compnentes = vGenAlvCli.getPanelFila().getComponents();
 			List<PedidoCliente> pedidos=new ArrayList<PedidoCliente>();
@@ -97,14 +105,9 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 			vAlb.setVisible(true);
 			vGenAlvCli.dispose();
 		}
-		
 	}
 
 	public VAlbaranesClientes getvAlbsPro() {
 		return vAlbsCli;
 	}
-	
-	
-	
-
 }

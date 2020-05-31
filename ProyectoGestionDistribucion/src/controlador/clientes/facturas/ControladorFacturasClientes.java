@@ -3,7 +3,7 @@ package controlador.clientes.facturas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import entidades.FacturasCliente;
+import entidades.FacturaCliente;
 import modelo.negocio.GestorFacturaCliente;
 import vista.clientes.facturas.VFacturasClientes;
 import vista.clientes.facturas.VGeneraFacturaCliente;
@@ -17,7 +17,7 @@ public class ControladorFacturasClientes implements ActionListener{
 	
 	public void listar(VFacturasClientes vFacturas) {
 		this.vFacturas=vFacturas;
-		List<FacturasCliente> filas;
+		List<FacturaCliente> filas;
 		GestorFacturaCliente gfc=new GestorFacturaCliente();
 		filas=gfc.listarFacturas();
 		vFacturas.muestraPendientes(filas);

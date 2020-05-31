@@ -10,12 +10,10 @@ import java.util.List;
 import vista.VentanaPrincipal;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
-
 import controlador.clientes.facturas.ControladorFacturasClientes;
 import controlador.clientes.facturas.CtrlFilaFacturasGenCliente;
-import controlador.proveedores.facturas.ControladorFacturasProveedores;
 import entidades.Cliente;
-import entidades.FacturasCliente;
+import entidades.FacturaCliente;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -49,17 +47,17 @@ public class VFacturasClientes extends JInternalFrame {
 		setClosable(true);
 		setMaximizable(false);
 		setIconifiable(true);
-		setTitle("Facturas Proveedores");
+		setTitle("Facturas Clientes");
 	}
 	
-	public void muestraPendientes(List<FacturasCliente> lista) {
+	public void muestraPendientes(List<FacturaCliente> lista) {
 		panelGeneradas = new JPanel();
 		panelGeneradas.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelGeneradas.setBackground(Color.WHITE);
 		panelGeneradas.setBorder(null);
 
 		scrollPane.setViewportView(panelGeneradas);
-		for (FacturasCliente fila:lista) {
+		for (FacturaCliente fila:lista) {
 			Cliente cli=fila.getCliente();
 			vFilaFact=new VFilaFacturasCliente(fila,this);
 			CtrlFilaFacturasGenCliente controla=new CtrlFilaFacturasGenCliente(vFilaFact);

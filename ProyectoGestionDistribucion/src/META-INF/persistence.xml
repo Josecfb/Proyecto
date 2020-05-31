@@ -7,14 +7,14 @@
 		<class>entidades.Cliente</class>
 		<class>entidades.Codigospostale</class>
 		<class>entidades.CodigospostalePK</class>
-		<class>entidades.FacturasCliente</class>
+		<class>entidades.FacturaCliente</class>
 		<class>entidades.FacturaProveedor</class>
 		<class>entidades.Familia</class>
 		<class>entidades.FilasAlbaranCliente</class>
 		<class>entidades.FilasAlbaranClientePK</class>
 		<class>entidades.FilaAlbaranProveedor</class>
 		<class>entidades.FilasAlbaranProveedorPK</class>
-		<class>entidades.FilasFacturasCliente</class>
+		<class>entidades.FilaFacturaCliente</class>
 		<class>entidades.FilasFacturasClientePK</class>
 		<class>entidades.FilaFacturaProveedor</class>
 		<class>entidades.FilasFacturasProveedorPK</class>

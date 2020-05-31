@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import entidades.Articulo;
-import entidades.FacturasCliente;
-import entidades.FilasFacturasCliente;
+import entidades.FacturaCliente;
+import entidades.FilaFacturaCliente;
 
 public class DaoFacturaCliente {
 	private EntityManager em;
@@ -15,7 +15,7 @@ public class DaoFacturaCliente {
 		em=ab.abrirConexion();
 	}
 	
-	public int nuevaFactura(FacturasCliente fact) {
+	public int nuevaFactura(FacturaCliente fact) {
 		abrir();
 		if (em==null) return -1;
 		em.getTransaction().begin();
@@ -25,12 +25,12 @@ public class DaoFacturaCliente {
 		return 0;
 	}
 	
-	public int modificaFactura(FacturasCliente fact) {
+	public int modificaFactura(FacturaCliente fact) {
 		abrir();
 		if (em==null) return -1;
-		FacturasCliente antigua=em.find(FacturasCliente.class, fact.getNum());
+		FacturaCliente antigua=em.find(FacturaCliente.class, fact.getNum());
 		em.getTransaction().begin();
-		for (FilasFacturasCliente fi:antigua.getFilasFacturasClientes()) 
+		for (FilaFacturaCliente fi:antigua.getFilasFacturasClientes()) 
 			em.remove(fi);
 		em.getTransaction().commit();
 		em.getTransaction().begin();
@@ -43,24 +43,24 @@ public class DaoFacturaCliente {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<FacturasCliente> listarFacturas(){
+	public List<FacturaCliente> listarFacturas(){
 		abrir();
 		if (em==null) return null;
-		List<FacturasCliente> lista=em.createQuery("select fact from FacturasCliente fact order by fact.fecha desc").getResultList();
+		List<FacturaCliente> lista=em.createQuery("select fact from FacturaCliente fact order by fact.fecha desc").getResultList();
 		em.close();
 		return lista;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<FilasFacturasCliente> generaFilas(FacturasCliente fact){
-		List<FilasFacturasCliente> filasFact=new ArrayList<FilasFacturasCliente>();
+	public List<FilaFacturaCliente> generaFilas(FacturaCliente fact){
+		List<FilaFacturaCliente> filasFact=new ArrayList<FilaFacturaCliente>();
 		abrir();
 		if (em==null) return null;
 		List<Object[]> filas;
 		filas=em.createQuery("select fil.articuloBean,sum(fil.cantidad),fil.precio from FilasAlbaranCliente fil where fil.albaranCliente.facturasCliente=:fact group by fil.articuloBean").setParameter("fact", fact).getResultList();
 		for (Object[] fila:filas) {
 			Articulo art=(Articulo) fila[0];
-			FilasFacturasCliente filaFact=new FilasFacturasCliente();
+			FilaFacturaCliente filaFact=new FilaFacturaCliente();
 			filaFact.setFacturasCliente(fact);
 			filaFact.setArticuloBean(art);
 			int cantidad=((Long) fila[1]).intValue();
@@ -71,12 +71,12 @@ public class DaoFacturaCliente {
 		return filasFact;
 	}
 	
-	public int modificaFacturaGenerada(FacturasCliente fact) {
+	public int modificaFacturaGenerada(FacturaCliente fact) {
 		abrir();
 		if (em==null) return -1;
-		FacturasCliente antigua=em.find(FacturasCliente.class, fact.getNum());
+		FacturaCliente antigua=em.find(FacturaCliente.class, fact.getNum());
 		antigua.getFilasFacturasClientes().clear();
-		for (FilasFacturasCliente fila:fact.getFilasFacturasClientes())
+		for (FilaFacturaCliente fila:fact.getFilasFacturasClientes())
 			antigua.getFilasFacturasClientes().add(fila);
 		em.getTransaction().begin();
 		em.merge(antigua);

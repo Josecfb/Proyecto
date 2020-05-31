@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import entidades.AlbaranCliente;
-import entidades.FacturasCliente;
+import entidades.FacturaCliente;
 import entidades.FilasAlbaranCliente;
-import entidades.FilasFacturasCliente;
+import entidades.FilaFacturaCliente;
 import modelo.persistencia.DaoFacturaCliente;
 import vista.pdf.PdfFacturaCliente;
 
@@ -17,17 +17,17 @@ public class GestorFacturaCliente {
 	}
 	
 	public void generaFacturaAlbaranMinorista(AlbaranCliente alb) {
-		FacturasCliente fac =new FacturasCliente();
+		FacturaCliente fac =new FacturaCliente();
 		fac.setCliente(alb.getClienteBean());
 		fac.setFecha(new Date());
 		fac.setPagada(false);
 		fac.setAlbaranClientes(new ArrayList<AlbaranCliente>());
 		fac.getAlbaranClientes().add(alb);
 		//dfc.nuevaFactura(fac);
-		List<FilasFacturasCliente> filasFacturasClientes=new ArrayList<FilasFacturasCliente>();
+		List<FilaFacturaCliente> filasFacturasClientes=new ArrayList<FilaFacturaCliente>();
 		List<FilasAlbaranCliente> filasA=alb.getFilasAlbaranClientes();
 		for (FilasAlbaranCliente filaAlb:filasA) {
-			FilasFacturasCliente filaFac=new FilasFacturasCliente();
+			FilaFacturaCliente filaFac=new FilaFacturaCliente();
 			filaFac.setArticuloBean(filaAlb.getArticuloBean());
 			filaFac.setCantidad(filaAlb.getCantidad());
 			filaFac.setPrecio(filaAlb.getPrecio());
@@ -39,23 +39,23 @@ public class GestorFacturaCliente {
 		new PdfFacturaCliente(fac);
 	}
 	
-	public int modificaFactura(FacturasCliente fact) {
+	public int modificaFactura(FacturaCliente fact) {
 		return dfc.modificaFactura(fact);
 	}
 	
-	public List<FacturasCliente> listarFacturas(){
+	public List<FacturaCliente> listarFacturas(){
 		return dfc.listarFacturas();
 	}
 	
-	public int nuevaFactura(FacturasCliente fact) {
+	public int nuevaFactura(FacturaCliente fact) {
 		return dfc.nuevaFactura(fact);
 	}
 	
-	public List<FilasFacturasCliente> generaFilas(FacturasCliente fac){
+	public List<FilaFacturaCliente> generaFilas(FacturaCliente fac){
 		return dfc.generaFilas(fac);
 	}
 	
-	public int modificaFacturaGenerada(FacturasCliente fact) {
+	public int modificaFacturaGenerada(FacturaCliente fact) {
 		return dfc.modificaFacturaGenerada(fact);
 	}
 

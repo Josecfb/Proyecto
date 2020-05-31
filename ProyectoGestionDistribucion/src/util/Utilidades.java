@@ -4,7 +4,7 @@ package util;
  * @author Jose Carlos
  *
  */
-public class Util {
+public class Utilidades {
 
 	/**
 	 * Recibe una cadena en formato euro y retorna el valor double

@@ -20,6 +20,7 @@ import entidades.Cliente;
 import entidades.FilasPedidosCliente;
 import entidades.PedidoCliente;
 import modelo.negocio.GestorCliente;
+import util.Utilidades;
 
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
@@ -29,7 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class VPedidoCliente extends JInternalFrame {
-
+	private Utilidades u;
 	private static final long serialVersionUID = 4339097703466328107L;
 	private VPedidosClientes vpedidos;
 	private JDateChooser cFecha;
@@ -49,6 +50,7 @@ public class VPedidoCliente extends JInternalFrame {
 	public VPedidoCliente(PedidoCliente ped,VPedidosClientes vpedidos) {
 		this.vpedidos=vpedidos;
 		this.ped=ped;
+		u=new Utilidades();
 		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/pedidoproveedor.png"));
 		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
 		setFrameIcon(icones);
@@ -197,7 +199,7 @@ public class VPedidoCliente extends JInternalFrame {
 
 		scrollPendientes.setViewportView(panel);
 		double total=0;
-		ControladorFilaPedidoCliente cfpc =new ControladorFilaPedidoCliente(filaPed);
+//		ControladorFilaPedidoCliente cfpc =new ControladorFilaPedidoCliente(filaPed);
 		for (FilasPedidosCliente fil:filas) {
 			filaPed=new VFilaPedidoCliente(this,fil);
 			ControladorFilaPedidoCliente controla=new ControladorFilaPedidoCliente(filaPed);
@@ -210,7 +212,7 @@ public class VPedidoCliente extends JInternalFrame {
 			System.out.println(fil.getPrecio());
 			filaPed.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getPrecio()));
 			panel.add(filaPed);
-			total+=cfpc.euroADoble(filaPed.gettPrecio().getText())*Integer.parseInt(filaPed.gettUnidades().getText());
+			total+=u.euroADoble(filaPed.gettPrecio().getText())*Integer.parseInt(filaPed.gettUnidades().getText());
 			filaPed.updateUI();
 		}
 		
@@ -223,7 +225,7 @@ public class VPedidoCliente extends JInternalFrame {
 		double total=0;
 		for (Component fila:filas) {
 			VFilaPedidoCliente fil=(VFilaPedidoCliente) fila;
-			total+=(new ControladorFilaPedidoCliente(fil).euroADoble(fil.gettPrecio().getText()))*Integer.parseInt(fil.gettUnidades().getText());
+			total+=u.euroADoble(fil.gettPrecio().getText())*Integer.parseInt(fil.gettUnidades().getText());
 		}
 		lTotal.setText(formatoeuro.format(total));
 	}

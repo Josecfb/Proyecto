@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import controlador.clientes.facturas.CtrlFilaFactCliente;
 import entidades.Articulo;
-import entidades.FilasFacturasCliente;
+import entidades.FilaFacturaCliente;
 import entidades.PedidoProveedor;
 import modelo.negocio.GestorArticulo;
 import java.awt.Font;
@@ -23,15 +23,14 @@ public class VFilaFacturaCliente extends JPanel {
 	private JTextField tCod;
 	private JComboBox<Articulo> articulo;
 	private JTextField tUnidades;
-	private JTextField tCajas;
-	private JTextField tCoste;
+	private JTextField tPrecio;
 	private JTextField tTotal;
 	private JButton bBorrar;
 	private PedidoProveedor ped;
 	private VFacturaCliente vFactura;
-	private FilasFacturasCliente fila;
+	private FilaFacturaCliente fila;
 
-	public VFilaFacturaCliente(VFacturaCliente vFactura,FilasFacturasCliente fila) {
+	public VFilaFacturaCliente(VFacturaCliente vFactura,FilaFacturaCliente fila) {
 		this.fila=fila;
 		this.vFactura=vFactura;
 		setBackground(SystemColor.control);
@@ -48,32 +47,24 @@ public class VFilaFacturaCliente extends JPanel {
 		asignaArticulosCombo();
 		articulo.setEditable(true);
 		articulo.setSelectedItem(null);
-		articulo.setBounds(67, 1, 363, 20);
+		articulo.setBounds(67, 1, 382, 20);
 		articulo.setAutoscrolls(true);
 		AutoCompleteDecorator.decorate(articulo);
 		add(articulo);
 		
 		tUnidades = new JTextField();
 		tUnidades.setColumns(10);
-		tUnidades.setBounds(482, 1, 32, 20);
+		tUnidades.setBounds(459, 1, 55, 20);
 		tUnidades.setHorizontalAlignment(JTextField.RIGHT);
 		tUnidades.setText("0");
-		tUnidades.setFocusable(false);
 		add(tUnidades);
 		
-		tCajas = new JTextField();
-		tCajas.setColumns(10);
-		tCajas.setBounds(440, 1, 32, 20);
-		tCajas.setHorizontalAlignment(JTextField.RIGHT);
-		tCajas.setText("0");
-		add(tCajas);
-		
-		tCoste = new JTextField();
-		tCoste.setColumns(10);
-		tCoste.setBounds(524, 1, 64, 20);
-		tCoste.setHorizontalAlignment(JTextField.RIGHT);
-		tCoste.setText("0,00 €");
-		add(tCoste);
+		tPrecio = new JTextField();
+		tPrecio.setColumns(10);
+		tPrecio.setBounds(524, 1, 64, 20);
+		tPrecio.setHorizontalAlignment(JTextField.RIGHT);
+		tPrecio.setText("0,00 €");
+		add(tPrecio);
 		
 		tTotal = new JTextField();
 		tTotal.setColumns(10);
@@ -123,12 +114,8 @@ public class VFilaFacturaCliente extends JPanel {
 		return tUnidades;
 	}
 
-	public JTextField gettCajas() {
-		return tCajas;
-	}
-
-	public JTextField gettCoste() {
-		return tCoste;
+	public JTextField getTPrecio() {
+		return tPrecio;
 	}
 
 	public JTextField gettTotal() {
@@ -147,7 +134,7 @@ public class VFilaFacturaCliente extends JPanel {
 		return vFactura;
 	}
 
-	public FilasFacturasCliente getFila() {
+	public FilaFacturaCliente getFila() {
 		return fila;
 	}
 	

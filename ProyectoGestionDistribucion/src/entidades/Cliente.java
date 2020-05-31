@@ -76,7 +76,7 @@ public class Cliente implements Serializable {
 	
 	//bi-directional many-to-one association to FacturasProveedor
 		@OneToMany(mappedBy="cliente")
-		private List<FacturasCliente> facturasCliente;
+		private List<FacturaCliente> facturasCliente;
 
 	public Cliente() {
 	}
@@ -271,11 +271,11 @@ public class Cliente implements Serializable {
 	
 	
 
-	public List<FacturasCliente> getFacturasCliente() {
+	public List<FacturaCliente> getFacturasCliente() {
 		return facturasCliente;
 	}
 
-	public void setFacturasCliente(List<FacturasCliente> facturasCliente) {
+	public void setFacturasCliente(List<FacturaCliente> facturasCliente) {
 		this.facturasCliente = facturasCliente;
 	}
 

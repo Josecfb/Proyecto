@@ -22,6 +22,8 @@ import entidades.AlbaranCliente;
 import entidades.Cliente;
 import entidades.FilasAlbaranCliente;
 import modelo.negocio.GestorCliente;
+import util.Utilidades;
+
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import javax.swing.JCheckBox;
@@ -44,9 +46,11 @@ public class VAlbaranCliente extends JInternalFrame {
 	private JTextField tNumAlb;
 	private JCheckBox checAlmacen, checFacturado;
 	private JButton bNuevaFila;
+	private Utilidades u;
 
 
 	public VAlbaranCliente(AlbaranCliente alb,VAlbaranesClientes vAlbsCli) {
+		u=new Utilidades();
 		this.vAlbsCli=vAlbsCli;
 		this.alb=alb;
 		formatoeuro = NumberFormat.getCurrencyInstance();
@@ -263,12 +267,13 @@ public class VAlbaranCliente extends JInternalFrame {
 		double total=0;
 		for (Component fila:filas) {
 			VFilaAlbaranCliente fil=(VFilaAlbaranCliente) fila;
-			total+=(new CtrlFilaAlbCliente(fil).euroADoble(fil.gettPrecio().getText()))*Integer.parseInt(fil.gettUnidades().getText());
+			total+=u.euroADoble(fil.gettPrecio().getText())*Integer.parseInt(fil.gettUnidades().getText());
 		}
 		lBase.setText(formatoeuro.format(total));
 		lIva.setText(formatoeuro.format(total*0.1));
 		lTotal.setText(formatoeuro.format(total*1.1));
 	}
+
 	
 	public void correoFactura() {
 		JOptionPane.showMessageDialog(new JFrame(),"Se ha generado y enviado la factura correspondiente por EMail al cliente","Factura enviadad",JOptionPane.INFORMATION_MESSAGE);

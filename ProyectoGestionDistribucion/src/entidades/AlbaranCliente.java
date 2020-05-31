@@ -39,7 +39,7 @@ public class AlbaranCliente implements Serializable {
 	//bi-directional many-to-one association to FacturasCliente
 	@ManyToOne
 	@JoinColumn(name="NUM_FACTURA")
-	private FacturasCliente facturasCliente;
+	private FacturaCliente facturasCliente;
 
 	//bi-directional many-to-one association to FilasAlbaranCliente
 	@OneToMany(mappedBy="albaranCliente")
@@ -84,11 +84,11 @@ public class AlbaranCliente implements Serializable {
 		this.clienteBean = clienteBean;
 	}
 
-	public FacturasCliente getFacturasCliente() {
+	public FacturaCliente getFacturasCliente() {
 		return this.facturasCliente;
 	}
 
-	public void setFacturasCliente(FacturasCliente facturasCliente) {
+	public void setFacturasCliente(FacturaCliente facturasCliente) {
 		this.facturasCliente = facturasCliente;
 	}
 

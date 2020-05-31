@@ -2,7 +2,7 @@ package vista.clientes.facturas;
 
 import javax.swing.JPanel;
 import controlador.clientes.facturas.CtrlFilaFacturasGenCliente;
-import entidades.FacturasCliente;
+import entidades.FacturaCliente;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -14,12 +14,12 @@ public class VFilaFacturasCliente extends JPanel {
 	private static final long serialVersionUID = 4665261804339480581L;
 	private JLabel lProveedor, lFecha,lNum;
 	private JButton bEditar;
-	private FacturasCliente fact;
+	private FacturaCliente fact;
 	private VFacturasClientes vFacturas;
 
 
 
-	public VFilaFacturasCliente(FacturasCliente fact,VFacturasClientes vFacturas) {
+	public VFilaFacturasCliente(FacturaCliente fact,VFacturasClientes vFacturas) {
 		setBackground(Color.WHITE);
 		this.vFacturas=vFacturas;
 		this.fact=fact;
@@ -66,7 +66,7 @@ public class VFilaFacturasCliente extends JPanel {
 		return bEditar;
 	}
 
-	public FacturasCliente getFact() {
+	public FacturaCliente getFact() {
 		return fact;
 	}
 

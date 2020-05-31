@@ -10,19 +10,28 @@ import java.util.Date;
 import java.util.List;
 import entidades.AlbaranCliente;
 import entidades.Cliente;
-import entidades.FacturasCliente;
+import entidades.FacturaCliente;
 import modelo.negocio.GestorAlbaranCliente;
 import modelo.negocio.GestorFacturaCliente;
 import vista.clientes.facturas.VFacturaCliente;
 import vista.clientes.facturas.VFacturasClientes;
 import vista.clientes.facturas.VFilaAlbGeneraFactCliente;
 import vista.clientes.facturas.VGeneraFacturaCliente;
-
+/**
+ * Controla la ventana del asistente para generar facturas de cliente a partir de albaranes
+ * @author Jose Carlos
+ *
+ */
 public class CtrlGenFactCliente implements ActionListener, FocusListener{
 	private VGeneraFacturaCliente vGenFactCliente; 
 	private VFacturasClientes vFactsCli;
 
-	
+	/**
+	 * El constructor recibe como parámetros la ventana del listado de facturas del cliente y la ventana del asistente
+	 * para generar facturas a partir de albaranes de cliente
+	 * @param vGenFactCliente
+	 * @param vFactsCli
+	 */
 	public CtrlGenFactCliente(VGeneraFacturaCliente vGenFactCliente,VFacturasClientes vFactsCli) {
 		this.vGenFactCliente=vGenFactCliente;
 		this.vFactsCli=vFactsCli;
@@ -33,16 +42,23 @@ public class CtrlGenFactCliente implements ActionListener, FocusListener{
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Cuando el combobox de cliente pierde el foco llena la lista con los albaranes de ese cliente que estén sin facturar
+	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenFactCliente.getComboCli().getEditor().getEditorComponent()) {
 			GestorAlbaranCliente gac=new GestorAlbaranCliente();
-			List<AlbaranCliente> listaAlb =gac.listaAlbaranesAlmacen(((Cliente) vGenFactCliente.getComboCli().getSelectedItem()));
+			List<AlbaranCliente> listaAlb;
+			listaAlb =gac.listaAlbaranesAlmacen(((Cliente) vGenFactCliente.getComboCli().getSelectedItem()));
 			vGenFactCliente.muestraAlbaranes(listaAlb);
 		}
 	}
-
+	/**
+	 * Cuando se pulsa el botón siguiente muestra la lista de albaranes sin facturar y oculta el combobox de cliente
+	 * Cuando se pulsa el botón cancelar se cierra la ventana del asistente
+	 * Cuando se pulsa el botón aceptar se genera la factura 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -63,10 +79,9 @@ public class CtrlGenFactCliente implements ActionListener, FocusListener{
 		if (e.getSource()==vGenFactCliente.getbAceptar()) {
 			GestorAlbaranCliente gac=new GestorAlbaranCliente();
 			GestorFacturaCliente gfc=new GestorFacturaCliente();
-			FacturasCliente fac=new FacturasCliente();
+			FacturaCliente fac=new FacturaCliente();
 			fac.setCliente((Cliente) vGenFactCliente.getComboCli().getSelectedItem());
 			fac.setFecha(new Date());
-	
 			Component[] componentes;
 			componentes = vGenFactCliente.getPanelFila().getComponents();
 			List<AlbaranCliente> albaranes=new ArrayList<AlbaranCliente>();
@@ -80,13 +95,11 @@ public class CtrlGenFactCliente implements ActionListener, FocusListener{
 				}
 			}
 			fac.setAlbaranClientes(albaranes);
-			
 			gfc.nuevaFactura(fac);
 			for (AlbaranCliente alb:fac.getAlbaranClientes()) {
 				alb.setFacturasCliente(fac);
 				alb.setFacturado(true);
 				gac.facturaAlbaran(alb); 
-				
 			}
 			fac.setFilasFacturasClientes(gfc.generaFilas(fac));
 			gfc.modificaFacturaGenerada(fac);
@@ -103,8 +116,5 @@ public class CtrlGenFactCliente implements ActionListener, FocusListener{
 	public VFacturasClientes getvFactsCli() {
 		return vFactsCli;
 	}
-	
-	
-	
 
 }

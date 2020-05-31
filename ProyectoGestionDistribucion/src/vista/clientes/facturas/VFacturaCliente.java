@@ -15,9 +15,11 @@ import com.toedter.calendar.JDateChooser;
 import controlador.clientes.facturas.ControladorFacturaCliente;
 import controlador.clientes.facturas.CtrlFilaFactCliente;
 import entidades.Cliente;
-import entidades.FacturasCliente;
-import entidades.FilasFacturasCliente;
+import entidades.FacturaCliente;
+import entidades.FilaFacturaCliente;
 import modelo.negocio.GestorCliente;
+import util.Utilidades;
+
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import javax.swing.JCheckBox;
@@ -31,7 +33,7 @@ public class VFacturaCliente extends JInternalFrame {
 	private VFacturasClientes vFactsCli;
 	private JDateChooser cFecha;
 	private JComboBox<Cliente> comboCliente;
-	private FacturasCliente fact;
+	private FacturaCliente fact;
 	private JScrollPane scrollPendientes;
 	private VFilaFacturaCliente vFilaFact;
 	private JPanel panel;
@@ -40,11 +42,13 @@ public class VFacturaCliente extends JInternalFrame {
 	private JTextField tNumFact;
 	private JCheckBox checPagada;
 	private JButton bNuevaFila;
+	private Utilidades u;
 
 
-	public VFacturaCliente(FacturasCliente fact,VFacturasClientes vFactsCli) {
+	public VFacturaCliente(FacturaCliente fact,VFacturasClientes vFactsCli) {
 		this.vFactsCli=vFactsCli;
 		this.fact=fact;
+		u=new Utilidades();
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoentero=NumberFormat.getIntegerInstance();
 		setBounds(100, 100, 759, 519);
@@ -108,7 +112,7 @@ public class VFacturaCliente extends JInternalFrame {
 		lblNewLabel_1.setOpaque(true);
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBackground(new Color(0, 0, 128));
-		lblNewLabel_1.setBounds(39, 102, 45, 18);
+		lblNewLabel_1.setBounds(27, 102, 45, 18);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Nombre");
@@ -116,23 +120,15 @@ public class VFacturaCliente extends JInternalFrame {
 		lblNewLabel_2.setOpaque(true);
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setBackground(new Color(0, 0, 128));
-		lblNewLabel_2.setBounds(94, 102, 358, 18);
+		lblNewLabel_2.setBounds(82, 102, 375, 18);
 		getContentPane().add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Cajas");
-		lblNewLabel_3.setOpaque(true);
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3.setBackground(new Color(0, 0, 128));
-		lblNewLabel_3.setBounds(462, 102, 38, 18);
-		getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Unidades");
 		lblNewLabel_4.setOpaque(true);
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_4.setBackground(new Color(0, 0, 128));
-		lblNewLabel_4.setBounds(510, 102, 29, 18);
+		lblNewLabel_4.setBounds(475, 102, 55, 18);
 		getContentPane().add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Precio");
@@ -140,7 +136,7 @@ public class VFacturaCliente extends JInternalFrame {
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_5.setBackground(new Color(0, 0, 128));
-		lblNewLabel_5.setBounds(549, 102, 64, 18);
+		lblNewLabel_5.setBounds(540, 102, 64, 18);
 		getContentPane().add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Total");
@@ -148,7 +144,7 @@ public class VFacturaCliente extends JInternalFrame {
 		lblNewLabel_6.setForeground(Color.WHITE);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_6.setBackground(new Color(0, 0, 128));
-		lblNewLabel_6.setBounds(623, 102, 76, 18);
+		lblNewLabel_6.setBounds(614, 102, 76, 18);
 		getContentPane().add(lblNewLabel_6);
 		
 		JLabel lNum = new JLabel("Numero");
@@ -199,7 +195,7 @@ public class VFacturaCliente extends JInternalFrame {
 	}
 
 	public void nuevaFila() {
-		FilasFacturasCliente fil = new FilasFacturasCliente();
+		FilaFacturaCliente fil = new FilaFacturaCliente();
 		fil.setFacturasCliente(fact);
 		vFilaFact=new VFilaFacturaCliente(this,fil);
 		CtrlFilaFactCliente controla=new CtrlFilaFactCliente(vFilaFact);
@@ -222,16 +218,16 @@ public class VFacturaCliente extends JInternalFrame {
 
 	}
 	
-	public void muestraFilas(FacturasCliente factura) {
+	public void muestraFilas(FacturaCliente factura) {
 		
-		List<FilasFacturasCliente> filas=fact.getFilasFacturasClientes();
+		List<FilaFacturaCliente> filas=fact.getFilasFacturasClientes();
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(710,filas.size()*30));
 		panel.setBackground(SystemColor.control);
 		panel.setBorder(null);
 		
 		scrollPendientes.setViewportView(panel);
-		for (FilasFacturasCliente fil:filas) {
+		for (FilaFacturaCliente fil:filas) {
 			vFilaFact=new VFilaFacturaCliente(this,fil);
 			CtrlFilaFactCliente controla=new CtrlFilaFactCliente(vFilaFact);
 			vFilaFact.establecerControlador(controla);
@@ -239,15 +235,13 @@ public class VFacturaCliente extends JInternalFrame {
 			vFilaFact.gettCod().setText(String.valueOf(fil.getArticuloBean().getCod()));
 			vFilaFact.getArticulo().setSelectedItem(fil.getArticuloBean());
 			vFilaFact.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
-			vFilaFact.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
-			vFilaFact.gettCoste().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
+			vFilaFact.getTPrecio().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
 			vFilaFact.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
 			if (factura.getPagada()) {
 				vFilaFact.gettCod().setFocusable(false);
 				vFilaFact.getArticulo().setEnabled(false);
 				vFilaFact.gettUnidades().setFocusable(false);
-				vFilaFact.gettCajas().setFocusable(false);
-				vFilaFact.gettCoste().setFocusable(false);
+				vFilaFact.getTPrecio().setFocusable(false);
 				vFilaFact.gettTotal().setFocusable(false);
 				vFilaFact.getbBorrar().setEnabled(false);
 			}
@@ -263,7 +257,7 @@ public class VFacturaCliente extends JInternalFrame {
 		double total=0;
 		for (Component fila:filas) {
 			VFilaFacturaCliente fil=(VFilaFacturaCliente) fila;
-			total+=(new CtrlFilaFactCliente(fil).euroADoble(fil.gettCoste().getText()))*Integer.parseInt(fil.gettUnidades().getText());
+			total+=u.euroADoble(fil.getTPrecio().getText())*Integer.parseInt(fil.gettUnidades().getText());
 		}
 		lBase.setText(formatoeuro.format(total));
 		lIva.setText(formatoeuro.format(total*0.1));
@@ -282,7 +276,7 @@ public class VFacturaCliente extends JInternalFrame {
 	}
 
 
-	public FacturasCliente getFact() {
+	public FacturaCliente getFact() {
 		return fact;
 	}
 

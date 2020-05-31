@@ -9,8 +9,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="FILAS_FACTURAS_CLIENTE")
-@NamedQuery(name="FilasFacturasCliente.findAll", query="SELECT f FROM FilasFacturasCliente f")
-public class FilasFacturasCliente implements Serializable {
+@NamedQuery(name="FilaFacturaCliente.findAll", query="SELECT f FROM FilaFacturaCliente f")
+public class FilaFacturaCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -25,14 +25,14 @@ public class FilasFacturasCliente implements Serializable {
 	//bi-directional many-to-one association to FacturasCliente
 	@ManyToOne
 	@JoinColumn(name="FACTURA")
-	private FacturasCliente facturasCliente;
+	private FacturaCliente facturasCliente;
 
 	//bi-directional many-to-one association to Articulo
 	@ManyToOne
 	@JoinColumn(name="ARTICULO")
 	private Articulo articuloBean;
 
-	public FilasFacturasCliente() {
+	public FilaFacturaCliente() {
 	}
 
 	public FilasFacturasClientePK getId() {
@@ -59,11 +59,11 @@ public class FilasFacturasCliente implements Serializable {
 		this.precio = precio;
 	}
 
-	public FacturasCliente getFacturasCliente() {
+	public FacturaCliente getFacturasCliente() {
 		return this.facturasCliente;
 	}
 
-	public void setFacturasCliente(FacturasCliente facturasCliente) {
+	public void setFacturasCliente(FacturaCliente facturasCliente) {
 		this.facturasCliente = facturasCliente;
 	}
 

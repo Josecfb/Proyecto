@@ -10,7 +10,7 @@ import java.text.NumberFormat;
 import javax.swing.JTextField;
 
 import entidades.Articulo;
-import util.Util;
+import util.Utilidades;
 import vista.clientes.VFilaPrecioCliente;
 /**
  * controla las filas con los precios de artículos especiales de un cliente
@@ -20,14 +20,14 @@ import vista.clientes.VFilaPrecioCliente;
 public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 	private NumberFormat formatoeuro,formatoPorcentaje;
 	private VFilaPrecioCliente vFilaPre;
-	private Util u;
+	private Utilidades u;
 	/**
 	 * Al constructor se le pasa lavista de la fila de precio cliente
 	 * @param vFilaPre
 	 */
 	public ControlaFilaPrecioCli(VFilaPrecioCliente vFilaPre) {
 		this.vFilaPre=vFilaPre;
-		u=new Util();
+		u=new Utilidades();
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		formatoPorcentaje.setMinimumFractionDigits(2);

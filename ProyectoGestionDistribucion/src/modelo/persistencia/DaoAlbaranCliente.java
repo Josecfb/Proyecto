@@ -107,7 +107,6 @@ public class DaoAlbaranCliente {
 		if (em==null) return null;
 		List<AlbaranCliente> lista=em.createQuery("select alb from AlbaranCliente alb where alb.clienteBean=:cli and alb.actualizadoAlmacen=true and alb.facturado=false").setParameter("cli", cli).getResultList();
 		em.close();
-		System.out.println("albaranes encontrados sin facturar de"+cli.getNombre()+"="+lista.size());
 		return lista;
 	}
 	

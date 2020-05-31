@@ -5,15 +5,24 @@ import java.awt.event.ActionListener;
 
 import vista.clientes.albaranes.VAlbaranCliente;
 import vista.clientes.albaranes.VFilaAlbaranGeneradoCliente;
-
+/**
+ * Controla la pulsacion del botón editar albaran que hay en cada fila del listado de albaranes
+ * @author Jose Carlos
+ *
+ */
 public class CtrlFilaAlbaranesGenCliente implements ActionListener{
 	private VFilaAlbaranGeneradoCliente fila;
 	private VAlbaranCliente vAlba;
-	
+	/**
+	 *El constructor recibe la vista de fila del listado de albaranes
+	 * @param fila
+	 */
 	public CtrlFilaAlbaranesGenCliente(VFilaAlbaranGeneradoCliente fila) {
 		this.fila=fila;
 	}
-
+	/**
+	 * Cuando se pulsa el botón de editar albarán se abre una ventana donde es posible modificar el albarán
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fila.getbEditar()) {

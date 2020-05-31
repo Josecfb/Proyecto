@@ -17,10 +17,12 @@ import entidades.Cliente;
 import entidades.FilasPedidosCliente;
 import entidades.PedidoCliente;
 import modelo.negocio.GestorPedidosCliente;
+import util.Utilidades;
 import vista.clientes.pedidos.VPedidoCliente;
 import vista.clientes.pedidos.VFilaPedidoCliente;
 
 public class ControladorPedidoCliente implements InternalFrameListener, FocusListener,ActionListener{
+	private Utilidades u;
 	private GestorPedidosCliente gpc;
 	private VPedidoCliente vpedidoCliente;
 	private List<FilasPedidosCliente> filasmodificadas;
@@ -28,6 +30,7 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 	public ControladorPedidoCliente(VPedidoCliente pedidoCliente) {
 		this.vpedidoCliente=pedidoCliente;
 		gpc=new GestorPedidosCliente();
+		u=new Utilidades();
 	}
 	
 	@Override
@@ -104,7 +107,7 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 			filaModif=new FilasPedidosCliente();
 			VFilaPedidoCliente fil=(VFilaPedidoCliente) fila;
 			fil.updateUI();
-//			if (fil.getFila()!=null)
+			if (fil.getFila()!=null)
 				asignaCamposFila(fil,filaModif,pedModif);
 			if (filasmodificadas.contains(filaModif))
 				filasmodificadas.get(filasmodificadas.indexOf(filaModif)).setCantidad(filasmodificadas.get(filasmodificadas.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
@@ -117,18 +120,13 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 	private void asignaCamposFila(VFilaPedidoCliente vFila,FilasPedidosCliente filaModif,PedidoCliente pedModif) {
 		vFila.updateUI();
 		vFila.getArticulo().requestFocus();
-		System.out.println(vFila.getArticulo().getSelectedItem());
 		Articulo arti=(Articulo) vFila.getArticulo().getSelectedItem();
 		filaModif.setPedidosCliente(pedModif);
 		filaModif.setArticuloBean(arti);
 		filaModif.setCantidad(Integer.parseInt(vFila.gettUnidades().getText()));
-		filaModif.setPrecio(euroADoble(vFila.gettPrecio().getText()));
-		System.out.println("en objeto "+filaModif.getPrecio()+" en vista"+vFila.gettPrecio().getText());
+		filaModif.setPrecio(u.euroADoble(vFila.gettPrecio().getText()));
 	}
 	
-	private Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
 	
 	public List<FilasPedidosCliente> articulosPendientesPedido(PedidoCliente pedido){
 		return gpc.listaFilasPedido(pedido);

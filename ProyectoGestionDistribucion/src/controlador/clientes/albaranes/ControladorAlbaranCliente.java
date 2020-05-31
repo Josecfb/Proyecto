@@ -18,7 +18,7 @@ import entidades.Cliente;
 import entidades.FilasAlbaranCliente;
 import modelo.negocio.GestorAlbaranCliente;
 import modelo.negocio.GestorFacturaCliente;
-import util.Util;
+import util.Utilidades;
 import vista.clientes.albaranes.VAlbaranCliente;
 import vista.clientes.albaranes.VFilaAlbaranCliente;
 /**
@@ -30,14 +30,14 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 	private GestorAlbaranCliente gac;
 	private VAlbaranCliente vAlbaran;
 	private List<FilasAlbaranCliente> filasAlb;
-	private Util u;
+	private Utilidades u;
 	/**
 	 * El constructor recibe la ventana del albaran del cliente
 	 * @param vAlbaran
 	 */
 	public ControladorAlbaranCliente(VAlbaranCliente vAlbaran) {
 		this.vAlbaran=vAlbaran;
-		u=new Util();
+		u=new Utilidades();
 		gac=new GestorAlbaranCliente();
 	}
 	/**
@@ -107,7 +107,8 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		vAlbaran.getPanel().updateUI();	
 	}
 	/**
-	 * Asigna las filas de la ficha del albaran al objeto albModif
+	 * Asigna las filas de la ficha del albaran al objeto albModif 
+	 * si se repiten filas con el mismo artículo se suman las cantidades
 	 * @param albModif
 	 */
 	private void ponFilas(AlbaranCliente albModif) {
@@ -120,7 +121,10 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 			fil.updateUI();
 			if (fil.getFila()!=null)
 				asignaCamposFila(fil,filaModif,albModif);
-			filasAlb.add(filaModif);
+			if (filasAlb.contains(filaModif))
+				filasAlb.get(filasAlb.indexOf(filaModif)).setCantidad(filasAlb.get(filasAlb.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+			else
+				filasAlb.add(filaModif);
 		}
 		albModif.setFilasAlbaranClientes(filasAlb);
 	}

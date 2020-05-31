@@ -19,7 +19,7 @@ import entidades.Articulo;
 import entidades.Familia;
 import entidades.Proveedor;
 import modelo.negocio.GestorArticulo;
-import util.Util;
+import util.Utilidades;
 import vista.articulos.VFichaArticulo;
 /**
  * Implementa InternalFrameListener, FocusListener, ActionListener, KeyListener
@@ -29,7 +29,7 @@ import vista.articulos.VFichaArticulo;
 public class ControladorFichaArticulo implements InternalFrameListener, FocusListener, ActionListener, KeyListener {
 	private VFichaArticulo fichaArticulo;
 	private GestorArticulo ga;
-	private Util u;
+	private Utilidades u;
 	
 	/**
 	 * 
@@ -38,7 +38,7 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	public ControladorFichaArticulo(VFichaArticulo fichaArticulo) {
 		this.fichaArticulo=fichaArticulo;
 		ga=new GestorArticulo();
-		u=new Util();
+		u=new Utilidades();
 	}
 	/**
 	 * Al cerrar la ventana

@@ -23,13 +23,13 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entidades.Datosempresa;
-import entidades.FacturasCliente;
-import entidades.FilasFacturasCliente;
+import entidades.FacturaCliente;
+import entidades.FilaFacturaCliente;
 
 public class PdfFacturaCliente {
 	NumberFormat formatoeuro;
 
-	public PdfFacturaCliente(FacturasCliente fac) {
+	public PdfFacturaCliente(FacturaCliente fac) {
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		Paragraph p;
 		Font fuente=FontFactory.getFont("arial",12);
@@ -126,7 +126,7 @@ public class PdfFacturaCliente {
 				celda[i].setVerticalAlignment(PdfPCell.ALIGN_CENTER);
 				tabla.addCell(celda[i]);
 			}
-			List<FilasFacturasCliente> filas=new ArrayList<FilasFacturasCliente>();
+			List<FilaFacturaCliente> filas=new ArrayList<FilaFacturaCliente>();
 			filas=fac.getFilasFacturasClientes();
 			for (int i=0;i<celda.length;i++) 
 				celda[i].setBackgroundColor(BaseColor.WHITE);
@@ -136,7 +136,7 @@ public class PdfFacturaCliente {
 			celda[3].setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 			celda[4].setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 			double base=0;
-			for (FilasFacturasCliente fila:filas) {
+			for (FilaFacturaCliente fila:filas) {
 				celda[0].setPhrase(new Phrase(String.valueOf(fila.getArticuloBean().getCodpro())));
 				celda[1].setPhrase(new Phrase(fila.getArticuloBean().getNombre()));
 				celda[2].setPhrase(new Phrase(String.valueOf(fila.getCantidad())));

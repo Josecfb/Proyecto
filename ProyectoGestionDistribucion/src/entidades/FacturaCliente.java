@@ -12,8 +12,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="FACTURAS_CLIENTE")
-@NamedQuery(name="FacturasCliente.findAll", query="SELECT f FROM FacturasCliente f")
-public class FacturasCliente implements Serializable {
+@NamedQuery(name="FacturaCliente.findAll", query="SELECT f FROM FacturaCliente f")
+public class FacturaCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,9 +38,9 @@ public class FacturasCliente implements Serializable {
 
 	//bi-directional many-to-one association to FilasFacturasCliente
 	@OneToMany(mappedBy="facturasCliente",cascade = CascadeType.ALL)
-	private List<FilasFacturasCliente> filasFacturasClientes;
+	private List<FilaFacturaCliente> filasFacturasClientes;
 
-	public FacturasCliente() {
+	public FacturaCliente() {
 	}
 
 	public int getNum() {
@@ -97,22 +97,22 @@ public class FacturasCliente implements Serializable {
 		return albaranCliente;
 	}
 
-	public List<FilasFacturasCliente> getFilasFacturasClientes() {
+	public List<FilaFacturaCliente> getFilasFacturasClientes() {
 		return this.filasFacturasClientes;
 	}
 
-	public void setFilasFacturasClientes(List<FilasFacturasCliente> filasFacturasClientes) {
+	public void setFilasFacturasClientes(List<FilaFacturaCliente> filasFacturasClientes) {
 		this.filasFacturasClientes = filasFacturasClientes;
 	}
 
-	public FilasFacturasCliente addFilasFacturasCliente(FilasFacturasCliente filasFacturasCliente) {
+	public FilaFacturaCliente addFilasFacturasCliente(FilaFacturaCliente filasFacturasCliente) {
 		getFilasFacturasClientes().add(filasFacturasCliente);
 		filasFacturasCliente.setFacturasCliente(this);
 
 		return filasFacturasCliente;
 	}
 
-	public FilasFacturasCliente removeFilasFacturasCliente(FilasFacturasCliente filasFacturasCliente) {
+	public FilaFacturaCliente removeFilasFacturasCliente(FilaFacturaCliente filasFacturasCliente) {
 		getFilasFacturasClientes().remove(filasFacturasCliente);
 		filasFacturasCliente.setFacturasCliente(null);
 

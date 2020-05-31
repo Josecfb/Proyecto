@@ -13,27 +13,41 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import entidades.Articulo;
 import entidades.Cliente;
-import entidades.FacturasCliente;
-import entidades.FilasFacturasCliente;
+import entidades.FacturaCliente;
+import entidades.FilaFacturaCliente;
 import modelo.negocio.GestorFacturaCliente;
+import util.Utilidades;
 import vista.clientes.facturas.VFacturaCliente;
 import vista.clientes.facturas.VFilaFacturaCliente;
-
+/**
+ * Controla la ventana de facturas de cliente
+ * @author Jose Carlos
+ *
+ */
 public class ControladorFacturaCliente implements InternalFrameListener, FocusListener,ActionListener{
+	private Utilidades u;
 	private GestorFacturaCliente gfc;
 	private VFacturaCliente vFactura;
-	private List<FilasFacturasCliente> filasFact;
+	private List<FilaFacturaCliente> filasFact;
 	
+	/**
+	 * El constructor recibe la ventana factura de cliente
+	 * @param vFactura
+	 */
 	public ControladorFacturaCliente(VFacturaCliente vFactura) {
+		u=new Utilidades();
 		this.vFactura=vFactura;
 		gfc=new GestorFacturaCliente();
 	}
 	
+	/**
+	 * Cuando se va ha cerrar la ventana pregunsa si se desea guardar, en caso afirmativo, si es de una factura existente la modifica, en caso contrario la crea nueva
+	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION)
-				if (!vFactura.gettNumAlb().getText().equals("")) {
+				if (vFactura.getFact()!=null) {
 					modificaFactura();
 					vFactura.dispose();
 				}
@@ -43,70 +57,92 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 				vFactura.dispose();
 	}
 	
+	/**
+	 * Modifica una factura existente
+	 */
 	private void modificaFactura() {
-		FacturasCliente factModif=new FacturasCliente();
+		FacturaCliente factModif=new FacturaCliente();
 		factModif.setNum(Integer.valueOf(vFactura.gettNumAlb().getText()));
 		asignaCampos(factModif);
 		ponFilas(factModif);
 		vFactura.muestraFilas(factModif);
-		
-			
 		int ok=gfc.modificaFactura(factModif);
 		if (ok==0) {
 			ControladorFacturasClientes cfc = new ControladorFacturasClientes(vFactura.getvFactsPro());
 			cfc.listar(vFactura.getvFactsPro());
-		
 		}
-//		//else 
-//			//muestraErrores(ok);		
 	}
 	
+	/**
+	 * Crea una nueva factura asignandole los datos de la ventana factura y llamando al método nuevaFactura de la clase GestorFacturaCliente
+	 */
 	private void nuevaFactura() {
-		FacturasCliente facturaNUeva=new FacturasCliente();
+		FacturaCliente facturaNUeva=new FacturaCliente();
 		asignaCampos(facturaNUeva);
-		int ok=gfc.nuevaFactura(facturaNUeva);
 		ponFilas(facturaNUeva);
-		gfc.modificaFacturaGenerada(facturaNUeva);
+		int ok=gfc.nuevaFactura(facturaNUeva);
 		if (ok==0)
 			vFactura.dispose();
 	}
-	
-	private void asignaCampos(FacturasCliente factModif) {
+	/**
+	 * Asigna los campos de la cabecera de la ventana factura al objeto factModif
+	 * @param factModif Entidad Factura
+	 */
+	private void asignaCampos(FacturaCliente factModif) {
 		factModif.setFecha(vFactura.getcFecha().getDate());
 		factModif.setCliente((Cliente) vFactura.getComboCliente().getSelectedItem());
 		factModif.setPagada(vFactura.getChecPagada().isSelected());
 		vFactura.getPanel().updateUI();	
 	}
-
-	private void ponFilas(FacturasCliente factModif) {
-		FilasFacturasCliente filaModif;
+	/**
+	 * Asigna los datos de las filas de la ventana factura a las filas de factura del objeto factModif
+	 * si se repiten filas con el mismo artículo se suman las cantidades
+	 * @param factModif Objeto FacturaCliente
+	 */
+	private void ponFilas(FacturaCliente factModif) {
+		FilaFacturaCliente filaModif;
 		Component[] componentes=vFactura.getPanel().getComponents();
-		filasFact=new ArrayList<FilasFacturasCliente>();
+		filasFact=new ArrayList<FilaFacturaCliente>();
 		for (Component fila:componentes) {
-			filaModif=new FilasFacturasCliente();
+			filaModif=new FilaFacturaCliente();
 			VFilaFacturaCliente fil=(VFilaFacturaCliente) fila;
 			fil.updateUI();
 			if (fil.getFila()!=null)
 				asignaCamposFila(fil,filaModif,factModif);
-			filasFact.add(filaModif);
+			if (filasFact.contains(filaModif))
+				filasFact.get(filasFact.indexOf(filaModif)).setCantidad(filasFact.get(filasFact.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+			else
+				filasFact.add(filaModif);
 		}
 		factModif.setFilasFacturasClientes(filasFact);
 	}
-	
-	private void asignaCamposFila(VFilaFacturaCliente fila,FilasFacturasCliente filaModif,FacturasCliente factModif) {
+	/**
+	 * Asigna los datos de una fila de la ventana Factura a una fila de la entidad factModif
+	 * @param fila Vista fila factura cliente
+	 * @param filaModif Objeto FilaFacturaCliente
+	 * @param factModif Objeto FacturaCliente
+	 */
+	private void asignaCamposFila(VFilaFacturaCliente fila,FilaFacturaCliente filaModif,FacturaCliente factModif) {
 		fila.updateUI();
 		fila.getArticulo().requestFocus();
 		Articulo arti=(Articulo) fila.getArticulo().getSelectedItem();
 		filaModif.setFacturasCliente(factModif);
 		filaModif.setArticuloBean(arti);
 		filaModif.setCantidad(Integer.parseInt(fila.gettUnidades().getText()));
-		filaModif.setPrecio(euroADoble(fila.gettCoste().getText()));
+		filaModif.setPrecio(u.euroADoble(fila.getTPrecio().getText()));
 	}
-	
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
+	/**
+	 * controla la pulsacion del botón nueva fila y del checkbox de factura pagada
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==vFactura.getbNuevaFila())
+			vFactura.nuevaFila();
+		if (e.getSource()==vFactura.getChecPagada()) {
+			modificaFactura();
+			vFactura.getChecPagada().requestFocus();
+		}
 	}
-	
 	@Override
 	public void focusGained(FocusEvent arg0) {
 		// TODO Auto-generated method stub
@@ -153,18 +189,4 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==vFactura.getbNuevaFila())
-			vFactura.nuevaFila();
-		if (e.getSource()==vFactura.getChecPagada()) {
-			modificaFactura();
-			
-			vFactura.getChecPagada().requestFocus();
-		}
-				
-		
-	}
-	
 }

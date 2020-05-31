@@ -44,9 +44,9 @@ public class VGeneraFacturaCliente extends JInternalFrame {
 		comboCli.setSelectedItem(null);
 		getContentPane().add(comboCli);
 		
-		lProve = new JLabel("Proveedor");
+		lProve = new JLabel("Cliente");
 		lProve.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lProve.setBounds(53, 145, 86, 25);
+		lProve.setBounds(79, 145, 60, 25);
 		getContentPane().add(lProve);
 		
 		scrollPane = new JScrollPane();
@@ -65,12 +65,12 @@ public class VGeneraFacturaCliente extends JInternalFrame {
 		bCancelar.setBounds(423, 304, 123, 30);
 		getContentPane().add(bCancelar);
 		
-		linea1 = new JLabel("Este asistente le ayudar\u00E1 a generar la factura correspondiente a los albaranes de un proveedor");
+		linea1 = new JLabel("Este asistente le ayudar\u00E1 a generar la factura correspondiente a los albaranes de un cliente");
 		linea1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		linea1.setBounds(53, 11, 631, 25);
 		getContentPane().add(linea1);
 		
-		linea2 = new JLabel("Comienze seleccionando el proveedor y pulse el bot\u00F3n siguiente");
+		linea2 = new JLabel("Comienze seleccionando el cliente y pulse el bot\u00F3n siguiente");
 		linea2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		linea2.setBounds(53, 35, 589, 25);
 		getContentPane().add(linea2);
@@ -79,7 +79,7 @@ public class VGeneraFacturaCliente extends JInternalFrame {
 		bSiguiente.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		bSiguiente.setBounds(174, 304, 123, 30);
 		getContentPane().add(bSiguiente);
-		setTitle("Genera Nueva Factura Proveedor");
+		setTitle("Asistente para generar Nueva Factura Cliente");
 
 	}
 

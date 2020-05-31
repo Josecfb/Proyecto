@@ -12,18 +12,30 @@ import javax.swing.JTextField;
 import entidades.Articulo;
 import entidades.PrecioCliente;
 import modelo.negocio.GestorArticulo;
+import util.Utilidades;
 import vista.clientes.pedidos.VFilaPedidoCliente;
-
+/**
+ * Controla la vista de fila de pedido de cliente
+ * @author Jose Carlos
+ *
+ */
 public class ControladorFilaPedidoCliente implements FocusListener, ActionListener{
 	private VFilaPedidoCliente vFilaPedido;
 	private NumberFormat formatoeuro;
-	
+	private Utilidades u; 
+	/**
+	 * El constructor recibe como argumento la vista de la fila de pedido de cliente
+	 * @param vFilaPedido
+	 */
 	public ControladorFilaPedidoCliente(VFilaPedidoCliente vFilaPedido) {
 		this.vFilaPedido=vFilaPedido;
 		formatoeuro = NumberFormat.getCurrencyInstance();
+		u=new Utilidades();
 	}
 	
-
+	/**
+	 * Cuando los campos ganan foco cambian de color de fondo y de formaro en caso de tener el signo €
+	 */
 	@Override
 	public void focusGained(FocusEvent e) {
 
@@ -36,7 +48,13 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
 
-
+	/**
+	 * Cuando el campo articulo pierde foco asigna valor al precio con el valor correspondiente 
+	 * en función de si el cliente tiene precio especial en dicho artículo o
+	 * si el cliente es mayorista o minorista y  al código del artículo
+	 * cuando el campo código pierde foco asigna valor al combobox artículo
+	 * cuando las unidades pierden foco calcula el total y actualiza el total general
+	 */
 	@Override
 	public void focusLost(FocusEvent e) throws NullPointerException, NumberFormatException {
 
@@ -50,7 +68,6 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaPedido.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
 			PrecioCliente precli=new PrecioCliente(vFilaPedido.getvPedido().getPed().getClienteBean(), art);
-			//System.out.println();
 			if(vFilaPedido.getvPedido().getPed().getClienteBean().getPreciosClientes().contains(precli))
 				vFilaPedido.gettPrecio().setText(formatoeuro.format(vFilaPedido.getvPedido().getPed().getClienteBean().getPreciosClientes().get(vFilaPedido.getvPedido().getPed().getClienteBean().getPreciosClientes().indexOf(precli)).getPrecio()));
 			else 
@@ -64,7 +81,7 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 		if (e.getSource()==vFilaPedido.gettUnidades()) {
 			vFilaPedido.updateUI();
 			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
-			vFilaPedido.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaPedido.gettUnidades().getText())*euroADoble(vFilaPedido.gettPrecio().getText())));
+			vFilaPedido.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaPedido.gettUnidades().getText())*u.euroADoble(vFilaPedido.gettPrecio().getText())));
 			vFilaPedido.getvPedido().actualizaTotal();
 		}
 		
@@ -81,21 +98,9 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 		}
 	}
 	
-	
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
-	
-	public String focoEuro(String cad) {
-		return cad.split(" ")[0];
-	}
-	
-	public String noFocoEuro(String cad) {
-		if (!cad.contains(",")) cad+=",00";
-		return cad+" €";
-	}
-
-
+	/**
+	 * Al pulsar el botón elimina la fila del pedido del cliente
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vFilaPedido.getbBorrar()) {
@@ -103,7 +108,6 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.getvPedido().getPanel().remove(vFilaPedido);
 			vFilaPedido.getvPedido().updateUI();
 		}
-		
 	}
 
 }

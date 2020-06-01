@@ -15,8 +15,8 @@ import vista.articulos.VFilaListadoArticulos;
 public class ControlaFilaListadoArticulos implements ActionListener{
 	private VFilaListadoArticulos filaListadoArticulos;
 	/**
-	 * Recive la vista de una fila de articulo del listado de artículos
-	 * @param filaListadoArticulos
+	 * Recibe la vista de una fila de articulo del listado de artículos
+	 * @param filaListadoArticulos vista de una fila de articulo del listado de artículos
 	 */
 	public ControlaFilaListadoArticulos(VFilaListadoArticulos filaListadoArticulos) {
 		this.filaListadoArticulos=filaListadoArticulos;

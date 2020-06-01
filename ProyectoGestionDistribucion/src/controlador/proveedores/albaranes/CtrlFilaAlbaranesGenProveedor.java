@@ -6,15 +6,24 @@ import java.awt.event.ActionListener;
 import vista.proveedores.albaranes.VAlbaranProveedor;
 import vista.proveedores.albaranes.VFilaAlbaranGeneradoProveedor;
 
-
+/**
+ * Controla la vista de las filas del la ventana del listado de albaranes de proveedores
+ * @author Jose Carlos
+ *
+ */
 public class CtrlFilaAlbaranesGenProveedor implements ActionListener{
 	private VFilaAlbaranGeneradoProveedor fila;
 	private VAlbaranProveedor vAlba;
-	
+	/**
+	 * El constructor recibe como argumento la vista de fila del listado de  albaranes de proveedor
+	 * @param fila  vista de fila del listado de  albaranes de proveedor VFilaAlbaranGeneradoProveedor
+	 */
 	public CtrlFilaAlbaranesGenProveedor(VFilaAlbaranGeneradoProveedor fila) {
 		this.fila=fila;
 	}
-
+	/**
+	 * Abre la ventana del albaran seleccionado
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fila.getbEditar()) {

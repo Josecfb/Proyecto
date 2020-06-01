@@ -6,33 +6,57 @@ import entidades.AlbaranProveedor;
 import entidades.Articulo;
 import entidades.Proveedor;
 import modelo.persistencia.DaoArticulo;
-
+/**
+ * Gestor de Articulos
+ * @author Jose Carlos
+ *
+ */
 public class GestorArticulo {
 	private DaoArticulo da;
-	
+	/**
+	 * El constructor crea un objeto DaoArticulo
+	 */
 	public GestorArticulo() {
 		da=new DaoArticulo();
 	}
 	
-	
+	/**
+	 * Llama al método deUnProveedor de DaoArticulo
+	 * @param pro Objeto entidad Proveedor
+	 * @return List de objetos Articulo
+	 */
 	public List<Articulo> deUnProveedor(Proveedor pro){
 		return da.deUnProveedor(pro);
 	}
-	
+	/**
+	 * Llama al método listado de DaoArticulo
+	 * @param filtroNombre
+	 * @return List de objetos Articulo
+	 */
 	public List<Articulo> listar(String filtroNombre){
-		return da.Listado(filtroNombre);
+		return da.listado(filtroNombre);
 	}
+	/**
+	 * Llama al método existe de DaoArticulo
+	 * @param num número de artículo
+	 * @return Objeto Articulo
+	 */
 	public Articulo existe(int num) {
 		return da.existe(num);
 	}
-	
+	/**
+	 * Llama al método existe de DaoArticulo
+	 * @param num numero de artículo
+	 * @param pro Objeto entidad Proveedor
+	 * @return Objeto Articulo
+	 */
 	public Articulo existe(int num,Proveedor pro) {
 		return da.existe(num,pro);
 	}
 	/**
-	 * 
+	 * Llama al método modificar de DaoArticulo
 	 * @param art Articulo
-	 * @return [0]=false->nombre vacío [1]=false->coste menor que cero [2]=false-> precio mayorista menor que cero [3]=false-> precio minorista menor que cero [4]=false-> sin proveedor [5]=true->modificado con éxito
+	 * @return [0]=false, nombre vacío [1]=false, coste menor que cero [2]=false, precio mayorista menor que cero [3]=false,  precio minorista menor que cero [4]=false, sin proveedor [5]=true, modificado con éxito
 	 */
 	public boolean[] modificarArticulo(Articulo art) {
 		boolean[] ok = valida(art);
@@ -44,7 +68,7 @@ public class GestorArticulo {
 	}
 	
 	/**
-	 * 
+	 * Llama al método nuevo de DaoArticulo
 	 * @param art Articulo
 	 * @return [0]=false->nombre vacío [1]=false->coste menor que cero [2]=false-> precio mayorista menor que cero [3]=false-> precio minorista menor que cero [4]=false-> sin proveedor [5]=true->modificado con éxito
 	 */
@@ -56,7 +80,11 @@ public class GestorArticulo {
 		}
 		return ok;
 	}
-	
+	/**
+	 * Comprueba errores en el artículo
+	 * @param art Objeto Articulo
+	 * @return array de boolean [0]=false->nombre vacío [1]=false->coste menor que cero [2]=false-> precio mayorista menor que cero [3]=false-> precio minorista menor que cero [4]=false-> sin proveedor [5]=true->modificado con éxito
+	 */
 	private boolean[] valida(Articulo art) {
 		boolean[] ok=new boolean[6];
 		for (int i=0;i<ok.length-1;i++)
@@ -69,15 +97,27 @@ public class GestorArticulo {
 		ok[4]=art.getProveedorBean()!=null;
 		return ok;
 	}
-	
+	/**
+	 * Llama al método actualizaArticulosAlbaranProve de DaoArticulo
+	 * @param albModif Objeto AlbaranProveedor
+	 * @param masmenos 1 suma -1 resta
+	 */
 	public void actualizaArticulosAlbaranProve(AlbaranProveedor albModif,int masmenos) {
 		da.actualizaArticulosAlbaranProve(albModif,masmenos);
 	}
-	
+	/**
+	 * Llama al método actualizaArticulosAlbaranCliente de DaoArticulo
+	 * @param albModif Ojeto AlbaranCliente
+	 * @param masmenos 1 suma -1 resta
+	 */
 	public void actualizaArticulosAlbaranCliente(AlbaranCliente albModif,int masmenos) {
 		da.actualizaArticulosAlbaranCliente(albModif,masmenos);
 	}
-	
+	/**
+	 * Llama al método borrarArticulo de DaoArticulo
+	 * @param art Objeto Articulo
+	 * @return Cadena con mensaje de error
+	 */
 	public String borrarArticulo(Articulo art) {
 		if (art!=null) {
 			if (art.getFilasAlbaranClientes().size()>0) 

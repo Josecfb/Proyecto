@@ -10,22 +10,34 @@ import javax.swing.JTextField;
 
 import entidades.Articulo;
 import modelo.negocio.GestorArticulo;
+import util.Utilidades;
 import vista.proveedores.facturas.VFilaFacturaProveedor;
-
+/**
+ * Controla la vista de la fila de factura de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class CtrlFilaFactProve implements FocusListener, ActionListener{
 	private VFilaFacturaProveedor vFilaFact;
 	private NumberFormat formatoeuro;
-	
+	private Utilidades u;
+	/**
+	 * Constructor
+	 * @param vFilaFact vista de la fila de factura de proveedor VFilaFacturaProveedor
+	 */
 	public CtrlFilaFactProve(VFilaFacturaProveedor vFilaFact) {
 		this.vFilaFact=vFilaFact;
 		formatoeuro = NumberFormat.getCurrencyInstance();
+		u=new Utilidades();
 	}
 	
-
+	/**
+	 * Al recibir foco los campos cambian de color de fondo
+	 */
 	@Override
 	public void focusGained(FocusEvent e) {
 		if (e.getSource()==vFilaFact.gettCoste()) {
-			vFilaFact.gettCoste().setText(focoEuro(vFilaFact.gettCoste().getText()));
+			vFilaFact.gettCoste().setText(u.focoEuro(vFilaFact.gettCoste().getText()));
 		}
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
@@ -35,7 +47,11 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 		if (e.getSource()==vFilaFact.getArticulo().getEditor().getEditorComponent())
 			vFilaFact.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
-
+	/** 
+	 * Cuando el combo de articulo pierde foco rellena los campos precio y codigo de artículo
+	 * cuando el codigo de articulo pierde foco rellena el combo de artículo  
+	 * cuando el campo cajas pierde foco calcula las unidades y el total
+	 */
 	@Override
 	public void focusLost(FocusEvent e) throws NullPointerException, NumberFormatException {
 
@@ -63,35 +79,22 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 			vFilaFact.updateUI();
 			art=(Articulo) vFilaFact.getArticulo().getSelectedItem();
 			vFilaFact.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaFact.gettCajas().getText())*art.getUnidadesCaja()));
-			vFilaFact.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaFact.gettUnidades().getText())*euroADoble(vFilaFact.gettCoste().getText())));
+			vFilaFact.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaFact.gettUnidades().getText())*u.euroADoble(vFilaFact.gettCoste().getText())));
 			vFilaFact.gettCajas().setBackground(Color.WHITE);
 			vFilaFact.getvFactura().actualizaTotal();
 			return;
 		}
 		if (e.getSource()==vFilaFact.gettCoste()) {
-			vFilaFact.gettCoste().setText(noFocoEuro(vFilaFact.gettCoste().getText()));
+			vFilaFact.gettCoste().setText(u.noFocoEuro(vFilaFact.gettCoste().getText()));
 		}
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
 			campo.setBackground(Color.WHITE);
 		}
 	}
-	
-	
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
-	
-	public String focoEuro(String cad) {
-		return cad.split(" ")[0];
-	}
-	
-	public String noFocoEuro(String cad) {
-		if (!cad.contains(",")) cad+=",00";
-		return cad+" €";
-	}
-
-
+	/**
+	 * Borra una fila de la factura
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vFilaFact.getbBorrar()) {

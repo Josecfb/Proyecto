@@ -24,7 +24,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener{
 	private Utilidades u;
 	/**
 	 * Al constructor se le pasa la vista de fila de albaran
-	 * @param vFilaAlb
+	 * @param vFilaAlb vista de fila de albaran VFilaAlbaranCliente
 	 */
 	public CtrlFilaAlbCliente(VFilaAlbaranCliente vFilaAlb) {
 		this.vFilaAlb=vFilaAlb;
@@ -80,7 +80,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener{
 			return;
 		}
 		/**
-		 * al perder foco las unidades calcula los totales
+		 * Al perder foco los campos recuperan su color original y al salir de las unidades calcula los totales
 		 */
 		if (e.getSource()==vFilaAlb.gettUnidades()) {
 			vFilaAlb.updateUI();

@@ -1,10 +1,8 @@
 package vista.empresa;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
-import modelo.persistencia.DaoProvincia;
 import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.Font;
@@ -12,7 +10,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import controlador.proveedores.ControladorFichaProveedor;
+import controlador.config.ControladorFichaConfig;
 import entidades.Datosempresa;
 
 public class VFichaEmpresa extends JInternalFrame {
@@ -28,7 +26,7 @@ public class VFichaEmpresa extends JInternalFrame {
 	private JTextField tMovil;
 	private JTextField tEmail;
 	private JTextField tNif;
-	private JComboBox<String> tPoblacion;
+	private JTextField tPoblacion;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JTextField tColor;
@@ -83,9 +81,9 @@ public class VFichaEmpresa extends JInternalFrame {
 		lPoblación.setBounds(418, 210, 66, 25);
 		panel.add(lPoblación);
 		
-		tPoblacion = new JComboBox<String>();
+		tPoblacion = new JTextField();
 		tPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tPoblacion.setEditable(true);
+
 		tPoblacion.setBounds(494, 210, 248, 25);
 		panel.add(tPoblacion);
 		
@@ -181,30 +179,26 @@ public class VFichaEmpresa extends JInternalFrame {
 		tDireccion.setText(dat.getDireccion());
 		tProvincia.setText(dat.getProvincia());
 		tCodPos.setText(dat.getCodpos());
-		DaoProvincia dp=new DaoProvincia();
-		for (String poblacion:dp.nomPoblaciones(dat.getCodpos()))
-			tPoblacion.addItem(poblacion);
-		tPoblacion.setSelectedItem(dat.getPoblacion());
+		tPoblacion.setText(dat.getPoblacion());
 		tFijo.setText(dat.getFijo());
 		tMovil.setText(dat.getMovil());
 		tEmail.setText(dat.getEmail());
 		tNif.setText(dat.getNif());
 	}
 	
-	public void EstablecerManejadorVentana(ControladorFichaProveedor manejador) {
+	public void EstablecerManejadorVentana(ControladorFichaConfig manejador) {
 		this.addInternalFrameListener(manejador);
 		tProvincia.addFocusListener(manejador);
 		Component[] componentes=panel.getComponents();
 		for (Component componente:componentes) 
 			if (componente.getClass()==JTextField.class) {
 				componente.addFocusListener(manejador);
-				componente.addKeyListener(manejador);
 			}
 	}
 	public JTextField gettDireccion() {
 		return tDireccion;
 	}
-	public JComboBox<String> gettPoblacion() {
+	public JTextField gettPoblacion() {
 		return tPoblacion;
 	}
 	public JTextField gettProvincia() {

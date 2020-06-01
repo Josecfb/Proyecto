@@ -23,7 +23,7 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 	private Utilidades u;
 	/**
 	 * Al constructor se le pasa lavista de la fila de precio cliente
-	 * @param vFilaPre
+	 * @param vFilaPre Vista de las filas de precios de un cliente VFilaPrecioCliente
 	 */
 	public ControlaFilaPrecioCli(VFilaPrecioCliente vFilaPre) {
 		this.vFilaPre=vFilaPre;
@@ -33,7 +33,7 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 		formatoPorcentaje.setMinimumFractionDigits(2);
 	}
 	/**
-	 * Al pulsar el botón borrar fila borra el precio de artículo espercial del cliente
+	 * Al pulsar el botón borrar fila borra el precio de artículo especial del cliente
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -23,14 +23,16 @@ import vista.clientes.pedidos.VPedidosClientes;
 public class ControladorListadoClientes implements ActionListener{
 	private VListadoClientes listado;
 
-	
+	/**
+	 * El constructor ejecuta directamnte el método listar
+	 * @param listado Ventana de listado de clientes VListadoClientes
+	 */
 	public ControladorListadoClientes(VListadoClientes listado) {
 		this.listado=listado;
 		listar();		
 	}
 	/**
 	 * Obtiene la lista con todos los clientes y llama al método muestra(filas de la ventana listado de clientes
-	 * @param listado Ventana listado de clientes
 	 */
 	public void listar() {
 		GestorCliente gc=new GestorCliente();
@@ -38,7 +40,7 @@ public class ControladorListadoClientes implements ActionListener{
 		listado.muestra(filas);
 	}
 	/**
-	 * Si se pulsa un botón
+	 * Si se pulsa un botón, activa filtro, ejecuta filtro, nuevo cliente, actualizar listado, ventana de pedidos, ventana de albaranes y ventana de facturas
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

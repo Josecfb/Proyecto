@@ -14,7 +14,7 @@ public class CtrlFilaFacturasGenCliente implements ActionListener{
 	private VFacturaCliente vFact;
 	/**
 	 * El constructor recibe como parámetro la fila del listado de facturas
-	 * @param vFila
+	 * @param vFila vista de la fila del listado de facturas VFilaFacturasCliente
 	 */
 	public CtrlFilaFacturasGenCliente(VFilaFacturasCliente vFila) {
 		this.vFila=vFila;

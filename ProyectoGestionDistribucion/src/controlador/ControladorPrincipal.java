@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import controlador.articulos.ControladorListadoArticulos;
 import controlador.clientes.ControladorListadoClientes;
+import controlador.config.ControladorFichaConfig;
 import controlador.proveedores.ControladorListadoProveedores;
 import modelo.persistencia.DaoDatosEmpresa;
 import vista.VentanaPrincipal;
@@ -82,6 +83,8 @@ public class ControladorPrincipal implements ActionListener{
 	private void configuracion() {
 		DaoDatosEmpresa dde =new DaoDatosEmpresa();
 		VFichaEmpresa vFichaEmp=new VFichaEmpresa(dde.empresa());
+		ControladorFichaConfig cfc=new ControladorFichaConfig(vFichaEmp);
+		vFichaEmp.EstablecerManejadorVentana(cfc);
 		ventanaPrincipal.getPanelInterior().add(vFichaEmp);
 		vFichaEmp.setVisible(true);
 	}

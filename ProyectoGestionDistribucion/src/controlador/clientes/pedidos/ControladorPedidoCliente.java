@@ -20,31 +20,39 @@ import modelo.negocio.GestorPedidosCliente;
 import util.Utilidades;
 import vista.clientes.pedidos.VPedidoCliente;
 import vista.clientes.pedidos.VFilaPedidoCliente;
-
+/**
+ * Controla la ventana de un pedido de cliente
+ * @author Jose Carlos
+ *
+ */
 public class ControladorPedidoCliente implements InternalFrameListener, FocusListener,ActionListener{
 	private Utilidades u;
 	private GestorPedidosCliente gpc;
 	private VPedidoCliente vpedidoCliente;
 	private List<FilasPedidosCliente> filasmodificadas;
-	
+	/**
+	 * El constructor recibe como argumento la ventana de pedido de un cliente
+	 * @param pedidoCliente Vista de la ventana de pedido de un cliente VPedidoCliente
+	 */
 	public ControladorPedidoCliente(VPedidoCliente pedidoCliente) {
 		this.vpedidoCliente=pedidoCliente;
 		gpc=new GestorPedidosCliente();
 		u=new Utilidades();
 	}
-	
+	/**
+	 * Cuando se cierra la ventana pregunta si desea guardar, en caso afirmativo el albarán es editado lo modifica en la base de datos
+	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION)
-				if (!vpedidoCliente.gettNumpedido().getText().equals(""))
-					modificaPedido();
-				else
-					nuevoPedido();
+				modificaPedido();
 			else
 				vpedidoCliente.dispose();
 	}
-	
+	/**
+	 * Modifica el pedido llamando al método modificarPedido del gestor de pedidos de cliente
+	 */
 	private void modificaPedido() {
 		PedidoCliente pedModif=new PedidoCliente();
 		pedModif.setNum(Integer.valueOf(vpedidoCliente.gettNumpedido().getText()));
@@ -54,42 +62,20 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 		if (ok==0) {
 			actualizarListaPedidos();
 			vpedidoCliente.dispose();
-			
 		}
-		//else 
-			//muestraErrores(ok);		
+	
 	}
-
+	/**
+	 * Actualiza el listado de pedidos llamando al método listar de la ventana de la lista de pedidos
+	 */
 	private void actualizarListaPedidos() {
 		ControladorPedidosClientes cpp = new ControladorPedidosClientes(vpedidoCliente.getVpedidos());
 		cpp.listar(vpedidoCliente.getVpedidos());
 	}
-	
-	private void nuevoPedido() {
-		PedidoCliente pedidoNuevo=new PedidoCliente();
-		asignaCampos(pedidoNuevo);
-		boolean[] ok=new boolean[4];
-		ok=gpc.nuevoPedido(pedidoNuevo);
-		ponFilas(pedidoNuevo);
-		if (ok[3]) gpc.modificarPedido(pedidoNuevo);
-		if (ok[3]) {
-			actualizarListaPedidos();
-			vpedidoCliente.dispose();
-		}
-		else
-			muestraErrores(ok);
-		
-	}
-	
-	private void muestraErrores(boolean[] ok) {
-		if (!ok[0])
-			JOptionPane.showMessageDialog(new JFrame(),"Proveedor vacío","error",JOptionPane.ERROR_MESSAGE);
-		if (!ok[1])
-			JOptionPane.showMessageDialog(new JFrame(),"Fecha vacía","error",JOptionPane.ERROR_MESSAGE);
-		
-	}
-	
-
+	/**
+	 * Asigna los campos de la cabecera de la ventana del pedido al objeto pedModif
+	 * @param pedModif
+	 */
 	private void asignaCampos(PedidoCliente pedModif) {
 		pedModif.setFecha(vpedidoCliente.getcFecha().getDate());
 		pedModif.setClienteBean((Cliente) vpedidoCliente.getComboCliente().getSelectedItem());
@@ -98,7 +84,11 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 		vpedidoCliente.getPanel().updateUI();
 		
 	}
-
+	/**
+	 * Asigna las filas de la ficha del pedido al objeto pedModif 
+	 * si se repiten filas con el mismo artículo se suman las cantidades
+	 * @param pedModif
+	 */
 	private void ponFilas(PedidoCliente pedModif) {
 		FilasPedidosCliente filaModif;
 		Component[] componentes=vpedidoCliente.getPanel().getComponents();
@@ -116,7 +106,12 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 		}
 		pedModif.setFilasPedidosClientes(filasmodificadas);
 	}
-	
+	/**
+	 * Asigna los campos de una fila del pedido a la fila de pedido de la entidad pedModif
+	 * @param vFila Vista de la fila del pedido de cliente VFilaPedidoCliente 
+	 * @param filaModif Objeto entidad fila de pedido de cliente FilasPedidosCliente
+	 * @param pedModif Objeto entidad pedido de cliente PedidoCliente
+	 */
 	private void asignaCamposFila(VFilaPedidoCliente vFila,FilasPedidosCliente filaModif,PedidoCliente pedModif) {
 		vFila.updateUI();
 		vFila.getArticulo().requestFocus();
@@ -127,7 +122,11 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 		filaModif.setPrecio(u.euroADoble(vFila.gettPrecio().getText()));
 	}
 	
-	
+	/**
+	 * Retorna las filas del pedido del cliente
+	 * @param pedido Objeto entidad pedido de cliente PedidoCliente
+	 * @return lista de filas del pedido de cliente List<FilasPedidosCliente
+	 */
 	public List<FilasPedidosCliente> articulosPendientesPedido(PedidoCliente pedido){
 		return gpc.listaFilasPedido(pedido);
 	}
@@ -137,7 +136,9 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Al salir del combobox de cliente asigna el cliente al pedido
+	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vpedidoCliente.getComboCliente().getEditor().getEditorComponent() && vpedidoCliente.getComboCliente().getSelectedItem()!=null) {
@@ -146,6 +147,15 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 			pc.setClienteBean((Cliente) vpedidoCliente.getComboCliente().getSelectedItem());
 			vpedidoCliente.setPed(pc);
 		}
+		
+	}
+	/**
+	 * Crea un fila nueva en el pedido al pulsar el botón de nueva fila
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==vpedidoCliente.getbNuevaFila())
+			vpedidoCliente.nuevaFila();
 		
 	}
 
@@ -187,11 +197,6 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==vpedidoCliente.getbNuevaFila())
-			vpedidoCliente.nuevaFila();
-		
-	}
+
 	
 }

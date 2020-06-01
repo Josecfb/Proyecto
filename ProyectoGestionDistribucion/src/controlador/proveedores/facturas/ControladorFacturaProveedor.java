@@ -17,20 +17,32 @@ import entidades.FacturaProveedor;
 import entidades.FilaFacturaProveedor;
 import entidades.Proveedor;
 import modelo.negocio.GestorFacturaProve;
+import util.Utilidades;
 import vista.proveedores.facturas.VFacturaProveedor;
 import vista.proveedores.facturas.VFilaFacturaProveedor;
 
-
+/**
+ * Controla la ventana de factura de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class ControladorFacturaProveedor implements InternalFrameListener, FocusListener,ActionListener{
 	private GestorFacturaProve gfp;
 	private VFacturaProveedor vFactura;
 	private List<FilaFacturaProveedor> filasFact;
-	
+	private Utilidades u;
+	/**
+	 * El constructor recibe la ventana factura de proveedor
+	 * @param vFactura vista de la ventana factura de proveedor VFacturaProveedor
+	 */
 	public ControladorFacturaProveedor(VFacturaProveedor vFactura) {
 		this.vFactura=vFactura;
 		gfp=new GestorFacturaProve();
+		u=new Utilidades();
 	}
-	
+	/**
+	 * Cuando se va ha cerrar la ventana pregunta si se desea guardar, en caso afirmativo, si es de una factura existente la modifica, en caso contrario la crea nueva
+	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
@@ -44,7 +56,9 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 			else
 				vFactura.dispose();
 	}
-	
+	/**
+	 * Modifica una factura existente
+	 */
 	private void modificaFactura() {
 		FacturaProveedor factModif=new FacturaProveedor();
 		factModif.setNum(Integer.valueOf(vFactura.gettNumAlb().getText()));
@@ -57,12 +71,12 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 		if (ok==0) {
 			ControladorFacturasProveedores cap = new ControladorFacturasProveedores(vFactura.getvFactsPro());
 			cap.listar(vFactura.getvFactsPro());
-		
 		}
-//		//else 
-//			//muestraErrores(ok);		
+
 	}
-	
+	/**
+	 * Crea una nueva factura asignandole los datos de la ventana factura y llamando al método nuevaFactura de la clase GestorFacturaProve
+	 */
 	private void nuevaFactura() {
 		FacturaProveedor facturaNUeva=new FacturaProveedor();
 		asignaCampos(facturaNUeva);
@@ -72,14 +86,21 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 		if (ok==0)
 			vFactura.dispose();
 	}
-	
+	/**
+	 * Asigna los campos de la cabecera de la ventana factura al objeto factModif
+	 * @param factModif Entidad objeto FacturaProveedor
+	 */
 	private void asignaCampos(FacturaProveedor factModif) {
 		factModif.setFecha(vFactura.getcFecha().getDate());
 		factModif.setProveedore((Proveedor) vFactura.getComboProveedor().getSelectedItem());
 		factModif.setPagada(vFactura.getChecPagada().isSelected());
 		vFactura.getPanel().updateUI();	
 	}
-
+	/**
+	 * Asigna los datos de las filas de la ventana factura a las filas de factura del objeto factModif
+	 * si se repiten filas con el mismo artículo se suman las cantidades
+	 * @param factModif Objeto FacturaProveedor
+	 */
 	private void ponFilas(FacturaProveedor factModif) {
 		FilaFacturaProveedor filaModif;
 		Component[] componentes=vFactura.getPanel().getComponents();
@@ -97,7 +118,12 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 		}
 		factModif.setFilasFacturasProveedors(filasFact);
 	}
-	
+	/**
+	 * Asigna los datos de una fila de la ventana Factura a una fila de la entidad factModif
+	 * @param fila Vista fila factura proveedor
+	 * @param filaModif Objeto FilaFacturaProveedor
+	 * @param factModif Objeto FacturaProveedor
+	 */
 	private void asignaCamposFila(VFilaFacturaProveedor fila,FilaFacturaProveedor filaModif,FacturaProveedor factModif) {
 		fila.updateUI();
 		fila.getArticulo().requestFocus();
@@ -105,13 +131,10 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 		filaModif.setFacturasProveedor(factModif);
 		filaModif.setArticuloBean(arti);
 		filaModif.setCantidad(Integer.parseInt(fila.gettUnidades().getText()));
-		filaModif.setPrecio(euroADoble(fila.gettCoste().getText()));
+		filaModif.setPrecio(u.euroADoble(fila.gettCoste().getText()));
 	}
 	
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
-	
+		
 	@Override
 	public void focusGained(FocusEvent arg0) {
 		// TODO Auto-generated method stub
@@ -158,7 +181,9 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Botón de nueva fila y check de factura pagada
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vFactura.getbNuevaFila())

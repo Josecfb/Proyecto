@@ -18,12 +18,20 @@ import vista.proveedores.albaranes.VAlbaranProveedor;
 import vista.proveedores.albaranes.VAlbaranesProveedores;
 import vista.proveedores.albaranes.VFilaPedGeneraAlbProve;
 import vista.proveedores.albaranes.VGeneraAlbaranProve;
-
+/**
+ * Controla la ventana del asistente para generar albaranes a partir de los pedidos a proveedores
+ * @author Jose Carlos
+ *
+ */
 public class CtrlGenAlbProv implements ActionListener, FocusListener{
 	private VGeneraAlbaranProve vGenAlvPro; 
 	private VAlbaranesProveedores vAlbsPro;
 
-	
+	/**
+	 * El constructor recibe la ventana del asistente para generar albaranes y la ventana del listado de albaranes 
+	 * @param vGenAlvPro Vista de la ventana del asistente para generar albaranes vGenAlvPro
+	 * @param vAlbsPro Vista de la ventana del listado de albaranes VAlbaranesProveedores
+	 */
 	public CtrlGenAlbProv(VGeneraAlbaranProve vGenAlvPro,VAlbaranesProveedores vAlbsPro) {
 		this.vGenAlvPro=vGenAlvPro;
 		this.vAlbsPro=vAlbsPro;
@@ -34,7 +42,9 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Cuando el cuadro combinado de proveedor pierde el foco genera la lista de pedidos sin albarán de ese proveedor
+	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenAlvPro.getComboProve().getEditor().getEditorComponent()) {
@@ -43,7 +53,11 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 			vGenAlvPro.muestraPedidos(listaPed);
 		}
 	}
-
+	/**
+	 * Cuando se pulsa el botón de siguiente se oculta el combobox de proveedor, y muestra la lista de pedidos sin albarán y el botón aceptar
+	 * Si se pulsa cancelar se cierra la ventana del asistente
+	 * Si se pulsa Aceptar genera el albarán con los pedidos seleccionados
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -97,14 +111,10 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 			vAlb.setVisible(true);
 			vGenAlvPro.dispose();
 		}
-		
 	}
 
 	public VAlbaranesProveedores getvAlbsPro() {
 		return vAlbsPro;
 	}
 	
-	
-	
-
 }

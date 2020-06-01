@@ -29,8 +29,8 @@ public class CtrlGenAlbCli implements ActionListener, FocusListener{
 
 	/**
 	 * El constructor recibe como parámetros la ventana del asistente para generar los albaranes y la ventana de la lista de albaranes
-	 * @param vGenAlvCli
-	 * @param vAlbsCli
+	 * @param vGenAlvCli Ventana del asistente para generar albaranes VGeneraAlbaranCliente
+	 * @param vAlbsCli Ventana del listado de albaranes VAlbaranesClientes
 	 */
 	public CtrlGenAlbCli(VGeneraAlbaranCliente vGenAlvCli,VAlbaranesClientes vAlbsCli) {
 		this.vGenAlvCli=vGenAlvCli;

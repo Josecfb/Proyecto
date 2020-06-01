@@ -17,7 +17,7 @@ public class ControladorAlbaranesClientes implements ActionListener{
 	private VAlbaranesClientes vAlbaranes;
 	/**
 	 * El constructor recibe como parámetro la ventana de listado de albaranes y ejecuta el método listar
-	 * @param vAlbaranes
+	 * @param vAlbaranes Vista de la ventana de listado de albaranes VAlbaranesClientes
 	 */
 	public ControladorAlbaranesClientes(VAlbaranesClientes vAlbaranes) {
 		listar(vAlbaranes);
@@ -25,7 +25,7 @@ public class ControladorAlbaranesClientes implements ActionListener{
 	/**
 	 * Llena la ventana vAlbaranes con la lista de los albaranes llamando al método
 	 * listarAlbaranes del GestorAlbaranCliente
-	 * @param vAlbaranes
+	 * @param vAlbaranes Vista de la ventana de listado de albaranes VAlbaranesClientes
 	 */
 	public void listar(VAlbaranesClientes vAlbaranes) {
 		this.vAlbaranes=vAlbaranes;

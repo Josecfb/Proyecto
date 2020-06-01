@@ -18,12 +18,20 @@ import vista.proveedores.facturas.VFacturaProveedor;
 import vista.proveedores.facturas.VFacturasProveedores;
 import vista.proveedores.facturas.VFilaAlbGeneraFactProve;
 import vista.proveedores.facturas.VGeneraFacturaProve;
-
+/**
+ * Controla el asistente para generar facturas de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class CtrlGenFactProv implements ActionListener, FocusListener{
 	private VGeneraFacturaProve vGenFactPro; 
 	private VFacturasProveedores vFactsPro;
 
-	
+	/**
+	 * El constructor recibe dos argumentos
+	 * @param vGenFactPro Ventana del asistente para generar facturas de proveedor VGeneraFacturaProve
+	 * @param vFactsPro ventana del listado de facturas de proveedor VFacturasProveedores
+	 */
 	public CtrlGenFactProv(VGeneraFacturaProve vGenFactPro,VFacturasProveedores vFactsPro) {
 		this.vGenFactPro=vGenFactPro;
 		this.vFactsPro=vFactsPro;
@@ -34,7 +42,9 @@ public class CtrlGenFactProv implements ActionListener, FocusListener{
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Cuando el combobox de proveedor pierde el foco genera el listado de albaranes sin facturar de ese proveedor
+	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vGenFactPro.getComboProve().getEditor().getEditorComponent()) {
@@ -43,7 +53,11 @@ public class CtrlGenFactProv implements ActionListener, FocusListener{
 			vGenFactPro.muestraAlbaranes(listaAlb);
 		}
 	}
-
+	/**
+	 * Cuando se pulsa el botón de siguiente se oculta el combobox de proveedor, y muestra la lista de albaranes sin facturar y el botón aceptar
+	 * Si se pulsa cancelar se cierra la ventana del asistente
+	 * Si se pulsa Aceptar genera la factura  con los albaranes seleccionados
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

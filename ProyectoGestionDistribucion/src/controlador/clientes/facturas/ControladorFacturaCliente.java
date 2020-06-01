@@ -32,7 +32,7 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 	
 	/**
 	 * El constructor recibe la ventana factura de cliente
-	 * @param vFactura
+	 * @param vFactura vista de la ventana factura de cliente VFacturaCliente
 	 */
 	public ControladorFacturaCliente(VFacturaCliente vFactura) {
 		u=new Utilidades();
@@ -41,7 +41,7 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 	}
 	
 	/**
-	 * Cuando se va ha cerrar la ventana pregunsa si se desea guardar, en caso afirmativo, si es de una factura existente la modifica, en caso contrario la crea nueva
+	 * Cuando se va ha cerrar la ventana pregunta si se desea guardar, en caso afirmativo, si es de una factura existente la modifica, en caso contrario la crea nueva
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {

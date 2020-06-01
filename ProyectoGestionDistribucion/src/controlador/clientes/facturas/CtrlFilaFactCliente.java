@@ -23,7 +23,7 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener{
 	private NumberFormat formatoeuro;
 	/**
 	 * El constructor recibe la vista de fila de factura de cliente
-	 * @param vFilaFact
+	 * @param vFilaFact vista de fila de factura de cliente VFilaFacturaCliente
 	 */
 	public CtrlFilaFactCliente(VFilaFacturaCliente vFilaFact) {
 		this.vFilaFact=vFilaFact;
@@ -112,7 +112,5 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener{
 			vFilaFact.getvFactura().actualizaTotal();
 			vFilaFact.getvFactura().updateUI();
 		}
-		
 	}
-
 }

@@ -5,15 +5,24 @@ import java.awt.event.ActionListener;
 
 import vista.proveedores.pedidos.VFilaPedidoPendienteProveedor;
 import vista.proveedores.pedidos.VPedidoProveedor;
-
+/**
+ * Controla las filas del listado de pedidos de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class ControladorFilaPedidoPendienteProveedor implements ActionListener{
 	private VFilaPedidoPendienteProveedor fila;
 	private VPedidoProveedor pp;
-	
+	/**
+	 * Constructor
+	 * @param fila Vista de la fila del listado de pedidos de proveedor VFilaPedidoPendienteProveedor
+	 */
 	public ControladorFilaPedidoPendienteProveedor(VFilaPedidoPendienteProveedor fila) {
 		this.fila=fila;
 	}
-
+/**
+ * Al pulsar el botón abre la ventana del pedido de proveedor para editarlo
+ */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fila.getbEditar()) {

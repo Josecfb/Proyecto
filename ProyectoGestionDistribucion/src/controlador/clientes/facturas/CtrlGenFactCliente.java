@@ -29,8 +29,8 @@ public class CtrlGenFactCliente implements ActionListener, FocusListener{
 	/**
 	 * El constructor recibe como parámetros la ventana del listado de facturas del cliente y la ventana del asistente
 	 * para generar facturas a partir de albaranes de cliente
-	 * @param vGenFactCliente
-	 * @param vFactsCli
+	 * @param vGenFactCliente Vista de la ventana del asistente para generar facturas vGenFactCliente
+	 * @param vFactsCli Vista de la ventana del listado de facturas del cliente VFacturasClientes
 	 */
 	public CtrlGenFactCliente(VGeneraFacturaCliente vGenFactCliente,VFacturasClientes vFactsCli) {
 		this.vGenFactCliente=vGenFactCliente;

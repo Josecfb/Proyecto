@@ -21,6 +21,7 @@ import entidades.Cliente;
 import entidades.PrecioCliente;
 import modelo.negocio.GestorCliente;
 import modelo.persistencia.DaoProvincia;
+import util.Utilidades;
 import vista.clientes.VFichaCliente;
 import vista.clientes.VFilaPrecioCliente;
 /**
@@ -32,16 +33,18 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	private VFichaCliente fichaCliente;
 	private GestorCliente gc;
 	private List<PrecioCliente> filasPrecio;
+	private Utilidades u;
 	/**
-	 * Recive la vista de la ficha del cliente
-	 * @param fichaCliente
+	 * Recibe la vista de la ficha del cliente
+	 * @param fichaCliente vista de la ficha de cliente
 	 */
 	public ControladorFichaCliente(VFichaCliente fichaCliente) {
 		this.fichaCliente=fichaCliente;
 		gc=new GestorCliente();
+		u=new Utilidades();
 	}
 	/**
-	 * Al cerrar la ficha del cliente
+	 * Al cerrar la ficha del cliente, Si la ficha era de un cliente existente lo modifica y si era sin cliente lo crea nuevo en la base de datos
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
@@ -74,7 +77,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		}
 	}
 	/**
-	 * modifica cliente existente
+	 * Modifica cliente existente
 	 */
 	private void modificaCliente() {
 		Cliente cliModif=new Cliente();
@@ -89,7 +92,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			muestraErrores(ok);	
 	}
 	/**
-	 * dependiendo de los valores de array ok muestra diferentes errores
+	 * Dependiendo de los valores de array ok muestra diferentes errores
 	 * @param ok
 	 */
 	private void muestraErrores(boolean[] ok) {
@@ -104,7 +107,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	}
 	/**
 	 * Asigna los datos de la ficha al objeto cliModif
-	 * @param cliModif Cliente
+	 * @param cliModif objeto de la clase Cliente
 	 */
 	private void asignaCampos(Cliente cliModif) {
 		if (fichaCliente.getComboTipo().getSelectedItem()!=null)
@@ -154,16 +157,9 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		Articulo arti=(Articulo) vFila.getComboArt().getSelectedItem();
 		filaModif.setClienteBean(cliModif);
 		filaModif.setArticuloBean(arti);
-		filaModif.setPrecio(euroADoble(vFila.gettPrecio().getText()));
+		filaModif.setPrecio(u.euroADoble(vFila.gettPrecio().getText()));
 	}
-	/**
-	 * convierte una cadena con sigo € en un double
-	 * @param cad
-	 * @return
-	 */
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
+
 
 	/**
 	 * Controla que no se excedan las longitudes de los campos
@@ -196,7 +192,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 				e.consume();
 	}
 	/**
-	 * cuando un campo recibe foco cambia el color de fondo y selecciona su contenido
+	 * Cuando un campo recibe foco cambia el color de fondo y selecciona su contenido
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
@@ -209,7 +205,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 			fichaCliente.getComboTipo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
 	/**
-	 * cuando un campo piered foco cambia de color, al salir de tipo de cliente pinta label con nombre y apellidos o nombre comercial y fiscal
+	 * Cuando un campo pierde foco cambia de color, al salir de tipo de cliente pinta label con nombre y apellidos o nombre comercial y fiscal
 	 * al salir de código postal asigna la provincia y la población
 	 */
 	@SuppressWarnings("unlikely-arg-type")
@@ -236,8 +232,8 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		}
 	}
 	/**
-	 * Al pulsar el boton nuefa fila de precio crea una nueva fila para precio especial
-	 * controla la pulsacion del botón de borrar cliente
+	 * Al pulsar el boton nueva fila de precio crea una nueva fila para precio especial
+	 * y controla la pulsacion del botón de borrar cliente
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

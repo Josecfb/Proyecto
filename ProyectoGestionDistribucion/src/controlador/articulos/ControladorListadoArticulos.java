@@ -34,7 +34,7 @@ public class ControladorListadoArticulos implements ActionListener{
 		listado.muestra(filas);
 	}
 	/**
-	 * Al pulsar un botón
+	 * Al pulsar un botón Activa filtro, ejecuta filtro, nuevo artículo, actualizar listado
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -53,7 +53,7 @@ public class ControladorListadoArticulos implements ActionListener{
 		
 	}
 	/**
-	 * activa y desactiva el botón filtro y el cuadro donde se escribe el filtro para nombre de artículo
+	 * Activa y desactiva el botón filtro y el cuadro donde se escribe el filtro para nombre de artículo
 	 */
 	private void muestraFiltros() {
 		if (listado.getbFiltrar().isVisible()) {

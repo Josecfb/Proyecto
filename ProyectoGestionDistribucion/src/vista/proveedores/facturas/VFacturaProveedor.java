@@ -21,6 +21,7 @@ import entidades.FacturaProveedor;
 import entidades.FilaFacturaProveedor;
 import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
+import util.Utilidades;
 
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
@@ -44,6 +45,7 @@ public class VFacturaProveedor extends JInternalFrame {
 	private JTextField tNumFact;
 	private JCheckBox checPagada;
 	private JButton bNuevaFila;
+	private Utilidades u;
 
 
 	public VFacturaProveedor(FacturaProveedor fact,VFacturasProveedores vFactsPro) {
@@ -51,6 +53,7 @@ public class VFacturaProveedor extends JInternalFrame {
 		this.fact=fact;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoentero=NumberFormat.getIntegerInstance();
+		u=new Utilidades();
 		setBounds(100, 100, 759, 519);
 		getContentPane().setLayout(null);
 		setResizable(false);
@@ -267,7 +270,7 @@ public class VFacturaProveedor extends JInternalFrame {
 		double total=0;
 		for (Component fila:filas) {
 			VFilaFacturaProveedor fil=(VFilaFacturaProveedor) fila;
-			total+=(new CtrlFilaFactProve(fil).euroADoble(fil.gettCoste().getText()))*Integer.parseInt(fil.gettUnidades().getText());
+			total+=u.euroADoble(fil.gettCoste().getText())*Integer.parseInt(fil.gettUnidades().getText());
 		}
 		lBase.setText(formatoeuro.format(total));
 		lIva.setText(formatoeuro.format(total*0.1));

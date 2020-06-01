@@ -25,7 +25,7 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 	private Utilidades u; 
 	/**
 	 * El constructor recibe como argumento la vista de la fila de pedido de cliente
-	 * @param vFilaPedido
+	 * @param vFilaPedido vista de la fila de pedido de cliente VFilaPedidoCliente
 	 */
 	public ControladorFilaPedidoCliente(VFilaPedidoCliente vFilaPedido) {
 		this.vFilaPedido=vFilaPedido;

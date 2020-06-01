@@ -33,7 +33,7 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	
 	/**
 	 * 
-	 * @param fichaArticulo
+	 * @param fichaArticulo Ventana de la ficha de artículo
 	 */
 	public ControladorFichaArticulo(VFichaArticulo fichaArticulo) {
 		this.fichaArticulo=fichaArticulo;
@@ -61,7 +61,7 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 				fichaArticulo.dispose();							
 	}
 	/**
-	 * cuando un campo gana foco
+	 * Cuando un campo gana foco cambia de color de fondo y su formato en caso de ser noneda o porcentaje
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
@@ -86,7 +86,7 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 		}
 	}
 	/**
-	 * Cuando un campo pierde el foco
+	 * Cuando un campo pierde el foco cambia de color de fondo y su formato en caso de ser noneda o porcentaje
 	 */
 	@Override
 	public void focusLost(FocusEvent e) {
@@ -153,7 +153,7 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	
 	/**
 	 * dependiendo del valor de cada elemento del array ok muestra mensajes de error
-	 * @param ok
+	 * @param ok array de valores boolean con las banderas de los errores
 	 */
 	private void muestraErrores(boolean[] ok) {
 		if (!ok[0])
@@ -204,7 +204,7 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 		
 	}
 	/**
-	 * Al pulsar sobre el botón borrar
+	 * Al pulsar sobre el botón borrar llama al método borrarArtículo
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

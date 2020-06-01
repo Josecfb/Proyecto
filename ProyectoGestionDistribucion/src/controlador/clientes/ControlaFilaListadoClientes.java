@@ -13,7 +13,10 @@ import vista.clientes.VFilaListadoClientes;
  */
 public class ControlaFilaListadoClientes implements ActionListener{
 	private VFilaListadoClientes filaListadoClientes;
-	
+	/**
+	 * Controla las filas del listado de clientes
+	 * @param filaListadoClientes Vista de la fila de listado de clientes VFilaListadoClientes
+	 */
 	public ControlaFilaListadoClientes(VFilaListadoClientes filaListadoClientes) {
 		this.filaListadoClientes=filaListadoClientes;
 	}

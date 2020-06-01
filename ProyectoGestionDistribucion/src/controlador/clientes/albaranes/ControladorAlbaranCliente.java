@@ -32,8 +32,8 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 	private List<FilasAlbaranCliente> filasAlb;
 	private Utilidades u;
 	/**
-	 * El constructor recibe la ventana del albaran del cliente
-	 * @param vAlbaran
+	 * Controla la ventana de albaran de cliente
+	 * @param vAlbaran Vista de la ventana de albaran de cliente VAlbaranCliente
 	 */
 	public ControladorAlbaranCliente(VAlbaranCliente vAlbaran) {
 		this.vAlbaran=vAlbaran;
@@ -58,7 +58,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 				vAlbaran.dispose();
 	}
 	/**
-	 * Modifica el albaran, en caso de que esté actualizado en almacen y el clienet es minorista, 
+	 * Modifica el albaran, en caso de que esté actualizado en almacen y el cliente es minorista, 
 	 * si no está facturado crea la factura en pdf y se la envia al cliente por email
 	 */
 	private void modificaAlbaran() {
@@ -77,11 +77,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		if (ok==0) {
 			ControladorAlbaranesClientes cac = new ControladorAlbaranesClientes(vAlbaran.getvAlbsCli());
 			cac.listar(vAlbaran.getvAlbsCli());
-			
-			
 		}
-//		//else 
-//			//muestraErrores(ok);		
 	}
 	/**
 	 * Guarda el albaran como nuevo en la base de datos
@@ -97,7 +93,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 	}
 	/**
 	 * Asigna los campos de la cabecera de la  ficha del albaran al objeto albModif
-	 * @param albModif
+	 * @param albModif Objeto entidad albaran de cliente AlbaranCliente
 	 */
 	private void asignaCampos(AlbaranCliente albModif) {
 		albModif.setFecha(vAlbaran.getcFecha().getDate());
@@ -109,7 +105,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 	/**
 	 * Asigna las filas de la ficha del albaran al objeto albModif 
 	 * si se repiten filas con el mismo artículo se suman las cantidades
-	 * @param albModif
+	 * @param albModif Objeto entidad albaran de cliente AlbaranCliente
 	 */
 	private void ponFilas(AlbaranCliente albModif) {
 		FilasAlbaranCliente filaModif;
@@ -130,9 +126,9 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 	}
 	/**
 	 * Asigna los campos de una fila del albaran a la fila de albaran de la entidad albModif
-	 * @param fila
-	 * @param filaModif
-	 * @param albModif
+	 * @param fila Vista de fila de albaran de cliente VFilaAlbaranCliente
+	 * @param filaModif Objeto entidad fila de albaran de cliente FilasAlbaranCliente
+	 * @param albModif Objeto entidad albaran de cliente AlbaranCliente
 	 */
 	private void asignaCamposFila(VFilaAlbaranCliente fila,FilasAlbaranCliente filaModif,AlbaranCliente albModif) {
 		fila.updateUI();
@@ -144,7 +140,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 		filaModif.setPrecio(u.euroADoble(fila.gettPrecio().getText()));
 	}
 	/**
-	 * Asigna las acciones para el botón de nueva fila y la casilla de verificación de actualizar alamacen
+	 * Asigna las acciones para el botón de nueva fila y la casilla de verificación de actualizar almacén
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

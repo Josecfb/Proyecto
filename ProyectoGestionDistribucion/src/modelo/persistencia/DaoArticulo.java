@@ -15,7 +15,7 @@ public class DaoArticulo {
 	
 
 	@SuppressWarnings("unchecked")
-	public List<Articulo> Listado(String filtroNombre){
+	public List<Articulo> listado(String filtroNombre){
 		List<Articulo> lista;
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();

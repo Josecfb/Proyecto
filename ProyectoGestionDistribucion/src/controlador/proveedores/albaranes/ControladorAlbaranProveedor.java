@@ -17,20 +17,33 @@ import entidades.Articulo;
 import entidades.FilaAlbaranProveedor;
 import entidades.Proveedor;
 import modelo.negocio.GestorAlbaranProve;
+import util.Utilidades;
 import vista.proveedores.albaranes.VAlbaranProveedor;
 import vista.proveedores.albaranes.VFilaAlbaranProveedor;
 
-
+/**
+ * controla la ventana del Albaran de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class ControladorAlbaranProveedor implements InternalFrameListener, FocusListener,ActionListener{
 	private GestorAlbaranProve gap;
 	private VAlbaranProveedor vAlbaran;
 	private List<FilaAlbaranProveedor> filasAlb;
-	
+	private Utilidades u;
+	/**
+	 * El constructor recibe como argumento la ventana de albarán de proveedor
+	 * @param vAlbaran Vista de la ventana de albarán de proveedor VAlbaranProveedor
+	 */
 	public ControladorAlbaranProveedor(VAlbaranProveedor vAlbaran) {
 		this.vAlbaran=vAlbaran;
 		gap=new GestorAlbaranProve();
+		u=new Utilidades();
 	}
-	
+	/**
+	 * Al cerrar la ventana confirma si se desea guardar los cambios, en caso afirmativo, lo modifica o lo crea nuevo 
+	 * dependiendo de si se estaba modificando o creando uno nuevo
+	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
@@ -44,7 +57,10 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 			else
 				vAlbaran.dispose();
 	}
-	
+	/**
+	 * Modifica el albaran editado llamando a l método modificaAlbaran del GestorAlbaranProveedor
+	 * y actualiza el listado de albaranes
+	 */
 	private void modificaAlbaran() {
 		AlbaranProveedor albModif=new AlbaranProveedor();
 		albModif.setNum(Integer.valueOf(vAlbaran.gettNumAlb().getText()));
@@ -55,13 +71,11 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 		if (ok==0) {
 			ControladorAlbaranesProveedores cap = new ControladorAlbaranesProveedores(vAlbaran.getvAlbsPro());
 			cap.listar(vAlbaran.getvAlbsPro());
-			
-			
 		}
-//		//else 
-//			//muestraErrores(ok);		
 	}
-	
+	/**
+	 * Crea un nuevo albaran llamando al método nuevoAlbaran del GestorAlbaranProveedor
+	 */
 	private void nuevoAlbaran() {
 		AlbaranProveedor albaranNuevo=new AlbaranProveedor();
 		asignaCampos(albaranNuevo);
@@ -71,14 +85,21 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 		if (ok==0)
 			vAlbaran.dispose();
 	}
-	
+	/**
+	 * Asigna los campos de la cabecera de la ventana del albaran de proveedor al objeto albModif
+	 * @param albModif AlbaranProveedor Objeto entidad Albaran de proveedor AlbaranProveedor
+	 */
 	private void asignaCampos(AlbaranProveedor albModif) {
 		albModif.setFecha(vAlbaran.getcFecha().getDate());
 		albModif.setProveedore((Proveedor) vAlbaran.getComboProveedor().getSelectedItem());
 		albModif.setActualizadoAlmacen(vAlbaran.getChecAlmacen().isSelected());
 		vAlbaran.getPanel().updateUI();	
 	}
-
+	/**
+	 * Asigna los datos de las filas de la ventana del albaran al objeto albModif
+	 * Si hay filas repetidas las suma
+	 * @param albModif
+	 */
 	private void ponFilas(AlbaranProveedor albModif) {
 		FilaAlbaranProveedor filaModif;
 		Component[] componentes=vAlbaran.getPanel().getComponents();
@@ -96,7 +117,12 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 		}
 		albModif.setFilasAlbaranProveedors(filasAlb);
 	}
-	
+	/**
+	 * Asigna los datos de una fila de la ventana albaran proveedor
+	 * @param fila Vista de la fila de albaran de proveedor VFilaAlbaranProveedor
+	 * @param filaModif Objeto entidad de fila de albaran de proveedor FilaAlbaranProveedor
+	 * @param albModif Objeto entidad albarán de proveedor AlbaranProveedor
+	 */
 	private void asignaCamposFila(VFilaAlbaranProveedor fila,FilaAlbaranProveedor filaModif,AlbaranProveedor albModif) {
 		fila.updateUI();
 		fila.getArticulo().requestFocus();
@@ -104,12 +130,10 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 		filaModif.setAlbaranesProveedor(albModif);
 		filaModif.setArticuloBean(arti);
 		filaModif.setCantidad(Integer.parseInt(fila.gettUnidades().getText()));
-		filaModif.setPrecio(euroADoble(fila.gettCoste().getText()));
+		filaModif.setPrecio(u.euroADoble(fila.gettCoste().getText()));
 	}
 	
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
+
 	
 	@Override
 	public void focusGained(FocusEvent arg0) {
@@ -157,7 +181,9 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 		// TODO Auto-generated method stub
 		
 	}
-
+	/** 
+	 * Crea nuevas filas en el albaran al pulsar el botón
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vAlbaran.getbNuevaFila())
@@ -171,8 +197,5 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 			
 			vAlbaran.getChecAlmacen().requestFocus();
 		}
-				
-		
 	}
-	
 }

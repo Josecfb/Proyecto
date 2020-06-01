@@ -21,6 +21,7 @@ import entidades.AlbaranProveedor;
 import entidades.FilaAlbaranProveedor;
 import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
+import util.Utilidades;
 
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
@@ -44,6 +45,7 @@ public class VAlbaranProveedor extends JInternalFrame {
 	private JTextField tNumAlb;
 	private JCheckBox checAlmacen;
 	private JButton bNuevaFila;
+	private Utilidades u;
 
 
 	public VAlbaranProveedor(AlbaranProveedor alb,VAlbaranesProveedores vAlbsPro) {
@@ -51,6 +53,7 @@ public class VAlbaranProveedor extends JInternalFrame {
 		this.alb=alb;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoentero=NumberFormat.getIntegerInstance();
+		u=new Utilidades();
 		setBounds(100, 100, 759, 519);
 		getContentPane().setLayout(null);
 		setResizable(false);
@@ -267,7 +270,7 @@ public class VAlbaranProveedor extends JInternalFrame {
 		double total=0;
 		for (Component fila:filas) {
 			VFilaAlbaranProveedor fil=(VFilaAlbaranProveedor) fila;
-			total+=(new CtrlFilaAlbProve(fil).euroADoble(fil.gettCoste().getText()))*Integer.parseInt(fil.gettUnidades().getText());
+			total+=u.euroADoble(fil.gettCoste().getText())*Integer.parseInt(fil.gettUnidades().getText());
 		}
 		lBase.setText(formatoeuro.format(total));
 		lIva.setText(formatoeuro.format(total*0.1));

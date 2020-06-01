@@ -15,7 +15,7 @@ public class CtrlFilaAlbaranesGenCliente implements ActionListener{
 	private VAlbaranCliente vAlba;
 	/**
 	 *El constructor recibe la vista de fila del listado de albaranes
-	 * @param fila
+	 * @param fila vista de fila del listado de albaranes VFilaAlbaranGeneradoCliente
 	 */
 	public CtrlFilaAlbaranesGenCliente(VFilaAlbaranGeneradoCliente fila) {
 		this.fila=fila;

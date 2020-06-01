@@ -21,17 +21,26 @@ import modelo.negocio.GestorPedidosProve;
 import vista.pdf.PdfPedidoProveedor;
 import vista.proveedores.pedidos.VFilaPedidoProveedor;
 import vista.proveedores.pedidos.VPedidoProveedor;
-
+/**
+ * Controla la ventana de pedido de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class ControladorPedidoProveedor implements InternalFrameListener, FocusListener,ActionListener{
 	private GestorPedidosProve gpp;
 	private VPedidoProveedor vpedidoProveedor;
 	private List<FilaPedidoProveedor> filasmodificadas;
-	
+	/**
+	 * Constructor
+	 * @param pedidoProveedor Vista de la ventana de pedido a proveedor VPedidoProveedor
+	 */
 	public ControladorPedidoProveedor(VPedidoProveedor pedidoProveedor) {
 		this.vpedidoProveedor=pedidoProveedor;
 		gpp=new GestorPedidosProve();
 	}
-	
+	/**
+	 * Cuando se va ha cerrar la ventana pregunta si se desea guardar, en caso afirmativo, si es de un pedido existente la modifica, en caso contrario la uno nuevo
+	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
@@ -45,7 +54,9 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 			else
 				vpedidoProveedor.dispose();
 	}
-	
+	/**
+	 * Modifica pedido existente llamando al método modificarPedido del GestorPedidosProve
+	 */
 	private void modificaPedido() {
 		PedidoProveedor pedModif=new PedidoProveedor();
 		pedModif.setNum(Integer.valueOf(vpedidoProveedor.gettNumpedido().getText()));
@@ -54,15 +65,17 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		int ok=gpp.modificarPedido(pedModif);
 		if (ok==0) 
 			vpedidoProveedor.dispose();
-//		else 
-//			muestraErrores(ok);		
 	}
-
+	/**
+	 * Actualiza la lista de pedidos de proveedor
+	 */
 	private void actualizarListaPedidos() {
 		ControladorPedidosProveedores cpp = new ControladorPedidosProveedores(vpedidoProveedor.getVpedidos());
 		cpp.listar(vpedidoProveedor.getVpedidos());
 	}
-	
+	/**
+	 * Crea un nuevo pedido llamando al método nuevoPedido del GestorPedidosProve
+	 */
 	private void nuevoPedido() {
 		PedidoProveedor pedidoNuevo=new PedidoProveedor();
 		asignaCampos(pedidoNuevo);
@@ -75,7 +88,10 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 			muestraErrores(ok);
 		
 	}
-	
+	/**
+	 * Muestra diferentes errores en función del array de boolean ok
+	 * @param ok Array de boolean
+	 */
 	private void muestraErrores(boolean[] ok) {
 		if (!ok[0])
 			JOptionPane.showMessageDialog(new JFrame(),"Proveedor vacío","error",JOptionPane.ERROR_MESSAGE);
@@ -84,7 +100,10 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		
 	}
 	
-
+	/**
+	 * Asigna los campos de la cabecera del pedido al objeto pedModif
+	 * @param pedModif Objeto entidad PedidoProveedor
+	 */
 	private void asignaCampos(PedidoProveedor pedModif) {
 		pedModif.setFecha(vpedidoProveedor.getcFecha().getDate());
 		pedModif.setProveedore((Proveedor) vpedidoProveedor.getComboProveedor().getSelectedItem());
@@ -95,7 +114,10 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		vpedidoProveedor.getPanel().updateUI();
 		
 	}
-
+	/** Asigna los datos de las filas de la ventana pedido a las filas del pedido del objeto pedModif
+	 * si se repiten filas con el mismo artículo se suman las cantidades
+	 * @param pedModif Objeto PedidoProveedor
+	 */
 	private void ponFilas(PedidoProveedor pedModif) {
 		FilaPedidoProveedor filaModif;
 		Component[] componentes=vpedidoProveedor.getPanel().getComponents();
@@ -114,7 +136,12 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		}
 		pedModif.setFilaPedidoProveedor(filasmodificadas);
 	}
-	
+	/**
+	 * Asigna los datos de una fila del pedido
+	 * @param fila Vista de fila la ventana de pedido VFilaPedidoProveedor
+	 * @param filaModif Objeto entidad FilaPedidoProveedor
+	 * @param pedModif Objeto entidad PedidoProveedor
+	 */
 	private void asignaCamposFila(VFilaPedidoProveedor fila,FilaPedidoProveedor filaModif,PedidoProveedor pedModif) {
 		fila.updateUI();
 		FilasPedidosProveedorPK clave=new FilasPedidosProveedorPK();
@@ -137,7 +164,9 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Cuando el comboBox de proveedor pierde foco asigna el proveedor al pedido
+	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		if (arg0.getSource()==vpedidoProveedor.getComboProveedor().getEditor().getEditorComponent() && vpedidoProveedor.getComboProveedor().getSelectedItem()!=null) {
@@ -186,7 +215,9 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Crea una nueva fila en la ventana del pedido
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vpedidoProveedor.getbNuevaFila())

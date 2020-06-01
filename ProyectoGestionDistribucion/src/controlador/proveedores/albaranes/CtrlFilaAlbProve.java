@@ -10,26 +10,32 @@ import javax.swing.JTextField;
 
 import entidades.Articulo;
 import modelo.negocio.GestorArticulo;
+import util.Utilidades;
 import vista.proveedores.albaranes.VFilaAlbaranProveedor;
-
+/**
+ * Controla los eventos de la fila de albaran de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class CtrlFilaAlbProve implements FocusListener, ActionListener{
 	private VFilaAlbaranProveedor vFilaAlb;
 	private NumberFormat formatoeuro;
-	
+	private Utilidades u;
+	/**
+	 * Constructor recibe la vista de la fila del albaran de proveedor
+	 * @param vFilaAlb vista de la fila del albaran de proveedor VFilaAlbaranProveedor
+	 */
 	public CtrlFilaAlbProve(VFilaAlbaranProveedor vFilaAlb) {
 		this.vFilaAlb=vFilaAlb;
 		formatoeuro = NumberFormat.getCurrencyInstance();
+		u=new Utilidades();
 	}
 	
-
+	/**
+	 * Cuando los campos reciben foco cambian de color
+	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource()==vFilaAlb.getArticulo().getEditor().getEditorComponent()) {
-			if (vFilaAlb.getArticulo().getSelectedItem()==null) {
-
-			}
-			
-		}
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
 			campo.selectAll();
@@ -38,7 +44,11 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener{
 		if (e.getSource()==vFilaAlb.getArticulo().getEditor().getEditorComponent())
 			vFilaAlb.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
-
+	/** 
+	 * Cuando el combo de articulo pierde foco rellena los campos precio y codigo de artículo
+	 * cuando el codigo de articulo pierde foco rellena el combo de artículo  
+	 * cuando el campo cajas pierde foco calcula las unidades y el total
+	 */
 	@Override
 	public void focusLost(FocusEvent e) throws NullPointerException, NumberFormatException {
 
@@ -66,7 +76,7 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener{
 			vFilaAlb.updateUI();
 			art=(Articulo) vFilaAlb.getArticulo().getSelectedItem();
 			vFilaAlb.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaAlb.gettCajas().getText())*art.getUnidadesCaja()));
-			vFilaAlb.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaAlb.gettUnidades().getText())*euroADoble(vFilaAlb.gettCoste().getText())));
+			vFilaAlb.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaAlb.gettUnidades().getText())*u.euroADoble(vFilaAlb.gettCoste().getText())));
 			vFilaAlb.gettCajas().setBackground(Color.WHITE);
 			vFilaAlb.getvAlbaran().actualizaTotal();
 			return;
@@ -77,21 +87,9 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener{
 		}
 	}
 	
-	
-	public Double euroADoble(String cad) {
-		return Double.valueOf(cad.split(" ")[0].split(",")[0]+"."+cad.split(" ")[0].split(",")[1]);
-	}
-	
-	public String focoEuro(String cad) {
-		return cad.split(" ")[0];
-	}
-	
-	public String noFocoEuro(String cad) {
-		if (!cad.contains(",")) cad+=",00";
-		return cad+" €";
-	}
-
-
+	/**
+	 * Al pulsar el botón borra la fila del albarán
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vFilaAlb.getbBorrar()) {

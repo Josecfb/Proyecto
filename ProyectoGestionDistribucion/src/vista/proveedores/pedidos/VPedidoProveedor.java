@@ -25,6 +25,7 @@ import entidades.FilaPedidoProveedor;
 import entidades.PedidoProveedor;
 import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
+import util.Utilidades;
 
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
@@ -48,11 +49,13 @@ public class VPedidoProveedor extends JInternalFrame {
 	private JTextField tNumpedido;
 	private JCheckBox checConfirmado, checEnviado;
 	private JButton bNuevaFila;
+	private Utilidades u;
 
 
 	public VPedidoProveedor(PedidoProveedor ped,VPedidosProveedores vpedidos) {
 		this.vpedidos=vpedidos;
 		this.ped=ped;
+		u=new Utilidades();
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoentero=NumberFormat.getIntegerInstance();
 		contrPedPro=new ControladorPedidoProveedor(this);
@@ -213,7 +216,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		panel.setBorder(null);
 		scrollPendientes.setViewportView(panel);
 		double total=0;
-		ControladorFilaPedidoProveedor cfpp =new ControladorFilaPedidoProveedor(filaPed);
+		new ControladorFilaPedidoProveedor(filaPed);
 		for (FilaPedidoProveedor fil:filas) {
 			filaPed=new VFilaPedidoProveedor(this,fil);
 			ControladorFilaPedidoProveedor controla=new ControladorFilaPedidoProveedor(filaPed);
@@ -226,7 +229,7 @@ public class VPedidoProveedor extends JInternalFrame {
 			filaPed.gettCoste().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
 			filaPed.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
 			panel.add(filaPed);
-			total+=cfpp.euroADoble(filaPed.gettCoste().getText())*Integer.parseInt(filaPed.gettUnidades().getText());
+			total+=u.euroADoble(filaPed.gettCoste().getText())*Integer.parseInt(filaPed.gettUnidades().getText());
 			filaPed.updateUI();
 		}
 		
@@ -239,7 +242,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		double total=0;
 		for (Component fila:filas) {
 			VFilaPedidoProveedor fil=(VFilaPedidoProveedor) fila;
-			total+=(new ControladorFilaPedidoProveedor(fil).euroADoble(fil.gettCoste().getText()))*Integer.parseInt(fil.gettUnidades().getText());
+			total+=u.euroADoble(fil.gettCoste().getText())*Integer.parseInt(fil.gettUnidades().getText());
 		}
 		lTotal.setText(formatoeuro.format(total));
 	}

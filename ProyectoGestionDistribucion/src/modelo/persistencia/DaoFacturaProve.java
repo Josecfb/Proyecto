@@ -8,10 +8,18 @@ import javax.persistence.EntityManager;
 import entidades.Articulo;
 import entidades.FacturaProveedor;
 import entidades.FilaFacturaProveedor;
-
+/**
+ * Gentiona la persistencia de las facturas de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class DaoFacturaProve {
 	private EntityManager em;
-
+	/**
+	 * Persiste una nueva factura de proveedor
+	 * @param fact Objeto FacturaProveedor
+	 * @return -1 error 0 correcto
+	 */
 	public int nuevaFactura(FacturaProveedor fact) {
 		abrir();
 		if (em==null) return -1;
@@ -21,12 +29,18 @@ public class DaoFacturaProve {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Abre la conexión
+	 */
 	private void abrir() {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
 	}
-	
+	/**
+	 * genera las filas de una factura a partir de los albaranes 
+	 * @param fact Objeto FacturaProveedor
+	 * @return List de FacturasProveedor
+	 */
 	@SuppressWarnings("unchecked")
 	public List<FilaFacturaProveedor> generaFilas(FacturaProveedor fact){
 		List<FilaFacturaProveedor> filasFact=new ArrayList<FilaFacturaProveedor>();
@@ -46,7 +60,11 @@ public class DaoFacturaProve {
 		}
 		return filasFact;
 	}
-	
+	/**
+	 * Modifica una factura generada
+	 * @param fact Objeto FacturaProveedor
+	 * @return -1 error 0 correcto
+	 */
 	public int modificaFacturaGenerada(FacturaProveedor fact) {
 		abrir();
 		if (em==null) return -1;
@@ -60,7 +78,11 @@ public class DaoFacturaProve {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Modifica una factura existente
+	 * @param fact Objeto FacturaProveedor
+	 * @return -1 error 0 correcto
+	 */
 	public int modificaFactura(FacturaProveedor fact) {
 		abrir();
 		if (em==null) return -1;
@@ -77,7 +99,10 @@ public class DaoFacturaProve {
 		System.gc();
 		return 0;
 	}
-	
+	/**
+	 * Obtiene el listado de las facturas de Proveedor
+	 * @return List de FacturaProveedor
+	 */
 	@SuppressWarnings("unchecked")
 	public List<FacturaProveedor> listarFacturas(){
 		abrir();

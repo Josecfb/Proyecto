@@ -20,7 +20,11 @@ import modelo.negocio.GestorProveedor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
+/**
+ * Vista de la ventana de la ficha de un artículo
+ * @author Jose Carlos
+ *
+ */
 public class VFichaArticulo extends JInternalFrame {
 
 	private static final long serialVersionUID = 3871990475316407616L;
@@ -43,7 +47,11 @@ public class VFichaArticulo extends JInternalFrame {
 	private JLabel lFoto;
 	private JPanel panel;
 	private JTextField tReservados;
-
+	/**
+	 * El constructor recibe el objeto Articulo y VListadoArticulos
+	 * @param art Objeto Articulo
+	 * @param vla Vista de la ventana VListadoArticulos
+	 */
 	public VFichaArticulo(Articulo art,VListadoArticulos vla) {
 		this.art=art;
 		this.vla=vla;
@@ -260,7 +268,10 @@ public class VFichaArticulo extends JInternalFrame {
 		if (art!=null)
 			llenaFicha(art);
 	}
-	
+	/**
+	 * Rellena los campos de la ficha de artículo
+	 * @param art Objeto Articulo
+	 */
 	private void llenaFicha(Articulo art) {
 		tCodigo.setText(String.valueOf(art.getCod()));
 		tNombre.setText(art.getNombre());
@@ -277,7 +288,10 @@ public class VFichaArticulo extends JInternalFrame {
 		tReservados.setText(String.valueOf(art.getReservados()));
 		lFoto.setIcon(new ImageIcon(new ImageIcon("src/fotos/"+String.valueOf(art.getCod())+".jpg").getImage().getScaledInstance(603, 274, Image.SCALE_DEFAULT)));
 	}
-	
+	/**
+	 * Establece el controlador de la ventana dela ficha de artículo
+	 * @param manejador Objeto ControladorFichaArticulo
+	 */
 	@SuppressWarnings("rawtypes")
 	public void EstablecerManejadorVentana(ControladorFichaArticulo manejador) {
 		this.addInternalFrameListener(manejador);

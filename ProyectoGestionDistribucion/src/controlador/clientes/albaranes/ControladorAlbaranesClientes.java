@@ -32,7 +32,7 @@ public class ControladorAlbaranesClientes implements ActionListener{
 		List<AlbaranCliente> filas;
 		GestorAlbaranCliente gac=new GestorAlbaranCliente();
 		filas=gac.listarAlbaranes();
-		vAlbaranes.muestraPendientes(filas);
+		vAlbaranes.muestraAlbaranes(filas);
 	}
 	/**
 	 * Cuando se pulsa sobre el botón bNuevoGenerado se abre la ventana del asistente para generar albarán de cliente

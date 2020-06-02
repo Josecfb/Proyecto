@@ -4,12 +4,20 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import entidades.Proveedor;
-
+/**
+ * Gestiona la persistencia de los proveedores
+ * @author Jose Carlos
+ *
+ */
 public class DaoProveedor {
 	private EntityManager em;
-
+	/**
+	 * Obtiene la lista de los proveedores
+	 * @param filtroNombre Actua como filtro para el nombre 
+	 * @return List de Proveedor
+	 */
 	@SuppressWarnings("unchecked")
-	public List<Proveedor> Listado(String filtroNombre){
+	public List<Proveedor> listar(String filtroNombre){
 		List<Proveedor> lista;
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
@@ -25,6 +33,11 @@ public class DaoProveedor {
 			return lista;
 		}
 	}
+	/**
+	 * Retorna un proveedor si existe en la base de datos
+	 * @param num Número de proveedor
+	 * @return Objeto Proveedor
+	 */
 	public Proveedor existe(int num) {
 		Proveedor pro;
 		AbreCierra ab=new AbreCierra();
@@ -35,7 +48,11 @@ public class DaoProveedor {
 			pro=em.find(Proveedor.class, num);
 		return pro;
 	}
-	
+	/**
+	 * Modifica un proveedor existente
+	 * @param pro Objeto Proveedor
+	 * @return -1 error 0 correcto
+	 */
 	public int modificar(Proveedor pro) {
 		Proveedor antiguo=existe(pro.getNumero());
 		em.getTransaction().begin();
@@ -56,7 +73,11 @@ public class DaoProveedor {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Persiste un nuevo proveedor
+	 * @param pro Objeto Proveedor
+	 * @return -1 error 0 correcto
+	 */
 	public int nuevo(Proveedor pro) {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
@@ -67,7 +88,10 @@ public class DaoProveedor {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Elimina un proveedor de la base de datos
+	 * @param pro Objeto Proveedor
+	 */
 	public void borrarProveedor(Proveedor pro) {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();

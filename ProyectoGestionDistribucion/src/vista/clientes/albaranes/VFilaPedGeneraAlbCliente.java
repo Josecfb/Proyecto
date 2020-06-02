@@ -4,13 +4,19 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JCheckBox;
-
+/**
+ * vista de las filas de pedidos de cliente que generan un albaran de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VFilaPedGeneraAlbCliente extends JPanel {
 
 	private static final long serialVersionUID = -1711496554895544388L;
 	private JLabel lNum,lFecha;
 	private JCheckBox checMarca;
-	
+	/**
+	 * constructor
+	 */
 	public VFilaPedGeneraAlbCliente() {
 		setLayout(null);
 		

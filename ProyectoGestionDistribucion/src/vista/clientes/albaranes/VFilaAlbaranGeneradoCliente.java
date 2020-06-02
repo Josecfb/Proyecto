@@ -10,7 +10,11 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
-
+/**
+ * Vista de la s filas del listado de albaranes
+ * @author Jose Carlos
+ *
+ */
 public class VFilaAlbaranGeneradoCliente extends JPanel {
 
 	private static final long serialVersionUID = 4665261804339480581L;
@@ -19,7 +23,11 @@ public class VFilaAlbaranGeneradoCliente extends JPanel {
 	private AlbaranCliente alb;
 	private VAlbaranesClientes vAlbaranes;
 
-
+	/**
+	 * El constructor recibe el objeto AlbaranCliente y la ventana de listado de albaranes de cliente
+	 * @param alb Objeto AlbaranCliente
+	 * @param vAlbaranes ventana de listado de albaranes de cliente VAlbaranesClientes
+	 */
 	public VFilaAlbaranGeneradoCliente(AlbaranCliente alb,VAlbaranesClientes vAlbaranes) {
 		setBackground(Color.WHITE);
 		this.vAlbaranes=vAlbaranes;
@@ -46,7 +54,10 @@ public class VFilaAlbaranGeneradoCliente extends JPanel {
 		lNum.setBounds(10, 5, 48, 20);
 		add(lNum);
 	}
-	
+	/**
+	 * Establece el controlador para las filas del listado de albaranes de cliente
+	 * @param controlador
+	 */
 	public void establecerControlador(CtrlFilaAlbaranesGenCliente controlador) {
 		bEditar.addActionListener(controlador);
 	}

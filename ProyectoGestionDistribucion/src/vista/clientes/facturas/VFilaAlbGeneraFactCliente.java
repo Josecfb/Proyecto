@@ -4,13 +4,19 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JCheckBox;
-
+/**
+ * Vista de la fila del listado de albaranes que generan la factura del cliente
+ * @author Jose Carlos
+ *
+ */
 public class VFilaAlbGeneraFactCliente extends JPanel {
 
 	private static final long serialVersionUID = -1711496554895544388L;
 	private JLabel lNum,lFecha;
 	private JCheckBox checMarca;
-	
+	/**
+	 * El constructor
+	 */
 	public VFilaAlbGeneraFactCliente() {
 		setLayout(null);
 		

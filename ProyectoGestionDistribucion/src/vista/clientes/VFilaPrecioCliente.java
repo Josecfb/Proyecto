@@ -14,7 +14,11 @@ import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
+/**
+ * Vista de la fila de precio especial para cliente
+ * @author Jose Carlos
+ *
+ */
 public class VFilaPrecioCliente extends JPanel {
 	private static final long serialVersionUID = 1396732755308443918L;
 	private Cliente cli;
@@ -25,7 +29,11 @@ public class VFilaPrecioCliente extends JPanel {
 	private JLabel lPrecioReal;
 	private JComboBox<Articulo> comboArt;
 	private JButton bBorrar;
-
+	/**
+	 * El controlador recibe la ventana de ficha de cliente y el objeto Cliente
+	 * @param vFicha Ventana de ficha de cliente VFichaCliente
+	 * @param cli Objeto Cliente
+	 */
 	public VFilaPrecioCliente(VFichaCliente vFicha,Cliente cli) {
 		this.vFicha=vFicha;
 		this.cli=cli;
@@ -75,7 +83,10 @@ public class VFilaPrecioCliente extends JPanel {
 		add(lPrecioReal);
 
 	}
-	
+	/**
+	 * Establece el controlador de la vista de fila de precio especial de cliente
+	 * @param controlador ControlaFilaPrecioCli
+	 */
 	public void establecerControlador(ControlaFilaPrecioCli controlador) {
 		bBorrar.addActionListener(controlador);
 		Component[] componentes=getComponents();

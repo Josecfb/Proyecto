@@ -41,6 +41,11 @@ public class Utilidades {
 	public Double porcentajeADoble(String cad) {
 		return Double.valueOf(cad.split("%")[0])/100;
 	}
+	/**
+	 * Quita el signo de %
+	 * @param cad cadena co signo %
+	 * @return cadena sin %
+	 */
 	public String focoPorcentaje(String cad) {
 		return cad.split("%")[0];
 	}

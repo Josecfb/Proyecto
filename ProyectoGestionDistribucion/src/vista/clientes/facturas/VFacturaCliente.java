@@ -26,7 +26,11 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-
+/**
+ * Vista de la ventana de la factura de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VFacturaCliente extends JInternalFrame {
 
 	private static final long serialVersionUID = 4339097703466328107L;
@@ -44,7 +48,11 @@ public class VFacturaCliente extends JInternalFrame {
 	private JButton bNuevaFila;
 	private Utilidades u;
 
-
+	/**
+	 * El constructor recibe el objeto entidad FacturaCliente y la ventana del listado de facturas de cliente
+	 * @param fact Objeto FacturaCliente
+	 * @param vFactsCli ventana listado de facturas VFacturasClientes
+	 */
 	public VFacturaCliente(FacturaCliente fact,VFacturasClientes vFactsCli) {
 		this.vFactsCli=vFactsCli;
 		this.fact=fact;
@@ -193,7 +201,9 @@ public class VFacturaCliente extends JInternalFrame {
 			llenaFicha();
 		
 	}
-
+	/**
+	 * Crea una nueva fila en la ventana de factura de cliente
+	 */
 	public void nuevaFila() {
 		FilaFacturaCliente fil = new FilaFacturaCliente();
 		fil.setFacturasCliente(fact);
@@ -205,7 +215,9 @@ public class VFacturaCliente extends JInternalFrame {
 		panel.add(vFilaFact);
 		panel.updateUI();
 	}
-	
+	/**
+	 * Rellena los datos de la cabecera de la factura
+	 */
 	public void llenaFicha() {
 		tNumFact.setText(String.valueOf(fact.getNum()));
 		comboCliente.setSelectedItem(fact.getCliente());
@@ -217,7 +229,10 @@ public class VFacturaCliente extends JInternalFrame {
 		}
 
 	}
-	
+	/**
+	 * Rellena las filas de la factura de cliente
+	 * @param factura Objeto FacturaCliente
+	 */
 	public void muestraFilas(FacturaCliente factura) {
 		
 		List<FilaFacturaCliente> filas=fact.getFilasFacturasClientes();
@@ -250,7 +265,9 @@ public class VFacturaCliente extends JInternalFrame {
 		}
 		actualizaTotal();
 	}
-	
+	/**
+	 * Actualiza el total de la factura
+	 */
 	public void actualizaTotal() {
 
 		Component[] filas=panel.getComponents();
@@ -263,7 +280,10 @@ public class VFacturaCliente extends JInternalFrame {
 		lIva.setText(formatoeuro.format(total*0.1));
 		lTotal.setText(formatoeuro.format(total*1.1));
 	}
-	
+	/**
+	 * Establece el controlador de la ventana de la factura de cliente 
+	 * @param controlador ControladorFacturaCliente
+	 */
 	public void establecerControlador(ControladorFacturaCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);

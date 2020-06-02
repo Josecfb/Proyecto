@@ -108,7 +108,8 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		pedModif.setFecha(vpedidoProveedor.getcFecha().getDate());
 		pedModif.setProveedore((Proveedor) vpedidoProveedor.getComboProveedor().getSelectedItem());
 		pedModif.setConfirmado(vpedidoProveedor.getChecConfirmado().isSelected());
-		pedModif.setEnviado(vpedidoProveedor.getChecEnviado().isSelected());	
+		pedModif.setEnviado(vpedidoProveedor.getChecEnviado().isSelected());
+		ponFilas(pedModif);
 		if (pedModif.getEnviado() && !pedModif.getConfirmado())
 			new PdfPedidoProveedor(pedModif);
 		vpedidoProveedor.getPanel().updateUI();

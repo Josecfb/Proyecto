@@ -16,7 +16,11 @@ import entidades.Cliente;
 import entidades.FacturaCliente;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Ventana del listado de facturas de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VFacturasClientes extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
@@ -25,7 +29,10 @@ public class VFacturasClientes extends JInternalFrame {
 	private JPanel panelGeneradas;
 	private JScrollPane scrollPane;
 	private VFilaFacturasCliente vFilaFact;
-
+/**
+ * El constructor recibe la ventana principal
+ * @param v VentanaPrincipal
+ */
 	public VFacturasClientes(VentanaPrincipal v) {
 		this.v=v;
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -49,7 +56,10 @@ public class VFacturasClientes extends JInternalFrame {
 		setIconifiable(true);
 		setTitle("Facturas Clientes");
 	}
-	
+	/**
+	 * Muestra la lista de facturas
+	 * @param lista List de FacturaCliente
+	 */
 	public void muestraPendientes(List<FacturaCliente> lista) {
 		panelGeneradas = new JPanel();
 		panelGeneradas.setPreferredSize(new Dimension(650,lista.size()*30));
@@ -70,7 +80,10 @@ public class VFacturasClientes extends JInternalFrame {
 			panelGeneradas.add(vFilaFact);
 		}
 	}
-	
+	/**
+	 * Establece el controlador para la ventana del listado de facturas de cliente
+	 * @param cfp ControladorFacturasClientes
+	 */ 
 	public void establecerManejador(ControladorFacturasClientes cfp) {
 		bNueva.addActionListener(cfp);
 	}

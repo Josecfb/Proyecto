@@ -6,14 +6,21 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
+/**
+ * Vista de las filas del listado de clientes
+ * @author Jose Carlos
+ *
+ */
 public class VFilaListadoClientes extends JPanel {
 
 	private static final long serialVersionUID = 4813844448451936303L;
 	private JLabel numero, nif, nombreComercial, nombreFiscal,codPost, poblacion, provincia, fijo, movil;
 	private JButton bEditar;
 	private VListadoClientes v;
-
+	/**
+	 * El constructor recibe la ventana de listado de clientes
+	 * @param v ventana de listado de clientes VListadoClientes
+	 */
 	public VFilaListadoClientes(VListadoClientes v) {
 		this.v=v;
 		setLayout(null);
@@ -22,7 +29,9 @@ public class VFilaListadoClientes extends JPanel {
 		inicializar();
 		setVisible(true);
 	}
-	
+	/**
+	 * Inicializa la vista de la fila del listado de clientes
+	 */
 	private void inicializar() {
 		numero=new JLabel("Número");
 		nif=new JLabel("Nif");
@@ -56,7 +65,10 @@ public class VFilaListadoClientes extends JPanel {
 		bEditar.setIcon(new ImageIcon("src/img/pen.png"));
 		add(bEditar);
 	}
-	
+	/**
+	 * Establece el controlador para la fila 
+	 * @param controlador ControlaFilaListadoClientes
+	 */
 	public void establecerControlador(ControlaFilaListadoClientes controlador) {
 		bEditar.addActionListener(controlador);
 	}

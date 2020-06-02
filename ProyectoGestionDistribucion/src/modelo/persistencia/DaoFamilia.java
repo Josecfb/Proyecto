@@ -5,11 +5,19 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import entidades.Familia;
-
+/**
+ * Gestina la persistencia de las familias de artículos
+ * @author Jose Carlos
+ *
+ */
 public class DaoFamilia {
 private EntityManager em;
 	
-
+	/**
+	 * Obtiene la lista de familias de articulos
+	 * @param filtroNombre Cadena de filto para nombre de familia
+	 * @return List de Familia
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Familia> listado(String filtroNombre){
 		List<Familia> lista;

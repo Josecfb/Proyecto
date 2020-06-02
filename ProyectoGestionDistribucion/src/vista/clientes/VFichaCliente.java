@@ -28,7 +28,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Vista de la ventana de la ficha de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VFichaCliente extends JInternalFrame {
 	private static final long serialVersionUID = 7007272565978130446L;
 	private Cliente cli;
@@ -52,7 +56,11 @@ public class VFichaCliente extends JInternalFrame {
 	private JButton bNuevaFila, bBorrar;
 	private JPanel panel;
 	private  NumberFormat formatoeuro,formatoPorcentaje;
-
+	/**
+	 * El constructor recibe el Objeto Cliente y la ventana de listado de clientes
+	 * @param cli Objeto Cliente
+	 * @param vlc Ventana listado de clientes VListadoClientes
+	 */
 	public VFichaCliente(Cliente cli,VListadoClientes vlc) {
 		this.cli=cli;
 		this.vlc=vlc;
@@ -292,7 +300,10 @@ public class VFichaCliente extends JInternalFrame {
 			muestraFilasPrecios();
 		}
 	}
-	
+	/**
+	 * Rellena la ficha de cliente con los datos de un cliente
+	 * @param cli Objeto Cliente
+	 */
 	private void llenaFicha(Cliente cli) {
 		tNumero.setText(String.valueOf(cli.getNumero()));
 		if (cli.getTipo()==1) 
@@ -319,7 +330,9 @@ public class VFichaCliente extends JInternalFrame {
 			tPoblacion.addItem(poblacion);
 		tPoblacion.setSelectedItem(cli.getPoblacion());
 	}
-	
+	/**
+	 * Rellena las filas con los precios especiales para el cliente
+	 */
 	private void muestraFilasPrecios() {
 		List<PrecioCliente> lPrecios=cli.getPreciosClientes();
 		panel = new JPanel();
@@ -342,7 +355,10 @@ public class VFichaCliente extends JInternalFrame {
 			panel.add(vFila);
 		}
 	}
-	
+	/**
+	 * Establece el controlador de la ventana de cliente
+	 * @param cfc ControladorFichaCliente
+	 */
 	@SuppressWarnings("rawtypes")
 	public void establecerManejadorVentana(ControladorFichaCliente cfc) {
 		this.addInternalFrameListener(cfc);
@@ -360,7 +376,9 @@ public class VFichaCliente extends JInternalFrame {
 		bBorrar.addActionListener(cfc);
 		comboTipo.getEditor().getEditorComponent().addFocusListener(cfc);
 	}
-	
+	/**
+	 * Crea una nueva fila para precio de cliente
+	 */
 	public void nuevaFilaPrecio() {
 		PrecioCliente fil = new PrecioCliente();
 		fil.setClienteBean(cli);

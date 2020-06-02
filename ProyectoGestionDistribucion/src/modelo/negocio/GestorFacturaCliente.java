@@ -9,13 +9,24 @@ import entidades.FilasAlbaranCliente;
 import entidades.FilaFacturaCliente;
 import modelo.persistencia.DaoFacturaCliente;
 import vista.pdf.PdfFacturaCliente;
-
+/**
+ * Gestor de FacturaCliente
+ * @author Jose Carlos
+ *
+ */
 public class GestorFacturaCliente {
 	DaoFacturaCliente dfc;
+	/**
+	 * El constructor crea un objeto DaoFacturaCliente
+	 */
 	public GestorFacturaCliente() {
 		dfc=new DaoFacturaCliente();
 	}
-	
+	/**
+	 * Genera una factura a partir de un albaran de cliente minorista
+	 * Llama al método nuevaFactura de DaoFacturaCliente
+	 * @param alb Objeto AlbaranCliente
+	 */
 	public void generaFacturaAlbaranMinorista(AlbaranCliente alb) {
 		FacturaCliente fac =new FacturaCliente();
 		fac.setCliente(alb.getClienteBean());
@@ -23,7 +34,6 @@ public class GestorFacturaCliente {
 		fac.setPagada(false);
 		fac.setAlbaranClientes(new ArrayList<AlbaranCliente>());
 		fac.getAlbaranClientes().add(alb);
-		//dfc.nuevaFactura(fac);
 		List<FilaFacturaCliente> filasFacturasClientes=new ArrayList<FilaFacturaCliente>();
 		List<FilasAlbaranCliente> filasA=alb.getFilasAlbaranClientes();
 		for (FilasAlbaranCliente filaAlb:filasA) {
@@ -38,23 +48,42 @@ public class GestorFacturaCliente {
 		dfc.nuevaFactura(fac);
 		new PdfFacturaCliente(fac);
 	}
-	
+	/**
+	 * Llama al método modificaFactura de DaoFacturaCliente
+	 * @param fact Objeto FacturaCliente
+	 * @return entero -1 error 0 correcto
+	 */
 	public int modificaFactura(FacturaCliente fact) {
 		return dfc.modificaFactura(fact);
 	}
-	
+	/**
+	 * Obtiene la lista de facturas llama al método listarFacturas de DaoFacturaCliente
+	 * @return List de FacturaCliente
+	 */
 	public List<FacturaCliente> listarFacturas(){
 		return dfc.listarFacturas();
 	}
-	
+	/**
+	 * Llama al método nuevaFactura de DaoFacturaCliente
+	 * @param fact Objeto Factura
+	 * @return entero -1 error 0 correcto
+	 */
 	public int nuevaFactura(FacturaCliente fact) {
 		return dfc.nuevaFactura(fact);
 	}
-	
+	/**
+	 * Llama al método generaFilas de DaoFacturaCliente
+	 * @param fac Objeto FacturaCliente
+	 * @return List de FilaFacturaCliente
+	 */
 	public List<FilaFacturaCliente> generaFilas(FacturaCliente fac){
 		return dfc.generaFilas(fac);
 	}
-	
+	/**
+	 * Llama al método modificaFacturaGenerada de DaoFacturaCliente
+	 * @param fact Objeto FacturaCliente
+	 * @return entero -1 error 0 correcto
+	 */
 	public int modificaFacturaGenerada(FacturaCliente fact) {
 		return dfc.modificaFacturaGenerada(fact);
 	}

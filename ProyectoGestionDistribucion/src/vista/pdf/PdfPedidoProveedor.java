@@ -60,6 +60,7 @@ public class PdfPedidoProveedor {
 			}
 			List<FilaPedidoProveedor> filas=new ArrayList<FilaPedidoProveedor>();
 			filas=ped.getFilaPedidoProveedor();
+			System.out.println("numero de pedido"+ped.getNum());
 			for (int i=0;i<celda.length;i++) 
 				celda[i].setBackgroundColor(BaseColor.WHITE);
 			celda[0].setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);

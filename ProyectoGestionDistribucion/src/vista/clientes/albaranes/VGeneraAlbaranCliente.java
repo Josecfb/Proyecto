@@ -16,7 +16,11 @@ import entidades.PedidoCliente;
 import modelo.negocio.GestorCliente;
 import vista.VentanaPrincipal;
 import javax.swing.JButton;
-
+/**
+ * ventana del asistente para generar albaranes de cliente a partir de pedidos
+ * @author Jose Carlos
+ *
+ */
 public class VGeneraAlbaranCliente extends JInternalFrame {
 	private static final long serialVersionUID = -8073649338631908268L;
 	private VentanaPrincipal v;
@@ -26,7 +30,10 @@ public class VGeneraAlbaranCliente extends JInternalFrame {
 	private JPanel panelFila;
 	private JScrollPane scrollPane;
 	private VFilaPedGeneraAlbCliente vfila;
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VGeneraAlbaranCliente(VentanaPrincipal v) {
 		this.v=v;
 		setBounds(100, 100, 746, 382);
@@ -81,7 +88,10 @@ public class VGeneraAlbaranCliente extends JInternalFrame {
 		setTitle("Genera Nuevo Albaran Cliente");
 
 	}
-
+	/**
+	 * Muestra los pedidos para generar albarán
+	 * @param listaPed List de PedidoClliente
+	 */
 	public void muestraPedidos(List<PedidoCliente> listaPed) {
 		panelFila=new JPanel();
 		panelFila.setPreferredSize(new Dimension(410,180));
@@ -96,7 +106,10 @@ public class VGeneraAlbaranCliente extends JInternalFrame {
 			panelFila.add(vfila);
 		}
 	}
-	
+	/**
+	 * Establece el controlador para la ventana del asistente para generar albaranes d ecliente
+	 * @param contolador CtrlGenAlbCli
+	 */
 	public void establecerControlador(CtrlGenAlbCli contolador) {
 		comboCliente.getEditor().getEditorComponent().addFocusListener(contolador);
 		bAceptar.addActionListener(contolador);

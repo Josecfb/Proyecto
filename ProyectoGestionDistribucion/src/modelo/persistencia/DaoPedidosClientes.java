@@ -8,10 +8,18 @@ import entidades.Cliente;
 import entidades.FilasPedidosCliente;
 import entidades.FilasPedidosClientePK;
 import entidades.PedidoCliente;
-
+/**
+ * Gestiona la persistencia de los pedidos de cliente
+ * @author Jose Carlos
+ *
+ */
 public class DaoPedidosClientes {
 	private EntityManager em;
-	
+	/**
+	 * Obtiene la lists de los pedidos de un cliente dado
+	 * @param cli Objeto Cliente
+	 * @return Liste de PedidoCliente
+	 */
 	@SuppressWarnings("unchecked")
 	public List<PedidoCliente> listadoPendientes(Cliente cli){
 		List<PedidoCliente> listaPedidos;
@@ -27,7 +35,11 @@ public class DaoPedidosClientes {
 		ab.cerrarConexion();
 		return listaPedidos;
 	}
-	
+	/**
+	 * Obtiene la lista de los pedidos de un cliente que no han sido enviados
+	 * @param cli
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<PedidoCliente> listaNoEnviados(Cliente cli){
 		List<PedidoCliente> lista;
@@ -40,7 +52,11 @@ public class DaoPedidosClientes {
 		ab.cerrarConexion();
 		return lista;
 	}
-	
+	/**
+	 * Obtiene las filas de un pedido de cliente
+	 * @param pedido Objeto PedidoCliente
+	 * @return List de FilasPedidosCliente
+	 */
 	@SuppressWarnings("unchecked")
 	public List<FilasPedidosCliente> listaFilasPedido(PedidoCliente pedido){
 		List<FilasPedidosCliente> lista;
@@ -53,7 +69,12 @@ public class DaoPedidosClientes {
 		ab.cerrarConexion();
 		return lista;
 	}
-	
+	/**
+	 * Obtiene la una fila de PedidoCliente si existe en la base de datos
+	 * @param ped Objeto PedidoCliente
+	 * @param art Objeto Articulo
+	 * @return Objeto FilasPedidosCliente
+	 */
 	public FilasPedidosCliente existeFila(PedidoCliente ped, Articulo art) {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
@@ -67,7 +88,11 @@ public class DaoPedidosClientes {
 		else 
 			return em.find(FilasPedidosCliente.class,fila.getId());
 	}
-	
+	/**
+	 * Retorna un pedido cliente si existe en la base d edatos
+	 * @param num número de pedido
+	 * @return Objeto PedidoCliente
+	 */
 	public PedidoCliente existe(int num) {
 		PedidoCliente ped;
 		AbreCierra ab=new AbreCierra();
@@ -79,11 +104,13 @@ public class DaoPedidosClientes {
 		ab.cerrarConexion();
 		return ped;
 	}
-	
+	/**
+	 * Modifica un pedido de cliente existente
+	 * @param ped Objeto PedidoCliente
+	 * @return -1 error 0 correcto
+	 */
 	public int modificarPedido(PedidoCliente ped) {
 		AbreCierra ab=new AbreCierra();
-		for (FilasPedidosCliente fila:ped.getFilasPedidosClientes())
-			System.out.println("en dao "+fila.getPrecio());
 		PedidoCliente antiguo=existe(ped.getNum());
 		em=ab.abrirConexion();
 		em.getTransaction().begin();
@@ -103,8 +130,8 @@ public class DaoPedidosClientes {
 		return 0;
 	}
 	/**
-	 * 
-	 * @param ped
+	 * Persiste un nuevo pedido de cliente
+	 * @param ped Objeto PedidoCliente
 	 * @return -1 error conexion 0 ok
 	 */
 	public int nuevoPedido(PedidoCliente ped) {

@@ -6,15 +6,25 @@ import javax.persistence.EntityManager;
 import entidades.Articulo;
 import entidades.FacturaCliente;
 import entidades.FilaFacturaCliente;
-
+/**
+ * Gestiona la persistencia de Facturas de cliente
+ * @author Jose Carlos
+ *
+ */
 public class DaoFacturaCliente {
 	private EntityManager em;
-	
+	/**
+	 * Abre la conexión
+	 */
 	private void abrir() {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
 	}
-	
+	/**
+	 * Persiste una factura nueva
+	 * @param fact Objeto FacturaCliente
+	 * @return -1 error 0 correcto
+	 */
 	public int nuevaFactura(FacturaCliente fact) {
 		abrir();
 		if (em==null) return -1;
@@ -24,7 +34,11 @@ public class DaoFacturaCliente {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Modifica una factura existente
+	 * @param fact Objet FacturaCliente
+	 * @return -1 error 0 correcto
+	 */
 	public int modificaFactura(FacturaCliente fact) {
 		abrir();
 		if (em==null) return -1;
@@ -41,16 +55,23 @@ public class DaoFacturaCliente {
 		System.gc();
 		return 0;
 	}
-	
+	/**
+	 * Obtiene la lista de facturas
+	 * @return List de FacturaCliente
+	 */
 	@SuppressWarnings("unchecked")
 	public List<FacturaCliente> listarFacturas(){
 		abrir();
 		if (em==null) return null;
-		List<FacturaCliente> lista=em.createQuery("select fact from FacturaCliente fact order by fact.fecha desc").getResultList();
+		List<FacturaCliente> lista=em.createQuery("select fact from FacturaCliente fact order by fact.fecha desc, fact.num desc").getResultList();
 		em.close();
 		return lista;
 	}
-	
+	/**
+	 * Genera las filas de una factura generada a partir de albaranes de cliente
+	 * @param fact Objeto FacturaCliente
+	 * @return List de FilaFacturaCliente
+	 */
 	@SuppressWarnings("unchecked")
 	public List<FilaFacturaCliente> generaFilas(FacturaCliente fact){
 		List<FilaFacturaCliente> filasFact=new ArrayList<FilaFacturaCliente>();
@@ -70,7 +91,11 @@ public class DaoFacturaCliente {
 		}
 		return filasFact;
 	}
-	
+	/**
+	 * Modifica una factura existente
+	 * @param fact Objeto FacturaCliente
+	 * @return -1 error 0 correcto
+	 */
 	public int modificaFacturaGenerada(FacturaCliente fact) {
 		abrir();
 		if (em==null) return -1;
@@ -78,6 +103,8 @@ public class DaoFacturaCliente {
 		antigua.getFilasFacturasClientes().clear();
 		for (FilaFacturaCliente fila:fact.getFilasFacturasClientes())
 			antigua.getFilasFacturasClientes().add(fila);
+		System.out.println("numero de filas fact "+fact.getFilasFacturasClientes().size());
+		System.out.println("numero de filas antigua "+antigua.getFilasFacturasClientes().size());
 		em.getTransaction().begin();
 		em.merge(antigua);
 		em.getTransaction().commit();

@@ -30,7 +30,11 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-
+/**
+ * Vista de la ventana de albarán de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VAlbaranCliente extends JInternalFrame {
 
 	private static final long serialVersionUID = 4339097703466328107L;
@@ -48,7 +52,11 @@ public class VAlbaranCliente extends JInternalFrame {
 	private JButton bNuevaFila;
 	private Utilidades u;
 
-
+	/**
+	 * El constructor recibe el objeto AlbaranCliente y la ventana del listado de albaranes de clientes
+	 * @param alb Objeto AlbaranCliente
+	 * @param vAlbsCli ventana del listado de albaranes de clientes VAlbaranesClientes
+	 */
 	public VAlbaranCliente(AlbaranCliente alb,VAlbaranesClientes vAlbsCli) {
 		u=new Utilidades();
 		this.vAlbsCli=vAlbsCli;
@@ -202,7 +210,9 @@ public class VAlbaranCliente extends JInternalFrame {
 			llenaFicha();
 		
 	}
-
+	/**
+	 * Crea una nueva fila de albarán de cliente
+	 */
 	public void nuevaFila() {
 		FilasAlbaranCliente fil = new FilasAlbaranCliente();
 		fil.setAlbaranCliente(alb);
@@ -214,7 +224,9 @@ public class VAlbaranCliente extends JInternalFrame {
 		panel.add(vFilaAlb);
 		panel.updateUI();
 	}
-	
+	/**
+	 * Rellena la cabecera del Albarán de cliente
+	 */
 	public void llenaFicha() {
 		tNumAlb.setText(String.valueOf(alb.getNum()));
 		comboCliente.setSelectedItem(alb.getClienteBean());
@@ -227,7 +239,10 @@ public class VAlbaranCliente extends JInternalFrame {
 		}
 
 	}
-	
+	/**
+	 * Muestra las filas del albarán
+	 * @param albaran Objeto AlbaranCliente
+	 */
 	public void muestraFilas(AlbaranCliente albaran) {
 		
 		List<FilasAlbaranCliente> filas=alb.getFilasAlbaranClientes();
@@ -260,7 +275,9 @@ public class VAlbaranCliente extends JInternalFrame {
 		}
 		actualizaTotal();
 	}
-	
+	/**
+	 * Actualiza el total del albarán
+	 */
 	public void actualizaTotal() {
 
 		Component[] filas=panel.getComponents();
@@ -274,11 +291,16 @@ public class VAlbaranCliente extends JInternalFrame {
 		lTotal.setText(formatoeuro.format(total*1.1));
 	}
 
-	
+	/**
+	 * Mensaje de correo de factura enviado
+	 */
 	public void correoFactura() {
 		JOptionPane.showMessageDialog(new JFrame(),"Se ha generado y enviado la factura correspondiente por EMail al cliente","Factura enviadad",JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+	/**
+	 * Establece el controlador para la ventana de albaran de cliente
+	 * @param controlador ControladorAlbaranCliente
+	 */
 	public void establecerControlador(ControladorAlbaranCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);

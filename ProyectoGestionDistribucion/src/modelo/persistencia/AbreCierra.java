@@ -6,13 +6,18 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
+/**
+ * Abre y cierra la conexión con la base de datos
+ * @author Jose Carlos
+ *
+ */
 public class AbreCierra {
 	private EntityManager em;
 	
 	/**
-	 * 
-	 * @return true->conexion abierta false->error al conectar
+	 * Asigna los parámetros de conexión y crea la conexión
+	 * @return em EntityManager 
+	 *
 	 */
 	public EntityManager abrirConexion() {
 		try {

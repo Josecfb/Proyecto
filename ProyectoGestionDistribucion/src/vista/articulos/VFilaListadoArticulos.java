@@ -6,14 +6,21 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
+/**
+ * Controla la vista de las filas de la ventana de listado de artículos
+ * @author Jose Carlos
+ *
+ */
 public class VFilaListadoArticulos extends JPanel {
 
 	private static final long serialVersionUID = 4813844448451936303L;
 	private VListadoArticulos v;
 	private JLabel codigo, cProv, nombre,familia, coste, precioMay, precioMin, stock, stockMin;
 	private JButton bEditar;
-
+	/**
+	 * El constructor recibe la vista de la ventana de listado de artículos 
+	 * @param v Objeto VListadoArticulos
+	 */
 	public VFilaListadoArticulos(VListadoArticulos v) {
 		this.v=v;
 		setLayout(null);
@@ -22,7 +29,9 @@ public class VFilaListadoArticulos extends JPanel {
 		inicializar();
 		setVisible(true);
 	}
-	
+	/**
+	 * Inicializ la fila
+	 */
 	private void inicializar() {
 		codigo=new JLabel();
 		cProv=new JLabel();
@@ -56,7 +65,10 @@ public class VFilaListadoArticulos extends JPanel {
 		bEditar.setIcon(new ImageIcon("src/img/pen.png"));
 		add(bEditar);
 	}
-	
+	/** 
+	 * Establece el controlador de la fila d elistado de artículos
+	 * @param controlador Objeto ControlaFilaListadoArticulos
+	 */
 	public void establecerControlador(ControlaFilaListadoArticulos controlador) {
 		bEditar.addActionListener(controlador);
 	}

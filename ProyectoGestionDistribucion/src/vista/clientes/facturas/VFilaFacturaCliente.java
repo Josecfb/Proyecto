@@ -16,7 +16,11 @@ import modelo.negocio.GestorArticulo;
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.SystemColor;
-
+/**
+ * Vista de la fila de la ventana d factura de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VFilaFacturaCliente extends JPanel {
 
 	private static final long serialVersionUID = -3446443914975183188L;
@@ -29,7 +33,11 @@ public class VFilaFacturaCliente extends JPanel {
 	private PedidoProveedor ped;
 	private VFacturaCliente vFactura;
 	private FilaFacturaCliente fila;
-
+	/**
+	 * El constructor recibe la ventana de factura de cliente y el objeto FilaFacturaCliente
+	 * @param vFactura ventana de factura de cliente
+	 * @param fila objeto FilaFacturaCliente
+	 */
 	public VFilaFacturaCliente(VFacturaCliente vFactura,FilaFacturaCliente fila) {
 		this.fila=fila;
 		this.vFactura=vFactura;
@@ -80,14 +88,19 @@ public class VFilaFacturaCliente extends JPanel {
 		add(bBorrar);
 		setVisible(true);
 	}
-
+	/**
+	 * asigna los items del combobox de articulo
+	 */
 	private void asignaArticulosCombo() {
 		
 		List<Articulo> articulos=new GestorArticulo().listar("");
 			for (Articulo art:articulos)
 				articulo.addItem(art);
 	}
-	
+	/**
+	 * Establece el controlador para la fila de la ventana de factura d ecliente
+	 * @param controla CtrlFilaFactCliente
+	 */
 	public void establecerControlador(CtrlFilaFactCliente controla) {
 		Component[] componentes=getComponents();
 		JTextField jt=null;

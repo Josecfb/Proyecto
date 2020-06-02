@@ -19,7 +19,11 @@ import entidades.Cliente;
 import vista.VentanaPrincipal;
 
 
-
+/**
+ * Vista de la ventana del listado de albaranes de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VAlbaranesClientes extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
@@ -28,7 +32,10 @@ public class VAlbaranesClientes extends JInternalFrame {
 	private VFilaAlbaranGeneradoCliente filaAlb;
 	private VentanaPrincipal v;
 	private JButton bNuevoGenerado;
-
+	/**
+	 * El constructor recibe la vista de la ventana Principal
+	 * @param v VentanaPrincipal
+	 */
 	public VAlbaranesClientes(VentanaPrincipal v) {
 		this.v=v;
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -79,8 +86,11 @@ public class VAlbaranesClientes extends JInternalFrame {
 
 		new ControladorAlbaranesClientes(this);
 	}
-	
-	public void muestraPendientes(List<AlbaranCliente> lista) {
+	/**
+	 * Muestra la lista de albaranes
+	 * @param lista List de AlbaranCliente
+	 */
+	public void muestraAlbaranes(List<AlbaranCliente> lista) {
 		panelGenerados = new JPanel();
 		panelGenerados.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelGenerados.setBackground(Color.WHITE);
@@ -117,7 +127,10 @@ public class VAlbaranesClientes extends JInternalFrame {
 					panelGenerados.add(filaAlb);
 		}
 	}
-	
+	/**
+	 * Establece el controlador de la ventana de listado de albaranes
+	 * @param controlador ControladorAlbaranesClientes
+	 */
 	public void establecerManejador(ControladorAlbaranesClientes controlador) {
 		bNuevoGenerado.addActionListener(controlador);
 	}

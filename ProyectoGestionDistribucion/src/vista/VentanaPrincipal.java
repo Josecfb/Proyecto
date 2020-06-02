@@ -16,7 +16,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
+/**
+ * Vista de la ventana principal
+ * @author Jose Carlos
+ *
+ */
 public class VentanaPrincipal extends JFrame {
 	private static final long serialVersionUID = -2711106703828276308L;
 	/**
@@ -31,7 +35,9 @@ public class VentanaPrincipal extends JFrame {
 	private JButton bClientes;
 	private JButton bProveedores;
 	private JButton bConfiguracion;
-	
+	/**
+	 * Constructor de la ventana principal
+	 */
 	public VentanaPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaPrincipal.class.getResource("/img/icono.png")));
 		setTitle("Destión Distribución");
@@ -43,6 +49,9 @@ public class VentanaPrincipal extends JFrame {
 		this.setVisible(true);
 	
 	}
+	/**
+	 * Inicializa componentes
+	 */
 	private void inicializar() {
 		pintaMenu();
 		panelInterior = new JDesktopPane();
@@ -86,6 +95,9 @@ public class VentanaPrincipal extends JFrame {
 		
 		panelInterior.setVisible(true);
 	}
+	/**
+	 * Crea los menús de la ventana principal
+	 */
 	private void pintaMenu() {
 		barra=new JMenuBar();
 		setJMenuBar(barra);
@@ -107,7 +119,10 @@ public class VentanaPrincipal extends JFrame {
 		menuClientes.add(listarClientes);
 		menuArticulos.add(listarArticulos);
 	}
-		
+	/**
+	 * Establece el controlador ControladorPrincipal de la ventana principal
+	 * @param controlador
+	 */
 	public void establecerControlador(ControladorPrincipal controlador) {
 		listarProveedores.addActionListener(controlador);
 		listarClientes.addActionListener(controlador);

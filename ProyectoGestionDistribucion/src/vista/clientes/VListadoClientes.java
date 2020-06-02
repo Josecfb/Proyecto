@@ -23,7 +23,11 @@ import vista.VentanaPrincipal;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-
+/**
+ * Vista de la ventana de listado de clientes
+ * @author Jose Carlos
+ *
+ */
 public class VListadoClientes extends JInternalFrame {
 
 	private static final long serialVersionUID = -4178570588145846454L;

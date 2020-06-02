@@ -17,7 +17,11 @@ import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Vista de fila de albaran d ecliente
+ * @author Jose Carlos
+ *
+ */
 public class VFilaAlbaranCliente extends JPanel {
 
 	private static final long serialVersionUID = -3446443914975183188L;
@@ -30,7 +34,11 @@ public class VFilaAlbaranCliente extends JPanel {
 	private PedidoProveedor ped;
 	private VAlbaranCliente vAlbaran;
 	private FilasAlbaranCliente fila;
-
+	/**
+	 * El constructor recibe la ventana de albarán de cliente y el objeto FilasAlbaranCliente
+	 * @param vAlbaran Ventana de albarán de cliente
+	 * @param fila FilasAlbaranCliente
+	 */
 	public VFilaAlbaranCliente(VAlbaranCliente vAlbaran,FilasAlbaranCliente fila) {
 		this.fila=fila;
 		this.vAlbaran=vAlbaran;
@@ -81,14 +89,19 @@ public class VFilaAlbaranCliente extends JPanel {
 		add(bBorrar);
 		setVisible(true);
 	}
-
+	/**
+	 * Asigna los item al comboBox de artículo
+	 */
 	private void asignaArticulosCombo() {
 		
 		List<Articulo> articulos=new GestorArticulo().listar("");
 			for (Articulo art:articulos)
 				articulo.addItem(art);
 	}
-	
+	/**
+	 * Establece el controlador para la fila de albarán de cliente
+	 * @param controla CtrlFilaAlbCliente
+	 */
 	public void establecerControlador(CtrlFilaAlbCliente controla) {
 		Component[] componentes=getComponents();
 		JTextField jt=null;

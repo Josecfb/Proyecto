@@ -8,7 +8,11 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
-
+/**
+ * 
+ * @author Jose Carlos
+ *
+ */
 public class VFilaFacturasCliente extends JPanel {
 
 	private static final long serialVersionUID = 4665261804339480581L;

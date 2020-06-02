@@ -8,10 +8,18 @@ import entidades.AlbaranCliente;
 import entidades.Articulo;
 import entidades.Cliente;
 import entidades.FilasAlbaranCliente;
-
+/**
+ * Gestiona la persistencia de los albaranes de cliente
+ * @author Jose Carlos
+ *
+ */
 public class DaoAlbaranCliente {
 	private EntityManager em;
-
+	/**
+	 * Persiste un nuevo albarán de cliente
+	 * @param alb Objeto AlbaranCliente
+	 * @return -1 error 0 correcto
+	 */
 	public int nuevoAlbaran(AlbaranCliente alb) {
 		abrir();
 		if (em==null) return -1;
@@ -21,7 +29,11 @@ public class DaoAlbaranCliente {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Modifica el albarán generado
+	 * @param alb Objeto Albaran
+	 * @return -1 error 0 correcto
+	 */
 	public int modificaAlbaranGenerado(AlbaranCliente alb) {
 		abrir();
 		if (em==null) return -1;
@@ -35,7 +47,11 @@ public class DaoAlbaranCliente {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Modifica un albarán
+	 * @param alb Objeto AlbaranCliente
+	 * @return -1 error 0 correcto
+	 */
 	public int modificaAlbaran(AlbaranCliente alb) {
 		abrir();
 		if (em==null) return -1;
@@ -52,7 +68,11 @@ public class DaoAlbaranCliente {
 		System.gc();
 		return 0;
 	}
-	
+	/**
+	 * Modifica albaran procedente de facturas
+	 * @param alb Objeto Albaran
+	 * @return -1 error 0 correcto
+	 */
 	public int facturaAlbaran(AlbaranCliente alb) {
 		abrir();
 		if (em==null) return -1;
@@ -65,7 +85,10 @@ public class DaoAlbaranCliente {
 		System.gc();
 		return 0;
 	}
-	
+	/**
+	 * Obtiene la lista de todos los albaranes de cliente
+	 * @return List de AlbaranCliente
+	 */
 	@SuppressWarnings("unchecked")
 	public List<AlbaranCliente> listarAlbaranes(){
 		abrir();
@@ -74,12 +97,18 @@ public class DaoAlbaranCliente {
 		em.close();
 		return lista;
 	}
-
+	/**
+	 * Abre la conexión
+	 */
 	private void abrir() {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
 	}
-	
+	/**
+	 * Genera la filas de un albaran a partir de los pedido asociados
+	 * @param alb Objeto Albartan
+	 * @return List de FilasAlbaranCliente
+	 */
 	@SuppressWarnings("unchecked")
 	public List<FilasAlbaranCliente> generaFilas(AlbaranCliente alb){
 		List<FilasAlbaranCliente> filasAlb=new ArrayList<FilasAlbaranCliente>();
@@ -100,7 +129,11 @@ public class DaoAlbaranCliente {
 		}
 		return filasAlb;
 	}
-	
+	/**
+	 * Devuelve la lista de albaranes de un cliente dado
+	 * @param cli Objeto Cliente
+	 * @return List AlbaranCliente
+	 */
 	@SuppressWarnings("unchecked")
 	public List<AlbaranCliente> listaAlbaranesAlmacen(Cliente cli){
 		abrir();
@@ -109,7 +142,11 @@ public class DaoAlbaranCliente {
 		em.close();
 		return lista;
 	}
-	
+	/**
+	 * Re torna el albaran de un número de cliente
+	 * @param num número de cliente
+	 * @return Objeto AlbaranCliente
+	 */
 	public AlbaranCliente existe(int num) {
 		abrir();
 		if (em==null) return null;

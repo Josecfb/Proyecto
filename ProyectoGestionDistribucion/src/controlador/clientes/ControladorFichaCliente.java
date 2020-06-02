@@ -127,6 +127,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		cliModif.setNumCuentaContable(Integer.valueOf(fichaCliente.gettSubcuenta().getText()));
 		cliModif.setPoblacion((String) fichaCliente.gettPoblacion().getSelectedItem());
 		cliModif.setProvincia(fichaCliente.gettProvincia().getText());
+		cliModif.setConfirmado(fichaCliente.getChkConfirmado().isSelected());
 	}
 	/**
 	 * Asigna los precios de articulos especiales encontrados el la ficha del cliente para el cliente

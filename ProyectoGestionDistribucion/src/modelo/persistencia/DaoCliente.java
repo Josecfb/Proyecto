@@ -5,11 +5,19 @@ import javax.persistence.EntityManager;
 
 import entidades.Cliente;
 
-
+/**
+ * Gestiona la persistencia de Cliente
+ * @author Jose Carlos
+ *
+ */
 public class DaoCliente {
 	private EntityManager em;
 	
-	
+	/**
+	 * Retorna el cliente si existe en la base de datos
+	 * @param num número de cliente
+	 * @return Objeto Cliente
+	 */
 	public Cliente existe(int num) {
 		Cliente cli;
 		AbreCierra ab=new AbreCierra();
@@ -20,9 +28,13 @@ public class DaoCliente {
 			cli=em.find(Cliente.class, num);
 		return cli;
 	}
-	
+	/**
+	 * Obtiene la lista de lis clientes
+	 * @param filtroNombre cadena que actua como filtro para el nombre
+	 * @return List de Cliente
+	 */
 	@SuppressWarnings("unchecked")
-	public List<Cliente> Listado(String filtroNombre){
+	public List<Cliente> listado(String filtroNombre){
 		List<Cliente> lista;
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
@@ -37,31 +49,26 @@ public class DaoCliente {
 			return lista;
 		}
 	}
-	
+	/**
+	 * Modifica un cliente existente
+	 * @param cli Objeto Clienete
+	 * @return -1 error 0 correcto
+	 */
 	public int modificar(Cliente cli) {
 		Cliente antiguo=existe(cli.getNumero());
 		em.getTransaction().begin();
 		if (em==null) return -1;
-		antiguo.setNumero(cli.getNumero());
-		antiguo.setTipo(cli.getTipo());
-		antiguo.setNifCif(cli.getNifCif());
-		antiguo.setNombre(cli.getNombre());
-		antiguo.setApellidos(cli.getApellidos());
-		antiguo.setEmail(cli.getEmail());
-		antiguo.setTelefonoFijo(cli.getTelefonoFijo());
-		antiguo.setTelefonoMovil(cli.getTelefonoMovil());
-		antiguo.setDireccion(cli.getDireccion());
-		antiguo.setCodPost(cli.getCodPost());
-		antiguo.setNumCuentaContable(cli.getNumCuentaContable());
-		antiguo.setProvincia(cli.getProvincia());
-		antiguo.setPoblacion(cli.getPoblacion());
-		antiguo.setPreciosClientes(cli.getPreciosClientes());
+		antiguo=cli;
 		em.merge(antiguo);
 		em.getTransaction().commit();
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Persiste un nuevo cliente
+	 * @param cli Objeto Clienete
+	 * @return -1 error 0 correcto
+	 */
 	public int nuevo(Cliente cli) {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();
@@ -72,7 +79,10 @@ public class DaoCliente {
 		em.close();
 		return 0;
 	}
-	
+	/**
+	 * Elimina un cliente de la base de datos
+	 * @param cli Objeto Cliente
+	 */
 	public void borrarCliente(Cliente cli) {
 		AbreCierra ab=new AbreCierra();
 		em=ab.abrirConexion();

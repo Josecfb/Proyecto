@@ -25,7 +25,11 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.JToggleButton;
 
-
+/**
+ * Controlador de la ventana de listado de artículos
+ * @author Jose Carlos
+ *
+ */
 public class VListadoArticulos extends JInternalFrame {
 
 	private static final long serialVersionUID = -4178570588145846454L;
@@ -40,7 +44,10 @@ public class VListadoArticulos extends JInternalFrame {
 	private JToggleButton bFiltros;
 	private JButton bActualizar;
 
-
+	/**
+	 * El constructor recibe la vista de la ventana Principal 
+	 * @param v Objeto VentanaPrincipal
+	 */
 	public VListadoArticulos(VentanaPrincipal v) {
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		this.v=v;
@@ -57,7 +64,9 @@ public class VListadoArticulos extends JInternalFrame {
 		inicializar();
 
 	}
-	
+	/**
+	 * Inicializa la ventana del listado de artículos
+	 */
 	private void inicializar() {
 		Color fondo=new Color(100,100,100);
 		Lcod=new JLabel("C\u00F3digo");
@@ -179,7 +188,10 @@ public class VListadoArticulos extends JInternalFrame {
 
 		
 	}
-	
+	/**
+	 * Muestra las filas con todos los artículos
+	 * @param filas List de Articulo
+	 */
 	public void muestra(List<Articulo> filas) {
 
 		panel = new JPanel();
@@ -211,7 +223,10 @@ public class VListadoArticulos extends JInternalFrame {
 			panel.add(fila);
 		}
 	}
-	
+	/** 
+	 * Establece el controlador de la ventana de listado de artículos 
+	 * @param controlador Objeto ControladorListadoArticulos
+	 */
 	public void establecerControlador(ControladorListadoArticulos controlador) {
 		bFiltrar.addActionListener(controlador);
 		bNuevo.addActionListener(controlador);

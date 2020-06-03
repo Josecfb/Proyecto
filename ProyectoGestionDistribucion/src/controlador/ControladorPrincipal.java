@@ -27,7 +27,7 @@ public class ControladorPrincipal implements ActionListener{
 
 	/**
 	 * El constructor recibe como parámetro la ventana principal
-	 * @param ventanaPrincipal
+	 * @param ventanaPrincipal VentanaPrincipal
 	 */
 	public ControladorPrincipal(VentanaPrincipal ventanaPrincipal) {
 		this.ventanaPrincipal=ventanaPrincipal;

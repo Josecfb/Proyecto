@@ -19,7 +19,11 @@ import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Vista de fila de la ventana albarán de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VFilaAlbaranProveedor extends JPanel {
 
 	private static final long serialVersionUID = -3446443914975183188L;
@@ -33,7 +37,11 @@ public class VFilaAlbaranProveedor extends JPanel {
 	private PedidoProveedor ped;
 	private VAlbaranProveedor vAlbaran;
 	private FilaAlbaranProveedor fila;
-
+	/**
+	 * El constructor recibe el objeto entidad FilaAlbaranProveedor y la ventana de albarán de proveedor VAlbaranProveedor
+	 * @param vAlbaran ventana de albarán de proveedor VAlbaranProveedor
+	 * @param fila objeto entidad FilaAlbaranProveedor
+	 */
 	public VFilaAlbaranProveedor(VAlbaranProveedor vAlbaran,FilaAlbaranProveedor fila) {
 		this.fila=fila;
 		this.vAlbaran=vAlbaran;
@@ -99,7 +107,10 @@ public class VFilaAlbaranProveedor extends JPanel {
 			for (Articulo art:articulos)
 				articulo.addItem(art);
 	}
-	
+	/**
+	 * Establece el controlador para la fila de la ventana de albar´n de proveedor
+	 * @param controla CtrlFilaAlbProve
+	 */
 	public void establecerControlador(CtrlFilaAlbProve controla) {
 		Component[] componentes=getComponents();
 		JTextField jt=null;

@@ -14,13 +14,21 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import entidades.FacturaCliente;
-
+/**
+ * Envia un correo al cliente con la factura
+ * @author Jose Carlos
+ *
+ */
 public class EMailFacturaCliente implements Runnable{
 	private Properties props;
 	private Session session;
 	private String archivo;
 	private FacturaCliente fac;
-	
+	/**
+	 * El constructor recibe el objeto FacturaCliente y la cadena con la dirección y el nombre del pdf de la factura
+	 * @param fac Objeto FacturaCliente
+	 * @param archivo cadena con dirección y el nombre del pdf de la factura
+	 */
 	public EMailFacturaCliente(FacturaCliente fac,String archivo) {
 		this.archivo=archivo;
 		this.fac=fac;
@@ -37,7 +45,9 @@ public class EMailFacturaCliente implements Runnable{
        
 	    
 	}
-
+	/**
+	 * Hilo que envia el correo al cliente con la factura adjunta
+	 */
 	@Override
 	public void run() {
 		BodyPart texto = new MimeBodyPart();
@@ -64,6 +74,11 @@ public class EMailFacturaCliente implements Runnable{
 			}
 		
 	}
+	/**
+	 * Utilidad para no enseñar el password
+	 * @param cadena codificada
+	 * @return cadena descodificada
+	 */
 	public static String decodif(String cadena) {
 		String deco="";
 		for (int i=cadena.length()-1;i>=0;i--)

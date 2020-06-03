@@ -10,8 +10,12 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
-
-public class VFilaAlbaranGeneradoProveedor extends JPanel {
+/**
+ * Vista de la fila de la ventana del listado de albaranes de proveedor
+ * @author Jose Carlos
+ *
+ */
+public class VFilaAlbaranesProveedores extends JPanel {
 
 	private static final long serialVersionUID = 4665261804339480581L;
 	private JLabel lProveedor, lFecha,lNum;
@@ -19,8 +23,12 @@ public class VFilaAlbaranGeneradoProveedor extends JPanel {
 	private AlbaranProveedor alb;
 	private VAlbaranesProveedores vAlbaranes;
 
-
-	public VFilaAlbaranGeneradoProveedor(AlbaranProveedor alb,VAlbaranesProveedores vAlbaranes) {
+	/**
+	 * El constructor recibe el objeto entidad AlbaranProveedor y la ventana del listado de albaranes de proveedor VAlbaranesProveedores
+	 * @param alb objeto entidad AlbaranProveedor
+	 * @param vAlbaranes ventana del listado de albaranes de proveedor VAlbaranesProveedores
+	 */
+	public VFilaAlbaranesProveedores(AlbaranProveedor alb,VAlbaranesProveedores vAlbaranes) {
 		setBackground(Color.WHITE);
 		this.vAlbaranes=vAlbaranes;
 		this.alb=alb;
@@ -46,7 +54,10 @@ public class VFilaAlbaranGeneradoProveedor extends JPanel {
 		lNum.setBounds(10, 5, 48, 20);
 		add(lNum);
 	}
-	
+	/**
+	 * Establece el controlador de la fila del listado de albaranes
+	 * @param controlador CtrlFilaAlbaranesGenProveedor
+	 */
 	public void establecerControlador(CtrlFilaAlbaranesGenProveedor controlador) {
 		bEditar.addActionListener(controlador);
 	}

@@ -17,7 +17,11 @@ import entidades.Proveedor;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Ventana del listado de facturas de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VFacturasProveedores extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
@@ -26,7 +30,10 @@ public class VFacturasProveedores extends JInternalFrame {
 	private JPanel panelGeneradas;
 	private JScrollPane scrollPane;
 	private VFilaFacturasProveedor vFilaFact;
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VFacturasProveedores(VentanaPrincipal v) {
 		this.v=v;
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -50,8 +57,11 @@ public class VFacturasProveedores extends JInternalFrame {
 		setIconifiable(true);
 		setTitle("Facturas Proveedores");
 	}
-	
-	public void muestraPendientes(List<FacturaProveedor> lista) {
+	/**
+	 * Muestra las filas con las factura de la ventana de listado de facturas de proveedor
+	 * @param lista
+	 */
+	public void muestraFacturas(List<FacturaProveedor> lista) {
 		panelGeneradas = new JPanel();
 		panelGeneradas.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelGeneradas.setBackground(Color.WHITE);
@@ -71,7 +81,10 @@ public class VFacturasProveedores extends JInternalFrame {
 			panelGeneradas.add(vFilaFact);
 		}
 	}
-	
+	/**
+	 * Establece el controlador de la ventana del listado de facturas de proveedor
+	 * @param cfp ControladorFacturasProveedores
+	 */
 	public void establecerManejador(ControladorFacturasProveedores cfp) {
 		bNueva.addActionListener(cfp);
 	}

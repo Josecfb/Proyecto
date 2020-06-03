@@ -16,7 +16,11 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import controlador.proveedores.ControladorFichaProveedor;
 import entidades.Proveedor;
-
+/**
+ * Ventana de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VFichaProveedor extends JInternalFrame {
 
 	private static final long serialVersionUID = -4232463625349427321L;
@@ -35,7 +39,11 @@ public class VFichaProveedor extends JInternalFrame {
 	private JTextField tNif;
 	private JPanel panel;
 	private JButton bBorrar;
-
+	/**
+	 * El constructor recibe el objeto entidad Proveedor y la ventana del listado de proveedores VListadoProveedores
+	 * @param pro objeto entidad Proveedor
+	 * @param v ventana del listado de proveedores VListadoProveedores
+	 */
 	public VFichaProveedor(Proveedor pro,VListadoProveedores v) {
 		this.pro=pro;
 		this.v=v;
@@ -204,7 +212,10 @@ public class VFichaProveedor extends JInternalFrame {
 			llenaFicha(pro);
 		
 	}
-	
+	/**
+	 * Rellena los campos de la ventana con los datos del proveedor
+	 * @param pro objeto entidad Proveedor
+	 */
 	public void llenaFicha(Proveedor pro) {
 		tNumero.setText(String.valueOf(pro.getNumero()));
 		tNombre.setText(pro.getNombre());
@@ -222,7 +233,10 @@ public class VFichaProveedor extends JInternalFrame {
 		tSubcuenta.setText(String.valueOf(pro.getNumCuentaContable()));
 		tNif.setText(pro.getNif());
 	}
-	
+	/**
+	 * Establece el controlador de la ventana de ficha de proveedor
+	 * @param manejador ControladorFichaProveedor
+	 */
 	public void EstablecerManejadorVentana(ControladorFichaProveedor manejador) {
 		this.addInternalFrameListener(manejador);
 		tProvincia.addFocusListener(manejador);

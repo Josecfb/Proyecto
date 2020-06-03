@@ -61,7 +61,7 @@ public class GestorAlbaranCliente {
 	}
 	/**
 	 * Llama al método listarAlbaranes de DaoAlbaranCliente
-	 * @return Lista de albaranes List<AlbaranCliente>
+	 * @return Lista de albaranes List de AlbaranCliente
 	 */
 	public List<AlbaranCliente> listarAlbaranes(){
 		return dac.listarAlbaranes();
@@ -78,7 +78,7 @@ public class GestorAlbaranCliente {
 	/**
 	 * Llama al método listaAlbaranesAlmacen dde DaoAlbaranCliente
 	 * @param cli Objeto entidad Cliente
-	 * @return Lista de albaranes de un cliente List<AlbaranCliente>
+	 * @return Lista de albaranes de un cliente List de AlbaranCliente
 	 */
 	public List<AlbaranCliente> listaAlbaranesAlmacen(Cliente cli){
 		return dac.listaAlbaranesAlmacen(cli);

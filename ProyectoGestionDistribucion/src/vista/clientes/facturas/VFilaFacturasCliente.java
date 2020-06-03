@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 /**
- * 
+ * Vista de las filas del listado de facturas de cliente
  * @author Jose Carlos
  *
  */
@@ -20,9 +20,11 @@ public class VFilaFacturasCliente extends JPanel {
 	private JButton bEditar;
 	private FacturaCliente fact;
 	private VFacturasClientes vFacturas;
-
-
-
+	/**
+	 * El constructor recibe el objeto FacturaCliente y la ventana de listado de facturas de cliente
+	 * @param fact Objeto FacturaCliente
+	 * @param vFacturas ventana de listado de facturas de cliente
+	 */
 	public VFilaFacturasCliente(FacturaCliente fact,VFacturasClientes vFacturas) {
 		setBackground(Color.WHITE);
 		this.vFacturas=vFacturas;
@@ -49,7 +51,10 @@ public class VFilaFacturasCliente extends JPanel {
 		lNum.setBounds(10, 5, 48, 20);
 		add(lNum);
 	}
-	
+	/**
+	 * Establece el controlador para la fila del listado de facturas de cliente
+	 * @param controlador CtrlFilaFacturasGenCliente
+	 */
 	public void establecerControlador(CtrlFilaFacturasGenCliente controlador) {
 		bEditar.addActionListener(controlador);
 	}

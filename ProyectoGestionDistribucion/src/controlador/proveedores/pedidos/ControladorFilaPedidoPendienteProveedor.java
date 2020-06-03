@@ -3,7 +3,7 @@ package controlador.proveedores.pedidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vista.proveedores.pedidos.VFilaPedidoPendienteProveedor;
+import vista.proveedores.pedidos.VFilaPedidosProveedor;
 import vista.proveedores.pedidos.VPedidoProveedor;
 /**
  * Controla las filas del listado de pedidos de proveedor
@@ -11,13 +11,13 @@ import vista.proveedores.pedidos.VPedidoProveedor;
  *
  */
 public class ControladorFilaPedidoPendienteProveedor implements ActionListener{
-	private VFilaPedidoPendienteProveedor fila;
+	private VFilaPedidosProveedor fila;
 	private VPedidoProveedor pp;
 	/**
 	 * Constructor
 	 * @param fila Vista de la fila del listado de pedidos de proveedor VFilaPedidoPendienteProveedor
 	 */
-	public ControladorFilaPedidoPendienteProveedor(VFilaPedidoPendienteProveedor fila) {
+	public ControladorFilaPedidoPendienteProveedor(VFilaPedidosProveedor fila) {
 		this.fila=fila;
 	}
 /**

@@ -31,7 +31,7 @@ public class ControladorPedidosProveedores implements ActionListener{
 		List<PedidoProveedor> filas;
 		GestorPedidosProve gpp=new GestorPedidosProve();
 		filas=gpp.listar(null);
-		pedidosProve.muestraPendientes(filas);
+		pedidosProve.muestraPedidos(filas);
 	}
 	/**
 	 * Abre la ventana del asistente para generar pedidos 

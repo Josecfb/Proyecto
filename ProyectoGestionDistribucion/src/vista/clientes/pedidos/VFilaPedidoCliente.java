@@ -17,7 +17,11 @@ import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Vista de la fila de la ventana de pedidos de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VFilaPedidoCliente extends JPanel {
 
 	private static final long serialVersionUID = -3446443914975183188L;
@@ -30,7 +34,11 @@ public class VFilaPedidoCliente extends JPanel {
 	private PedidoProveedor ped;
 	private VPedidoCliente vPedido;
 	private FilasPedidosCliente fila;
-
+	/**
+	 * El constructor recibe la ventana de pedido de cliente y el objeto FilasPedidoCliente
+	 * @param vPedido ventana de pedido de cliente VPedidoCliente
+	 * @param fila objeto FilasPedidoCliente
+	 */
 	public VFilaPedidoCliente(VPedidoCliente vPedido,FilasPedidosCliente fila) {
 		this.fila=fila;
 		this.vPedido=vPedido;
@@ -85,9 +93,10 @@ public class VFilaPedidoCliente extends JPanel {
 		add(bBorrar);
 		setVisible(true);
 	}
-
-
-	
+	/**
+	 * Establece en controlador para la vista de fila de pedido de cliente
+	 * @param controla ControladorFilaPedidoCliente
+	 */
 	public void establecerControlador(ControladorFilaPedidoCliente controla) {
 		Component[] componentes=getComponents();
 		JTextField jt=null;

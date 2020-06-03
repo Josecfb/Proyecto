@@ -125,7 +125,7 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 	/**
 	 * Retorna las filas del pedido del cliente
 	 * @param pedido Objeto entidad pedido de cliente PedidoCliente
-	 * @return lista de filas del pedido de cliente List<FilasPedidosCliente
+	 * @return lista de filas del pedido de cliente List de FilasPedidosCliente
 	 */
 	public List<FilasPedidosCliente> articulosPendientesPedido(PedidoCliente pedido){
 		return gpc.listaFilasPedido(pedido);

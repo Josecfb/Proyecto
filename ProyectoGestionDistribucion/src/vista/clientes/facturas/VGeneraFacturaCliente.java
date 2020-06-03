@@ -16,7 +16,11 @@ import entidades.Cliente;
 import modelo.negocio.GestorCliente;
 import vista.VentanaPrincipal;
 import javax.swing.JButton;
-
+/**
+ * Vista de la ventana del asistente para generar facturas de cliente a partir de albaranes
+ * @author Jose Carlos
+ *
+ */
 public class VGeneraFacturaCliente extends JInternalFrame {
 
 	private static final long serialVersionUID = -8073649338631908268L;
@@ -27,7 +31,10 @@ public class VGeneraFacturaCliente extends JInternalFrame {
 	private JPanel panelFila;
 	private JScrollPane scrollPane;
 	private VFilaAlbGeneraFactCliente vfila;
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VGeneraFacturaCliente(VentanaPrincipal v) {
 		this.v=v;
 		setBounds(100, 100, 746, 382);
@@ -82,7 +89,10 @@ public class VGeneraFacturaCliente extends JInternalFrame {
 		setTitle("Asistente para generar Nueva Factura Cliente");
 
 	}
-
+	/**
+	 * Muestra la lista de albaranes sin facturar de un cliente
+	 * @param listaAlb
+	 */
 	public void muestraAlbaranes(List<AlbaranCliente> listaAlb) {
 		panelFila=new JPanel();
 		panelFila.setPreferredSize(new Dimension(410,180));
@@ -97,7 +107,10 @@ public class VGeneraFacturaCliente extends JInternalFrame {
 			panelFila.add(vfila);
 		}
 	}
-	
+	/**
+	 * Establece el controlador para la ventana del asistente para generar facturas de cliente
+	 * @param contolador CtrlGenFactCliente
+	 */
 	public void establecerControlador(CtrlGenFactCliente contolador) {
 		comboCli.getEditor().getEditorComponent().addFocusListener(contolador);
 		bAceptar.addActionListener(contolador);

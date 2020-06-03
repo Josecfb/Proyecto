@@ -24,7 +24,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 
-
+/**
+ * Ventana del listado de proveedores
+ * @author Jose Carlos
+ *
+ */
 public class VListadoProveedores extends JInternalFrame {
 
 	private static final long serialVersionUID = -4178570588145846454L;
@@ -41,7 +45,10 @@ public class VListadoProveedores extends JInternalFrame {
 	private JButton bPedidos;
 	private JButton bAlbaranes;
 
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VListadoProveedores(VentanaPrincipal v) {
 		this.v=v;
 		setResizable(false);
@@ -58,7 +65,9 @@ public class VListadoProveedores extends JInternalFrame {
 		inicializar();
 
 	}
-	
+	/**
+	 * Inicializa los componentes de la ventana
+	 */
 	private void inicializar() {
 		Color fondo=new Color(100,100,100);
 		numero=new JLabel("Número");
@@ -194,7 +203,10 @@ public class VListadoProveedores extends JInternalFrame {
 		bFacturas.setVerticalTextPosition( SwingConstants.BOTTOM );
 		new ControladorListadoProveedores(this);
 	}
-	
+	/**
+	 * Muestra las filas de la ventana listado de proveedores
+	 * @param filas List de Proveedor
+	 */
 	public void muestra(List<Proveedor> filas) {
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(800,filas.size()*25));
@@ -225,7 +237,10 @@ public class VListadoProveedores extends JInternalFrame {
 			panel.add(fila);
 		}
 	}
-	
+	/**
+	 * Establece el controlador de la ventana listado de proveedores
+	 * @param controlador ControladorListadoProveedores
+	 */
 	public void establecerControlador(ControladorListadoProveedores controlador) {
 		bFiltrar.addActionListener(controlador);
 		bNuevo.addActionListener(controlador);

@@ -36,7 +36,7 @@ public class AbreCierra {
 	
 	/**
 	 * Cierra la conexión
-	 * @return true->conexion cerrada false->error al cerrar la conexión 
+	 * @return true conexion cerrada false error al cerrar la conexión 
 	 */
 	public boolean cerrarConexion() {
 		try {

@@ -20,7 +20,11 @@ import modelo.negocio.GestorProveedor;
 import vista.VentanaPrincipal;
 
 import javax.swing.JButton;
-
+/**
+ * Ventana del asistente para generar facturas de proveedor a partir de pedidos
+ * @author Jose Carlos
+ *
+ */
 public class VGeneraFacturaProve extends JInternalFrame {
 
 	private static final long serialVersionUID = -8073649338631908268L;
@@ -31,7 +35,10 @@ public class VGeneraFacturaProve extends JInternalFrame {
 	private JPanel panelFila;
 	private JScrollPane scrollPane;
 	private VFilaAlbGeneraFactProve vfila;
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VGeneraFacturaProve(VentanaPrincipal v) {
 		this.v=v;
 		setBounds(100, 100, 746, 382);
@@ -86,7 +93,10 @@ public class VGeneraFacturaProve extends JInternalFrame {
 		setTitle("Genera Nueva Factura Proveedor");
 
 	}
-
+	/**
+	 * Muestra los albaranes sin facturar de un proveedor
+	 * @param listaAlb List de AlbaranProveedor
+	 */
 	public void muestraAlbaranes(List<AlbaranProveedor> listaAlb) {
 		panelFila=new JPanel();
 			panelFila.setPreferredSize(new Dimension(410,180));
@@ -101,7 +111,10 @@ public class VGeneraFacturaProve extends JInternalFrame {
 			panelFila.add(vfila);
 		}
 	}
-	
+	/**
+	 * Establece el controlador de la ventyana del asistente para generar facturas de proveedor
+	 * @param contolador CtrlGenFactProv
+	 */
 	public void establecerControlador(CtrlGenFactProv contolador) {
 		comboProve.getEditor().getEditorComponent().addFocusListener(contolador);
 		bAceptar.addActionListener(contolador);

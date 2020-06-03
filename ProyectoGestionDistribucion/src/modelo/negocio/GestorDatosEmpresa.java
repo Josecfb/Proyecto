@@ -11,7 +11,7 @@ public class GestorDatosEmpresa {
 	
 	/**
 	 * Llama al método mofificaEmpresa de DaoDatosEmpresa
-	 * @param empresa
+	 * @param empresa Datosempresa
 	 */
 	public void guardaEmpresa(Datosempresa empresa) {
 		DaoDatosEmpresa ddd=new DaoDatosEmpresa();

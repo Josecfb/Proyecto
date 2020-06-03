@@ -121,7 +121,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	/**
 	 * Establece el controlador ControladorPrincipal de la ventana principal
-	 * @param controlador
+	 * @param controlador ControladorPrincipal
 	 */
 	public void establecerControlador(ControladorPrincipal controlador) {
 		listarProveedores.addActionListener(controlador);

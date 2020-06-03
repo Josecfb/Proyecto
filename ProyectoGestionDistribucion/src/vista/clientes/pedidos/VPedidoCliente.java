@@ -28,7 +28,11 @@ import java.awt.SystemColor;
 import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Ventana de pedido de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VPedidoCliente extends JInternalFrame {
 	private Utilidades u;
 	private static final long serialVersionUID = 4339097703466328107L;
@@ -46,7 +50,11 @@ public class VPedidoCliente extends JInternalFrame {
 	private JCheckBox checEnviado;
 	private JButton bNuevaFila;
 
-
+	/**
+	 * El constructor recibe el objeto PedidoCliente y la ventana del listado de pedidos de cliente
+	 * @param ped objeto PedidoCliente
+	 * @param vpedidos VPedidosClientes
+	 */
 	public VPedidoCliente(PedidoCliente ped,VPedidosClientes vpedidos) {
 		this.vpedidos=vpedidos;
 		this.ped=ped;
@@ -169,7 +177,9 @@ public class VPedidoCliente extends JInternalFrame {
 			llenaFicha();
 		
 	}
-
+	/**
+	 * Crea una nueva fila en la ventana de pedido de cliente
+	 */
 	public void nuevaFila() {
 		FilasPedidosCliente fil = new FilasPedidosCliente();
 		fil.setPedidosCliente(ped);
@@ -181,14 +191,19 @@ public class VPedidoCliente extends JInternalFrame {
 		panel.add(filaPed);
 		panel.updateUI();
 	}
-	
+	/**
+	 * Rellena los datos de la cabecera de la ventana Pedido de cliente
+	 */
 	public void llenaFicha() {
 		tNumpedido.setText(String.valueOf(ped.getNum()));
 		comboCliente.setSelectedItem(ped.getClienteBean());
 		cFecha.setDate(ped.getFecha());
 		checEnviado.setSelected(ped.getEnviado());
 	}
-	
+	/**
+	 * Muestra las filas en la ventana de pedido de cliente
+	 * @param pedido Objeto PedidoCliente
+	 */
 	public void muestraFilas(PedidoCliente pedido) {
 		
 		List<FilasPedidosCliente> filas=contrPedCli.articulosPendientesPedido(pedido);
@@ -196,10 +211,8 @@ public class VPedidoCliente extends JInternalFrame {
 		panel.setPreferredSize(new Dimension(710,filas.size()*23));
 		panel.setBackground(SystemColor.control);
 		panel.setBorder(null);
-
 		scrollPendientes.setViewportView(panel);
 		double total=0;
-//		ControladorFilaPedidoCliente cfpc =new ControladorFilaPedidoCliente(filaPed);
 		for (FilasPedidosCliente fil:filas) {
 			filaPed=new VFilaPedidoCliente(this,fil);
 			ControladorFilaPedidoCliente controla=new ControladorFilaPedidoCliente(filaPed);
@@ -215,12 +228,12 @@ public class VPedidoCliente extends JInternalFrame {
 			total+=u.euroADoble(filaPed.gettPrecio().getText())*Integer.parseInt(filaPed.gettUnidades().getText());
 			filaPed.updateUI();
 		}
-		
 		lTotal.setText(formatoeuro.format(total));
 	}
-	
+	/**
+	 * Actualiza los totales del pedido de cliente
+	 */
 	public void actualizaTotal() {
-
 		Component[] filas=panel.getComponents();
 		double total=0;
 		for (Component fila:filas) {
@@ -229,7 +242,10 @@ public class VPedidoCliente extends JInternalFrame {
 		}
 		lTotal.setText(formatoeuro.format(total));
 	}
-	
+	/**
+	 * Establece el controlador de la ventana de pedido de cliente
+	 * @param controlador ControladorPedidoCliente
+	 */
 	public void establecerControlador(ControladorPedidoCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);

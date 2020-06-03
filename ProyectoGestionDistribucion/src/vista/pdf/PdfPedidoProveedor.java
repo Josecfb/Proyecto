@@ -20,9 +20,16 @@ import com.itextpdf.text.pdf.PdfWriter;
 import entidades.Datosempresa;
 import entidades.FilaPedidoProveedor;
 import entidades.PedidoProveedor;
-
+/**
+ * Genera el pdf de pedido a proveedor
+ * @author Jose Carlos
+ *
+ */
 public class PdfPedidoProveedor {
-
+	/**
+	 * El constructor recibe el objeto entidad PedidoProveedor
+	 * @param ped objeto entidad PedidoProveedor
+	 */
 	public PdfPedidoProveedor(PedidoProveedor ped) {
 		//GestorPedidosProve gpp=new GestorPedidosProve();
 		//ped=gpp.existe(ped.getNum());

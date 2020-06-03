@@ -54,7 +54,7 @@ public class GestorAlbaranProve {
 	/**
 	 * Llama al método genera filas de DaoAlbaranProve
 	 * @param alb Objeto entidad AlbaranProveedor
-	 * @return lista de albaranes de un proveedor List<FilaAlbaranProveedor>
+	 * @return lista de albaranes de un proveedor List de FilaAlbaranProveedor
 	 */
 	public List<FilaAlbaranProveedor> generaFilas(AlbaranProveedor alb){
 		return dap.generaFilas(alb);

@@ -29,7 +29,11 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-
+/**
+ * Ventana de factura de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VFacturaProveedor extends JInternalFrame {
 
 	private static final long serialVersionUID = 4339097703466328107L;
@@ -47,7 +51,11 @@ public class VFacturaProveedor extends JInternalFrame {
 	private JButton bNuevaFila;
 	private Utilidades u;
 
-
+	/**
+	 * El constructor recibe el objeto entidad FacturaProveedor y la ventana del lisado de facturas de proveedor VFacturasProveedores
+	 * @param fact objeto entidad FacturaProveedor
+	 * @param vFactsPro ventana del lisado de facturas de proveedor VFacturasProveedores
+	 */
 	public VFacturaProveedor(FacturaProveedor fact,VFacturasProveedores vFactsPro) {
 		this.vFactsPro=vFactsPro;
 		this.fact=fact;
@@ -204,7 +212,9 @@ public class VFacturaProveedor extends JInternalFrame {
 			llenaFicha();
 		
 	}
-
+	/**
+	 * Crea una fila nueva en la ventana de factura de proveedor
+	 */
 	public void nuevaFila() {
 		FilaFacturaProveedor fil = new FilaFacturaProveedor();
 		fil.setFacturasProveedor(fact);
@@ -216,7 +226,9 @@ public class VFacturaProveedor extends JInternalFrame {
 		panel.add(vFilaFact);
 		panel.updateUI();
 	}
-	
+	/**
+	 * Rellena los datos de la cabecera de la ventana de factura de proveedor
+	 */
 	public void llenaFicha() {
 		tNumFact.setText(String.valueOf(fact.getNum()));
 		comboProveedor.setSelectedItem(fact.getProveedore());
@@ -228,7 +240,10 @@ public class VFacturaProveedor extends JInternalFrame {
 		}
 
 	}
-	
+	/**
+	 * Muestra las filas de la ventana de la factura de proveedor
+	 * @param factura objeto entidad FacturaProveedor
+	 */
 	public void muestraFilas(FacturaProveedor factura) {
 		
 		List<FilaFacturaProveedor> filas=fact.getFilasFacturasProveedors();
@@ -263,7 +278,9 @@ public class VFacturaProveedor extends JInternalFrame {
 		}
 		actualizaTotal();
 	}
-	
+	/**
+	 * Actualiza el total de la factura de proveedor
+	 */
 	public void actualizaTotal() {
 
 		Component[] filas=panel.getComponents();
@@ -276,7 +293,10 @@ public class VFacturaProveedor extends JInternalFrame {
 		lIva.setText(formatoeuro.format(total*0.1));
 		lTotal.setText(formatoeuro.format(total*1.1));
 	}
-	
+	/**
+	 * Establece el controlador de la ventana de factura de proveedor
+	 * @param controlador ControladorFacturaProveedor
+	 */
 	public void establecerControlador(ControladorFacturaProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);

@@ -37,8 +37,8 @@ public class DaoPedidosClientes {
 	}
 	/**
 	 * Obtiene la lista de los pedidos de un cliente que no han sido enviados
-	 * @param cli
-	 * @return
+	 * @param cli Objeto Cliente
+	 * @return List de PedidoCliente
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PedidoCliente> listaNoEnviados(Cliente cli){

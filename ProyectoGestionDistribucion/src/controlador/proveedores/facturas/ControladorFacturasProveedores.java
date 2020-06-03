@@ -31,7 +31,7 @@ public class ControladorFacturasProveedores implements ActionListener{
 		List<FacturaProveedor> filas;
 		GestorFacturaProve gfp=new GestorFacturaProve();
 		filas=gfp.listarFacturas();
-		vFacturas.muestraPendientes(filas);
+		vFacturas.muestraFacturas(filas);
 	}
 	/**
 	 * Cuando se pulsa el botón nueva factura se abre una ventana del asistente para generar facturas a partir de albaranes

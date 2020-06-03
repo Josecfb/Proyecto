@@ -4,13 +4,19 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JCheckBox;
-
+/**
+ * Vista de la fila con el albaran de la ventana del asistente para generar facturas de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VFilaAlbGeneraFactProve extends JPanel {
 
 	private static final long serialVersionUID = -1711496554895544388L;
 	private JLabel lNum,lFecha;
 	private JCheckBox checMarca;
-	
+	/**
+	 * Constructor vacío
+	 */
 	public VFilaAlbGeneraFactProve() {
 		setLayout(null);
 		

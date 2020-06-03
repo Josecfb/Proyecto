@@ -14,7 +14,9 @@ import controlador.config.ControladorFichaConfig;
 import entidades.Datosempresa;
 
 public class VFichaEmpresa extends JInternalFrame {
-
+	/**
+	 * Ventana con laficha de datos de la empresa
+	 */
 	private static final long serialVersionUID = -4232463625349427321L;
 
 	private Datosempresa dat;
@@ -30,7 +32,10 @@ public class VFichaEmpresa extends JInternalFrame {
 	private JPanel panel;
 	private JPanel panel_1;
 	private JTextField tColor;
-
+	/**
+	 * El constructor recibe el objeto entidad Datosempresa
+	 * @param dat objeto entidad Datosempresa
+	 */
 	public VFichaEmpresa(Datosempresa dat) {
 		this.dat=dat;
 		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
@@ -173,7 +178,10 @@ public class VFichaEmpresa extends JInternalFrame {
 			llenaFicha(dat);
 		
 	}
-	
+	/**
+	 * Rellena la ficha con los datos de la empresa
+	 * @param dat
+	 */
 	public void llenaFicha(Datosempresa dat) {
 		tNombre.setText(dat.getNombre());
 		tDireccion.setText(dat.getDireccion());
@@ -185,7 +193,10 @@ public class VFichaEmpresa extends JInternalFrame {
 		tEmail.setText(dat.getEmail());
 		tNif.setText(dat.getNif());
 	}
-	
+	/**
+	 * Establece el controlador para la ventana de los datos de la empresa
+	 * @param manejador ControladorFichaConfig
+	 */
 	public void EstablecerManejadorVentana(ControladorFichaConfig manejador) {
 		this.addInternalFrameListener(manejador);
 		tProvincia.addFocusListener(manejador);

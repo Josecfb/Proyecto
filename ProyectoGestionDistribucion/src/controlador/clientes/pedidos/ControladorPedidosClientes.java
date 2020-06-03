@@ -25,7 +25,7 @@ public class ControladorPedidosClientes {
 		List<PedidoCliente> filas;
 		GestorPedidosCliente gpc=new GestorPedidosCliente();
 		filas=gpc.listar(null);
-		pedidosCliente.muestraPendientes(filas);
+		pedidosCliente.muestraPedidos(filas);
 	}
 	
 }

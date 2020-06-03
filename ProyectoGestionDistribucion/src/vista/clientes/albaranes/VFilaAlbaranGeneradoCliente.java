@@ -56,7 +56,7 @@ public class VFilaAlbaranGeneradoCliente extends JPanel {
 	}
 	/**
 	 * Establece el controlador para las filas del listado de albaranes de cliente
-	 * @param controlador
+	 * @param controlador CtrlFilaAlbaranesGenCliente
 	 */
 	public void establecerControlador(CtrlFilaAlbaranesGenCliente controlador) {
 		bEditar.addActionListener(controlador);

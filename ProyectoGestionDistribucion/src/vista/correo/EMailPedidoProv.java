@@ -13,12 +13,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
+/**
+ * Envia un correo al proveedor con el pedido adjunto en pdf
+ * @author Jose Carlos
+ *
+ */
 public class EMailPedidoProv implements Runnable{
 	private Properties props;
 	private Session session;
 	private String para,archivo;
-	
+	/**
+	 * El constructor recibe la cadena con el email del proveedor y la cadena con la direccion del pedido en pdf
+	 * @param para
+	 * @param archivo
+	 */
 	public EMailPedidoProv(String para,String archivo) {
 		this.archivo=archivo;
 		this.para=para;
@@ -33,7 +41,9 @@ public class EMailPedidoProv implements Runnable{
 	    Thread hilo=new Thread(this);
 		hilo.start();
 	}
-
+	/**
+	 * Hilo para enviar el correo
+	 */
 	@Override
 	public void run() {
 		BodyPart texto = new MimeBodyPart();
@@ -60,6 +70,11 @@ public class EMailPedidoProv implements Runnable{
 			}
 		
 	}
+	/**
+	 * Utilidad para no enseñar el password
+	 * @param cadena codificada
+	 * @return cadena descodificada
+	 */
 	public static String decodif(String cadena) {
 		String deco="";
 		for (int i=cadena.length()-1;i>=0;i--)

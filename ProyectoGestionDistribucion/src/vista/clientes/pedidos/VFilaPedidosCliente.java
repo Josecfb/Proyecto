@@ -10,16 +10,24 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
-
-public class VFilaPedidoPendienteCliente extends JPanel {
+/**
+ * Vista de la fila de pedido de la ventana listado de pedidos de clientes
+ * @author Jose Carlos
+ *
+ */
+public class VFilaPedidosCliente extends JPanel {
 
 	private static final long serialVersionUID = 4665261804339480581L;
 	private JLabel lCliente, lFecha, lNum;
 	private JButton bEditar;
 	private PedidoCliente ped;
 	private VPedidosClientes vpedidos;
-
-	public VFilaPedidoPendienteCliente(PedidoCliente ped,VPedidosClientes vpedidos) {
+	/**
+	 * El constructor recibe el objeto PedidoCliente y la ventana de listado de pedidos de cliente VPedidosClientes
+	 * @param ped PedidoCliente
+	 * @param vpedidos ventana de listado de pedidos de cliente VPedidosClientes
+	 */
+	public VFilaPedidosCliente(PedidoCliente ped,VPedidosClientes vpedidos) {
 		setBackground(Color.WHITE);
 		this.vpedidos=vpedidos;
 		this.ped=ped;
@@ -45,7 +53,10 @@ public class VFilaPedidoPendienteCliente extends JPanel {
 		lNum.setBounds(10, 5, 54, 20);
 		add(lNum);
 	}
-	
+	/**
+	 * Establece el controlador para la fila de la ventana listado de pedidos de clientes
+	 * @param controlador ControladorFilaPedidoPendienteCliente
+	 */
 	public void establecerControlador(ControladorFilaPedidoPendienteCliente controlador) {
 		bEditar.addActionListener(controlador);
 	}

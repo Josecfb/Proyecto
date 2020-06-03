@@ -32,7 +32,7 @@ public class ControladorAlbaranesProveedores implements ActionListener{
 		List<AlbaranProveedor> filas;
 		GestorAlbaranProve gap=new GestorAlbaranProve();
 		filas=gap.listarAlbaranes();
-		vAlbaranes.muestraPendientes(filas);
+		vAlbaranes.muestraAlbaranes(filas);
 	}
 	/**
 	 * Al pulsar sobre el boton nuevo se abre la ventana del asistente para crear albaranes de proveedor

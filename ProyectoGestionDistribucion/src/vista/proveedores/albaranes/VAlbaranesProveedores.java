@@ -20,16 +20,23 @@ import entidades.Proveedor;
 import vista.VentanaPrincipal;
 
 
-
+/**
+ * Ventana del listado de albaranes de proveedores
+ * @author Jose Carlos
+ *
+ */
 public class VAlbaranesProveedores extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
 	private JPanel panelGenerados, panelEnAlmacen, panelFacturados;
 	private JScrollPane scrollGenerados, scrollEnAlmacen, scrollFacturados;
-	private VFilaAlbaranGeneradoProveedor filaAlb;
+	private VFilaAlbaranesProveedores filaAlb;
 	private VentanaPrincipal v;
 	private JButton bNuevoGenerado;
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VAlbaranesProveedores(VentanaPrincipal v) {
 		this.v=v;
 		//formatoeuro = NumberFormat.getCurrencyInstance();
@@ -81,8 +88,11 @@ public class VAlbaranesProveedores extends JInternalFrame {
 
 		new ControladorAlbaranesProveedores(this);
 	}
-	
-	public void muestraPendientes(List<AlbaranProveedor> lista) {
+	/**
+	 * Genera las filas de la ventana listado de albaranes de proveedor
+	 * @param lista List de AlbaranProveedor
+	 */
+	public void muestraAlbaranes(List<AlbaranProveedor> lista) {
 		panelGenerados = new JPanel();
 		panelGenerados.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelGenerados.setBackground(Color.WHITE);
@@ -102,7 +112,7 @@ public class VAlbaranesProveedores extends JInternalFrame {
 		
 		for (AlbaranProveedor fila:lista) {
 			Proveedor pro=fila.getProveedore();
-			filaAlb=new VFilaAlbaranGeneradoProveedor(fila,this);
+			filaAlb=new VFilaAlbaranesProveedores(fila,this);
 			CtrlFilaAlbaranesGenProveedor controla=new CtrlFilaAlbaranesGenProveedor(filaAlb);
 			filaAlb.establecerControlador(controla);
 			filaAlb.setPreferredSize(new Dimension(650,30));
@@ -119,7 +129,10 @@ public class VAlbaranesProveedores extends JInternalFrame {
 					panelGenerados.add(filaAlb);
 		}
 	}
-	
+	/**
+	 * Establece el controlador de la ventana de listado de albaranes de proveedor
+	 * @param controlador ControladorAlbaranesProveedores
+	 */
 	public void establecerManejador(ControladorAlbaranesProveedores controlador) {
 		bNuevoGenerado.addActionListener(controlador);
 	}

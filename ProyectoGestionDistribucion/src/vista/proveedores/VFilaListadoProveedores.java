@@ -6,14 +6,21 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
+/**
+ * Vista de las fila de la ventana de listado de proveedores
+ * @author Jose Carlos
+ *
+ */
 public class VFilaListadoProveedores extends JPanel {
 
 	private static final long serialVersionUID = 4813844448451936303L;
 	private VListadoProveedores v;
 	private JLabel numero, nombre, direccion, codPost, poblacion, provincia, fijo, movil;
 	private JButton bEditar;
-
+	/**
+	 * El constructor recibe la ventana de listado de proveedores VListadoProveedores
+	 * @param v ventana de listado de proveedores VListadoProveedores
+	 */
 	public VFilaListadoProveedores(VListadoProveedores v) {
 		this.v=v;
 		setLayout(null);
@@ -22,7 +29,9 @@ public class VFilaListadoProveedores extends JPanel {
 		inicializar();
 		setVisible(true);
 	}
-	
+	/**
+	 * Inicializa los componentes de la fila
+	 */
 	private void inicializar() {
 		numero=new JLabel();
 		nombre=new JLabel();
@@ -53,7 +62,10 @@ public class VFilaListadoProveedores extends JPanel {
 		bEditar.setIcon(new ImageIcon("src/img/pen.png"));
 		add(bEditar);
 	}
-	
+	/**
+	 * Establece el controlador de la fila del listado de proveedores
+	 * @param controlador ControlaFilaListadoProveedores
+	 */
 	public void establecerControlador(ControlaFilaListadoProveedores controlador) {
 		bEditar.addActionListener(controlador);
 	}

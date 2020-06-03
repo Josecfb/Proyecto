@@ -32,7 +32,11 @@ import java.awt.SystemColor;
 import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Ventana de pedido de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VPedidoProveedor extends JInternalFrame {
 
 	private static final long serialVersionUID = 4339097703466328107L;
@@ -51,7 +55,11 @@ public class VPedidoProveedor extends JInternalFrame {
 	private JButton bNuevaFila;
 	private Utilidades u;
 
-
+	/**
+	 * El constructor recibe el objeto entidad PedidoProveedor y la ventana del listado de pedidos de proveedores VPedidosProveedores
+	 * @param ped objeto entidad PedidoProveedor
+	 * @param vpedidos ventana del listado de pedidos de proveedores VPedidosProveedores
+	 */
 	public VPedidoProveedor(PedidoProveedor ped,VPedidosProveedores vpedidos) {
 		this.vpedidos=vpedidos;
 		this.ped=ped;
@@ -186,7 +194,9 @@ public class VPedidoProveedor extends JInternalFrame {
 			llenaFicha();
 		
 	}
-
+	/**
+	 * Crea un nueva fila en la ventana de pedido de proveedor
+	 */
 	public void nuevaFila() {
 		FilaPedidoProveedor fil = new FilaPedidoProveedor();
 		fil.setPedidosProveedor(ped);
@@ -198,7 +208,9 @@ public class VPedidoProveedor extends JInternalFrame {
 		panel.add(filaPed);
 		panel.updateUI();
 	}
-	
+	/**
+	 * Rellena los datos de la cabecera de la ventana de pedido de proveedor
+	 */
 	public void llenaFicha() {
 		tNumpedido.setText(String.valueOf(ped.getNum()));
 		comboProveedor.setSelectedItem(ped.getProveedore());
@@ -206,7 +218,10 @@ public class VPedidoProveedor extends JInternalFrame {
 		checConfirmado.setSelected(ped.getConfirmado());
 		checEnviado.setSelected(ped.getEnviado());
 	}
-	
+	/**
+	 * Muestra las filas del pedido de proveedor
+	 * @param pedido objeto entidad PedidoProveedor
+	 */
 	public void muestraFilas(PedidoProveedor pedido) {
 		
 		List<FilaPedidoProveedor> filas=contrPedPro.articulosPendientesPedido(pedido);
@@ -235,7 +250,9 @@ public class VPedidoProveedor extends JInternalFrame {
 		
 		lTotal.setText(formatoeuro.format(total));
 	}
-	
+	/**
+	 * Actualiza el total de pedido proveedor
+	 */
 	public void actualizaTotal() {
 
 		Component[] filas=panel.getComponents();
@@ -246,7 +263,10 @@ public class VPedidoProveedor extends JInternalFrame {
 		}
 		lTotal.setText(formatoeuro.format(total));
 	}
-	
+	/**
+	 * Establece el controlador para la ventana de pedido de proveedor
+	 * @param controlador ControladorPedidoProveedor
+	 */
 	public void establecerControlador(ControladorPedidoProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);

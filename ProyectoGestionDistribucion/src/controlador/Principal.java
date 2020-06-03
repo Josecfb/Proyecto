@@ -9,7 +9,7 @@ import vista.VentanaPrincipal;
 public class Principal {
 	/**
 	 * 
-	 * @param args
+	 * @param args del maim
 	 */
 	public static void main(String[] args) {
 		VentanaPrincipal ventanaPrincipal=new VentanaPrincipal();

@@ -30,7 +30,7 @@ public class GestorArticulo {
 	}
 	/**
 	 * Llama al método listado de DaoArticulo
-	 * @param filtroNombre
+	 * @param filtroNombre cadena para filtro
 	 * @return List de objetos Articulo
 	 */
 	public List<Articulo> listar(String filtroNombre){
@@ -70,7 +70,7 @@ public class GestorArticulo {
 	/**
 	 * Llama al método nuevo de DaoArticulo
 	 * @param art Articulo
-	 * @return [0]=false->nombre vacío [1]=false->coste menor que cero [2]=false-> precio mayorista menor que cero [3]=false-> precio minorista menor que cero [4]=false-> sin proveedor [5]=true->modificado con éxito
+	 * @return [0]=false nombre vacío [1]=false coste menor que cero [2]=false  precio mayorista menor que cero [3]=false  precio minorista menor que cero [4]=false  sin proveedor [5]=true modificado con éxito
 	 */
 	public boolean[] nuevoArticulo(Articulo art) {
 		boolean[] ok = valida(art);
@@ -83,7 +83,7 @@ public class GestorArticulo {
 	/**
 	 * Comprueba errores en el artículo
 	 * @param art Objeto Articulo
-	 * @return array de boolean [0]=false->nombre vacío [1]=false->coste menor que cero [2]=false-> precio mayorista menor que cero [3]=false-> precio minorista menor que cero [4]=false-> sin proveedor [5]=true->modificado con éxito
+	 * @return array de boolean [0]=false->nombre vacío [1]=false coste menor que cero [2]=false precio mayorista menor que cero [3]=false precio minorista menor que cero [4]=false  sin proveedor [5]=true modificado con éxito
 	 */
 	private boolean[] valida(Articulo art) {
 		boolean[] ok=new boolean[6];

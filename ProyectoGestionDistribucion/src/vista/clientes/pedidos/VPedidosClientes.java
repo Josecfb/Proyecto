@@ -15,15 +15,22 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import vista.VentanaPrincipal;
-
+/**
+ * Controlador de la ventana de listado de pedidos de cliente
+ * @author Jose Carlos
+ *
+ */
 public class VPedidosClientes extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
 	private JPanel panelPendientes, panelEnviados, panelRecibidos;
 	private JScrollPane scrollPendientes, scrollEnviados;
-	private VFilaPedidoPendienteCliente filaPed;
+	private VFilaPedidosCliente filaPed;
 	private VentanaPrincipal v;
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VPedidosClientes(VentanaPrincipal v) {
 		this.v=v;
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -57,8 +64,11 @@ public class VPedidosClientes extends JInternalFrame {
 		pEnviados.add(scrollEnviados);
 		new ControladorPedidosClientes(this);
 	}
-	
-	public void muestraPendientes(List<PedidoCliente> lista) {
+	/**
+	 * Muestra las filas con los pedido dentro de la ventana de listado de pedidos de cliente
+	 * @param lista List de PedidoCliente
+	 */
+	public void muestraPedidos(List<PedidoCliente> lista) {
 		panelPendientes = new JPanel();
 		panelPendientes.setPreferredSize(new Dimension(650,lista.size()*35));
 		panelPendientes.setBackground(Color.WHITE);
@@ -78,7 +88,7 @@ public class VPedidosClientes extends JInternalFrame {
 		scrollEnviados.setViewportView(panelEnviados);
 		for (PedidoCliente fila:lista) {
 			Cliente cli=fila.getClienteBean();
-			filaPed=new VFilaPedidoPendienteCliente(fila,this);
+			filaPed=new VFilaPedidosCliente(fila,this);
 			ControladorFilaPedidoPendienteCliente controla=new ControladorFilaPedidoPendienteCliente(filaPed);
 			filaPed.establecerControlador(controla);
 			filaPed.setPreferredSize(new Dimension(650,30));

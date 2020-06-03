@@ -18,7 +18,7 @@ public class ControladorListadoArticulos implements ActionListener{
 	private VListadoArticulos listado;
 	/**
 	 * El constructor recibe la ventana del listado de artículos
-	 * @param listado
+	 * @param listado ventana del listado de artículos VListadoArticulos
 	 */
 	public ControladorListadoArticulos(VListadoArticulos listado) {
 		this.listado=listado;

@@ -20,16 +20,23 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import vista.VentanaPrincipal;
-
+/**
+ * Ventana del listado de pedidos de proveedores
+ * @author Jose Carlos
+ *
+ */
 public class VPedidosProveedores extends JInternalFrame {
 
 	private static final long serialVersionUID = 8710778275789682602L;
 	private JPanel panelPendientes, panelEnviados, panelRecibidos;
 	private JScrollPane scrollPendientes, scrollEnviados, scrollRecibidos;
-	private VFilaPedidoPendienteProveedor filaPed;
+	private VFilaPedidosProveedor filaPed;
 	private VentanaPrincipal v;
 	private JButton bNuevoPendiente;
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VPedidosProveedores(VentanaPrincipal v) {
 		this.v=v;
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -79,8 +86,11 @@ public class VPedidosProveedores extends JInternalFrame {
 		pRecibidos.add(scrollRecibidos);
 		new ControladorPedidosProveedores(this);
 	}
-	
-	public void muestraPendientes(List<PedidoProveedor> lista) {
+	/**
+	 * Muesta las filas con los pedidos de proveedores
+	 * @param lista List de PedidoProveedor
+	 */
+	public void muestraPedidos(List<PedidoProveedor> lista) {
 		panelPendientes = new JPanel();
 		panelPendientes.setPreferredSize(new Dimension(650,lista.size()*30));
 		panelPendientes.setBackground(Color.WHITE);
@@ -101,7 +111,7 @@ public class VPedidosProveedores extends JInternalFrame {
 		scrollRecibidos.setViewportView(panelRecibidos);
 		for (PedidoProveedor fila:lista) {
 			Proveedor pro=fila.getProveedore();
-			filaPed=new VFilaPedidoPendienteProveedor(fila,this);
+			filaPed=new VFilaPedidosProveedor(fila,this);
 			ControladorFilaPedidoPendienteProveedor controla=new ControladorFilaPedidoPendienteProveedor(filaPed);
 			filaPed.establecerControlador(controla);
 			filaPed.setPreferredSize(new Dimension(650,30));
@@ -118,7 +128,10 @@ public class VPedidosProveedores extends JInternalFrame {
 					panelPendientes.add(filaPed);
 		}
 	}
-	
+	/**
+	 * Establece el controlador para la ventana del listado de pedidos de proveedor
+	 * @param controlador
+	 */
 	public void establecerManejador(ControladorPedidosProveedores controlador) {
 		bNuevoPendiente.addActionListener(controlador);
 	}

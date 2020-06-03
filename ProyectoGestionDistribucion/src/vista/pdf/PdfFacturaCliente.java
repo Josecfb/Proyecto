@@ -25,10 +25,17 @@ import com.itextpdf.text.pdf.PdfWriter;
 import entidades.Datosempresa;
 import entidades.FacturaCliente;
 import entidades.FilaFacturaCliente;
-
+/**
+ * Genera el pdf de factura de cliente
+ * @author Jose Carlos
+ *
+ */
 public class PdfFacturaCliente {
 	NumberFormat formatoeuro;
-
+	/**
+	 * El constructor recibe el objeto entidad FacturaCliente
+	 * @param fac FacturaCliente
+	 */
 	public PdfFacturaCliente(FacturaCliente fac) {
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		Paragraph p;

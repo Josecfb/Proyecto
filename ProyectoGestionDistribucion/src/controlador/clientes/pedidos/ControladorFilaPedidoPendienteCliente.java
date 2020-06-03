@@ -3,7 +3,7 @@ package controlador.clientes.pedidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vista.clientes.pedidos.VFilaPedidoPendienteCliente;
+import vista.clientes.pedidos.VFilaPedidosCliente;
 import vista.clientes.pedidos.VPedidoCliente;
 /**
  * Controla la vista de las filas del listado de pedidos de clientes
@@ -11,13 +11,13 @@ import vista.clientes.pedidos.VPedidoCliente;
  *
  */
 public class ControladorFilaPedidoPendienteCliente implements ActionListener{
-	private VFilaPedidoPendienteCliente fila;
+	private VFilaPedidosCliente fila;
 	private VPedidoCliente pc;
 	/**
 	 * El constructor recibe como argumento la vista de la fila del listado de pedidos de clientes
 	 * @param fila vista de la fila del listado de pedidos de clientes VFilaPedidoPendienteCliente
 	 */
-	public ControladorFilaPedidoPendienteCliente(VFilaPedidoPendienteCliente fila) {
+	public ControladorFilaPedidoPendienteCliente(VFilaPedidosCliente fila) {
 		this.fila=fila;
 	}
 	/**

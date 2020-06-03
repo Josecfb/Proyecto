@@ -20,7 +20,11 @@ import modelo.negocio.GestorProveedor;
 import vista.VentanaPrincipal;
 
 import javax.swing.JButton;
-
+/**
+ * Vista de la ventana del asistente para generar albaranes a partir de los pedidos a proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VGeneraAlbaranProve extends JInternalFrame {
 
 	private static final long serialVersionUID = -8073649338631908268L;
@@ -31,7 +35,10 @@ public class VGeneraAlbaranProve extends JInternalFrame {
 	private JPanel panelFila;
 	private JScrollPane scrollPane;
 	private VFilaPedGeneraAlbProve vfila;
-
+	/**
+	 * El constructor recibe la ventana principal
+	 * @param v VentanaPrincipal
+	 */
 	public VGeneraAlbaranProve(VentanaPrincipal v) {
 		this.v=v;
 		setBounds(100, 100, 746, 382);
@@ -86,7 +93,10 @@ public class VGeneraAlbaranProve extends JInternalFrame {
 		setTitle("Genera Nuevo Albaran Proveedor");
 
 	}
-
+	/**
+	 * Muestra las filas con los pedidos sin albarán de un proveedor
+	 * @param listaPed List de PedidoProveedor
+	 */
 	public void muestraPedidos(List<PedidoProveedor> listaPed) {
 		panelFila=new JPanel();
 			panelFila.setPreferredSize(new Dimension(410,180));
@@ -101,7 +111,10 @@ public class VGeneraAlbaranProve extends JInternalFrame {
 			panelFila.add(vfila);
 		}
 	}
-	
+	/**
+	 * Establece el controlador para la ventana del asistente para generar albaranes a partir de pedidos a proveedor
+	 * @param contolador CtrlGenAlbProv
+	 */
 	public void establecerControlador(CtrlGenAlbProv contolador) {
 		comboProve.getEditor().getEditorComponent().addFocusListener(contolador);
 		bAceptar.addActionListener(contolador);

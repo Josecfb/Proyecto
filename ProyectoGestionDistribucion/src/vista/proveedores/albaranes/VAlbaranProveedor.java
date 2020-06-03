@@ -29,7 +29,11 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-
+/**
+ * Ventana del albarán de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VAlbaranProveedor extends JInternalFrame {
 
 	private static final long serialVersionUID = 4339097703466328107L;
@@ -47,7 +51,11 @@ public class VAlbaranProveedor extends JInternalFrame {
 	private JButton bNuevaFila;
 	private Utilidades u;
 
-
+	/**
+	 * El constructor recibe el objeto entidad AlbaranProveedor y la ventana del listado de albaranes de proveedor VAlbaranesProveedores
+	 * @param alb objeto entidad AlbaranProveedor
+	 * @param vAlbsPro ventana del listado de albaranes de proveedor VAlbaranesProveedores
+	 */
 	public VAlbaranProveedor(AlbaranProveedor alb,VAlbaranesProveedores vAlbsPro) {
 		this.vAlbsPro=vAlbsPro;
 		this.alb=alb;
@@ -204,7 +212,9 @@ public class VAlbaranProveedor extends JInternalFrame {
 			llenaFicha();
 		
 	}
-
+	/**
+	 * Crea una fila nueva en el albarán de proveedor
+	 */
 	public void nuevaFila() {
 		FilaAlbaranProveedor fil = new FilaAlbaranProveedor();
 		fil.setAlbaranesProveedor(alb);
@@ -216,7 +226,9 @@ public class VAlbaranProveedor extends JInternalFrame {
 		panel.add(vFilaAlb);
 		panel.updateUI();
 	}
-	
+	/**
+	 * Rellena los datos de la cabecera de la ventana de albarán de proveedor
+	 */
 	public void llenaFicha() {
 		tNumAlb.setText(String.valueOf(alb.getNum()));
 		comboProveedor.setSelectedItem(alb.getProveedore());
@@ -228,7 +240,10 @@ public class VAlbaranProveedor extends JInternalFrame {
 		}
 
 	}
-	
+	/**
+	 * Muestra las filas del albarán de proveedor
+	 * @param albaran objeto entidad AlbaranProveedor
+	 */
 	public void muestraFilas(AlbaranProveedor albaran) {
 		
 		List<FilaAlbaranProveedor> filas=alb.getFilasAlbaranProveedors();
@@ -263,7 +278,9 @@ public class VAlbaranProveedor extends JInternalFrame {
 		}
 		actualizaTotal();
 	}
-	
+	/**
+	 * Actualiza el total del albarán de proveedor
+	 */
 	public void actualizaTotal() {
 
 		Component[] filas=panel.getComponents();
@@ -276,7 +293,10 @@ public class VAlbaranProveedor extends JInternalFrame {
 		lIva.setText(formatoeuro.format(total*0.1));
 		lTotal.setText(formatoeuro.format(total*1.1));
 	}
-	
+	/**
+	 * Establece el controlador de la ventana de albarán de proveedor
+	 * @param controlador ControladorAlbaranProveedor
+	 */
 	public void establecerControlador(ControladorAlbaranProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);

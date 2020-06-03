@@ -10,7 +10,11 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
-
+/**
+ * Vista de fila de la ventana listado de facturas de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VFilaFacturasProveedor extends JPanel {
 
 	private static final long serialVersionUID = 4665261804339480581L;
@@ -18,9 +22,11 @@ public class VFilaFacturasProveedor extends JPanel {
 	private JButton bEditar;
 	private FacturaProveedor fact;
 	private VFacturasProveedores vFacturas;
-
-
-
+	/**
+	 * El constructor recibe el objeto entidad FacturaProveedor y la ventana de listado de facturas de proveedor VFacturasProveedores
+	 * @param fact objeto entidad FacturaProveedor
+	 * @param vFacturas ventana de listado de facturas de proveedor VFacturasProveedores
+	 */
 	public VFilaFacturasProveedor(FacturaProveedor fact,VFacturasProveedores vFacturas) {
 		setBackground(Color.WHITE);
 		this.vFacturas=vFacturas;
@@ -47,7 +53,10 @@ public class VFilaFacturasProveedor extends JPanel {
 		lNum.setBounds(10, 5, 48, 20);
 		add(lNum);
 	}
-	
+	/**
+	 * Establece el controlador para la vista de fila de la ventala listado de facturas de proveedor
+	 * @param controlador CtrlFilaFacturasGenProveedor
+	 */
 	public void establecerControlador(CtrlFilaFacturasGenProveedor controlador) {
 		bEditar.addActionListener(controlador);
 	}

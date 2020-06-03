@@ -59,7 +59,7 @@ public class VFacturasProveedores extends JInternalFrame {
 	}
 	/**
 	 * Muestra las filas con las factura de la ventana de listado de facturas de proveedor
-	 * @param lista
+	 * @param lista List de FacturaProveedor
 	 */
 	public void muestraFacturas(List<FacturaProveedor> lista) {
 		panelGeneradas = new JPanel();

@@ -180,7 +180,7 @@ public class VFichaEmpresa extends JInternalFrame {
 	}
 	/**
 	 * Rellena la ficha con los datos de la empresa
-	 * @param dat
+	 * @param dat Objeto entidad Datosempresa
 	 */
 	public void llenaFicha(Datosempresa dat) {
 		tNombre.setText(dat.getNombre());

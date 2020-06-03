@@ -91,7 +91,7 @@ public class VGeneraFacturaCliente extends JInternalFrame {
 	}
 	/**
 	 * Muestra la lista de albaranes sin facturar de un cliente
-	 * @param listaAlb
+	 * @param listaAlb List de AlbaranCliente
 	 */
 	public void muestraAlbaranes(List<AlbaranCliente> listaAlb) {
 		panelFila=new JPanel();

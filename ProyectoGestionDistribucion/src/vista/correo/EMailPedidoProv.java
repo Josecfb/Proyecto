@@ -24,8 +24,8 @@ public class EMailPedidoProv implements Runnable{
 	private String para,archivo;
 	/**
 	 * El constructor recibe la cadena con el email del proveedor y la cadena con la direccion del pedido en pdf
-	 * @param para
-	 * @param archivo
+	 * @param para  cadena con el email del proveedor
+	 * @param archivo cadena con la direccion del pedido
 	 */
 	public EMailPedidoProv(String para,String archivo) {
 		this.archivo=archivo;

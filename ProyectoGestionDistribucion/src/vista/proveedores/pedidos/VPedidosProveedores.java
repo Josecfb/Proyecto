@@ -130,7 +130,7 @@ public class VPedidosProveedores extends JInternalFrame {
 	}
 	/**
 	 * Establece el controlador para la ventana del listado de pedidos de proveedor
-	 * @param controlador
+	 * @param controlador ControladorPedidosProveedores
 	 */
 	public void establecerManejador(ControladorPedidosProveedores controlador) {
 		bNuevoPendiente.addActionListener(controlador);

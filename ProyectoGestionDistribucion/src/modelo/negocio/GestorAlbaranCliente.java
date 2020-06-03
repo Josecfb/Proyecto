@@ -54,7 +54,7 @@ public class GestorAlbaranCliente {
 	/**
 	 * Llama al método generaFilas de DaoAlbaranCliente 
 	 * @param alb objeto entidad AlbaranCliente
-	 * @return Lista de filas del albarán List<FilasAlbaranCliente>
+	 * @return Lista de filas del albarán List de FilasAlbaranCliente
 	 */
 	public List<FilasAlbaranCliente> generaFilas(AlbaranCliente alb){
 		return dac.generaFilas(alb);

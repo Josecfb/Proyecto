@@ -61,7 +61,7 @@ public class GestorAlbaranProve {
 	}
 	/**
 	 * Llama al método listarAlbaranes de DaoAlbaranProve
-	 * @return lista de albaranes List<FilaAlbaranProveedor>
+	 * @return lista de albaranes List de FilaAlbaranProveedor
 	 */
 	public List<AlbaranProveedor> listarAlbaranes(){
 		return dap.listarAlbaranes();

@@ -294,7 +294,7 @@ public class VFichaCliente extends JInternalFrame {
 		bBorrar = new JButton("");
 		bBorrar.setBounds(924, 445, 49, 51);
 		getContentPane().add(bBorrar);
-		bBorrar.setIcon(new ImageIcon(new ImageIcon("src/img/eliminar.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		bBorrar.setIcon(new ImageIcon(new ImageIcon("src/img/eliminar.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 		if (cli!=null) {
 			llenaFicha(cli);
 			muestraFilasPrecios();

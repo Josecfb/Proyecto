@@ -1,6 +1,5 @@
 package controlador.proveedores;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -10,12 +9,12 @@ import java.awt.event.KeyListener;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 import modelo.persistencia.DaoProvincia;
+import util.Utilidades;
 import vista.proveedores.VFichaProveedor;
 /**
  * Controla la ventana ficha de proveedor
@@ -24,12 +23,14 @@ import vista.proveedores.VFichaProveedor;
  */
 public class ControladorFichaProveedor implements InternalFrameListener, KeyListener, FocusListener, ActionListener{
 	private VFichaProveedor fichaProveedor;
+	private Utilidades u;
 	/**
 	 * El constructor recibe la vista de la ficha de proveedor
 	 * @param fichaProveedor vista de la ficha de proveedor VFichaProveedor
 	 */
 	public ControladorFichaProveedor(VFichaProveedor fichaProveedor) {
 		this.fichaProveedor=fichaProveedor;
+		u=new Utilidades();
 	}
 
 	@Override
@@ -148,11 +149,7 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.selectAll();
-			campo.setBackground(new Color(240,240,255));
-		}
+		u.foco(e);
 	}
 	/** 
 	 * cuando el codigo postal pierde foco, asigna valores a la Provinca y a la población
@@ -160,10 +157,7 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 	 */
 	@Override
 	public void focusLost(FocusEvent e) {
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		u.nofoco(e);
 		if (e.getSource()==fichaProveedor.gettCodPos() && !fichaProveedor.gettCodPos().getText().equals("")) {
 			DaoProvincia dp = new DaoProvincia();
 			fichaProveedor.gettProvincia().setText(dp.nomProvincia(fichaProveedor.gettCodPos().getText()));
@@ -190,33 +184,7 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if (e.getSource()==fichaProveedor.gettNombre())
-			if(fichaProveedor.gettNombre().getText().length()==30)
-				e.consume();
-		if (e.getSource()==fichaProveedor.gettDireccion())
-			if(fichaProveedor.gettDireccion().getText().length()==40)
-				e.consume();
-		if (e.getSource()==fichaProveedor.gettProvincia())
-			if(fichaProveedor.gettProvincia().getText().length()==22)
-				e.consume();
-		if (e.getSource()==fichaProveedor.gettCodPos())
-			if(fichaProveedor.gettCodPos().getText().length()==5)
-				e.consume();
-		if (e.getSource()==fichaProveedor.gettMovil())
-			if(fichaProveedor.gettMovil().getText().length()==9)
-				e.consume();
-		if (e.getSource()==fichaProveedor.gettFijo())
-			if(fichaProveedor.gettFijo().getText().length()==9)
-				e.consume();
-		if (e.getSource()==fichaProveedor.gettEMail())
-			if(fichaProveedor.gettEMail().getText().length()==30)
-				e.consume();
-		if (e.getSource()==fichaProveedor.gettSubcuenta())
-			if(fichaProveedor.gettSubcuenta().getText().length()==11)
-				e.consume();
-		if (e.getSource()==fichaProveedor.gettNif())
-			if(fichaProveedor.gettNif().getText().length()==9)
-				e.consume();
+		u.controlaTeclas(e);
 	}
 	/**
 	 * Elimina el proveedor al pulsar el botón llamando al método borrarProveedor

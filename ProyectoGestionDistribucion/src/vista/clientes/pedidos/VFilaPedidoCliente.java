@@ -11,8 +11,9 @@ import entidades.Articulo;
 import entidades.FilasPedidosCliente;
 import entidades.PedidoProveedor;
 import modelo.negocio.GestorArticulo;
+import util.JTextFieldN;
+import util.Utilidades;
 import java.awt.Font;
-import java.awt.Component;
 import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
@@ -23,12 +24,12 @@ import javax.swing.JButton;
  *
  */
 public class VFilaPedidoCliente extends JPanel {
-
 	private static final long serialVersionUID = -3446443914975183188L;
-	private JTextField tCod;
+	private Utilidades u;
+	private JTextFieldN tCod;
 	private JComboBox<Articulo> articulo;
-	private JTextField tUnidades;
-	private JTextField tPrecio;
+	private JTextFieldN tUnidades;
+	private JTextFieldN tPrecio;
 	private JTextField tTotal;
 	private JButton bBorrar;
 	private PedidoProveedor ped;
@@ -42,10 +43,11 @@ public class VFilaPedidoCliente extends JPanel {
 	public VFilaPedidoCliente(VPedidoCliente vPedido,FilasPedidosCliente fila) {
 		this.fila=fila;
 		this.vPedido=vPedido;
+		u=new Utilidades();
 		setBackground(SystemColor.control);
 		setLayout(null);
 		
-		tCod = new JTextField();
+		tCod = new JTextFieldN(4,'n');
 		tCod.setBounds(10, 1, 47, 20);
 		tCod.setHorizontalAlignment(JTextField.RIGHT);
 		tCod.setText("0");
@@ -65,14 +67,14 @@ public class VFilaPedidoCliente extends JPanel {
 		articulo.setSelectedItem(null);
 		add(articulo);
 		
-		tUnidades = new JTextField();
+		tUnidades = new JTextFieldN(3,'n');
 		tUnidades.setColumns(10);
 		tUnidades.setBounds(440, 1, 32, 20);
 		tUnidades.setHorizontalAlignment(JTextField.RIGHT);
 		tUnidades.setText("0");
 		add(tUnidades);
 		
-		tPrecio = new JTextField();
+		tPrecio = new JTextFieldN(5,'m');
 		tPrecio.setColumns(10);
 		tPrecio.setBounds(482, 1, 64, 20);
 		tPrecio.setHorizontalAlignment(JTextField.RIGHT);
@@ -98,13 +100,7 @@ public class VFilaPedidoCliente extends JPanel {
 	 * @param controla ControladorFilaPedidoCliente
 	 */
 	public void establecerControlador(ControladorFilaPedidoCliente controla) {
-		Component[] componentes=getComponents();
-		JTextField jt=null;
-		for (Component componente:componentes) 
-			if (componente.getClass()==JTextField.class) {
-				jt = (JTextField) componente;
-				jt.addFocusListener(controla);
-			}
+		u.addFocusKey(this, controla, controla);
 		articulo.getEditor().getEditorComponent().addFocusListener(controla);
 		bBorrar.addActionListener(controla);
 	}

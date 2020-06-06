@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.NumberFormat;
 import javax.swing.JTextField;
 
@@ -17,7 +19,7 @@ import vista.proveedores.albaranes.VFilaAlbaranProveedor;
  * @author Jose Carlos
  *
  */
-public class CtrlFilaAlbProve implements FocusListener, ActionListener{
+public class CtrlFilaAlbProve implements FocusListener, ActionListener, KeyListener{
 	private VFilaAlbaranProveedor vFilaAlb;
 	private NumberFormat formatoeuro;
 	private Utilidades u;
@@ -43,6 +45,7 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener{
 		}
 		if (e.getSource()==vFilaAlb.getArticulo().getEditor().getEditorComponent())
 			vFilaAlb.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
+		u.foco(e);
 	}
 	/** 
 	 * Cuando el combo de articulo pierde foco rellena los campos precio y codigo de artículo
@@ -81,10 +84,7 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener{
 			vFilaAlb.getvAlbaran().actualizaTotal();
 			return;
 		}
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		u.nofoco(e);
 	}
 	
 	/**
@@ -99,6 +99,23 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener{
 			vFilaAlb.getvAlbaran().updateUI();
 		}
 		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		u.controlaTeclas(e);
 	}
 
 }

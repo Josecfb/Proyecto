@@ -21,6 +21,9 @@ import controlador.clientes.ControladorFichaCliente;
 import entidades.Cliente;
 import entidades.PrecioCliente;
 import modelo.persistencia.DaoProvincia;
+import util.JTextFieldN;
+import util.JTextFieldT;
+import util.Utilidades;
 
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
@@ -35,18 +38,19 @@ import javax.swing.JButton;
  */
 public class VFichaCliente extends JInternalFrame {
 	private static final long serialVersionUID = 7007272565978130446L;
+	private Utilidades u;
 	private Cliente cli;
 	private VListadoClientes vlc;
 	private JTextField tNumero;
-	private JTextField tDireccion;
+	private JTextFieldT tDireccion;
 	private JComboBox<String> tPoblacion;
-	private JTextField tProvincia;
-	private JTextField tEmail;
-	private JTextField tFijo;
-	private JTextField tMovil;
-	private JTextField tCodPos;
-	private JTextField tSubcuenta;
-	private JTextField tNif;
+	private JTextFieldT tProvincia;
+	private JTextFieldT tEmail;
+	private JTextFieldN tFijo;
+	private JTextFieldN tMovil;
+	private JTextFieldN tCodPos;
+	private JTextFieldN tSubcuenta;
+	private JTextFieldT tNif;
 	private JPanel pestPrincipal,pestPrecios,pMay,pMin;
 	private JComboBox<String> comboTipo;
 	private JTextField tNombre;
@@ -64,6 +68,7 @@ public class VFichaCliente extends JInternalFrame {
 	public VFichaCliente(Cliente cli,VListadoClientes vlc) {
 		this.cli=cli;
 		this.vlc=vlc;
+		u=new Utilidades();
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		formatoPorcentaje.setMinimumFractionDigits(2);
@@ -111,7 +116,7 @@ public class VFichaCliente extends JInternalFrame {
 		lDireccion.setBounds(49, 156, 66, 25);
 		pestPrincipal.add(lDireccion);
 		
-		tDireccion = new JTextField();
+		tDireccion = new JTextFieldT(40);
 		tDireccion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tDireccion.setColumns(10);
 		tDireccion.setBounds(125, 156, 390, 25);
@@ -132,7 +137,7 @@ public class VFichaCliente extends JInternalFrame {
 		lProvincia.setBounds(49, 205, 66, 25);
 		pestPrincipal.add(lProvincia);
 		
-		tProvincia = new JTextField();
+		tProvincia = new JTextFieldT(22);
 		tProvincia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tProvincia.setColumns(10);
 		tProvincia.setBounds(125, 205, 134, 25);
@@ -143,7 +148,7 @@ public class VFichaCliente extends JInternalFrame {
 		lCodPost.setBounds(533, 156, 95, 25);
 		pestPrincipal.add(lCodPost);
 		
-		tEmail = new JTextField();
+		tEmail = new JTextFieldT(30);
 		tEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tEmail.setColumns(10);
 		tEmail.setBounds(591, 205, 159, 25);
@@ -154,7 +159,7 @@ public class VFichaCliente extends JInternalFrame {
 		lFijo.setBounds(59, 253, 55, 25);
 		pestPrincipal.add(lFijo);
 		
-		tFijo = new JTextField();
+		tFijo = new JTextFieldN(9,'n');
 		tFijo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tFijo.setColumns(10);
 		tFijo.setBounds(126, 253, 134, 25);
@@ -165,13 +170,13 @@ public class VFichaCliente extends JInternalFrame {
 		lMovil.setBounds(277, 253, 47, 25);
 		pestPrincipal.add(lMovil);
 		
-		tMovil = new JTextField();
+		tMovil = new JTextFieldN(9,'n');
 		tMovil.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tMovil.setColumns(10);
 		tMovil.setBounds(334, 253, 159, 25);
 		pestPrincipal.add(tMovil);
 		
-		tCodPos = new JTextField();
+		tCodPos = new JTextFieldN(5,'n');
 		tCodPos.setText((String) null);
 		tCodPos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tCodPos.setColumns(10);
@@ -183,7 +188,7 @@ public class VFichaCliente extends JInternalFrame {
 		lEMail.setBounds(538, 205, 47, 25);
 		pestPrincipal.add(lEMail);
 		
-		tSubcuenta = new JTextField();
+		tSubcuenta = new JTextFieldN(11,'n');
 		tSubcuenta.setText((String) null);
 		tSubcuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tSubcuenta.setColumns(10);
@@ -202,7 +207,7 @@ public class VFichaCliente extends JInternalFrame {
 		lNif.setBounds(564, 24, 34, 25);
 		pestPrincipal.add(lNif);
 		
-		tNif = new JTextField();
+		tNif = new JTextFieldT(9);
 		tNif.setText((String) null);
 		tNif.setHorizontalAlignment(SwingConstants.RIGHT);
 		tNif.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -363,18 +368,13 @@ public class VFichaCliente extends JInternalFrame {
 	public void establecerManejadorVentana(ControladorFichaCliente cfc) {
 		this.addInternalFrameListener(cfc);
 		Component[] componentes=pestPrincipal.getComponents();
-		for (Component componente:componentes) {
-			if (componente.getClass()==JTextField.class) {
-				componente.addFocusListener(cfc);
-				componente.addKeyListener(cfc);
-			}
-			comboTipo.getEditor().getEditorComponent().addFocusListener(cfc);
+		for (Component componente:componentes) 
 			if (componente.getClass()==JComboBox.class)
 				((JComboBox) componente).getEditor().getEditorComponent().addFocusListener(cfc);
-		}
+		u.addFocusKey(pestPrincipal,cfc,cfc);
 		bNuevaFila.addActionListener(cfc);
 		bBorrar.addActionListener(cfc);
-		comboTipo.getEditor().getEditorComponent().addFocusListener(cfc);
+		//comboTipo.getEditor().getEditorComponent().addFocusListener(cfc);
 	}
 	/**
 	 * Crea una nueva fila para precio de cliente

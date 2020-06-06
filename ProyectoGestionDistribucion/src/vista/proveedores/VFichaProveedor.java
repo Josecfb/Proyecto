@@ -6,8 +6,10 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
 import modelo.persistencia.DaoProvincia;
+import util.JTextFieldN;
+import util.JTextFieldT;
+import util.Utilidades;
 import javax.swing.JLabel;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JTabbedPane;
@@ -24,19 +26,20 @@ import entidades.Proveedor;
 public class VFichaProveedor extends JInternalFrame {
 
 	private static final long serialVersionUID = -4232463625349427321L;
+	private Utilidades u;
 	private VListadoProveedores v;
 	private Proveedor pro;
 	private JTextField tNumero;
-	private JTextField tDireccion;
+	private JTextFieldT tDireccion;
 	private JComboBox<String> tPoblacion;
-	private JTextField tProvincia;
-	private JTextField tCodPos;
-	private JTextField tFijo;
-	private JTextField tMovil;
-	private JTextField tNombre;
-	private JTextField tEMail;
-	private JTextField tSubcuenta;
-	private JTextField tNif;
+	private JTextFieldT tProvincia;
+	private JTextFieldN tCodPos;
+	private JTextFieldN tFijo;
+	private JTextFieldN tMovil;
+	private JTextFieldT tNombre;
+	private JTextFieldT tEMail;
+	private JTextFieldN tSubcuenta;
+	private JTextFieldT tNif;
 	private JPanel panel;
 	private JButton bBorrar;
 	/**
@@ -47,6 +50,7 @@ public class VFichaProveedor extends JInternalFrame {
 	public VFichaProveedor(Proveedor pro,VListadoProveedores v) {
 		this.pro=pro;
 		this.v=v;
+		u=new Utilidades();
 		setAutoscrolls(true);
 		setBorder(UIManager.getBorder("InternalFrame.border"));
 		setBounds(100, 100, 997, 481);
@@ -91,7 +95,7 @@ public class VFichaProveedor extends JInternalFrame {
 		lNombre_1.setBounds(282, 47, 55, 25);
 		panel.add(lNombre_1);
 		
-		tNombre = new JTextField();
+		tNombre = new JTextFieldT(30);
 		tNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tNombre.setColumns(10);
 		tNombre.setBounds(347, 47, 395, 25);
@@ -102,7 +106,7 @@ public class VFichaProveedor extends JInternalFrame {
 		lDireccion.setBounds(99, 102, 66, 25);
 		panel.add(lDireccion);
 		
-		tDireccion = new JTextField();
+		tDireccion = new JTextFieldT(40);
 		tDireccion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tDireccion.setColumns(10);
 		tDireccion.setBounds(175, 102, 567, 25);
@@ -124,7 +128,7 @@ public class VFichaProveedor extends JInternalFrame {
 		lProvincia.setBounds(99, 212, 66, 25);
 		panel.add(lProvincia);
 		
-		tProvincia = new JTextField();
+		tProvincia = new JTextFieldT(22);
 		tProvincia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tProvincia.setColumns(10);
 		tProvincia.setBounds(175, 210, 223, 25);
@@ -135,7 +139,7 @@ public class VFichaProveedor extends JInternalFrame {
 		lCodPost.setBounds(70, 157, 95, 25);
 		panel.add(lCodPost);
 		
-		tCodPos = new JTextField();
+		tCodPos = new JTextFieldN(9,'n');
 		tCodPos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tCodPos.setColumns(10);
 		tCodPos.setBounds(175, 157, 111, 25);
@@ -146,7 +150,7 @@ public class VFichaProveedor extends JInternalFrame {
 		lFijo.setBounds(310, 157, 55, 25);
 		panel.add(lFijo);
 		
-		tFijo = new JTextField();
+		tFijo = new JTextFieldN(9,'n');
 		tFijo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tFijo.setColumns(10);
 		tFijo.setBounds(375, 157, 134, 25);
@@ -157,13 +161,13 @@ public class VFichaProveedor extends JInternalFrame {
 		lMovil.setBounds(529, 154, 47, 25);
 		panel.add(lMovil);
 		
-		tMovil = new JTextField();
+		tMovil = new JTextFieldN(9,'n');
 		tMovil.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tMovil.setColumns(10);
 		tMovil.setBounds(583, 157, 159, 25);
 		panel.add(tMovil);
 		
-		tEMail = new JTextField();
+		tEMail = new JTextFieldT(30);
 		tEMail.setText((String) null);
 		tEMail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tEMail.setColumns(10);
@@ -175,7 +179,7 @@ public class VFichaProveedor extends JInternalFrame {
 		lEMail.setBounds(118, 267, 47, 25);
 		panel.add(lEMail);
 		
-		tSubcuenta = new JTextField();
+		tSubcuenta = new JTextFieldN(11,'n');
 		tSubcuenta.setText((String) null);
 		tSubcuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tSubcuenta.setColumns(10);
@@ -194,7 +198,7 @@ public class VFichaProveedor extends JInternalFrame {
 		lNif.setBounds(556, 267, 34, 25);
 		panel.add(lNif);
 		
-		tNif = new JTextField();
+		tNif = new JTextFieldT(9);
 		tNif.setText((String) null);
 		tNif.setHorizontalAlignment(SwingConstants.RIGHT);
 		tNif.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -240,12 +244,7 @@ public class VFichaProveedor extends JInternalFrame {
 	public void EstablecerManejadorVentana(ControladorFichaProveedor manejador) {
 		this.addInternalFrameListener(manejador);
 		tProvincia.addFocusListener(manejador);
-		Component[] componentes=panel.getComponents();
-		for (Component componente:componentes) 
-			if (componente.getClass()==JTextField.class) {
-				componente.addFocusListener(manejador);
-				componente.addKeyListener(manejador);
-			}
+		u.addFocusKey(panel, manejador, manejador);
 		bBorrar.addActionListener(manejador);
 	}
 	public JTextField gettDireccion() {

@@ -7,14 +7,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-
 import entidades.Articulo;
 import entidades.Familia;
 import entidades.Proveedor;
@@ -65,44 +61,25 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource()==fichaArticulo.gettPrecioMay())
-			fichaArticulo.gettPrecioMay().setText(u.focoEuro(fichaArticulo.gettPrecioMay().getText()));
-		if (e.getSource()==fichaArticulo.gettPrecioMin())
-			fichaArticulo.gettPrecioMin().setText(u.focoEuro(fichaArticulo.gettPrecioMin().getText()));	
-		if (e.getSource()==fichaArticulo.gettCoste())
-			fichaArticulo.gettCoste().setText(u.focoEuro(fichaArticulo.gettCoste().getText()));
-		if (e.getSource()==fichaArticulo.gettIva())
-			fichaArticulo.gettIva().setText(u.focoPorcentaje(fichaArticulo.gettIva().getText()));
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.selectAll();
-			campo.setBackground(new Color(240,240,255));
-		}
-
-		if (e.getSource()==JComboBox.class) {
-			@SuppressWarnings("rawtypes")
-			JComboBox jComboBox = (JComboBox) e.getSource();
-			jComboBox.getEditor().getEditorComponent().setBackground(Color.BLUE);
-		}
+		if (e.getSource()==fichaArticulo.getComboFamilia().getEditor().getEditorComponent()) 
+			fichaArticulo.getComboFamilia().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
+		if (e.getSource()==fichaArticulo.getComboProveedor().getEditor().getEditorComponent()) 
+			fichaArticulo.getComboProveedor().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
+		u.foco(e);
 	}
+
 	/**
 	 * Cuando un campo pierde el foco cambia de color de fondo y su formato en caso de ser noneda o porcentaje
 	 */
 	@Override
 	public void focusLost(FocusEvent e) {
-		if (e.getSource()==fichaArticulo.gettPrecioMay())
-			fichaArticulo.gettPrecioMay().setText(u.noFocoEuro(fichaArticulo.gettPrecioMay().getText()));
-		if (e.getSource()==fichaArticulo.gettPrecioMin())
-			fichaArticulo.gettPrecioMin().setText(u.noFocoEuro(fichaArticulo.gettPrecioMin().getText()));
-		if (e.getSource()==fichaArticulo.gettCoste())
-			fichaArticulo.gettCoste().setText(u.noFocoEuro(fichaArticulo.gettCoste().getText()));
-		if (e.getSource()==fichaArticulo.gettIva())
-			fichaArticulo.gettIva().setText(fichaArticulo.gettIva().getText()+"%");
-		if (e.getSource().getClass()==JTextField.class || e.getSource().getClass()==JComboBox.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		if (e.getSource()==fichaArticulo.getComboProveedor().getEditor().getEditorComponent()) 
+			fichaArticulo.getComboProveedor().getEditor().getEditorComponent().setBackground(new Color(255,255,255));
+		if (e.getSource()==fichaArticulo.getComboFamilia().getEditor().getEditorComponent()) 
+			fichaArticulo.getComboFamilia().getEditor().getEditorComponent().setBackground(new Color(255,255,255));
+		u.nofoco(e);
 	}
+
 	/**
 	 * Asigna los datos del formulario a un objeto Articulo y lo modifica en la base de datos
 	 */
@@ -234,13 +211,8 @@ public class ControladorFichaArticulo implements InternalFrameListener, FocusLis
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if (e.getSource()==fichaArticulo.gettNombre())
-			if (fichaArticulo.gettNombre().getText().length()==50)
-				e.consume();
-		if (e.getSource()==fichaArticulo.gettCProv())
-			if(fichaArticulo.gettCProv().getText().length()==11)
-				e.consume();
-		
+		u.controlaTeclas(e);
 	}
-
+	
+	
 }

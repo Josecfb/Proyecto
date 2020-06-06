@@ -5,10 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.NumberFormat;
-
-import javax.swing.JTextField;
-
 import entidades.Articulo;
 import util.Utilidades;
 import vista.clientes.VFilaPrecioCliente;
@@ -17,7 +16,7 @@ import vista.clientes.VFilaPrecioCliente;
  * @author Jose Carlos
  *
  */
-public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
+public class ControlaFilaPrecioCli implements FocusListener, ActionListener, KeyListener{
 	private NumberFormat formatoeuro,formatoPorcentaje;
 	private VFilaPrecioCliente vFilaPre;
 	private Utilidades u;
@@ -49,15 +48,7 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource()==vFilaPre.gettPrecio())
-			vFilaPre.gettPrecio().setText(u.focoEuro(vFilaPre.gettPrecio().getText()));
-		if (e.getSource()==vFilaPre.gettPorcent())
-			vFilaPre.gettPorcent().setText(u.focoPorcentaje(vFilaPre.gettPorcent().getText()));
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.selectAll();
-			campo.setBackground(new Color(240,240,255));
-		}
+		u.foco(e);
 		if (e.getSource()==vFilaPre.getComboArt().getEditor().getEditorComponent())
 			vFilaPre.getComboArt().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
@@ -68,10 +59,7 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 	 */
 	@Override
 	public void focusLost(FocusEvent e) {
-		if (e.getSource()==vFilaPre.gettPrecio()) 
-			vFilaPre.gettPrecio().setText(u.noFocoEuro(vFilaPre.gettPrecio().getText()));
-		if (e.getSource()==vFilaPre.gettPorcent())
-			vFilaPre.gettPorcent().setText(vFilaPre.gettPorcent().getText()+"%");
+		u.nofoco(e);
 		Articulo art=null;
 		if (e.getSource()==vFilaPre.getComboArt().getEditor().getEditorComponent()) {
 			art=(Articulo) vFilaPre.getComboArt().getSelectedItem();
@@ -87,12 +75,22 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener{
 			vFilaPre.getComboArt().getEditor().getEditorComponent().setBackground(Color.WHITE);
 			return;
 		}
-		if (e.getSource()==vFilaPre.gettPorcent())
-			vFilaPre.gettPrecio().setText(formatoeuro.format(u.euroADoble(vFilaPre.getlPrecioReal().getText())*(1-u.porcentajeADoble(vFilaPre.gettPorcent().getText())/100)));
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		u.controlaTeclas(e);
 		
 	}
 

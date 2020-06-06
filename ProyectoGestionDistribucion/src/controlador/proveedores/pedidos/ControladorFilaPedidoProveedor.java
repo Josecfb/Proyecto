@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.NumberFormat;
-import javax.swing.JTextField;
-
 import entidades.Articulo;
 import entidades.Proveedor;
 import modelo.negocio.GestorArticulo;
@@ -18,7 +18,7 @@ import vista.proveedores.pedidos.VFilaPedidoProveedor;
  * @author Jose Carlos
  *
  */
-public class ControladorFilaPedidoProveedor implements FocusListener, ActionListener{
+public class ControladorFilaPedidoProveedor implements FocusListener, ActionListener, KeyListener{
 	private VFilaPedidoProveedor vFilaPedido;
 	private NumberFormat formatoeuro;
 	private Utilidades u;
@@ -37,12 +37,7 @@ public class ControladorFilaPedidoProveedor implements FocusListener, ActionList
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.selectAll();
-			campo.setBackground(new Color(240,240,255));
-		}
+		u.foco(e);
 		if (e.getSource()==vFilaPedido.getArticulo().getEditor().getEditorComponent())
 			vFilaPedido.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
@@ -84,10 +79,7 @@ public class ControladorFilaPedidoProveedor implements FocusListener, ActionList
 			vFilaPedido.getvPedido().actualizaTotal();
 			return;
 		}
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		u.nofoco(e);
 	}
 	
 	
@@ -103,6 +95,23 @@ public class ControladorFilaPedidoProveedor implements FocusListener, ActionList
 			vFilaPedido.getvPedido().updateUI();
 		}
 		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		u.controlaTeclas(e);
 	}
 
 }

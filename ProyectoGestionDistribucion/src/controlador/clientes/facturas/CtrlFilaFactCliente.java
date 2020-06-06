@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.NumberFormat;
 import javax.swing.JTextField;
 import entidades.Articulo;
@@ -17,7 +19,7 @@ import vista.clientes.facturas.VFilaFacturaCliente;
  * @author Jose Carlos
  *
  */
-public class CtrlFilaFactCliente implements FocusListener, ActionListener{
+public class CtrlFilaFactCliente implements FocusListener, ActionListener, KeyListener{
 	private Utilidades u;
 	private VFilaFacturaCliente vFilaFact;
 	private NumberFormat formatoeuro;
@@ -36,9 +38,7 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener{
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource()==vFilaFact.getTPrecio()) {
-			vFilaFact.getTPrecio().setText(u.focoEuro(vFilaFact.getTPrecio().getText()));
-		}
+		u.foco(e);
 		if (e.getSource().getClass()==JTextField.class) {
 			JTextField campo=(JTextField) e.getSource();
 			campo.selectAll();
@@ -92,13 +92,7 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener{
 			vFilaFact.getvFactura().actualizaTotal();
 			return;
 		}
-		if (e.getSource()==vFilaFact.getTPrecio()) {
-			vFilaFact.getTPrecio().setText(u.noFocoEuro(vFilaFact.getTPrecio().getText()));
-		}
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		u.nofoco(e);
 	}
 	
 	/**
@@ -112,5 +106,22 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener{
 			vFilaFact.getvFactura().actualizaTotal();
 			vFilaFact.getvFactura().updateUI();
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		u.controlaTeclas(e);
 	}
 }

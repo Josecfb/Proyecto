@@ -11,20 +11,21 @@ import entidades.Articulo;
 import entidades.FilaPedidoProveedor;
 import entidades.PedidoProveedor;
 import modelo.negocio.GestorArticulo;
+import util.JTextFieldN;
+import util.Utilidades;
 import java.awt.Font;
-import java.awt.Component;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class VFilaPedidoProveedor extends JPanel {
-
 	private static final long serialVersionUID = -3446443914975183188L;
-	private JTextField tCod;
+	private Utilidades u;
+	private JTextFieldN tCod;
 	private JComboBox<Articulo> articulo;
 	private JTextField tUnidades;
-	private JTextField tCajas;
-	private JTextField tCoste;
+	private JTextFieldN tCajas;
+	private JTextFieldN tCoste;
 	private JTextField tTotal;
 	private JButton bBorrar;
 	private PedidoProveedor ped;
@@ -34,10 +35,11 @@ public class VFilaPedidoProveedor extends JPanel {
 	public VFilaPedidoProveedor(VPedidoProveedor vPedido,FilaPedidoProveedor fila) {
 		this.fila=fila;
 		this.vPedido=vPedido;
+		u=new  Utilidades();
 		setBackground(SystemColor.control);
 		setLayout(null);
 		
-		tCod = new JTextField();
+		tCod = new JTextFieldN(4,'n');
 		tCod.setBounds(10, 1, 47, 20);
 		tCod.setHorizontalAlignment(JTextField.RIGHT);
 		tCod.setText("0");
@@ -61,14 +63,14 @@ public class VFilaPedidoProveedor extends JPanel {
 		tUnidades.setFocusable(false);
 		add(tUnidades);
 		
-		tCajas = new JTextField();
+		tCajas = new JTextFieldN(3,'n');
 		tCajas.setColumns(10);
 		tCajas.setBounds(440, 1, 32, 20);
 		tCajas.setHorizontalAlignment(JTextField.RIGHT);
 		tCajas.setText("0");
 		add(tCajas);
 		
-		tCoste = new JTextField();
+		tCoste = new JTextFieldN(5,'m');
 		tCoste.setColumns(10);
 		tCoste.setBounds(524, 1, 64, 20);
 		tCoste.setHorizontalAlignment(JTextField.RIGHT);
@@ -98,13 +100,7 @@ public class VFilaPedidoProveedor extends JPanel {
 	}
 	
 	public void establecerControlador(ControladorFilaPedidoProveedor controla) {
-		Component[] componentes=getComponents();
-		JTextField jt=null;
-		for (Component componente:componentes) 
-			if (componente.getClass()==JTextField.class) {
-				jt = (JTextField) componente;
-				jt.addFocusListener(controla);
-			}
+		u.addFocusKey(this, controla, controla);
 		articulo.getEditor().getEditorComponent().addFocusListener(controla);
 		bBorrar.addActionListener(controla);
 	}

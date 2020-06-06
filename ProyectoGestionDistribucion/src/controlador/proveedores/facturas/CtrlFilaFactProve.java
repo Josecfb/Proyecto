@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.NumberFormat;
-import javax.swing.JTextField;
-
 import entidades.Articulo;
 import modelo.negocio.GestorArticulo;
 import util.Utilidades;
@@ -17,7 +17,7 @@ import vista.proveedores.facturas.VFilaFacturaProveedor;
  * @author Jose Carlos
  *
  */
-public class CtrlFilaFactProve implements FocusListener, ActionListener{
+public class CtrlFilaFactProve implements FocusListener, ActionListener, KeyListener{
 	private VFilaFacturaProveedor vFilaFact;
 	private NumberFormat formatoeuro;
 	private Utilidades u;
@@ -39,11 +39,7 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 		if (e.getSource()==vFilaFact.gettCoste()) {
 			vFilaFact.gettCoste().setText(u.focoEuro(vFilaFact.gettCoste().getText()));
 		}
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.selectAll();
-			campo.setBackground(new Color(240,240,255));
-		}
+		u.foco(e);
 		if (e.getSource()==vFilaFact.getArticulo().getEditor().getEditorComponent())
 			vFilaFact.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
@@ -87,10 +83,7 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 		if (e.getSource()==vFilaFact.gettCoste()) {
 			vFilaFact.gettCoste().setText(u.noFocoEuro(vFilaFact.gettCoste().getText()));
 		}
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		u.nofoco(e);
 	}
 	/**
 	 * Borra una fila de la factura
@@ -104,6 +97,23 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener{
 			vFilaFact.getvFactura().updateUI();
 		}
 		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		u.controlaTeclas(e);
 	}
 
 }

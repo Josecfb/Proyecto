@@ -5,10 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.NumberFormat;
-
-import javax.swing.JTextField;
-
 import entidades.Articulo;
 import entidades.PrecioCliente;
 import modelo.negocio.GestorArticulo;
@@ -19,7 +18,7 @@ import vista.clientes.pedidos.VFilaPedidoCliente;
  * @author Jose Carlos
  *
  */
-public class ControladorFilaPedidoCliente implements FocusListener, ActionListener{
+public class ControladorFilaPedidoCliente implements FocusListener, ActionListener, KeyListener{
 	private VFilaPedidoCliente vFilaPedido;
 	private NumberFormat formatoeuro;
 	private Utilidades u; 
@@ -38,12 +37,7 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.selectAll();
-			campo.setBackground(new Color(240,240,255));
-		}
+		u.foco(e);
 		if (e.getSource()==vFilaPedido.getArticulo().getEditor().getEditorComponent())
 			vFilaPedido.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
@@ -92,10 +86,7 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.gettCod().setBackground(Color.WHITE);
 			return;
 		}
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		u.nofoco(e);
 	}
 	
 	/**
@@ -108,6 +99,22 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			vFilaPedido.getvPedido().getPanel().remove(vFilaPedido);
 			vFilaPedido.getvPedido().updateUI();
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		u.controlaTeclas(e);
 	}
 
 }

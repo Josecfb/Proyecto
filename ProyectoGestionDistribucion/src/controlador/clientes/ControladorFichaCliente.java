@@ -12,10 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-
 import entidades.Articulo;
 import entidades.Cliente;
 import entidades.PrecioCliente;
@@ -167,41 +165,14 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if (e.getSource()==fichaCliente.gettNif())
-			if(fichaCliente.gettNif().getText().length()==9)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettNombre())
-			if(fichaCliente.gettNombre().getText().length()==20)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettApellidos())
-			if(fichaCliente.gettApellidos().getText().length()==20)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettDireccion())
-			if(fichaCliente.gettDireccion().getText().length()==40)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettProvincia())
-			if(fichaCliente.gettProvincia().getText().length()==22)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettEmail())
-			if(fichaCliente.gettEmail().getText().length()==30)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettFijo())
-			if(fichaCliente.gettFijo().getText().length()==9)
-				e.consume();
-		if (e.getSource()==fichaCliente.gettMovil())
-			if(fichaCliente.gettMovil().getText().length()==9)
-				e.consume();
+		u.controlaTeclas(e);
 	}
 	/**
 	 * Cuando un campo recibe foco cambia el color de fondo y selecciona su contenido
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.selectAll();
-			campo.setBackground(new Color(240,240,255));
-		}
+		u.foco(e);
 		if (e.getSource()==fichaCliente.getComboTipo().getEditor().getEditorComponent()) 
 			fichaCliente.getComboTipo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
@@ -212,10 +183,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public void focusLost(FocusEvent e) {
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		u.nofoco(e);
 		if (e.getSource()==fichaCliente.getComboTipo().getEditor().getEditorComponent()) {
 			if (fichaCliente.getComboTipo().getSelectedItem()=="Minorista") {
 				fichaCliente.getpMay().setVisible(false);

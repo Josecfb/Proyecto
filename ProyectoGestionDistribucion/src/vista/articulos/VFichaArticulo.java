@@ -17,6 +17,10 @@ import entidades.Familia;
 import entidades.Proveedor;
 import modelo.negocio.GestorFamilia;
 import modelo.negocio.GestorProveedor;
+import util.JTextFieldN;
+import util.JTextFieldT;
+import util.Utilidades;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,17 +32,18 @@ import javax.swing.JComboBox;
 public class VFichaArticulo extends JInternalFrame {
 
 	private static final long serialVersionUID = 3871990475316407616L;
+	private Utilidades u;
 	private VListadoArticulos vla;
 	private JTextField tCodigo;
-	private JTextField tNombre;
-	private JTextField tCProv;
-	private JTextField tCoste;
-	private JTextField tPrecioMay;
-	private JTextField tPrecioMin;
-	private JTextField tIva;
-	private JTextField tUnidadesCaja;
-	private JTextField tStock;
-	private JTextField tStockMin;
+	private JTextFieldT tNombre;
+	private JTextFieldT tCProv;
+	private JTextFieldN tCoste;
+	private JTextFieldN tPrecioMay;
+	private JTextFieldN tPrecioMin;
+	private JTextFieldN tIva;
+	private JTextFieldN tUnidadesCaja;
+	private JTextFieldN tStock;
+	private JTextFieldN tStockMin;
 	private JComboBox<Familia> comboFamilia;
 	private JComboBox<Proveedor> comboProveedor;
 	private JButton bBorrar;
@@ -55,6 +60,7 @@ public class VFichaArticulo extends JInternalFrame {
 	public VFichaArticulo(Articulo art,VListadoArticulos vla) {
 		this.art=art;
 		this.vla=vla;
+		u=new Utilidades();
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		setBounds(100, 100, 870, 490);
@@ -98,13 +104,13 @@ public class VFichaArticulo extends JInternalFrame {
 		lNombre.setBounds(216, 40, 55, 25);
 		panel.add(lNombre);
 		
-		tNombre = new JTextField();
+		tNombre = new JTextFieldT(50);
 		tNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tNombre.setColumns(10);
 		tNombre.setBounds(298, 40, 437, 25);
 		panel.add(tNombre);
 		
-		tCProv = new JTextField();
+		tCProv = new JTextFieldT(11);
 		tCProv.setHorizontalAlignment(SwingConstants.RIGHT);
 		tCProv.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tCProv.setColumns(10);
@@ -138,7 +144,7 @@ public class VFichaArticulo extends JInternalFrame {
 		lCoste.setBounds(31, 146, 55, 25);
 		panel.add(lCoste);
 		
-		tCoste = new JTextField();
+		tCoste = new JTextFieldN(5,'m');
 		tCoste.setHorizontalAlignment(SwingConstants.RIGHT);
 		tCoste.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tCoste.setColumns(10);
@@ -146,7 +152,7 @@ public class VFichaArticulo extends JInternalFrame {
 		tCoste.setText("0,00 €");
 		panel.add(tCoste);
 		
-		tPrecioMay = new JTextField();
+		tPrecioMay = new JTextFieldN(5,'m');
 		tPrecioMay.setHorizontalAlignment(SwingConstants.RIGHT);
 		tPrecioMay.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tPrecioMay.setColumns(10);
@@ -159,7 +165,7 @@ public class VFichaArticulo extends JInternalFrame {
 		lPrecioMay.setBounds(281, 146, 72, 25);
 		panel.add(lPrecioMay);
 		
-		tPrecioMin = new JTextField();
+		tPrecioMin = new JTextFieldN(5,'m');
 		tPrecioMin.setHorizontalAlignment(SwingConstants.RIGHT);
 		tPrecioMin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tPrecioMin.setColumns(10);
@@ -177,7 +183,7 @@ public class VFichaArticulo extends JInternalFrame {
 		lIva.setBounds(31, 197, 55, 25);
 		panel.add(lIva);
 		
-		tIva = new JTextField();
+		tIva = new JTextFieldN(5,'p');
 		tIva.setHorizontalAlignment(SwingConstants.RIGHT);
 		tIva.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tIva.setColumns(10);
@@ -185,7 +191,7 @@ public class VFichaArticulo extends JInternalFrame {
 		tIva.setText("0%");
 		panel.add(tIva);
 		
-		tUnidadesCaja = new JTextField();
+		tUnidadesCaja = new JTextFieldN(4,'n');
 		tUnidadesCaja.setHorizontalAlignment(SwingConstants.RIGHT);
 		tUnidadesCaja.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tUnidadesCaja.setColumns(10);
@@ -215,7 +221,7 @@ public class VFichaArticulo extends JInternalFrame {
 		comboFamilia.setSelectedItem(null);
 		panel.add(comboFamilia);
 		
-		tStock = new JTextField();
+		tStock = new JTextFieldN(4,'n');
 		tStock.setHorizontalAlignment(SwingConstants.RIGHT);
 		tStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tStock.setColumns(10);
@@ -228,7 +234,7 @@ public class VFichaArticulo extends JInternalFrame {
 		lStock.setBounds(31, 251, 55, 25);
 		panel.add(lStock);
 		
-		tStockMin = new JTextField();
+		tStockMin = new JTextFieldN(4,'n');
 		tStockMin.setHorizontalAlignment(SwingConstants.RIGHT);
 		tStockMin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tStockMin.setColumns(10);
@@ -292,21 +298,19 @@ public class VFichaArticulo extends JInternalFrame {
 	 * Establece el controlador de la ventana dela ficha de artículo
 	 * @param manejador Objeto ControladorFichaArticulo
 	 */
+	
 	@SuppressWarnings("rawtypes")
 	public void EstablecerManejadorVentana(ControladorFichaArticulo manejador) {
 		this.addInternalFrameListener(manejador);
 		bBorrar.addActionListener(manejador);
 		Component[] componentes=panel.getComponents();
-		comboFamilia.addFocusListener(manejador);
-		for (Component componente:componentes) {
-			if (componente.getClass()==JTextField.class) {
-				componente.addFocusListener(manejador);
-				componente.addKeyListener(manejador);
-			}
-			if (componente.getClass()==JComboBox.class)
-				((JComboBox) componente).getEditor().getEditorComponent().addFocusListener(manejador);
-		}
+		for (Component componente:componentes) 
+		if (componente.getClass()==JComboBox.class)
+			((JComboBox) componente).getEditor().getEditorComponent().addFocusListener(manejador);
+		u.addFocusKey(panel,manejador,manejador);
+
 	}
+
 
 	public Articulo getArt() {
 		return art;

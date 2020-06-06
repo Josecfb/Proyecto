@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.NumberFormat;
-import javax.swing.JTextField;
-
 import entidades.Articulo;
 import entidades.PrecioCliente;
 import modelo.negocio.GestorArticulo;
@@ -18,7 +18,7 @@ import vista.clientes.albaranes.VFilaAlbaranCliente;
  * @author Jose Carlos
  *
  */
-public class CtrlFilaAlbCliente implements FocusListener, ActionListener{
+public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyListener{
 	private VFilaAlbaranCliente vFilaAlb;
 	private NumberFormat formatoeuro;
 	private Utilidades u;
@@ -37,11 +37,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener{
 	 */
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.selectAll();
-			campo.setBackground(new Color(240,240,255));
-		}
+		u.foco(e);
 		if (e.getSource()==vFilaAlb.getArticulo().getEditor().getEditorComponent())
 			vFilaAlb.getArticulo().getEditor().getEditorComponent().setBackground(new Color(240,240,255));
 	}
@@ -90,10 +86,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener{
 			vFilaAlb.getvAlbaran().actualizaTotal();
 			return;
 		}
-		if (e.getSource().getClass()==JTextField.class) {
-			JTextField campo=(JTextField) e.getSource();
-			campo.setBackground(Color.WHITE);
-		}
+		u.nofoco(e);
 	}
 	
 	/**
@@ -107,6 +100,23 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener{
 			vFilaAlb.getvAlbaran().actualizaTotal();
 			vFilaAlb.getvAlbaran().updateUI();
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		u.controlaTeclas(e);
 	}
 
 }

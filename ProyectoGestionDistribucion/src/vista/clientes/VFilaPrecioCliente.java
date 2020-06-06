@@ -7,7 +7,8 @@ import controlador.clientes.ControlaFilaPrecioCli;
 import entidades.Articulo;
 import entidades.Cliente;
 import modelo.negocio.GestorArticulo;
-import java.awt.Component;
+import util.JTextFieldN;
+import util.Utilidades;
 import java.awt.Font;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -21,11 +22,12 @@ import javax.swing.JLabel;
  */
 public class VFilaPrecioCliente extends JPanel {
 	private static final long serialVersionUID = 1396732755308443918L;
+	private Utilidades u;
 	private Cliente cli;
 	private VFichaCliente vFicha;
-	private JTextField tCodArt;
-	private JTextField tPorcent;
-	private JTextField tPrecio;
+	private JTextFieldN tCodArt;
+	private JTextFieldN tPorcent;
+	private JTextFieldN tPrecio;
 	private JLabel lPrecioReal;
 	private JComboBox<Articulo> comboArt;
 	private JButton bBorrar;
@@ -37,22 +39,23 @@ public class VFilaPrecioCliente extends JPanel {
 	public VFilaPrecioCliente(VFichaCliente vFicha,Cliente cli) {
 		this.vFicha=vFicha;
 		this.cli=cli;
+		u=new Utilidades();
 		setLayout(null);
 		
-		tCodArt = new JTextField();
+		tCodArt = new JTextFieldN(4,'n');
 		tCodArt.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		tCodArt.setBounds(10, 5, 41, 20);
 		add(tCodArt);
 		tCodArt.setColumns(10);
 		
-		tPorcent = new JTextField();
+		tPorcent = new JTextFieldN(5,'p');
 		tPorcent.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		tPorcent.setColumns(10);
 		tPorcent.setBounds(423, 5, 64, 20);
 		tPorcent.setText("0,00 %");
 		add(tPorcent);
 		
-		tPrecio = new JTextField();
+		tPrecio = new JTextFieldN(5,'m');
 		tPrecio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		tPrecio.setColumns(10);
 		tPrecio.setBounds(497, 5, 84, 20);
@@ -89,13 +92,14 @@ public class VFilaPrecioCliente extends JPanel {
 	 */
 	public void establecerControlador(ControlaFilaPrecioCli controlador) {
 		bBorrar.addActionListener(controlador);
-		Component[] componentes=getComponents();
-		JTextField jt=null;
-		for (Component componente:componentes) 
-			if (componente.getClass()==JTextField.class) {
-				jt = (JTextField) componente;
-				jt.addFocusListener(controlador);
-			}
+//		Component[] componentes=getComponents();
+//		JTextField jt=null;
+//		for (Component componente:componentes) 
+//			if (componente.getClass()==JTextField.class) {
+//				jt = (JTextField) componente;
+//				jt.addFocusListener(controlador);
+//			}
+		u.addFocusKey(this,controlador,controlador);
 		comboArt.getEditor().getEditorComponent().addFocusListener(controlador);
 	}
 

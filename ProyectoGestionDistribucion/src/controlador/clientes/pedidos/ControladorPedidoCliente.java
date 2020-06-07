@@ -1,8 +1,6 @@
 package controlador.clientes.pedidos;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-
 import entidades.Articulo;
 import entidades.Cliente;
 import entidades.FilasPedidosCliente;
@@ -25,7 +22,7 @@ import vista.clientes.pedidos.VFilaPedidoCliente;
  * @author Jose Carlos
  *
  */
-public class ControladorPedidoCliente implements InternalFrameListener, FocusListener,ActionListener{
+public class ControladorPedidoCliente implements InternalFrameListener, FocusListener{
 	private Utilidades u;
 	private GestorPedidosCliente gpc;
 	private VPedidoCliente vpedidoCliente;
@@ -97,12 +94,13 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 			filaModif=new FilasPedidosCliente();
 			VFilaPedidoCliente fil=(VFilaPedidoCliente) fila;
 			fil.updateUI();
-			if (fil.getFila()!=null)
+			if (!fil.gettCod().getText().equals("0")) {
 				asignaCamposFila(fil,filaModif,pedModif);
-			if (filasmodificadas.contains(filaModif))
-				filasmodificadas.get(filasmodificadas.indexOf(filaModif)).setCantidad(filasmodificadas.get(filasmodificadas.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
-			else
-				filasmodificadas.add(filaModif);
+				if (filasmodificadas.contains(filaModif))
+					filasmodificadas.get(filasmodificadas.indexOf(filaModif)).setCantidad(filasmodificadas.get(filasmodificadas.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+				else
+					filasmodificadas.add(filaModif);
+			}
 		}
 		pedModif.setFilasPedidosClientes(filasmodificadas);
 	}
@@ -147,15 +145,6 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 			pc.setClienteBean((Cliente) vpedidoCliente.getComboCliente().getSelectedItem());
 			vpedidoCliente.setPed(pc);
 		}
-		
-	}
-	/**
-	 * Crea un fila nueva en el pedido al pulsar el botón de nueva fila
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==vpedidoCliente.getbNuevaFila())
-			vpedidoCliente.nuevaFila();
 		
 	}
 

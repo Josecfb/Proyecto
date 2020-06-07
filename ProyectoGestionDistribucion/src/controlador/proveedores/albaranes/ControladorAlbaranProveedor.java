@@ -108,12 +108,13 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 			filaModif=new FilaAlbaranProveedor();
 			VFilaAlbaranProveedor fil=(VFilaAlbaranProveedor) fila;
 			fil.updateUI();
-			if (fil.getFila()!=null)
+			if (!fil.gettCod().getText().equals("0")) {
 				asignaCamposFila(fil,filaModif,albModif);
-			if (filasAlb.contains(filaModif))
-				filasAlb.get(filasAlb.indexOf(filaModif)).setCantidad(filasAlb.get(filasAlb.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
-			else
-				filasAlb.add(filaModif);
+				if (filasAlb.contains(filaModif))
+					filasAlb.get(filasAlb.indexOf(filaModif)).setCantidad(filasAlb.get(filasAlb.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+				else
+					filasAlb.add(filaModif);
+			}
 		}
 		albModif.setFilasAlbaranProveedors(filasAlb);
 	}
@@ -186,8 +187,6 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==vAlbaran.getbNuevaFila())
-			vAlbaran.nuevaFila();
 		if (e.getSource()==vAlbaran.getChecAlmacen()) {
 			if (vAlbaran.getChecAlmacen().isSelected())
 				gap.actualizaAlmacen(vAlbaran.getAlb(),1);

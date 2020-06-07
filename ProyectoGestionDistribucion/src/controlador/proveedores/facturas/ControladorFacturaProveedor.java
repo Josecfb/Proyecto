@@ -109,12 +109,13 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 			filaModif=new FilaFacturaProveedor();
 			VFilaFacturaProveedor fil=(VFilaFacturaProveedor) fila;
 			fil.updateUI();
-			if (fil.getFila()!=null)
+			if (!fil.gettCod().getText().equals("0")) {
 				asignaCamposFila(fil,filaModif,factModif);
-			if (filasFact.contains(filaModif))
-				filasFact.get(filasFact.indexOf(filaModif)).setCantidad(filasFact.get(filasFact.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
-			else
-				filasFact.add(filaModif);
+				if (filasFact.contains(filaModif))
+					filasFact.get(filasFact.indexOf(filaModif)).setCantidad(filasFact.get(filasFact.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+				else
+					filasFact.add(filaModif);
+			}
 		}
 		factModif.setFilasFacturasProveedors(filasFact);
 	}
@@ -186,15 +187,9 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==vFactura.getbNuevaFila())
-			vFactura.nuevaFila();
 		if (e.getSource()==vFactura.getChecPagada()) {
 			modificaFactura();
-			
 			vFactura.getChecPagada().requestFocus();
 		}
-				
-		
 	}
-	
 }

@@ -1,6 +1,7 @@
 package controlador.clientes.pedidos;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -54,7 +55,8 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 
 		Articulo art=null;
 		vFilaPedido.updateUI();
-		if (e.getSource()==vFilaPedido.getArticulo().getEditor().getEditorComponent()) {
+		if (e.getSource()==vFilaPedido.getArticulo().getEditor().getEditorComponent() && !vFilaPedido.getArticulo().getSelectedItem().equals("")) {
+			System.out.println(vFilaPedido.getArticulo().getSelectedItem());
 			vFilaPedido.updateUI();
 			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
 			vFilaPedido.getFila().setArticuloBean(art);
@@ -69,7 +71,7 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 					vFilaPedido.gettPrecio().setText(formatoeuro.format(art.getPrecioMayorista()));
 				else
 					vFilaPedido.gettPrecio().setText(formatoeuro.format(art.getPrecioMinorista()));
-			return;
+			
 		}
 		
 		if (e.getSource()==vFilaPedido.gettUnidades()) {
@@ -77,6 +79,8 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
 			vFilaPedido.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaPedido.gettUnidades().getText())*u.euroADoble(vFilaPedido.gettPrecio().getText())));
 			vFilaPedido.getvPedido().actualizaTotal();
+			if (!vFilaPedido.gettCod().getText().equals("0") && !vFilaPedido.gettUnidades().getText().equals("0") && !hayFilasVacias())
+				vFilaPedido.getvPedido().nuevaFila();
 		}
 		
 		if (e.getSource()==vFilaPedido.gettCod()) {
@@ -84,9 +88,19 @@ public class ControladorFilaPedidoCliente implements FocusListener, ActionListen
 			if (!vFilaPedido.gettCod().getText().equals("0"))
 				vFilaPedido.getArticulo().setSelectedItem(new GestorArticulo().existe(Integer.parseInt(vFilaPedido.gettCod().getText())));
 			vFilaPedido.gettCod().setBackground(Color.WHITE);
-			return;
+			
 		}
 		u.nofoco(e);
+	}
+	
+	public boolean hayFilasVacias() {
+		Component[] filas=vFilaPedido.getvPedido().getPanel().getComponents();
+		for(Component componente:filas) {
+			VFilaPedidoCliente fila=(VFilaPedidoCliente) componente;
+			if(fila.gettCod().getText().equals("0"))
+				return true;
+		}
+		return false;
 	}
 	
 	/**

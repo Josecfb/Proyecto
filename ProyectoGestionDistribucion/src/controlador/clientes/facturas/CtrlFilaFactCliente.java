@@ -1,6 +1,7 @@
 package controlador.clientes.facturas;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -59,7 +60,7 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener, KeyLi
 
 		Articulo art=null;
 		vFilaFact.updateUI();
-		if (e.getSource()==vFilaFact.getArticulo().getEditor().getEditorComponent()) {
+		if (e.getSource()==vFilaFact.getArticulo().getEditor().getEditorComponent() && vFilaFact.getArticulo().getSelectedItem()!=null) {
 			vFilaFact.updateUI();
 			art=(Articulo) vFilaFact.getArticulo().getSelectedItem();
 			vFilaFact.getFila().setArticuloBean(art);
@@ -74,7 +75,6 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener, KeyLi
 					vFilaFact.getTPrecio().setText(formatoeuro.format(art.getPrecioMinorista()));
 			vFilaFact.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaFact.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
-			return;
 		}
 		
 		if (e.getSource()==vFilaFact.gettCod()) {
@@ -90,9 +90,20 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener, KeyLi
 			vFilaFact.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaFact.gettUnidades().getText())*u.euroADoble(vFilaFact.getTPrecio().getText())));
 			vFilaFact.gettUnidades().setBackground(Color.WHITE);
 			vFilaFact.getvFactura().actualizaTotal();
-			return;
+			if (!vFilaFact.gettCod().getText().equals("0") && !vFilaFact.gettUnidades().getText().equals("0") && !hayFilasVacias())
+				vFilaFact.getvFactura().nuevaFila();
 		}
 		u.nofoco(e);
+	}
+	
+	public boolean hayFilasVacias() {
+		Component[] filas=vFilaFact.getvFactura().getPanel().getComponents();
+		for(Component componente:filas) {
+			VFilaFacturaCliente fila=(VFilaFacturaCliente) componente;
+			if(fila.gettCod().getText().equals("0"))
+				return true;
+		}
+		return false;
 	}
 	
 	/**

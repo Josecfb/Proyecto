@@ -3,7 +3,6 @@ package vista.proveedores.albaranes;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JComboBox;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -14,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
-
 import controlador.proveedores.albaranes.ControladorAlbaranProveedor;
 import controlador.proveedores.albaranes.CtrlFilaAlbProve;
 import entidades.AlbaranProveedor;
@@ -22,12 +20,9 @@ import entidades.FilaAlbaranProveedor;
 import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 import util.Utilidades;
-
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import javax.swing.JCheckBox;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
 /**
  * Ventana del albarán de proveedor
@@ -48,7 +43,6 @@ public class VAlbaranProveedor extends JInternalFrame {
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumAlb;
 	private JCheckBox checAlmacen;
-	private JButton bNuevaFila;
 	private Utilidades u;
 
 	/**
@@ -181,11 +175,6 @@ public class VAlbaranProveedor extends JInternalFrame {
 		checAlmacen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		checAlmacen.setBounds(311, 61, 141, 23);
 		getContentPane().add(checAlmacen);
-
-		bNuevaFila = new JButton("");
-		bNuevaFila.setBounds(578, 60, 35, 35);
-		bNuevaFila.setIcon(new ImageIcon("src/img/nuevafila.png"));
-		getContentPane().add(bNuevaFila);
 		
 		JLabel lblBase = new JLabel("Base");
 		lblBase.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -210,6 +199,8 @@ public class VAlbaranProveedor extends JInternalFrame {
 		muestraFilas(alb);
 		if (alb!=null)
 			llenaFicha();
+		if (alb.getFilasAlbaranProveedors().size()==0)
+			nuevaFila();
 		
 	}
 	/**
@@ -300,7 +291,6 @@ public class VAlbaranProveedor extends JInternalFrame {
 	public void establecerControlador(ControladorAlbaranProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);
-		bNuevaFila.addActionListener(controlador);
 		checAlmacen.addActionListener(controlador);
 	}
 	
@@ -327,10 +317,6 @@ public class VAlbaranProveedor extends JInternalFrame {
 
 	public JPanel getPanel() {
 		return panel;
-	}
-
-	public JButton getbNuevaFila() {
-		return bNuevaFila;
 	}
 
 	public VAlbaranesProveedores getvAlbsPro() {

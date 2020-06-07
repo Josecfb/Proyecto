@@ -4,7 +4,6 @@ package vista.clientes.albaranes;
 import javax.swing.JInternalFrame;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -23,12 +22,9 @@ import entidades.Cliente;
 import entidades.FilasAlbaranCliente;
 import modelo.negocio.GestorCliente;
 import util.Utilidades;
-
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import javax.swing.JCheckBox;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
 /**
  * Vista de la ventana de albarán de cliente
@@ -49,7 +45,6 @@ public class VAlbaranCliente extends JInternalFrame {
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumAlb;
 	private JCheckBox checAlmacen, checFacturado;
-	private JButton bNuevaFila;
 	private Utilidades u;
 
 	/**
@@ -174,11 +169,6 @@ public class VAlbaranCliente extends JInternalFrame {
 		checAlmacen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		checAlmacen.setBounds(311, 61, 105, 23);
 		getContentPane().add(checAlmacen);
-
-		bNuevaFila = new JButton("");
-		bNuevaFila.setBounds(578, 60, 35, 35);
-		bNuevaFila.setIcon(new ImageIcon("src/img/nuevafila.png"));
-		getContentPane().add(bNuevaFila);
 		
 		JLabel lblBase = new JLabel("Base");
 		lblBase.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -206,8 +196,11 @@ public class VAlbaranCliente extends JInternalFrame {
 		setTitle("Albaran Cliente");
 		//contrAlbPro.articulosPendientesPedido(alb);
 		muestraFilas(alb);
-		if (alb!=null)
+		if (alb!=null) {
 			llenaFicha();
+		}
+		if (alb.getFilasAlbaranClientes().size()==0)
+			nuevaFila();
 		
 	}
 	/**
@@ -237,8 +230,8 @@ public class VAlbaranCliente extends JInternalFrame {
 			tNumAlb.setFocusable(false);
 			comboCliente.setFocusable(false);
 		}
-
 	}
+	
 	/**
 	 * Muestra las filas del albarán
 	 * @param albaran Objeto AlbaranCliente
@@ -304,7 +297,6 @@ public class VAlbaranCliente extends JInternalFrame {
 	public void establecerControlador(ControladorAlbaranCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);
-		bNuevaFila.addActionListener(controlador);
 		checAlmacen.addActionListener(controlador);
 	}
 	
@@ -336,10 +328,6 @@ public class VAlbaranCliente extends JInternalFrame {
 
 	public JPanel getPanel() {
 		return panel;
-	}
-
-	public JButton getbNuevaFila() {
-		return bNuevaFila;
 	}
 
 	public VAlbaranesClientes getvAlbsCli() {

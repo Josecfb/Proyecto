@@ -1,6 +1,7 @@
 package controlador.proveedores.facturas;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -53,7 +54,7 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener, KeyList
 
 		Articulo art=null;
 		vFilaFact.updateUI();
-		if (e.getSource()==vFilaFact.getArticulo().getEditor().getEditorComponent()) {
+		if (e.getSource()==vFilaFact.getArticulo().getEditor().getEditorComponent() && vFilaFact.getArticulo().getSelectedItem()!=null ) {
 			vFilaFact.updateUI();
 			art=(Articulo) vFilaFact.getArticulo().getSelectedItem();
 			vFilaFact.getFila().setArticuloBean(art);
@@ -61,29 +62,33 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener, KeyList
 			vFilaFact.gettCoste().setText(formatoeuro.format(art.getCoste())); 
 			vFilaFact.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaFact.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
-			return;
 		}
 		
 		if (e.getSource()==vFilaFact.gettCod()) {
 			vFilaFact.updateUI();
 			if (!vFilaFact.gettCod().getText().equals("0"))
 				vFilaFact.getArticulo().setSelectedItem(new GestorArticulo().existe(Integer.parseInt(vFilaFact.gettCod().getText())));
-			vFilaFact.gettCod().setBackground(Color.WHITE);
-			return;
 		}
-		if (e.getSource()==vFilaFact.gettCajas()) {
+		if (e.getSource()==vFilaFact.gettCajas() && !vFilaFact.gettCajas().getText().equals("0")) {
 			vFilaFact.updateUI();
 			art=(Articulo) vFilaFact.getArticulo().getSelectedItem();
 			vFilaFact.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaFact.gettCajas().getText())*art.getUnidadesCaja()));
 			vFilaFact.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaFact.gettUnidades().getText())*u.euroADoble(vFilaFact.gettCoste().getText())));
-			vFilaFact.gettCajas().setBackground(Color.WHITE);
 			vFilaFact.getvFactura().actualizaTotal();
-			return;
-		}
-		if (e.getSource()==vFilaFact.gettCoste()) {
-			vFilaFact.gettCoste().setText(u.noFocoEuro(vFilaFact.gettCoste().getText()));
+			if (!vFilaFact.gettCod().getText().equals("0") && !vFilaFact.gettCajas().getText().equals("0") && !hayFilasVacias())
+				vFilaFact.getvFactura().nuevaFila();
 		}
 		u.nofoco(e);
+	}
+	
+	public boolean hayFilasVacias() {
+		Component[] filas=vFilaFact.getvFactura().getPanel().getComponents();
+		for(Component componente:filas) {
+			VFilaFacturaProveedor fila=(VFilaFacturaProveedor) componente;
+			if(fila.gettCod().getText().equals("0"))
+				return true;
+		}
+		return false;
 	}
 	/**
 	 * Borra una fila de la factura

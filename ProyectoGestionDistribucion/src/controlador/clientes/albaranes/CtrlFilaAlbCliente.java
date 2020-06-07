@@ -1,6 +1,7 @@
 package controlador.clientes.albaranes;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -49,7 +50,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyLis
 	public void focusLost(FocusEvent e){
 		Articulo art=null;
 		vFilaAlb.updateUI();
-		if (e.getSource()==vFilaAlb.getArticulo().getEditor().getEditorComponent()) {
+		if (e.getSource()==vFilaAlb.getArticulo().getEditor().getEditorComponent() && vFilaAlb.getArticulo().getSelectedItem()!=null) {
 			vFilaAlb.updateUI();
 			art=(Articulo) vFilaAlb.getArticulo().getSelectedItem();
 			vFilaAlb.getFila().setArticuloBean(art);
@@ -65,7 +66,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyLis
 					vFilaAlb.gettPrecio().setText(formatoeuro.format(art.getPrecioMinorista()));
 			vFilaAlb.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaAlb.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
-			return;
+			
 		}
 		
 		if (e.getSource()==vFilaAlb.gettCod()) {
@@ -73,7 +74,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyLis
 			if (!vFilaAlb.gettCod().getText().equals("0"))
 				vFilaAlb.getArticulo().setSelectedItem(new GestorArticulo().existe(Integer.parseInt(vFilaAlb.gettCod().getText())));
 			vFilaAlb.gettCod().setBackground(Color.WHITE);
-			return;
+			
 		}
 		/**
 		 * Al perder foco los campos recuperan su color original y al salir de las unidades calcula los totales
@@ -84,9 +85,20 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyLis
 			vFilaAlb.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaAlb.gettUnidades().getText())*u.euroADoble(vFilaAlb.gettPrecio().getText())));
 			vFilaAlb.gettUnidades().setBackground(Color.WHITE);
 			vFilaAlb.getvAlbaran().actualizaTotal();
-			return;
+			if (!vFilaAlb.gettCod().getText().equals("0") && !vFilaAlb.gettUnidades().getText().equals("0") && !hayFilasVacias())
+				vFilaAlb.getvAlbaran().nuevaFila();
 		}
 		u.nofoco(e);
+	}
+	
+	public boolean hayFilasVacias() {
+		Component[] filas=vFilaAlb.getvAlbaran().getPanel().getComponents();
+		for(Component componente:filas) {
+			VFilaAlbaranCliente fila=(VFilaAlbaranCliente) componente;
+			if(fila.gettCod().getText().equals("0"))
+				return true;
+		}
+		return false;
 	}
 	
 	/**

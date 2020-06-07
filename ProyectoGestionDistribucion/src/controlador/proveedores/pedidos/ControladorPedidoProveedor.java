@@ -1,8 +1,6 @@
 package controlador.proveedores.pedidos;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-
 import entidades.Articulo;
 import entidades.FilaPedidoProveedor;
 import entidades.FilasPedidosProveedorPK;
@@ -26,7 +23,7 @@ import vista.proveedores.pedidos.VPedidoProveedor;
  * @author Jose Carlos
  *
  */
-public class ControladorPedidoProveedor implements InternalFrameListener, FocusListener,ActionListener{
+public class ControladorPedidoProveedor implements InternalFrameListener, FocusListener{
 	private GestorPedidosProve gpp;
 	private VPedidoProveedor vpedidoProveedor;
 	private List<FilaPedidoProveedor> filasmodificadas;
@@ -106,7 +103,8 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 	 */
 	private void asignaCampos(PedidoProveedor pedModif) {
 		pedModif.setFecha(vpedidoProveedor.getcFecha().getDate());
-		pedModif.setProveedore((Proveedor) vpedidoProveedor.getComboProveedor().getSelectedItem());
+		if (!vpedidoProveedor.getComboProveedor().getSelectedItem().equals("")) 
+			pedModif.setProveedore((Proveedor) vpedidoProveedor.getComboProveedor().getSelectedItem());
 		pedModif.setConfirmado(vpedidoProveedor.getChecConfirmado().isSelected());
 		pedModif.setEnviado(vpedidoProveedor.getChecEnviado().isSelected());
 		ponFilas(pedModif);
@@ -127,13 +125,14 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 			filaModif=new FilaPedidoProveedor();
 			VFilaPedidoProveedor fil=(VFilaPedidoProveedor) fila;
 			fil.updateUI();
-			if (fil.getFila()!=null)
+			if (!fil.gettCod().getText().equals("0")) {
 				asignaCamposFila(fil,filaModif,pedModif);
-			//si no está la añade y si está le suma la cantidad
-			if (!filasmodificadas.contains(filaModif))
-				filasmodificadas.add(filaModif);
-			else
-				filasmodificadas.get(filasmodificadas.indexOf(filaModif)).setCantidad(filasmodificadas.get(filasmodificadas.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+				//si no está la añade y si está le suma la cantidad
+				if (!filasmodificadas.contains(filaModif))
+					filasmodificadas.add(filaModif);
+				else
+					filasmodificadas.get(filasmodificadas.indexOf(filaModif)).setCantidad(filasmodificadas.get(filasmodificadas.indexOf(filaModif)).getCantidad()+filaModif.getCantidad());
+			}
 		}
 		pedModif.setFilaPedidoProveedor(filasmodificadas);
 	}
@@ -170,11 +169,12 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
-		if (arg0.getSource()==vpedidoProveedor.getComboProveedor().getEditor().getEditorComponent() && vpedidoProveedor.getComboProveedor().getSelectedItem()!=null) {
+		if (arg0.getSource()==vpedidoProveedor.getComboProveedor().getEditor().getEditorComponent() && !vpedidoProveedor.getComboProveedor().getSelectedItem().equals("")) {
 			vpedidoProveedor.getPanel().updateUI();
 			PedidoProveedor pp=new PedidoProveedor();
 			pp.setProveedore((Proveedor) vpedidoProveedor.getComboProveedor().getSelectedItem());
 			vpedidoProveedor.setPed(pp);
+			vpedidoProveedor.nuevaFila();
 		}
 		
 	}
@@ -216,14 +216,6 @@ public class ControladorPedidoProveedor implements InternalFrameListener, FocusL
 		// TODO Auto-generated method stub
 		
 	}
-	/**
-	 * Crea una nueva fila en la ventana del pedido
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==vpedidoProveedor.getbNuevaFila())
-			vpedidoProveedor.nuevaFila();
-		
-	}
+
 	
 }

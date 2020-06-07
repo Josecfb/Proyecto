@@ -19,12 +19,9 @@ import entidades.FacturaCliente;
 import entidades.FilaFacturaCliente;
 import modelo.negocio.GestorCliente;
 import util.Utilidades;
-
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import javax.swing.JCheckBox;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
 /**
  * Vista de la ventana de la factura de cliente
@@ -45,7 +42,6 @@ public class VFacturaCliente extends JInternalFrame {
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumFact;
 	private JCheckBox checPagada;
-	private JButton bNuevaFila;
 	private Utilidades u;
 
 	/**
@@ -170,11 +166,6 @@ public class VFacturaCliente extends JInternalFrame {
 		checPagada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		checPagada.setBounds(311, 61, 141, 23);
 		getContentPane().add(checPagada);
-
-		bNuevaFila = new JButton("");
-		bNuevaFila.setBounds(578, 60, 35, 35);
-		bNuevaFila.setIcon(new ImageIcon("src/img/nuevafila.png"));
-		getContentPane().add(bNuevaFila);
 		
 		JLabel lblBase = new JLabel("Base");
 		lblBase.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -199,7 +190,8 @@ public class VFacturaCliente extends JInternalFrame {
 		muestraFilas(fact);
 		if (fact!=null)
 			llenaFicha();
-		
+		if (fact.getFilasFacturasClientes().size()==0)
+			nuevaFila();
 	}
 	/**
 	 * Crea una nueva fila en la ventana de factura de cliente
@@ -287,7 +279,6 @@ public class VFacturaCliente extends JInternalFrame {
 	public void establecerControlador(ControladorFacturaCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);
-		bNuevaFila.addActionListener(controlador);
 		checPagada.addActionListener(controlador);
 	}
 	
@@ -316,10 +307,7 @@ public class VFacturaCliente extends JInternalFrame {
 		return panel;
 	}
 
-	public JButton getbNuevaFila() {
-		return bNuevaFila;
-	}
-	
+
 	public VFacturasClientes getvFactsPro() {
 		return vFactsCli;
 	}

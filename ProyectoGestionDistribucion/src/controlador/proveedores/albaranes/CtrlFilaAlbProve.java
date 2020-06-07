@@ -1,6 +1,7 @@
 package controlador.proveedores.albaranes;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -9,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.NumberFormat;
 import javax.swing.JTextField;
-
 import entidades.Articulo;
 import modelo.negocio.GestorArticulo;
 import util.Utilidades;
@@ -57,7 +57,7 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener, KeyListe
 
 		Articulo art=null;
 		vFilaAlb.updateUI();
-		if (e.getSource()==vFilaAlb.getArticulo().getEditor().getEditorComponent()) {
+		if (e.getSource()==vFilaAlb.getArticulo().getEditor().getEditorComponent() && vFilaAlb.getArticulo().getSelectedItem()!=null) {
 			vFilaAlb.updateUI();
 			art=(Articulo) vFilaAlb.getArticulo().getSelectedItem();
 			vFilaAlb.getFila().setArticuloBean(art);
@@ -65,7 +65,6 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener, KeyListe
 			vFilaAlb.gettCoste().setText(formatoeuro.format(art.getCoste())); 
 			vFilaAlb.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaAlb.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
-			return;
 		}
 		
 		if (e.getSource()==vFilaAlb.gettCod()) {
@@ -73,18 +72,28 @@ public class CtrlFilaAlbProve implements FocusListener, ActionListener, KeyListe
 			if (!vFilaAlb.gettCod().getText().equals("0"))
 				vFilaAlb.getArticulo().setSelectedItem(new GestorArticulo().existe(Integer.parseInt(vFilaAlb.gettCod().getText())));
 			vFilaAlb.gettCod().setBackground(Color.WHITE);
-			return;
 		}
-		if (e.getSource()==vFilaAlb.gettCajas()) {
+		if (e.getSource()==vFilaAlb.gettCajas() && !vFilaAlb.gettCajas().getText().equals("0")) {
 			vFilaAlb.updateUI();
 			art=(Articulo) vFilaAlb.getArticulo().getSelectedItem();
 			vFilaAlb.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaAlb.gettCajas().getText())*art.getUnidadesCaja()));
 			vFilaAlb.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaAlb.gettUnidades().getText())*u.euroADoble(vFilaAlb.gettCoste().getText())));
 			vFilaAlb.gettCajas().setBackground(Color.WHITE);
 			vFilaAlb.getvAlbaran().actualizaTotal();
-			return;
+			if (!vFilaAlb.gettCod().getText().equals("0") && !vFilaAlb.gettCajas().getText().equals("0") && !hayFilasVacias())
+				vFilaAlb.getvAlbaran().nuevaFila();
 		}
 		u.nofoco(e);
+	}
+	
+	public boolean hayFilasVacias() {
+		Component[] filas=vFilaAlb.getvAlbaran().getPanel().getComponents();
+		for(Component componente:filas) {
+			VFilaAlbaranProveedor fila=(VFilaAlbaranProveedor) componente;
+			if(fila.gettCod().getText().equals("0"))
+				return true;
+		}
+		return false;
 	}
 	
 	/**

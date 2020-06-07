@@ -1,6 +1,7 @@
 package controlador.proveedores.pedidos;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -51,7 +52,7 @@ public class ControladorFilaPedidoProveedor implements FocusListener, ActionList
 
 		Articulo art=null;
 		vFilaPedido.updateUI();
-		if (e.getSource()==vFilaPedido.getArticulo().getEditor().getEditorComponent()) {
+		if (e.getSource()==vFilaPedido.getArticulo().getEditor().getEditorComponent() && vFilaPedido.getArticulo().getSelectedItem()!=null) {
 			vFilaPedido.updateUI();
 			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
 			vFilaPedido.getFila().setArticuloBean(art);
@@ -59,7 +60,6 @@ public class ControladorFilaPedidoProveedor implements FocusListener, ActionList
 			vFilaPedido.gettCoste().setText(formatoeuro.format(art.getCoste())); 
 			vFilaPedido.gettCod().setText(String.valueOf(art.getCod()));
 			vFilaPedido.getArticulo().getEditor().getEditorComponent().setBackground(Color.WHITE);
-			return;
 		}
 		
 		if (e.getSource()==vFilaPedido.gettCod()) {
@@ -68,21 +68,29 @@ public class ControladorFilaPedidoProveedor implements FocusListener, ActionList
 			if (!vFilaPedido.gettCod().getText().equals("0"))
 				vFilaPedido.getArticulo().setSelectedItem(ga.existe(Integer.parseInt(vFilaPedido.gettCod().getText()),(Proveedor)vFilaPedido.getvPedido().getComboProveedor().getSelectedItem()));
 			vFilaPedido.gettCod().setBackground(Color.WHITE);
-			return;
 		}
-		if (e.getSource()==vFilaPedido.gettCajas()) {
+		if (e.getSource()==vFilaPedido.gettCajas()  && !vFilaPedido.gettCajas().getText().equals("0")) {
 			vFilaPedido.updateUI();
 			art=(Articulo) vFilaPedido.getArticulo().getSelectedItem();
 			vFilaPedido.gettUnidades().setText(String.valueOf(Integer.parseInt(vFilaPedido.gettCajas().getText())*art.getUnidadesCaja()));
 			vFilaPedido.gettTotal().setText(formatoeuro.format(Integer.parseInt(vFilaPedido.gettUnidades().getText())*u.euroADoble(vFilaPedido.gettCoste().getText())));
 			vFilaPedido.gettCajas().setBackground(Color.WHITE);
 			vFilaPedido.getvPedido().actualizaTotal();
-			return;
+			if (!vFilaPedido.gettCod().getText().equals("0") && !vFilaPedido.gettCajas().getText().equals("0") && !hayFilasVacias())
+				vFilaPedido.getvPedido().nuevaFila();
 		}
 		u.nofoco(e);
 	}
 	
-	
+	public boolean hayFilasVacias() {
+		Component[] filas=vFilaPedido.getvPedido().getPanel().getComponents();
+		for(Component componente:filas) {
+			VFilaPedidoProveedor fila=(VFilaPedidoProveedor) componente;
+			if(fila.gettCod().getText().equals("0"))
+				return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Cuando se pulsa el botón borrar fila elimina la fila del pedido

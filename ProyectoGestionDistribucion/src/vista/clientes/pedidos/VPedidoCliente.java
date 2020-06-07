@@ -2,7 +2,6 @@ package vista.clientes.pedidos;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JComboBox;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -13,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
-
 import controlador.clientes.pedidos.ControladorFilaPedidoCliente;
 import controlador.clientes.pedidos.ControladorPedidoCliente;
 import entidades.Cliente;
@@ -21,13 +19,11 @@ import entidades.FilasPedidosCliente;
 import entidades.PedidoCliente;
 import modelo.negocio.GestorCliente;
 import util.Utilidades;
-
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
-
 import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 /**
  * Ventana de pedido de cliente
  * @author Jose Carlos
@@ -48,7 +44,6 @@ public class VPedidoCliente extends JInternalFrame {
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumpedido;
 	private JCheckBox checEnviado;
-	private JButton bNuevaFila;
 
 	/**
 	 * El constructor recibe el objeto PedidoCliente y la ventana del listado de pedidos de cliente
@@ -165,11 +160,6 @@ public class VPedidoCliente extends JInternalFrame {
 		checEnviado.setBounds(442, 61, 97, 23);
 		getContentPane().add(checEnviado);
 		
-		bNuevaFila = new JButton("");
-		bNuevaFila.setBounds(578, 60, 35, 35);
-		bNuevaFila.setIcon(new ImageIcon("src/img/nuevafila.png"));
-		getContentPane().add(bNuevaFila);
-		
 		setTitle("Pedido Cliente");
 		contrPedCli.articulosPendientesPedido(ped);
 		muestraFilas(ped);
@@ -249,7 +239,6 @@ public class VPedidoCliente extends JInternalFrame {
 	public void establecerControlador(ControladorPedidoCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);
-		bNuevaFila.addActionListener(controlador);
 	}
 	
 	
@@ -285,9 +274,5 @@ public class VPedidoCliente extends JInternalFrame {
 
 	public void setPed(PedidoCliente ped) {
 		this.ped = ped;
-	}
-
-	public JButton getbNuevaFila() {
-		return bNuevaFila;
 	}
 }

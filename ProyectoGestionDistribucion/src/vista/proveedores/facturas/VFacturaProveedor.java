@@ -1,9 +1,7 @@
 package vista.proveedores.facturas;
 
-
 import javax.swing.JInternalFrame;
 import javax.swing.JComboBox;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -14,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
-
 import controlador.proveedores.facturas.ControladorFacturaProveedor;
 import controlador.proveedores.facturas.CtrlFilaFactProve;
 import entidades.FacturaProveedor;
@@ -22,12 +19,9 @@ import entidades.FilaFacturaProveedor;
 import entidades.Proveedor;
 import modelo.negocio.GestorProveedor;
 import util.Utilidades;
-
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import javax.swing.JCheckBox;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
 /**
  * Ventana de factura de proveedor
@@ -48,7 +42,6 @@ public class VFacturaProveedor extends JInternalFrame {
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumFact;
 	private JCheckBox checPagada;
-	private JButton bNuevaFila;
 	private Utilidades u;
 
 	/**
@@ -181,11 +174,6 @@ public class VFacturaProveedor extends JInternalFrame {
 		checPagada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		checPagada.setBounds(311, 61, 141, 23);
 		getContentPane().add(checPagada);
-
-		bNuevaFila = new JButton("");
-		bNuevaFila.setBounds(578, 60, 35, 35);
-		bNuevaFila.setIcon(new ImageIcon("src/img/nuevafila.png"));
-		getContentPane().add(bNuevaFila);
 		
 		JLabel lblBase = new JLabel("Base");
 		lblBase.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -210,6 +198,8 @@ public class VFacturaProveedor extends JInternalFrame {
 		muestraFilas(fact);
 		if (fact!=null)
 			llenaFicha();
+		if (fact.getFilasFacturasProveedors().size()==0)
+			nuevaFila();
 		
 	}
 	/**
@@ -300,7 +290,6 @@ public class VFacturaProveedor extends JInternalFrame {
 	public void establecerControlador(ControladorFacturaProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);
-		bNuevaFila.addActionListener(controlador);
 		checPagada.addActionListener(controlador);
 	}
 	
@@ -327,10 +316,6 @@ public class VFacturaProveedor extends JInternalFrame {
 
 	public JPanel getPanel() {
 		return panel;
-	}
-
-	public JButton getbNuevaFila() {
-		return bNuevaFila;
 	}
 	
 	public VFacturasProveedores getvFactsPro() {

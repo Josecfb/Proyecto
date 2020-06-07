@@ -3,7 +3,6 @@ package vista.proveedores.pedidos;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JComboBox;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -14,11 +13,8 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
 import com.toedter.calendar.JDateChooser;
-
 import controlador.proveedores.pedidos.ControladorFilaPedidoProveedor;
 import controlador.proveedores.pedidos.ControladorPedidoProveedor;
 import entidades.FilaPedidoProveedor;
@@ -30,8 +26,7 @@ import util.Utilidades;
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import javax.swing.JCheckBox;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 /**
  * Ventana de pedido de proveedor
  * @author Jose Carlos
@@ -52,7 +47,6 @@ public class VPedidoProveedor extends JInternalFrame {
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumpedido;
 	private JCheckBox checConfirmado, checEnviado;
-	private JButton bNuevaFila;
 	private Utilidades u;
 
 	/**
@@ -182,16 +176,12 @@ public class VPedidoProveedor extends JInternalFrame {
 		checEnviado.setBounds(442, 61, 97, 23);
 		getContentPane().add(checEnviado);
 		
-		bNuevaFila = new JButton("");
-		bNuevaFila.setBounds(578, 60, 35, 35);
-		bNuevaFila.setIcon(new ImageIcon("src/img/nuevafila.png"));
-		getContentPane().add(bNuevaFila);
-		
 		setTitle("Pedido Proveedor");
 		contrPedPro.articulosPendientesPedido(ped);
 		muestraFilas(ped);
 		if (ped!=null)
 			llenaFicha();
+		
 		
 	}
 	/**
@@ -270,7 +260,6 @@ public class VPedidoProveedor extends JInternalFrame {
 	public void establecerControlador(ControladorPedidoProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);
-		bNuevaFila.addActionListener(controlador);
 	}
 	
 	
@@ -310,9 +299,5 @@ public class VPedidoProveedor extends JInternalFrame {
 
 	public void setPed(PedidoProveedor ped) {
 		this.ped = ped;
-	}
-
-	public JButton getbNuevaFila() {
-		return bNuevaFila;
 	}
 }

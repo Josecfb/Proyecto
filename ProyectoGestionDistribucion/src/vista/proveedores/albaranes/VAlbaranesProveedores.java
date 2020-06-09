@@ -109,7 +109,6 @@ public class VAlbaranesProveedores extends JInternalFrame {
 		scrollGenerados.setViewportView(panelGenerados);
 		scrollEnAlmacen.setViewportView(panelEnAlmacen);
 		scrollFacturados.setViewportView(panelFacturados);
-		
 		for (AlbaranProveedor fila:lista) {
 			Proveedor pro=fila.getProveedore();
 			filaAlb=new VFilaAlbaranesProveedores(fila,this);

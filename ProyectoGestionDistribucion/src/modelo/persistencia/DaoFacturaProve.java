@@ -107,7 +107,7 @@ public class DaoFacturaProve {
 	public List<FacturaProveedor> listarFacturas(){
 		abrir();
 		if (em==null) return null;
-		List<FacturaProveedor> lista=em.createQuery("select fact from FacturaProveedor fact order by fact.fecha desc").getResultList();
+		List<FacturaProveedor> lista=em.createQuery("select fact from FacturaProveedor fact order by fact.fecha desc, fact.num desc").getResultList();
 		em.close();
 		return lista;
 	}

@@ -73,10 +73,11 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener, Key
 			System.out.println(porcen);
 			vFilaPre.gettPorcent().setText(formatoPorcentaje.format(porcen));
 			vFilaPre.getComboArt().getEditor().getEditorComponent().setBackground(Color.WHITE);
-			return;
 		}
-		
-		
+		if (e.getSource()==vFilaPre.gettPorcent())
+			vFilaPre.gettPrecio().setText(formatoeuro.format(u.euroADoble(vFilaPre.getlPrecioReal().getText())*(1-u.porcentajeADoble(vFilaPre.gettPorcent().getText()))));
+		if (e.getSource()==vFilaPre.gettPrecio())
+			vFilaPre.gettPorcent().setText(formatoPorcentaje.format((u.euroADoble(vFilaPre.getlPrecioReal().getText())-u.euroADoble(vFilaPre.gettPrecio().getText()))/u.euroADoble((vFilaPre.getlPrecioReal().getText()))));
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {

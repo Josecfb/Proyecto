@@ -30,8 +30,6 @@ public class VFichaEmpresa extends JInternalFrame {
 	private JTextField tNif;
 	private JTextField tPoblacion;
 	private JPanel panel;
-	private JPanel panel_1;
-	private JTextField tColor;
 	/**
 	 * El constructor recibe el objeto entidad Datosempresa
 	 * @param dat objeto entidad Datosempresa
@@ -160,15 +158,6 @@ public class VFichaEmpresa extends JInternalFrame {
 		tNif.setColumns(10);
 		tNif.setBounds(583, 267, 159, 25);
 		panel.add(tNif);
-		
-		panel_1 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_1, null);
-		
-		panel_1.setLayout(null);
-		
-		tColor = new JTextField();
-		tColor.setBounds(78, 61, 86, 20);
-		panel_1.add(tColor);
 		
 		if (dat!=null)
 			setTitle("Ficha de "+dat.getNombre());

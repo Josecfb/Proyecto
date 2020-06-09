@@ -205,9 +205,6 @@ public class VFichaProveedor extends JInternalFrame {
 		tNif.setColumns(10);
 		tNif.setBounds(583, 267, 159, 25);
 		panel.add(tNif);
-		
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Facturas", null, panel_1, null);
 		bBorrar = new JButton("");
 		bBorrar.setBounds(924, 385, 49, 51);
 		getContentPane().add(bBorrar);

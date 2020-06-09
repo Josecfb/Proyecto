@@ -31,9 +31,9 @@
 		<class>entidades.Provincia</class>
 		<class>entidades.Datosempresa</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/GestionDistribucion"/>
-			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="$Mis2Perro"/>
+			<property name="javax.persistence.jdbc.url" value='jdbc:mysql://34.240.118.15:5306/GestionDistribucion'/>
+			<property name="javax.persistence.jdbc.user" value="userprog"/>
+			<property name="javax.persistence.jdbc.password" value="itt7648_"/>
 		</properties>
 	</persistence-unit>
 </persistence>

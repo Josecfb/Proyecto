@@ -150,7 +150,8 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 				gac.actualizaAlmacen(vAlbaran.getAlb(),-1);
 			else
 				gac.actualizaAlmacen(vAlbaran.getAlb(),1);
-			modificaAlbaran();
+			vAlbaran.getAlb().setActualizadoAlmacen(vAlbaran.getChecAlmacen().isSelected());
+			vAlbaran.muestraFilas(vAlbaran.getAlb());
 			vAlbaran.getChecAlmacen().requestFocus();
 		}
 	}

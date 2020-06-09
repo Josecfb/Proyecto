@@ -45,7 +45,7 @@ public class PdfFacturaCliente {
 		Document factura=new Document();
 		DaoDatosEmpresa de=new DaoDatosEmpresa();
 		Datosempresa empresa=de.empresa();
-		DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
 		String archivo="src/facturasclientepdf/"+fac.getNum()+"_"+formatoFecha.format(fac.getFecha())+"_"+fac.getCliente().getNombre()+".pdf";
 		try {
 			FileOutputStream ficheroPdf = new FileOutputStream(archivo);
@@ -113,15 +113,17 @@ public class PdfFacturaCliente {
 			factura.add(new Paragraph(" ",FontFactory.getFont("arial",10)));
 			PdfPTable tabla = new PdfPTable(5);
 			float[] anchoCols = new float[5];
-			anchoCols[0]=50f;
-			anchoCols[1]=200f;
-			anchoCols[2]=50f;
-			anchoCols[3]=50f;
-			anchoCols[4]=50f;
+			anchoCols[0]=80f;
+			anchoCols[1]=360f;
+			anchoCols[2]=90f;
+			anchoCols[3]=90f;
+			anchoCols[4]=90f;
 			tabla.setWidths(anchoCols);
 			PdfPCell[] celda=new PdfPCell[5];
-			for (int i=0;i<celda.length;i++)
+			for (int i=0;i<celda.length;i++) {
 				celda[i]=new PdfPCell();
+				
+			}
 			celda[0].setPhrase(new Phrase("Código"));
 			celda[1].setPhrase(new Phrase("Nombre del Artículo"));
 			celda[2].setPhrase(new Phrase("Cantidad"));
@@ -144,8 +146,8 @@ public class PdfFacturaCliente {
 			celda[4].setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 			double base=0;
 			for (FilaFacturaCliente fila:filas) {
-				celda[0].setPhrase(new Phrase(String.valueOf(fila.getArticuloBean().getCodpro())));
-				celda[1].setPhrase(new Phrase(fila.getArticuloBean().getNombre()));
+				celda[0].setPhrase(new Phrase(String.valueOf(fila.getArticuloBean().getCod())));
+				celda[1].setPhrase(new Phrase(fila.getArticuloBean().getNombre().substring(0, 1)+fila.getArticuloBean().getNombre().substring(1, fila.getArticuloBean().getNombre().length()).toLowerCase()));
 				celda[2].setPhrase(new Phrase(String.valueOf(fila.getCantidad())));
 				celda[3].setPhrase(new Phrase(formatoeuro.format(fila.getPrecio())));
 				celda[4].setPhrase(new Phrase(formatoeuro.format(fila.getCantidad()*fila.getPrecio())));

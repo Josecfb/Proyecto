@@ -63,7 +63,7 @@ public class VFacturasProveedores extends JInternalFrame {
 	 */
 	public void muestraFacturas(List<FacturaProveedor> lista) {
 		panelGeneradas = new JPanel();
-		panelGeneradas.setPreferredSize(new Dimension(650,lista.size()*30));
+		panelGeneradas.setPreferredSize(new Dimension(650,lista.size()*40));
 		panelGeneradas.setBackground(Color.WHITE);
 		panelGeneradas.setBorder(null);
 

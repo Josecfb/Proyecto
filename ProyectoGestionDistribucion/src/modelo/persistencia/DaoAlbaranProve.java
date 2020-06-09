@@ -94,7 +94,7 @@ public class DaoAlbaranProve {
 	public List<AlbaranProveedor> listarAlbaranes(){
 		abrir();
 		if (em==null) return null;
-		List<AlbaranProveedor> lista=em.createQuery("select alb from AlbaranProveedor alb order by alb.fecha desc").getResultList();
+		List<AlbaranProveedor> lista=em.createQuery("select alb from AlbaranProveedor alb order by alb.fecha desc, alb.num desc").getResultList();
 		em.close();
 		return lista;
 	}

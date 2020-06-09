@@ -46,7 +46,10 @@ public class Utilidades {
 	}
 	
 	public String noFocoPorcentaje(String cad) {
-		return cad+'%';
+		if (cad.contains(","))
+				return cad+'%';
+		else 
+			return cad+",00%";
 	}
 	
 	/**
@@ -55,7 +58,7 @@ public class Utilidades {
 	 * @return con signo %
 	 */
 	public Double porcentajeADoble(String cad) {
-		return Double.valueOf(cad.split("%")[0])/100;
+		return Double.valueOf(cad.split("%")[0].split(",")[0]+"."+cad.split("%")[0].split(",")[1])/100;
 	}
 	/**
 	 * Quita el signo de %

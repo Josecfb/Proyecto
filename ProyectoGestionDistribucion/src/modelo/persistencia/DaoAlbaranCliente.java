@@ -93,7 +93,7 @@ public class DaoAlbaranCliente {
 	public List<AlbaranCliente> listarAlbaranes(){
 		abrir();
 		if (em==null) return null;
-		List<AlbaranCliente> lista=em.createQuery("select alb from AlbaranCliente alb").getResultList();
+		List<AlbaranCliente> lista=em.createQuery("select alb from AlbaranCliente alb order by alb.fecha desc, alb.num desc").getResultList();
 		em.close();
 		return lista;
 	}

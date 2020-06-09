@@ -158,6 +158,7 @@ public class VPedidoCliente extends JInternalFrame {
 		checEnviado = new JCheckBox("Enviado");
 		checEnviado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		checEnviado.setBounds(442, 61, 97, 23);
+		System.out.println(ped.getClienteBean().getTipo());
 		getContentPane().add(checEnviado);
 		
 		setTitle("Pedido Cliente");
@@ -189,6 +190,8 @@ public class VPedidoCliente extends JInternalFrame {
 		comboCliente.setSelectedItem(ped.getClienteBean());
 		cFecha.setDate(ped.getFecha());
 		checEnviado.setSelected(ped.getEnviado());
+		if (ped.getClienteBean().getTipo()==1)
+			checEnviado.setEnabled(false);
 	}
 	/**
 	 * Muestra las filas en la ventana de pedido de cliente

@@ -29,9 +29,9 @@ public class DaoPedidosClientes {
 			return null;
 		else
 			if (cli==null)
-				listaPedidos=em.createQuery("select ped from PedidoCliente ped order by ped.fecha desc").getResultList();
+				listaPedidos=em.createQuery("select ped from PedidoCliente ped order by ped.fecha desc, ped.num desc").getResultList();
 			else
-				listaPedidos=em.createQuery("select ped from PedidoCliente ped where ped.clienteBean=:cli order by ped.fecha desc").setParameter("cli", cli).getResultList();
+				listaPedidos=em.createQuery("select ped from PedidoCliente ped where ped.clienteBean=:cli order by ped.fecha desc, ped.num desc").setParameter("cli", cli).getResultList();
 		ab.cerrarConexion();
 		return listaPedidos;
 	}

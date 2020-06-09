@@ -62,7 +62,7 @@ public class EMailFacturaCliente implements Runnable{
 	            MimeMessage mensaje = new MimeMessage(session);
 	            mensaje.setFrom(new InternetAddress("cursillos2002@gmail.com"));
 	            mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(fac.getCliente().getEmail()));
-	            mensaje.setSubject("Pedido");
+	            mensaje.setSubject("Factura num"+fac.getNum());
 	            mensaje.setContent(multiParte);
 	            Transport t = session.getTransport("smtp");
 	            t.connect("cursillos2002@gmail.com", decodif("%pssfQ3tjN$"));

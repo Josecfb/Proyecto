@@ -17,7 +17,11 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Vista de las filas de la ventana de pedidos de proveedor
+ * @author Jose Carlos
+ *
+ */
 public class VFilaPedidoProveedor extends JPanel {
 	private static final long serialVersionUID = -3446443914975183188L;
 	private Utilidades u;

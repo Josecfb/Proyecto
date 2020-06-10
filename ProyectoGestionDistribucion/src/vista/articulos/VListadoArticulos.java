@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JToggleButton;
 
 /**
- * Controlador de la ventana de listado de artículos
+ * Vista de la ventana de listado de artículos
  * @author Jose Carlos
  *
  */

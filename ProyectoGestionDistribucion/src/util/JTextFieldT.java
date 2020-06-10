@@ -5,7 +5,7 @@ import javax.swing.JTextField;
 public class JTextFieldT extends JTextField{
 
 	/**
-	 * 
+	 * Clase especial para los JTextField que contienen texto
 	 */
 	private static final long serialVersionUID = -5699828852982298138L;
 	private int largo;

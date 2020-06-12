@@ -205,7 +205,6 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		if (e.getSource()==vFactura.getcFecha()) {
-			System.out.println(e.getPropertyName());
 			 if (!e.getPropertyName().equals("ancestor"))
 				 vFactura.setModificado(true);
 

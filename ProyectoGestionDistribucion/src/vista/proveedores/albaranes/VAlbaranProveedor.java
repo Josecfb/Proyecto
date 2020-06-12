@@ -254,8 +254,8 @@ public class VAlbaranProveedor extends JInternalFrame {
 			vFilaAlb.getArticulo().setSelectedItem(fil.getArticuloBean());
 			vFilaAlb.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
 			vFilaAlb.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
-			vFilaAlb.gettCoste().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
-			vFilaAlb.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
+			vFilaAlb.gettCoste().setText(formatoeuro.format(fil.getPrecio()));
+			vFilaAlb.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getPrecio()));
 			if (albaran.getActualizadoAlmacen()) {
 				vFilaAlb.gettCod().setFocusable(false);
 				vFilaAlb.getArticulo().setEnabled(false);

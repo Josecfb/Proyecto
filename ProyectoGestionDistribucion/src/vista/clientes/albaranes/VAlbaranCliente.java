@@ -46,6 +46,7 @@ public class VAlbaranCliente extends JInternalFrame {
 	private JTextField tNumAlb;
 	private JCheckBox checAlmacen, checFacturado;
 	private Utilidades u;
+	private boolean modificado;
 
 	/**
 	 * El constructor recibe el objeto AlbaranCliente y la ventana del listado de albaranes de clientes
@@ -201,7 +202,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		}
 		if (alb.getFilasAlbaranClientes().size()==0)
 			nuevaFila();
-		
+		modificado=false;
 	}
 	/**
 	 * Crea una nueva fila de albarán de cliente
@@ -216,6 +217,7 @@ public class VAlbaranCliente extends JInternalFrame {
 		vFilaAlb.setPreferredSize(new Dimension(710,30));
 		panel.add(vFilaAlb);
 		panel.updateUI();
+		modificado=true;
 	}
 	/**
 	 * Rellena la cabecera del Albarán de cliente
@@ -297,7 +299,10 @@ public class VAlbaranCliente extends JInternalFrame {
 	public void establecerControlador(ControladorAlbaranCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);
+		comboCliente.addActionListener(controlador);
 		checAlmacen.addActionListener(controlador);
+		checFacturado.addActionListener(controlador);
+		cFecha.addPropertyChangeListener(controlador);
 	}
 	
 	public JComboBox<Cliente> getComboCliente() {
@@ -333,4 +338,11 @@ public class VAlbaranCliente extends JInternalFrame {
 	public VAlbaranesClientes getvAlbsCli() {
 		return vAlbsCli;
 	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
+	}
+	
 }

@@ -253,8 +253,8 @@ public class VFacturaProveedor extends JInternalFrame {
 			vFilaFact.getArticulo().setSelectedItem(fil.getArticuloBean());
 			vFilaFact.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
 			vFilaFact.gettCajas().setText(String.valueOf(fil.getCantidad()/fil.getArticuloBean().getUnidadesCaja()));
-			vFilaFact.gettCoste().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
-			vFilaFact.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
+			vFilaFact.gettCoste().setText(formatoeuro.format(fil.getPrecio()));
+			vFilaFact.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getPrecio()));
 			if (factura.getPagada()) {
 				vFilaFact.gettCod().setFocusable(false);
 				vFilaFact.getArticulo().setEnabled(false);

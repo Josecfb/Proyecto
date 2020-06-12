@@ -107,6 +107,7 @@ public class VFilaFacturaCliente extends JPanel {
 	public void establecerControlador(CtrlFilaFactCliente controla) {
 		u.addFocusKey(this,controla,controla);
 		articulo.getEditor().getEditorComponent().addFocusListener(controla);
+		articulo.addItemListener(controla);
 		bBorrar.addActionListener(controla);
 	}
 

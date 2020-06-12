@@ -1,8 +1,14 @@
 package controlador.clientes.pedidos;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -22,7 +28,7 @@ import vista.clientes.pedidos.VFilaPedidoCliente;
  * @author Jose Carlos
  *
  */
-public class ControladorPedidoCliente implements InternalFrameListener, FocusListener{
+public class ControladorPedidoCliente implements InternalFrameListener, FocusListener,ActionListener, ItemListener, PropertyChangeListener{
 	private Utilidades u;
 	private GestorPedidosCliente gpc;
 	private VPedidoCliente vpedidoCliente;
@@ -41,11 +47,15 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
+		if(vpedidoCliente.isModificado()) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION)
 				modificaPedido();
 			else
 				vpedidoCliente.dispose();
+		}
+		else
+			vpedidoCliente.dispose();
 	}
 	/**
 	 * Modifica el pedido llamando al método modificarPedido del gestor de pedidos de cliente
@@ -185,7 +195,18 @@ public class ControladorPedidoCliente implements InternalFrameListener, FocusLis
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		if (e.getSource()==vpedidoCliente.getcFecha()) 
+			 if (!e.getPropertyName().equals("ancestor"))
+				 vpedidoCliente.setModificado(true);
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		vpedidoCliente.setModificado(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		vpedidoCliente.setModificado(true);
+	}
 }

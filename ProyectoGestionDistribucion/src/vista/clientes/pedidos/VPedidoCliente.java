@@ -44,6 +44,7 @@ public class VPedidoCliente extends JInternalFrame {
 	private NumberFormat formatoeuro, formatoentero;
 	private JTextField tNumpedido;
 	private JCheckBox checEnviado;
+	private boolean modificado;
 
 	/**
 	 * El constructor recibe el objeto PedidoCliente y la ventana del listado de pedidos de cliente
@@ -166,7 +167,7 @@ public class VPedidoCliente extends JInternalFrame {
 		muestraFilas(ped);
 		if (ped!=null)
 			llenaFicha();
-		
+		modificado=false;
 	}
 	/**
 	 * Crea una nueva fila en la ventana de pedido de cliente
@@ -181,6 +182,7 @@ public class VPedidoCliente extends JInternalFrame {
 		panel.setPreferredSize(new Dimension(710,panel.getHeight()+23));
 		panel.add(filaPed);
 		panel.updateUI();
+		modificado=true;
 	}
 	/**
 	 * Rellena los datos de la cabecera de la ventana Pedido de cliente
@@ -242,6 +244,9 @@ public class VPedidoCliente extends JInternalFrame {
 	public void establecerControlador(ControladorPedidoCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);
+		comboCliente.addItemListener(controlador);
+		cFecha.addPropertyChangeListener(controlador);
+		checEnviado.addActionListener(controlador);
 	}
 	
 	
@@ -278,4 +283,11 @@ public class VPedidoCliente extends JInternalFrame {
 	public void setPed(PedidoCliente ped) {
 		this.ped = ped;
 	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
+	}
+	
 }

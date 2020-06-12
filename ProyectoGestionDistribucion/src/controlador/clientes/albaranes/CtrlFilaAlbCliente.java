@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.NumberFormat;
@@ -19,7 +21,7 @@ import vista.clientes.albaranes.VFilaAlbaranCliente;
  * @author Jose Carlos
  *
  */
-public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyListener{
+public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyListener, ItemListener{
 	private VFilaAlbaranCliente vFilaAlb;
 	private NumberFormat formatoeuro;
 	private Utilidades u;
@@ -111,6 +113,7 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyLis
 			vFilaAlb.getvAlbaran().getPanel().remove(vFilaAlb);
 			vFilaAlb.getvAlbaran().actualizaTotal();
 			vFilaAlb.getvAlbaran().updateUI();
+			vFilaAlb.getvAlbaran().setModificado(true);
 		}
 	}
 
@@ -129,6 +132,12 @@ public class CtrlFilaAlbCliente implements FocusListener, ActionListener, KeyLis
 	@Override
 	public void keyTyped(KeyEvent e) {
 		u.controlaTeclas(e);
+		vFilaAlb.getvAlbaran().setModificado(true);
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		vFilaAlb.getvAlbaran().setModificado(true);
 	}
 
 }

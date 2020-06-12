@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -26,7 +30,7 @@ import vista.clientes.albaranes.VFilaAlbaranCliente;
  * @author Jose Carlos
  *
  */
-public class ControladorAlbaranCliente implements InternalFrameListener, FocusListener,ActionListener{
+public class ControladorAlbaranCliente implements InternalFrameListener, FocusListener,ActionListener, ItemListener, PropertyChangeListener{
 	private GestorAlbaranCliente gac;
 	private VAlbaranCliente vAlbaran;
 	private List<FilasAlbaranCliente> filasAlb;
@@ -46,6 +50,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
+		if (vAlbaran.isModificado()) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION)
 				if (!vAlbaran.gettNumAlb().getText().equals("")) {
@@ -56,6 +61,9 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 					nuevoAlbaran();
 			else
 				vAlbaran.dispose();
+		}
+		else
+			vAlbaran.dispose();
 	}
 	/**
 	 * Modifica el albaran, en caso de que esté actualizado en almacen y el cliente es minorista, 
@@ -145,6 +153,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		vAlbaran.setModificado(true);
 		if (e.getSource()==vAlbaran.getChecAlmacen()) {
 			if (vAlbaran.getChecAlmacen().isSelected())
 				gac.actualizaAlmacen(vAlbaran.getAlb(),-1);
@@ -153,6 +162,7 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 			vAlbaran.getAlb().setActualizadoAlmacen(vAlbaran.getChecAlmacen().isSelected());
 			vAlbaran.muestraFilas(vAlbaran.getAlb());
 			vAlbaran.getChecAlmacen().requestFocus();
+			vAlbaran.setModificado(true);
 		}
 	}
 	
@@ -202,5 +212,15 @@ public class ControladorAlbaranCliente implements InternalFrameListener, FocusLi
 	public void internalFrameOpened(InternalFrameEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		if (e.getSource()==vAlbaran.getcFecha()) 
+			 if (!e.getPropertyName().equals("ancestor"))
+				 vAlbaran.setModificado(true);
+	}
+	@Override
+	public void itemStateChanged(ItemEvent arg0) {
+		vAlbaran.setModificado(true);
 	}
 }

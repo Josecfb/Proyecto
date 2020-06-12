@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -24,7 +28,7 @@ import vista.clientes.facturas.VFilaFacturaCliente;
  * @author Jose Carlos
  *
  */
-public class ControladorFacturaCliente implements InternalFrameListener, FocusListener,ActionListener{
+public class ControladorFacturaCliente implements InternalFrameListener, FocusListener, ActionListener, ItemListener, PropertyChangeListener{
 	private Utilidades u;
 	private GestorFacturaCliente gfc;
 	private VFacturaCliente vFactura;
@@ -45,6 +49,7 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
+		if (vFactura.isModificado()) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION)
 				if (vFactura.getFact()!=null) {
@@ -55,6 +60,9 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 					nuevaFactura();
 			else
 				vFactura.dispose();
+		}
+		else
+			vFactura.dispose();
 	}
 	
 	/**
@@ -131,6 +139,7 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 		filaModif.setArticuloBean(arti);
 		filaModif.setCantidad(Integer.parseInt(fila.gettUnidades().getText()));
 		filaModif.setPrecio(u.euroADoble(fila.getTPrecio().getText()));
+		System.out.println(filaModif.getPrecio());
 	}
 	/**
 	 * controla la pulsacion del botón nueva fila y del checkbox de factura pagada
@@ -140,6 +149,7 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 		if (e.getSource()==vFactura.getChecPagada()) {
 			modificaFactura();
 			vFactura.getChecPagada().requestFocus();
+			vFactura.setModificado(true);
 		}
 	}
 	@Override
@@ -187,5 +197,17 @@ public class ControladorFacturaCliente implements InternalFrameListener, FocusLi
 	public void internalFrameOpened(InternalFrameEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		if (e.getSource()==vFactura.getcFecha()) 
+			 if (!e.getPropertyName().equals("ancestor"))
+				 vFactura.setModificado(true);
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		vFactura.setModificado(true);
 	}
 }

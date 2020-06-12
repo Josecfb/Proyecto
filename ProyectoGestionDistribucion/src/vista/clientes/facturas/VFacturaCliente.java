@@ -43,6 +43,7 @@ public class VFacturaCliente extends JInternalFrame {
 	private JTextField tNumFact;
 	private JCheckBox checPagada;
 	private Utilidades u;
+	private boolean modificado;
 
 	/**
 	 * El constructor recibe el objeto entidad FacturaCliente y la ventana del listado de facturas de cliente
@@ -192,6 +193,7 @@ public class VFacturaCliente extends JInternalFrame {
 			llenaFicha();
 		if (fact.getFilasFacturasClientes().size()==0)
 			nuevaFila();
+		modificado=false;
 	}
 	/**
 	 * Crea una nueva fila en la ventana de factura de cliente
@@ -206,6 +208,7 @@ public class VFacturaCliente extends JInternalFrame {
 		vFilaFact.setPreferredSize(new Dimension(710,30));
 		panel.add(vFilaFact);
 		panel.updateUI();
+		modificado=true;
 	}
 	/**
 	 * Rellena los datos de la cabecera de la factura
@@ -242,8 +245,8 @@ public class VFacturaCliente extends JInternalFrame {
 			vFilaFact.gettCod().setText(String.valueOf(fil.getArticuloBean().getCod()));
 			vFilaFact.getArticulo().setSelectedItem(fil.getArticuloBean());
 			vFilaFact.gettUnidades().setText(formatoentero.format(fil.getCantidad()));
-			vFilaFact.getTPrecio().setText(formatoeuro.format(fil.getArticuloBean().getCoste()));
-			vFilaFact.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getArticuloBean().getCoste()));
+			vFilaFact.getTPrecio().setText(formatoeuro.format(fil.getPrecio()));
+			vFilaFact.gettTotal().setText(formatoeuro.format(fil.getCantidad()*fil.getPrecio()));
 			if (factura.getPagada()) {
 				vFilaFact.gettCod().setFocusable(false);
 				vFilaFact.getArticulo().setEnabled(false);
@@ -279,6 +282,8 @@ public class VFacturaCliente extends JInternalFrame {
 	public void establecerControlador(ControladorFacturaCliente controlador) {
 		this.addInternalFrameListener(controlador);
 		comboCliente.getEditor().getEditorComponent().addFocusListener(controlador);
+		comboCliente.addItemListener(controlador);
+		cFecha.addPropertyChangeListener(controlador);
 		checPagada.addActionListener(controlador);
 	}
 	
@@ -307,9 +312,14 @@ public class VFacturaCliente extends JInternalFrame {
 		return panel;
 	}
 
-
 	public VFacturasClientes getvFactsPro() {
 		return vFactsCli;
+	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
 	}
 
 }

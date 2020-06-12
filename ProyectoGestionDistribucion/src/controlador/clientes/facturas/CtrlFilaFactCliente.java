@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.NumberFormat;
@@ -20,7 +22,7 @@ import vista.clientes.facturas.VFilaFacturaCliente;
  * @author Jose Carlos
  *
  */
-public class CtrlFilaFactCliente implements FocusListener, ActionListener, KeyListener{
+public class CtrlFilaFactCliente implements FocusListener, ActionListener, KeyListener, ItemListener{
 	private Utilidades u;
 	private VFilaFacturaCliente vFilaFact;
 	private NumberFormat formatoeuro;
@@ -116,6 +118,7 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener, KeyLi
 			vFilaFact.getvFactura().getPanel().remove(vFilaFact);
 			vFilaFact.getvFactura().actualizaTotal();
 			vFilaFact.getvFactura().updateUI();
+			vFilaFact.getvFactura().setModificado(true);
 		}
 	}
 
@@ -134,5 +137,11 @@ public class CtrlFilaFactCliente implements FocusListener, ActionListener, KeyLi
 	@Override
 	public void keyTyped(KeyEvent e) {
 		u.controlaTeclas(e);
+		vFilaFact.getvFactura().setModificado(true);
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		vFilaFact.getvFactura().setModificado(true);
 	}
 }

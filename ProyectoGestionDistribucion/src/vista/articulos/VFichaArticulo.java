@@ -33,6 +33,7 @@ public class VFichaArticulo extends JInternalFrame {
 
 	private static final long serialVersionUID = 3871990475316407616L;
 	private Utilidades u;
+	private boolean modificado;
 	private VListadoArticulos vla;
 	private JTextField tCodigo;
 	private JTextFieldT tNombre;
@@ -61,8 +62,10 @@ public class VFichaArticulo extends JInternalFrame {
 		this.art=art;
 		this.vla=vla;
 		u=new Utilidades();
+		modificado=false;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
+		formatoPorcentaje.setMinimumFractionDigits(2);
 		setBounds(100, 100, 870, 490);
 		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/articulos.png"));
 		ImageIcon icones=new ImageIcon( icon.getImage().getScaledInstance(18, 18, 0));
@@ -305,8 +308,10 @@ public class VFichaArticulo extends JInternalFrame {
 		bBorrar.addActionListener(manejador);
 		Component[] componentes=panel.getComponents();
 		for (Component componente:componentes) 
-		if (componente.getClass()==JComboBox.class)
+		if (componente.getClass()==JComboBox.class) {
 			((JComboBox) componente).getEditor().getEditorComponent().addFocusListener(manejador);
+			((JComboBox) componente).addItemListener(manejador);
+		}
 		u.addFocusKey(panel,manejador,manejador);
 
 	}
@@ -376,4 +381,11 @@ public class VFichaArticulo extends JInternalFrame {
 	public VListadoArticulos getVListadoArt() {
 		return vla;
 	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
+	}
+	
 }

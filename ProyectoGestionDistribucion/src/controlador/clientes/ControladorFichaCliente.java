@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import vista.clientes.VFilaPrecioCliente;
  * @author Jose Carlos
  *
  */
-public class ControladorFichaCliente implements InternalFrameListener, KeyListener, FocusListener, ActionListener {
+public class ControladorFichaCliente implements InternalFrameListener, KeyListener, FocusListener, ActionListener, ItemListener {
 	private VFichaCliente fichaCliente;
 	private GestorCliente gc;
 	private List<PrecioCliente> filasPrecio;
@@ -46,15 +48,19 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
-		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
-		if (res==JOptionPane.YES_OPTION) {
-			// Si la ficha era de un cliente existente lo modifica y si era sin cliente lo crea nuevo en la base de datos
-			if (fichaCliente.getCli()!=null)
-				modificaCliente();
+		if(fichaCliente.isModificado()) {
+			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
+			if (res==JOptionPane.YES_OPTION) {
+				// Si la ficha era de un cliente existente lo modifica y si era sin cliente lo crea nuevo en la base de datos
+				if (fichaCliente.getCli()!=null)
+					modificaCliente();
+				else
+					nuevoCliente();
+			ControladorListadoClientes clc=new ControladorListadoClientes(fichaCliente.getVlc());
+			clc.listar();
+			}
 			else
-				nuevoCliente();
-		ControladorListadoClientes clc=new ControladorListadoClientes(fichaCliente.getVlc());
-		clc.listar();
+				fichaCliente.dispose();
 		}
 		else
 			fichaCliente.dispose();
@@ -166,6 +172,7 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	@Override
 	public void keyTyped(KeyEvent e) {
 		u.controlaTeclas(e);
+		fichaCliente.setModificado(true);
 	}
 	/**
 	 * Cuando un campo recibe foco cambia el color de fondo y selecciona su contenido
@@ -208,9 +215,13 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==fichaCliente.getbNuevaFila()) {
 			fichaCliente.nuevaFilaPrecio();
+			fichaCliente.setModificado(true);
 		}
 		if (e.getSource()==fichaCliente.getbBorrar()) {
 			borrarCliente();
+		}
+		if (e.getSource()==fichaCliente.getChkConfirmado()) {
+			fichaCliente.setModificado(true);
 		}
 		
 	}
@@ -269,6 +280,14 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource()==fichaCliente.getComboTipo())
+			fichaCliente.setModificado(true);
+		if (e.getSource()==fichaCliente.gettPoblacion())
+			fichaCliente.setModificado(true);
 		
 	}
 

@@ -33,7 +33,6 @@ import javax.swing.JCheckBox;
  *
  */
 public class VPedidoProveedor extends JInternalFrame {
-
 	private static final long serialVersionUID = 4339097703466328107L;
 	private VPedidosProveedores vpedidos;
 	private JDateChooser cFecha;
@@ -48,6 +47,7 @@ public class VPedidoProveedor extends JInternalFrame {
 	private JTextField tNumpedido;
 	private JCheckBox checConfirmado, checEnviado;
 	private Utilidades u;
+	private boolean modificado;
 
 	/**
 	 * El constructor recibe el objeto entidad PedidoProveedor y la ventana del listado de pedidos de proveedores VPedidosProveedores
@@ -181,7 +181,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		muestraFilas(ped);
 		if (ped!=null)
 			llenaFicha();
-		
+		modificado=false;
 		
 	}
 	/**
@@ -197,6 +197,7 @@ public class VPedidoProveedor extends JInternalFrame {
 		panel.setPreferredSize(new Dimension(710,panel.getHeight()+28));
 		panel.add(filaPed);
 		panel.updateUI();
+		modificado=true;
 	}
 	/**
 	 * Rellena los datos de la cabecera de la ventana de pedido de proveedor
@@ -260,6 +261,10 @@ public class VPedidoProveedor extends JInternalFrame {
 	public void establecerControlador(ControladorPedidoProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);
+		comboProveedor.addItemListener(controlador);
+		cFecha.addPropertyChangeListener(controlador);
+		checConfirmado.addActionListener(controlador);
+		checEnviado.addActionListener(controlador);
 	}
 	
 	
@@ -300,4 +305,12 @@ public class VPedidoProveedor extends JInternalFrame {
 	public void setPed(PedidoProveedor ped) {
 		this.ped = ped;
 	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
+	}
+	
+	
 }

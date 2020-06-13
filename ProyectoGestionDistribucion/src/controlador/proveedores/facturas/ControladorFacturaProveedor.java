@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -26,7 +30,7 @@ import vista.proveedores.facturas.VFilaFacturaProveedor;
  * @author Jose Carlos
  *
  */
-public class ControladorFacturaProveedor implements InternalFrameListener, FocusListener,ActionListener{
+public class ControladorFacturaProveedor implements InternalFrameListener, FocusListener,ActionListener,ItemListener,PropertyChangeListener{
 	private GestorFacturaProve gfp;
 	private VFacturaProveedor vFactura;
 	private List<FilaFacturaProveedor> filasFact;
@@ -45,6 +49,8 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
+		
+		if(vFactura.isModificado()) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION)
 				if (!vFactura.gettNumAlb().getText().equals("")) {
@@ -55,6 +61,9 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 					nuevaFactura();
 			else
 				vFactura.dispose();
+		}
+		else
+			vFactura.dispose();
 	}
 	/**
 	 * Modifica una factura existente
@@ -190,6 +199,20 @@ public class ControladorFacturaProveedor implements InternalFrameListener, Focus
 		if (e.getSource()==vFactura.getChecPagada()) {
 			modificaFactura();
 			vFactura.getChecPagada().requestFocus();
+			vFactura.setModificado(true);
 		}
+	}
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		if (e.getSource()==vFactura.getcFecha()) {
+			System.out.println(e.getPropertyName());
+			 if (!e.getPropertyName().equals("ancestor"))
+				 vFactura.setModificado(true);
+
+		}
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		vFactura.setModificado(true);
 	}
 }

@@ -107,6 +107,7 @@ public class CtrlGenAlbProv implements ActionListener, FocusListener{
 			VAlbaranProveedor vAlb=new VAlbaranProveedor(alb,vAlbsPro);
 			ControladorAlbaranProveedor cap=new ControladorAlbaranProveedor(vAlb);
 			vAlb.establecerControlador(cap);
+			vAlb.setModificado(true);
 			vGenAlvPro.getV().getPanelInterior().add(vAlb);
 			vAlb.setVisible(true);
 			vGenAlvPro.dispose();

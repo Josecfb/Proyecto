@@ -40,6 +40,7 @@ public class VFichaCliente extends JInternalFrame {
 	private static final long serialVersionUID = 7007272565978130446L;
 	private Utilidades u;
 	private Cliente cli;
+	private boolean modificado;
 	private VListadoClientes vlc;
 	private JTextField tNumero;
 	private JTextFieldT tDireccion;
@@ -69,6 +70,7 @@ public class VFichaCliente extends JInternalFrame {
 		this.cli=cli;
 		this.vlc=vlc;
 		u=new Utilidades();
+		modificado=false;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoPorcentaje = NumberFormat.getPercentInstance();
 		formatoPorcentaje.setMinimumFractionDigits(2);
@@ -128,6 +130,7 @@ public class VFichaCliente extends JInternalFrame {
 		pestPrincipal.add(lPoblación);
 		
 		tPoblacion = new JComboBox<String>();
+		tPoblacion.setEditable(true);
 		tPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tPoblacion.setBounds(347, 205, 168, 25);
 		pestPrincipal.add(tPoblacion);
@@ -374,7 +377,9 @@ public class VFichaCliente extends JInternalFrame {
 		u.addFocusKey(pestPrincipal,cfc,cfc);
 		bNuevaFila.addActionListener(cfc);
 		bBorrar.addActionListener(cfc);
-		//comboTipo.getEditor().getEditorComponent().addFocusListener(cfc);
+		chkConfirmado.addActionListener(cfc);
+		comboTipo.addItemListener(cfc);
+		tPoblacion.addItemListener(cfc);
 	}
 	/**
 	 * Crea una nueva fila para precio de cliente
@@ -477,6 +482,12 @@ public class VFichaCliente extends JInternalFrame {
 
 	public VListadoClientes getVlc() {
 		return vlc;
+	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
 	}
 	
 }

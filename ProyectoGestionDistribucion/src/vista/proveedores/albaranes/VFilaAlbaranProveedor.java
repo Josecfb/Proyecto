@@ -112,6 +112,7 @@ public class VFilaAlbaranProveedor extends JPanel {
 	public void establecerControlador(CtrlFilaAlbProve controla) {
 		u.addFocusKey(this, controla, controla);
 		articulo.getEditor().getEditorComponent().addFocusListener(controla);
+		articulo.addItemListener(controla);
 		bBorrar.addActionListener(controla);
 	}
 

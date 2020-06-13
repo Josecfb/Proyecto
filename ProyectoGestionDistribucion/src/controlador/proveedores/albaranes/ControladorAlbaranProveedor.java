@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -26,7 +30,7 @@ import vista.proveedores.albaranes.VFilaAlbaranProveedor;
  * @author Jose Carlos
  *
  */
-public class ControladorAlbaranProveedor implements InternalFrameListener, FocusListener,ActionListener{
+public class ControladorAlbaranProveedor implements InternalFrameListener, FocusListener,ActionListener, ItemListener, PropertyChangeListener{
 	private GestorAlbaranProve gap;
 	private VAlbaranProveedor vAlbaran;
 	private List<FilaAlbaranProveedor> filasAlb;
@@ -46,6 +50,7 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent arg0) {
+		if(vAlbaran.isModificado()) {
 			int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 			if (res==JOptionPane.YES_OPTION)
 				if (!vAlbaran.gettNumAlb().getText().equals("")) {
@@ -56,6 +61,9 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 					nuevoAlbaran();
 			else
 				vAlbaran.dispose();
+		}
+		else
+			vAlbaran.dispose();
 	}
 	/**
 	 * Modifica el albaran editado llamando a l método modificaAlbaran del GestorAlbaranProveedor
@@ -193,8 +201,20 @@ public class ControladorAlbaranProveedor implements InternalFrameListener, Focus
 			else
 				gap.actualizaAlmacen(vAlbaran.getAlb(),-1);
 			modificaAlbaran();
-			
 			vAlbaran.getChecAlmacen().requestFocus();
+			vAlbaran.setModificado(true);
 		}
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		vAlbaran.setModificado(true);
+		
+	}
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		if (e.getSource()==vAlbaran.getcFecha()) 
+			 if (!e.getPropertyName().equals("ancestor"))
+				 vAlbaran.setModificado(true);
+		
 	}
 }

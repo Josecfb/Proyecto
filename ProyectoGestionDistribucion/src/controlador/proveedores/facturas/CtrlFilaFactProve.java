@@ -100,6 +100,7 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener, KeyList
 			vFilaFact.getvFactura().getPanel().remove(vFilaFact);
 			vFilaFact.getvFactura().actualizaTotal();
 			vFilaFact.getvFactura().updateUI();
+			vFilaFact.getvFactura().setModificado(true);
 		}
 		
 	}
@@ -119,6 +120,7 @@ public class CtrlFilaFactProve implements FocusListener, ActionListener, KeyList
 	@Override
 	public void keyTyped(KeyEvent e) {
 		u.controlaTeclas(e);
+		vFilaFact.getvFactura().setModificado(true);
 	}
 
 }

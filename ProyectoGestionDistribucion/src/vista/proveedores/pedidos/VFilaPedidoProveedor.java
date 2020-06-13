@@ -106,6 +106,7 @@ public class VFilaPedidoProveedor extends JPanel {
 	public void establecerControlador(ControladorFilaPedidoProveedor controla) {
 		u.addFocusKey(this, controla, controla);
 		articulo.getEditor().getEditorComponent().addFocusListener(controla);
+		articulo.addItemListener(controla);
 		bBorrar.addActionListener(controla);
 	}
 

@@ -42,9 +42,9 @@ public class DaoCliente {
 			return null;
 		else{
 			if (filtroNombre=="")
-				lista=em.createQuery("SELECT cli FROM Cliente cli where cli.confirmado=true").getResultList();
+				lista=em.createQuery("SELECT cli FROM Cliente cli").getResultList();
 			else
-				lista=em.createQuery("SELECT cli FROM Cliente cli where cli.confirmado=true and cli.nombre LIKE :filtroNombre").setParameter("filtroNombre","%"+filtroNombre+"%").getResultList();
+				lista=em.createQuery("SELECT cli FROM Cliente cli where cli.nombre LIKE :filtroNombre").setParameter("filtroNombre","%"+filtroNombre+"%").getResultList();
 			ab.cerrarConexion();
 			return lista;
 		}

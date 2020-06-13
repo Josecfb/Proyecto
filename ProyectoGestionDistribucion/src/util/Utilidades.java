@@ -58,7 +58,10 @@ public class Utilidades {
 	 * @return con signo %
 	 */
 	public Double porcentajeADoble(String cad) {
-		return Double.valueOf(cad.split("%")[0].split(",")[0]+"."+cad.split("%")[0].split(",")[1])/100;
+		if (cad.contains(","))
+			return Double.valueOf(cad.split("%")[0].split(",")[0]+"."+cad.split("%")[0].split(",")[1])/100;
+		else
+			return Double.valueOf(cad.split("%")[0])/100;
 	}
 	/**
 	 * Quita el signo de %

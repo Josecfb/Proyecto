@@ -92,13 +92,7 @@ public class VFilaPrecioCliente extends JPanel {
 	 */
 	public void establecerControlador(ControlaFilaPrecioCli controlador) {
 		bBorrar.addActionListener(controlador);
-//		Component[] componentes=getComponents();
-//		JTextField jt=null;
-//		for (Component componente:componentes) 
-//			if (componente.getClass()==JTextField.class) {
-//				jt = (JTextField) componente;
-//				jt.addFocusListener(controlador);
-//			}
+
 		u.addFocusKey(this,controlador,controlador);
 		comboArt.getEditor().getEditorComponent().addFocusListener(controlador);
 	}

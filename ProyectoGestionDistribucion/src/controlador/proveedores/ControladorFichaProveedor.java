@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
@@ -21,7 +23,7 @@ import vista.proveedores.VFichaProveedor;
  * @author Jose Carlos
  *
  */
-public class ControladorFichaProveedor implements InternalFrameListener, KeyListener, FocusListener, ActionListener{
+public class ControladorFichaProveedor implements InternalFrameListener, KeyListener, FocusListener, ActionListener, ItemListener{
 	private VFichaProveedor fichaProveedor;
 	private Utilidades u;
 	/**
@@ -49,6 +51,7 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 	 */
 	@Override
 	public void internalFrameClosing(InternalFrameEvent e) {
+		if(fichaProveedor.isModificado()) {
 		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Desea guardar?");
 		if (res==JOptionPane.YES_OPTION) {
 			if (fichaProveedor.getPro()!=null)
@@ -60,6 +63,7 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 		}
 		else 
 			fichaProveedor.dispose();
+		}else fichaProveedor.dispose();
 	}
 	/**
 	 * Crea un nuevo proveedor llamando al método nuevoProveedor del GestorProveedor
@@ -184,6 +188,7 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
+		fichaProveedor.setModificado(true);
 		u.controlaTeclas(e);
 	}
 	/**
@@ -191,19 +196,32 @@ public class ControladorFichaProveedor implements InternalFrameListener, KeyList
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==fichaProveedor.gettPoblacion())
+			fichaProveedor.setModificado(true);
 		if (e.getSource()==fichaProveedor.getbBorrar()) {
 			borrarProveedor();
 		}
+		if (e.getSource()==fichaProveedor.gettPoblacion())
+			fichaProveedor.setModificado(true);
+		System.out.println(fichaProveedor.isModificado());
 	}
 	/**
 	 * Pide confirmacion de borrado de proveedor en caso afirmativo
 	 * lo borra llamando al método borrarProveedor del GestorProveedor
 	 */
 	private void borrarProveedor() {
+		
 		int res=JOptionPane.showConfirmDialog(new JFrame(), "¿Está seguro que quiere eliminar este proveedor premanentemente?");
 		GestorProveedor gp=new GestorProveedor();
 		if (res==JOptionPane.YES_OPTION)
 			JOptionPane.showMessageDialog(fichaProveedor, gp.borrarProveedor(fichaProveedor.getPro()), "Borrar proveedor", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource()==fichaProveedor.gettPoblacion())
+			fichaProveedor.setModificado(true);
+		System.out.println(fichaProveedor.isModificado());
 	}
 
 }

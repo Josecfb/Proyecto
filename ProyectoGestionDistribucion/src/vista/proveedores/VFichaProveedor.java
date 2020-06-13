@@ -42,6 +42,7 @@ public class VFichaProveedor extends JInternalFrame {
 	private JTextFieldT tNif;
 	private JPanel panel;
 	private JButton bBorrar;
+	private boolean modificado;
 	/**
 	 * El constructor recibe el objeto entidad Proveedor y la ventana del listado de proveedores VListadoProveedores
 	 * @param pro objeto entidad Proveedor
@@ -50,6 +51,7 @@ public class VFichaProveedor extends JInternalFrame {
 	public VFichaProveedor(Proveedor pro,VListadoProveedores v) {
 		this.pro=pro;
 		this.v=v;
+		modificado=false;
 		u=new Utilidades();
 		setAutoscrolls(true);
 		setBorder(UIManager.getBorder("InternalFrame.border"));
@@ -241,6 +243,7 @@ public class VFichaProveedor extends JInternalFrame {
 	public void EstablecerManejadorVentana(ControladorFichaProveedor manejador) {
 		this.addInternalFrameListener(manejador);
 		tProvincia.addFocusListener(manejador);
+		tPoblacion.addItemListener(manejador);
 		u.addFocusKey(panel, manejador, manejador);
 		bBorrar.addActionListener(manejador);
 	}
@@ -288,6 +291,12 @@ public class VFichaProveedor extends JInternalFrame {
 
 	public JButton getbBorrar() {
 		return bBorrar;
+	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
 	}
 
 	

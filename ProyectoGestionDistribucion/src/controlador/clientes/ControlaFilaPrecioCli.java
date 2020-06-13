@@ -37,7 +37,7 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener, Key
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==vFilaPre.getbBorrar()) {
-			
+			vFilaPre.getvFicha().setModificado(true);
 			vFilaPre.getvFicha().getPanel().remove(vFilaPre);
 			vFilaPre.getvFicha().updateUI();
 		}
@@ -92,7 +92,8 @@ public class ControlaFilaPrecioCli implements FocusListener, ActionListener, Key
 	@Override
 	public void keyTyped(KeyEvent e) {
 		u.controlaTeclas(e);
-		
+		vFilaPre.getvFicha().setModificado(true);
 	}
+
 
 }

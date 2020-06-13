@@ -43,6 +43,7 @@ public class VFacturaProveedor extends JInternalFrame {
 	private JTextField tNumFact;
 	private JCheckBox checPagada;
 	private Utilidades u;
+	private boolean modificado;
 
 	/**
 	 * El constructor recibe el objeto entidad FacturaProveedor y la ventana del lisado de facturas de proveedor VFacturasProveedores
@@ -52,6 +53,7 @@ public class VFacturaProveedor extends JInternalFrame {
 	public VFacturaProveedor(FacturaProveedor fact,VFacturasProveedores vFactsPro) {
 		this.vFactsPro=vFactsPro;
 		this.fact=fact;
+		modificado=false;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoentero=NumberFormat.getIntegerInstance();
 		u=new Utilidades();
@@ -192,15 +194,12 @@ public class VFacturaProveedor extends JInternalFrame {
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTotal.setBounds(511, 453, 89, 25);
 		getContentPane().add(lblTotal);
-		
 		setTitle("Factura Proveedor");
-		//contrAlbPro.articulosPendientesPedido(alb);
 		muestraFilas(fact);
 		if (fact!=null)
 			llenaFicha();
 		if (fact.getFilasFacturasProveedors().size()==0)
 			nuevaFila();
-		
 	}
 	/**
 	 * Crea una fila nueva en la ventana de factura de proveedor
@@ -215,6 +214,7 @@ public class VFacturaProveedor extends JInternalFrame {
 		vFilaFact.setPreferredSize(new Dimension(710,30));
 		panel.add(vFilaFact);
 		panel.updateUI();
+		modificado=true;
 	}
 	/**
 	 * Rellena los datos de la cabecera de la ventana de factura de proveedor
@@ -228,7 +228,8 @@ public class VFacturaProveedor extends JInternalFrame {
 			tNumFact.setFocusable(false);
 			comboProveedor.setFocusable(false);
 		}
-
+		modificado=false;
+		System.out.println(modificado);
 	}
 	/**
 	 * Muestra las filas de la ventana de la factura de proveedor
@@ -290,7 +291,10 @@ public class VFacturaProveedor extends JInternalFrame {
 	public void establecerControlador(ControladorFacturaProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);
+		comboProveedor.addItemListener(controlador);
+		cFecha.addPropertyChangeListener(controlador);
 		checPagada.addActionListener(controlador);
+		modificado=false;
 	}
 	
 	public JComboBox<Proveedor> getComboProveedor() {
@@ -320,6 +324,12 @@ public class VFacturaProveedor extends JInternalFrame {
 	
 	public VFacturasProveedores getvFactsPro() {
 		return vFactsPro;
+	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
 	}
 
 }

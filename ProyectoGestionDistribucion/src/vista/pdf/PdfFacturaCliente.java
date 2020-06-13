@@ -80,7 +80,7 @@ public class PdfFacturaCliente {
 			p.add(empresa.getProvincia());
 			p.setTabSettings(tab);
 			p.add(Chunk.TABBING);
-			p.add(new Chunk(fac.getCliente().getProvincia()));
+			p.add(new Chunk(fac.getCliente().getPoblacion()));
 			p.setFont(fuente);
 			factura.add(p);
 			

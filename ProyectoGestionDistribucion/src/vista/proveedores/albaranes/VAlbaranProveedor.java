@@ -44,6 +44,7 @@ public class VAlbaranProveedor extends JInternalFrame {
 	private JTextField tNumAlb;
 	private JCheckBox checAlmacen;
 	private Utilidades u;
+	private boolean modificado;
 
 	/**
 	 * El constructor recibe el objeto entidad AlbaranProveedor y la ventana del listado de albaranes de proveedor VAlbaranesProveedores
@@ -53,6 +54,7 @@ public class VAlbaranProveedor extends JInternalFrame {
 	public VAlbaranProveedor(AlbaranProveedor alb,VAlbaranesProveedores vAlbsPro) {
 		this.vAlbsPro=vAlbsPro;
 		this.alb=alb;
+		modificado=false;
 		formatoeuro = NumberFormat.getCurrencyInstance();
 		formatoentero=NumberFormat.getIntegerInstance();
 		u=new Utilidades();
@@ -201,7 +203,6 @@ public class VAlbaranProveedor extends JInternalFrame {
 			llenaFicha();
 		if (alb.getFilasAlbaranProveedors().size()==0)
 			nuevaFila();
-		
 	}
 	/**
 	 * Crea una fila nueva en el albarán de proveedor
@@ -229,7 +230,7 @@ public class VAlbaranProveedor extends JInternalFrame {
 			tNumAlb.setFocusable(false);
 			comboProveedor.setFocusable(false);
 		}
-
+		modificado=false;
 	}
 	/**
 	 * Muestra las filas del albarán de proveedor
@@ -291,7 +292,9 @@ public class VAlbaranProveedor extends JInternalFrame {
 	public void establecerControlador(ControladorAlbaranProveedor controlador) {
 		this.addInternalFrameListener(controlador);
 		comboProveedor.getEditor().getEditorComponent().addFocusListener(controlador);
+		comboProveedor.addItemListener(controlador);
 		checAlmacen.addActionListener(controlador);
+		cFecha.addPropertyChangeListener(controlador);
 	}
 	
 	public JComboBox<Proveedor> getComboProveedor() {
@@ -322,4 +325,11 @@ public class VAlbaranProveedor extends JInternalFrame {
 	public VAlbaranesProveedores getvAlbsPro() {
 		return vAlbsPro;
 	}
+	public boolean isModificado() {
+		return modificado;
+	}
+	public void setModificado(boolean modificado) {
+		this.modificado = modificado;
+	}
+	
 }

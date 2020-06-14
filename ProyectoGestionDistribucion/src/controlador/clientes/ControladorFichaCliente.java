@@ -132,6 +132,8 @@ public class ControladorFichaCliente implements InternalFrameListener, KeyListen
 		cliModif.setPoblacion((String) fichaCliente.gettPoblacion().getSelectedItem());
 		cliModif.setProvincia(fichaCliente.gettProvincia().getText());
 		cliModif.setConfirmado(fichaCliente.getChkConfirmado().isSelected());
+		cliModif.setContrasena(fichaCliente.getCli().getContrasena());
+		
 	}
 	/**
 	 * Asigna los precios de articulos especiales encontrados el la ficha del cliente para el cliente

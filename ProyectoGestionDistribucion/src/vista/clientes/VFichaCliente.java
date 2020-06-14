@@ -54,8 +54,8 @@ public class VFichaCliente extends JInternalFrame {
 	private JTextFieldT tNif;
 	private JPanel pestPrincipal,pestPrecios,pMay,pMin;
 	private JComboBox<String> comboTipo;
-	private JTextField tNombre;
-	private JTextField tApellidos;
+	private JTextFieldT tNombre;
+	private JTextFieldT tApellidos;
 	private JCheckBox chkConfirmado;
 	private JScrollPane scrollPrecios;
 	private JButton bNuevaFila, bBorrar;
@@ -266,13 +266,13 @@ public class VFichaCliente extends JInternalFrame {
 		lNombre_1_1.setBounds(11, 48, 90, 25);
 		pMin.add(lNombre_1_1);
 		
-		tNombre = new JTextField();
+		tNombre = new JTextFieldT(20);
 		tNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tNombre.setColumns(10);
 		tNombre.setBounds(124, 60, 626, 25);
 		pestPrincipal.add(tNombre);
 		
-		tApellidos = new JTextField();
+		tApellidos = new JTextFieldT(20);
 		tApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tApellidos.setColumns(10);
 		tApellidos.setBounds(124, 108, 626, 25);
